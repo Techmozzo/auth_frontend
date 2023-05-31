@@ -1,0 +1,144 @@
+@import "variables/theme";
+@import "variables/breakpoints";
+@import "mixins/sizes";
+.logo-full {
+  color: $theme-color-black;
+  max-width: 163px;
+}
+.font-tinier {
+  font-size: $theme-tinier !important;
+  line-height: $theme-line-tinier;
+}
+.font-tiny {
+  @include font-size($screen-sm-min, $screen-xl-min, $theme-tinier, $theme-tiny, $theme-line-tinier, $theme-line-tiny);
+}
+
+.font-smaller {
+  @include font-size($screen-sm-min, $screen-xl-min, $theme-tiny, $theme-smaller, $theme-line-tiny, $theme-line-smaller);
+}
+.font-small {
+  @include font-size($screen-sm-min, $screen-xl-min, $theme-smaller, $theme-small, $theme-line-smaller, $theme-line-small);
+}
+.font-regular {
+  @include font-size($screen-sm-min, $screen-xl-min, $theme-small, $theme-regular, $theme-line-small, $theme-line-regular);
+}
+.font-title-small {
+  @include font-size($screen-sm-min, $screen-xl-min, $theme-regular, $theme-title-1, $theme-line-regular, $theme-line-title-1);
+}
+.font-header {
+  @include font-size($screen-sm-min, $screen-xl-min, $theme-regular, $theme-header, 25, $theme-line-header);
+}
+.font-title {
+  @include font-size($screen-sm-min, $screen-xl-min, $theme-title-1, $theme-title, 25, $theme-line-title);
+}
+.font-hero {
+  @include font-size($screen-sm-min, $screen-xl-min, $theme-line-title-1, $theme-hero, 25, $theme-line-hero);
+}
+.font-30 {
+  @include font-size($screen-sm-min, $screen-xl-min, 20, 30, 20, 45);
+}
+.text-theme-black {
+  color: $theme-color-black !important;
+}
+.text-theme-grey {
+  color: $theme-color-grey !important;
+}
+.text-theme-faint {
+  color: $theme-color-faint !important;
+}
+.text-theme-blue {
+  color: $theme-blue;
+}
+
+.text-theme {
+  color: $theme-color !important;
+}
+.bg-theme {
+  background: $theme-color !important;
+}
+.bg-theme-black {
+  background: $theme-color-black !important;
+}
+.bg-theme-grey {
+  background: $theme-color-grey !important;
+}
+.bg-theme-faint {
+  background: $theme-color-faint !important;
+}
+.bg-theme-faint-1 {
+  background: $theme-color-faint-1 !important;
+}
+.bg-theme-light {
+  background: $theme-color-light !important;
+}
+.bg-theme-off-white {
+  background: $theme-color-off-white !important;
+}
+
+.theme-font{
+  font-family: 'Notosans-regular', sans-serif;
+}
+.theme-font-bold{
+  font-family: 'Notosans-Bold', sans-serif;
+}
+.theme-font-2 {
+  font-family: 'Nunito', sans-serif;
+}
+.theme-hover {
+  &:hover {
+    @extend .bg-theme-light;
+    background: radial-gradient($theme-color-light 25%, $theme-color-off-white 100%);
+    color: $theme-color;
+    background: currentColor;
+    //@extend .text-theme;
+  }
+}
+svg:not(:root) {
+  overflow: hidden;
+  @include max-width-size($screen-sm-min, $screen-xl-min, 211px, 500px);
+}
+
+.center-horizontal {
+  margin: auto;
+  width: fit-content;
+}
+.center-vertical {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+.center-vertical-2 {
+  position: relative;
+  top: 33.3vh;
+  transform: translate(0, -50%);
+}
+
+.custom-top-bar {
+  position: relative !important;
+  top: -60px;
+  padding: 1.5rem 1.5rem .2rem;
+  z-index: 1000000001;
+  border-bottom: solid .5px $theme-color-faint;
+  //box-shadow: 0px 15px 45px -10px rgba(200, 203, 215, 0.499645);
+
+}
+.custom-top-bar-borderless {
+  position: relative !important;
+  top: -60px;
+  padding: 1.5rem 1.5rem .2rem;
+  z-index: 1000000001;
+  //box-shadow: 0px 15px 45px -10px rgba(200, 203, 215, 0.499645);
+
+}
+.left-14-neg {
+  left: -14px;
+}
+
+.border-faint {
+  border: solid 1px $theme-color-faint;
+}
+.theme-padding {
+  padding: .7rem;
+}
+
+

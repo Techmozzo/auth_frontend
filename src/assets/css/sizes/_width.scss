@@ -1,0 +1,156 @@
+@import "../mixins/mediaqueries";
+
+.max-w-100{
+  max-width: 50px !important;
+  @include sm {
+    max-width: 65px!important;
+  }
+  @include md {
+    max-width: 75px!important;
+  }
+  @include lg {
+    max-width: 100px!important;
+  }
+}
+.max-w-200{
+  max-width: 100px !important;
+  @include sm {
+    max-width: 150px!important;
+  }
+  @include md {
+    max-width: 180px!important;
+  }
+  @include lg {
+    max-width: 200px!important;
+  }
+}
+.max-w-400 {
+  max-width: 200px!important;
+  @include sm {
+    max-width: 300px!important;
+  }
+  @include md {
+    max-width: 350px!important;
+  }
+  @include lg {
+    max-width: 400px!important;
+  }
+}
+.max-w-600 {
+  max-width: 300px!important;
+  @include sm {
+    max-width: 400px!important;
+  }
+  @include md {
+    max-width: 500px!important;
+  }
+  @include lg {
+    max-width: 550px!important;
+  }
+  @include xl {
+    max-width: 600px!important;
+  }
+}
+.max-w-750 {
+  max-width: 375px!important;
+  @include sm {
+    max-width: 455px!important;
+  }
+  @include md {
+    max-width: 590px!important;
+  }
+  @include lg {
+    max-width: 690px!important;
+  }
+  @include xl {
+    max-width: 750px!important;
+  }
+}
+.max-w-850 {
+  max-width: 475px!important;
+  @include sm {
+    max-width: 555px!important;
+  }
+  @include md {
+    max-width: 690px!important;
+  }
+  @include lg {
+    max-width: 790px!important;
+  }
+  @include xl {
+    max-width: 850px!important;
+  }
+}
+.max-w-300 {
+
+  @include lg {
+    max-width: 300px!important;
+  }
+  @include xl {
+    max-width: 300px!important;
+  }
+}
+.max-w-350 {
+
+  @include lg {
+    max-width: 350px!important;
+  }
+  @include xl {
+    max-width: 350px!important;
+  }
+}
+
+
+
+.w-600 {
+  width: 300px!important;
+  @include sm {
+    width: 400px!important;
+  }
+  @include md {
+    width: 500px!important;
+  }
+  @include lg {
+    width: 550px!important;
+  }
+ @include xl {
+    width: 600px!important;
+  }
+
+}
+.w-750 {
+  width: 375px!important;
+  @include sm {
+    width: 455px!important;
+  }
+  @include md {
+    width: 590px!important;
+  }
+  @include lg {
+    width: 690px!important;
+  }
+  @include xl {
+    width: 750px!important;
+  }
+}
+.max-w-380 {
+  @include lg {
+    max-width: 380px!important;
+  }
+}
+
+.min-w-25-w{
+  min-width: 24vw !important;
+}
+.min-w-25-ch{
+  min-width: 24ch !important;
+}
+.min-w-300-w{
+  min-width: 300px !important;
+}
+
+.w-40w {
+  width: 40vw !important;
+  min-width: 40vw !important;
+  max-width: 40vw !important;
+}

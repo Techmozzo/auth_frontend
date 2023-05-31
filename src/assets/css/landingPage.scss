@@ -1,0 +1,221 @@
+@import "mixins/mediaqueries";
+@import "mixins/sizes";
+@import "variables/theme";
+
+.slide1{
+  @extend .theme-font-bold;
+  @extend .banner;
+  @include height-size($screen-sm-min, $screen-xl-min, 600px, 860px);
+  max-width: 100%;
+
+
+  .content1 {
+    position: absolute;
+    @include top($screen-sm-min, $screen-xl-min, 190px, 500px);
+    @include left($screen-sm-min, $screen-xl-min, 30px, 137.5px);
+    @include width-size($screen-sm-min, $screen-xl-min, 285px, 775.5px);
+  }
+
+
+  .small1{
+    @extend .theme-font;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 27px;
+    color: #FFFFFF;
+
+  }
+  .hero{
+    @extend .theme-font;
+    margin-top: 2vh;
+    font-weight: bold;
+    font-size: 5.125vw;
+    @include sm {
+      font-size: 4.125vw !important;
+    }
+    @include md {
+      font-size: 3.125vw !important;
+    }
+    //font-size: 48px;
+    //font-size: 3rem;
+    line-height: 140.5%;
+    font-style: normal;
+
+    color: #FFFFFF;
+  }
+  .small2{
+    @extend .theme-font;
+    margin: 2vh 0;
+    font-weight: 500 !important;
+    font-size: 16px !important;
+    line-height: 24px !important;
+    font-family: Poppins, sans-serif;
+    font-style: normal;
+
+    color: #FFFFFF;
+  }
+  .theme-title {
+    @extend .theme-font;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 140.5%;
+
+    display: flex;
+    align-items: center;
+
+    color: #2E2E2E;
+  }
+  button{
+    @extend .theme-font;
+    font-weight: 500;
+    font-size: 16px !important;
+    line-height: 16px !important;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 3vh;
+
+  }
+
+}
+.content2{
+  background-image: url('../images/howItWorks.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height:26vh;
+  width: 30vw;
+  max-width: 100vw;
+  max-height: 35vh;
+ @extend .theme-font;
+}
+.page {
+  padding: 10px 30px;
+}
+
+.howItWorks {
+  @extend .theme-font;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 140.5%;
+  color: #1d2124;
+  /* or 31px */
+  padding: 4vh 0;
+  align-items: center;
+}
+.projects{
+  @extend .theme-font;
+  color: #1d2124;
+  h3, {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 140.5%;
+    /* or 25px */
+
+    display: flex;
+    align-items: center;
+
+    /* Text */
+
+    color: #212121;
+  }
+  .raised{
+    @extend .theme-font;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 140.5%;
+    //color: #212121;
+  }
+  .posted-by {
+    @extend .theme-font;
+    font-size: 14px;
+    line-height: 140.5%;
+  }
+}
+.viewMoreBtn {
+  font-family: Poppins sans-serif;
+  font-size: 16px !important;
+  background: inherit;
+  &:hover {
+    border-bottom: solid 1px;
+    transition: border-bottom 2s linear;
+  }
+}
+.categoryButtons {
+  /* Text */
+  //background: #FFFFFF;
+  @extend .theme-font;
+  height: 50px;
+  border: 1px solid $theme-color;
+  box-sizing: border-box;
+    border-radius: 10px;
+  span {
+    @extend .theme-font;
+    font-size: 16px;
+    color: #212121;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 140.5%;
+    /* or 22px */
+    align-items: center;
+    &:hover {
+      //color: white;
+    }
+  }
+}
+.category {
+  .title {
+    @extend .theme-font;
+    font-weight: 500;
+    font-size: 22px;
+    color: #212121;
+  }
+}
+.banner{
+  background: $theme-color-black url('../images/home/banner.svg');
+  mix-blend-mode: normal;
+}
+.whatWedo {
+  padding-bottom: 30px;
+  height: 100%;
+  @include lg{
+    height: 800px;
+  }
+  @include xl {
+    height: 934px;
+  }
+
+}
+.box-safety {
+  position: absolute;
+    right: 0;
+  width: 100%;
+  //@include width-size($screen-sm-min, $screen-xl-min, 550px, 1170px);
+  @include height-size($screen-sm-min, $screen-xl-min, 550px, 417px);
+  //@include sm {
+  //  width: 100%;
+  //}
+  @include top($screen-sm-min, $screen-xl-min, -55px, -165px);
+  @include left($screen-sm-min, $screen-xl-min, 0, 110px);
+  @extend .box-shadow;
+  -webkit-transition: background-color 1000ms linear;
+  -moz-transition: background-color 1000ms linear;
+  -o-transition: background-color 1000ms linear;
+  -ms-transition: background-color 1000ms linear;
+  transition: background-color 1000ms linear;
+  &:hover {
+    @extend .text-theme-faint;
+    //@extend .bg-theme-grey;
+    background: $theme-color radial-gradient($theme-color-grey 25%, $theme-color-black 100%);
+
+    .font-title {
+      color: white !important;
+    }
+    .text-theme-grey {
+      color: white !important;
+    }
+  }
+}
+.box-safety-container {
+  min-height: 600px;
+}

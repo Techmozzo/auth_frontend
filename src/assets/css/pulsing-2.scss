@@ -1,0 +1,50 @@
+@import "variables/theme";
+.loader {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  margin: auto;
+  --s: 15px;
+}
+.loader::before,
+.loader::after,
+.loader i{
+  content:"";
+  position:absolute;
+  border-radius:50%;
+  inset:0;
+  padding:var(--s);
+  background:
+    conic-gradient(var(--c,$theme-color),transparent 30%),
+    radial-gradient(farthest-side at right,var(--c, $theme-color-light) 94%,#0000) calc(50% - var(--s)/4) 0/calc(var(--s)/2) var(--s);
+  background-repeat:no-repeat;
+  -webkit-mask:
+    linear-gradient($theme-color-grey 0 0) content-box,
+    linear-gradient($theme-color-black);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  animation:m 1s infinite linear;
+}
+.loader::after {
+  --c:$theme-color;
+  animation-timing-function:cubic-bezier(1,0,1,1);
+}
+.loader i {
+  --c:$theme-color-light;
+  animation-timing-function:cubic-bezier(0,0,0,1);
+}
+
+.loader-container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  @extend .center-vertical-2
+}
+.loader-container2 {
+  height: 100vh !important;
+  top: 50vh;
+}
+
+@keyframes m{
+  to {transform:rotate(-1turn)}
+}
