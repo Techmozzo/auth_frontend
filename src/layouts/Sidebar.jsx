@@ -1,4 +1,4 @@
-import { AiOutlineArrowRight, ImMenu3 } from 'react-icons/all';
+import { AiOutlineArrowRight, ImMenu3 } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import Fade from 'react-reveal/Fade';
 import React from 'react';

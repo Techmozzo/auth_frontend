@@ -4,9 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
 import { formatDistanceToNow } from 'date-fns';
 import {
-  IoHappyOutline,
-  GiThumbUp, FcDownload, FiFilter
-} from 'react-icons/all';
+  FcDownload
+} from 'react-icons/fc';
+import { FiFilter } from 'react-icons/fi';
+import { GiThumbUp } from 'react-icons/gi';
 import { myProfile } from '../../redux/actions/profileActions';
 import {
   notifier, stringCaps

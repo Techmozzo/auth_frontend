@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import {
-  MdExplore, RiLoginCircleLine, RiLogoutCircleLine, SiGnuprivacyguard
-} from 'react-icons/all';
+  SiGnuprivacyguard
+} from 'react-icons/si';
+import { MdExplore } from 'react-icons/md';
+import { RiLoginCircleLine, RiLogoutCircleLine } from 'react-icons/ri';
 import { useSelector } from 'react-redux';
 import { currentUser, logout } from '../utilities/auth';
 import { notifications } from '../redux/actions/profileActions';

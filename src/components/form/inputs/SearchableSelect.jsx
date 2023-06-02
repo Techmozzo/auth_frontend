@@ -1,5 +1,5 @@
 import React from 'react';
-import { HiOutlinePlus } from 'react-icons/all';
+import { HiOutlinePlus } from 'react-icons/fa';
 
 const Selectable = ({
   prop, data, selected, creatable, nextStep

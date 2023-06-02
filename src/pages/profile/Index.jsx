@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { CgMenuMotion } from 'react-icons/all';
+import { CgMenuMotion } from 'react-icons/cg';
 import Button from '@material-ui/core/Button';
 import MyAccount from './MyAccount';
 import Transactions from './Transactions';

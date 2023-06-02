@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
-import { AiOutlineDelete } from 'react-icons/all';
+import { AiOutlineDelete } from 'react-icons/ai';
 import { tagsHandler } from '../../../utilities/handlers';
 
 const TagsInput = ({

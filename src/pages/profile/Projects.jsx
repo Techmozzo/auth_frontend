@@ -2,9 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import isAfter from 'date-fns/isAfter';
 import {
-  FiEdit, RiDeleteBin6Line, IoCheckmarkOutline,
-  FaDraft2Digital, BsEyeSlash, MdSentimentVeryDissatisfied, IoPauseCircleOutline, RiDraftLine
-} from 'react-icons/all';
+
+  MdSentimentVeryDissatisfied
+} from 'react-icons/md';
+import {
+  RiDeleteBin6Line, RiDraftLine
+} from 'react-icons/ri';
+import { FiEdit } from 'react-icons/fi';
+import { IoCheckmarkOutline, IoPauseCircleOutline } from 'react-icons/io5';
+import { BsEyeSlash } from 'react-icons/bs';
 import Chip from '@material-ui/core/Chip';
 import { Link } from 'react-router-dom';
 import CardMedia from '@material-ui/core/CardMedia';

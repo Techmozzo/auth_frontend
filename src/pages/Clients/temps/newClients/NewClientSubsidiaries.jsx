@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { filter } from 'lodash';
 import uuid from 'react-uuid';
-import { AiOutlineDelete, AiOutlineExpandAlt, BsArrowsAngleContract } from 'react-icons/all';
+import { AiOutlineDelete, AiOutlineExpandAlt } from 'react-icons/ai';
+import { BsArrowsAngleContract } from 'react-icons/bs';
 import FormBuilder from '../../../../components/form/builders/form';
 import newClientSubsidiariesProps from '../../constants/subsidiaries';
 import CustomAccordion from '../../../../components/ui/customAccordion';

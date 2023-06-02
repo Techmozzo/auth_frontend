@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {
   useHistory
 } from 'react-router-dom';
-import { HiOutlineChevronRight } from 'react-icons/all';
+import { HiOutlineChevronRight } from 'react-icons/hi';
 import { useSelector } from 'react-redux';
 import { apiOptions } from '../../services/fetch';
 import useViewBoilerPlate from '../../components/hooks/useViewBoilerPlate';

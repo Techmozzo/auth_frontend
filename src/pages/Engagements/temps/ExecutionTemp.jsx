@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { last } from 'lodash';
-import { BsArrowsCollapse, GiExpand, MdDone } from 'react-icons/all';
+import { BsArrowsCollapse } from 'react-icons/bs';
+import { GiExpand } from 'react-icons/gi';
+import { MdDone } from 'react-icons/md';
 import { notifier, slugToString, stringDoesNotExist } from '../../../utilities/stringOperations';
 import CustomAccordion from '../../../components/ui/customAccordion';
 import DragNDropTemp from './newEngagement/DragNDropInputTemp';
-import { QuillEditor } from '../../../components/ui/richText';
 import { executions } from '../../../utilities/dummyData';
 
 const ExecutionTemp = ({

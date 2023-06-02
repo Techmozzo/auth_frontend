@@ -10,7 +10,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Card from '@material-ui/core/Card';
 import { Link } from 'react-router-dom';
-import { IoSadOutline } from 'react-icons/all';
+import { IoSadOutline } from 'react-icons/fa';
 import FormBuilder from '../../components/form/builders/form';
 import { validateField } from '../../utilities/validation';
 import { camelToString, notifier } from '../../utilities/stringOperations';

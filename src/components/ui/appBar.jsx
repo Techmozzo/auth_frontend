@@ -9,7 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import {
   MdMoreVert
-} from 'react-icons/all';
+} from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import { sentenceCaps } from '../../utilities/stringOperations';
 import { user } from '../../utilities/auth';

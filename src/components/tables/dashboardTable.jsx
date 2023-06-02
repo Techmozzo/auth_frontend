@@ -8,7 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { Box } from '@mui/material';
 import { useHistory } from 'react-router';
-import { CgArrowsExpandUpRight } from 'react-icons/all';
+import { CgArrowsExpandUpRight } from 'react-icons/cg';
 import Button from '@mui/material/Button';
 import { sentenceCaps } from '../../utilities/stringOperations';
 

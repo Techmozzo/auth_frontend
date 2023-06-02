@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import { RiNotification4Line } from 'react-icons/all';
+import { RiNotification4Line } from 'react-icons/ri';
 import Badge from '@material-ui/core/Badge';
 import { notifications } from '../../redux/actions/profileActions';
 // import Loader from '../../components/microComponents/loader';

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import {
   Link, useHistory, useLocation, useParams
 } from 'react-router-dom';
-import { FcDeleteDatabase } from 'react-icons/all';
+import { FcDeleteDatabase } from 'react-icons/fa';
 
 const NoData = ({ redirect }) => {
   const { push } = useHistory();

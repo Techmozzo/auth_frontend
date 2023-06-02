@@ -13,7 +13,7 @@ import NaijaStates from 'naija-state-local-government';
 import {
   Link, Redirect, useHistory, useLocation, useParams
 } from 'react-router-dom';
-import { BiArrowBack } from 'react-icons/all';
+import { BiArrowBack } from 'react-icons/fa';
 import FormBuilder from '../../components/form/builders/form';
 import { validateField } from '../../utilities/validation';
 import { camelToString, notifier, stringDoesNotExist } from '../../utilities/stringOperations';

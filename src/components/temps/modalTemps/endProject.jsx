@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
 import {
   AiOutlineCloseCircle, GoMail, IoLogoWhatsapp, SiTwitter, GrFacebook, FaLinkedin, ImTelegram
-} from 'react-icons/all';
+} from 'react-icons/fa';
 import IconButton from '@material-ui/core/IconButton';
 import { useDispatch, useSelector } from 'react-redux';
 import PageTemp from '../PageTemp';

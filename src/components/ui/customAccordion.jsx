@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FcCollapse, FcExpand } from 'react-icons/all';
+import { FcCollapse, FcExpand } from 'react-icons/fc';
 import Box from '@material-ui/core/Box';
 
 const CustomAccordion = ({

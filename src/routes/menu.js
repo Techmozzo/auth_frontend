@@ -1,13 +1,11 @@
 import {
-  AiOutlineAudit,
   AiOutlineHome,
-  AiOutlineUsergroupAdd,
-  BsFolder, IoBusinessOutline,
-  MdNotificationsNone,
-  MdPersonOutline,
-  RiDashboardLine,
-  RiSettings2Line
-} from 'react-icons/all';
+  AiOutlineUsergroupAdd
+} from 'react-icons/ai';
+import { MdPersonOutline, MdNotificationsNone } from 'react-icons/md';
+import { IoBusinessOutline } from 'react-icons/io5';
+import { BsFolder } from 'react-icons/bs';
+import { RiSettings2Line, RiDashboardLine } from 'react-icons/ri';
 import React from 'react';
 
 const miniMenu = [

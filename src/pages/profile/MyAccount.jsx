@@ -3,7 +3,7 @@ import localforage from 'localforage';
 import { useDispatch, useSelector } from 'react-redux';
 import Avatar from '@material-ui/core/Avatar';
 import CardContent from '@material-ui/core/CardContent';
-import { FcCurrencyExchange, RiLockPasswordLine, RiLogoutCircleLine } from 'react-icons/all';
+import { RiLockPasswordLine, RiLogoutCircleLine } from 'react-icons/ri';
 import { myProfile } from '../../redux/actions/profileActions';
 import FormBuilder from '../../components/form/builders/form';
 import formBuilderProps from './constants/myInfo';

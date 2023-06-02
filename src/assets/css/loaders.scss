@@ -107,8 +107,8 @@ $dial-loader-timing: ease-in-out;
   justify-content: center;
   width: 100%;
   max-width: $dial-loader-size;
-  margin-top: $dial-loader-size/2;
-  margin-bottom: $dial-loader-size/2;
+  margin-top: calc($dial-loader-size / 2);
+  margin-bottom: calc($dial-loader-size / 2);
   &:before,
   &:after {
     content: "";

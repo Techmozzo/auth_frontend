@@ -13,7 +13,7 @@ import {
 } from 'react-router-dom';
 import {
   BiDonateHeart, FaArrowDown, FaArrowUp, FiDelete, FiEdit, FiShare2, RiDeleteBin6Line
-} from 'react-icons/all';
+} from 'react-icons/fa';
 import Paper from '@material-ui/core/Paper';
 import CardMedia from '@material-ui/core/CardMedia';
 import _ from 'lodash';

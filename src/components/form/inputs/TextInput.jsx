@@ -1,6 +1,7 @@
 /* eslint-disable react/destructuring-assignment */
 import React, { useState } from 'react';
-import { FaEyeSlash, FaEye, FaCheck } from 'react-icons/all';
+// eslint-disable-next-line import/no-unresolved
+import { FaEyeSlash, FaEye, FaCheck } from 'react-icons/fa';
 import Skeleton from '@material-ui/lab/Skeleton';
 import {
   containSpecialChars,

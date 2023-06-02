@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { isUndefined } from 'lodash';
-import { RiUserReceivedLine } from 'react-icons/all';
+import { RiUserReceivedLine } from 'react-icons/ri';
 import FormBuilder from '../../components/form/builders/form';
 import userProps from './constants/usersProps';
 import { apiOptions } from '../../services/fetch';

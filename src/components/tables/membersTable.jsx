@@ -10,7 +10,7 @@ import TableRow from '@mui/material/TableRow';
 import { Box } from '@mui/material';
 import { useHistory } from 'react-router';
 import Button from '@mui/material/Button';
-import { CgArrowsExpandUpRight } from 'react-icons/all';
+import { CgArrowsExpandUpRight } from 'react-icons/cg';
 import { makeFullName, sentenceCaps } from '../../utilities/stringOperations';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
