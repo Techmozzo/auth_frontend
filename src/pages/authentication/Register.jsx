@@ -94,9 +94,9 @@ const RegisterPage = () => {
   };
   /* on visiting */
   const initialTemp = ({ ...props }) => (
-    <div className=" margin-center m-t-40">
-      <div className="box-shadow row">
-        <div className="login position-relative col-md-5">
+    <div className=" margin-center m-t-40" style={{ minHeight: '1000px' }}>
+      <div className="box-shadow row" style={{ minHeight: '1000px' }}>
+        <div className="login position-relative col-md-5" style={{ minHeight: '1000px' }}>
           <div className="login-content p-0 m-0 p-lg-3 ml-lg-5">
             <p className="font-title-small text-theme-black bold theme-font-bold text-theme">
               Fast. Secure. Safe.

@@ -60,7 +60,14 @@ const fetchBackend = async (
     .then((res) => res, async (err) => {
       // console.log(err.response?.data);
       // || err?.response?.status === 403
-      if ((err?.response?.status === 401) && window.location.pathname !== '/login') {
+      if ((err?.response?.status === 401) && window.location.pathname !== '/login'
+       && window.location.pathname !== '/reset-password'
+       && window.location.pathname !== '/register'
+       && window.location.pathname !== '/forgot-password'
+       && window.location.pathname !== '/reset-password'
+       && window.location.pathname !== '/home'
+
+      ) {
         // notifiy user
         notifier({
           type: 'info',

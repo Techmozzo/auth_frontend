@@ -112,7 +112,7 @@ const ForgotPassword = () => {
       <p>
         Forgot Password
       </p>
-      <div className="max-w-600 w-600 margin-center m-t-40">
+      <div className="max-w-600 w-600 margin-center m-t-40 ">
         {
           store.status === 'pending'
             ? <Loader />
@@ -120,7 +120,7 @@ const ForgotPassword = () => {
               <div className="login-form-container p-20">
                 <p className="">Provide your registered email address to reset your password</p>
                 <hr />
-                <div className="login-form mb-3">
+                <div className=" mb-3">
                   <FormBuilder
                     formItems={
                       forgotPasswordProps(
@@ -133,9 +133,12 @@ const ForgotPassword = () => {
                       )
                     }
                   />
-                  <button disabled={!(!stringDoesNotExist(formData.email) && errors.email?.length === 0)} className="w-50 btn btn-sm float-right" type="button" onClick={handleResetPassword}>
-                    Reset Password
-                  </button>
+                  <div className="clearfix">
+                    <button disabled={!(!stringDoesNotExist(formData.email) && errors.email?.length === 0)} className="w-50 btn btn-sm float-right" type="button" onClick={handleResetPassword}>
+                      Reset Password
+                    </button>
+                  </div>
+
                 </div>
               </div>
             )

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Helvetica+Neue:400,600,700');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import 'file-input';
 @import 'modal';
 @import 'carousel';
@@ -28,11 +28,11 @@
 //@import "insane";
 @font-face {
   font-family: Notosans-Bold;
-  src: url('./Noto_Sans/NotoSans-Bold.ttf');
+  src: local('Noto Sans Bold'), url('./Noto_Sans/NotoSans-Bold.ttf');
 }
 @font-face {
   font-family: Notosans-regular;
-  src: url('./Noto_Sans/NotoSans-Regular.ttf');
+  src: local('Noto Sans Regular'), url('./Noto_Sans/NotoSans-Regular.ttf');
 }
 
 * {
@@ -78,8 +78,7 @@
 
 }
 body {
-  @extend .theme-font;
-  @extend .text-theme-grey;
+  font-family: 'Noto San', sans-serif;
   margin: 0;
   font-size: 1rem;
   overflow-x: hidden;
@@ -1053,7 +1052,8 @@ a {
 }
 .login {
   mix-blend-mode: normal;
-  background: url('../images/login/loginBg.svg') no-repeat center;
+  background: url('../images/login/loginBg.svg') repeat-x center;
+  background-size:cover;
   @include height-size($screen-sm-min, $screen-xl-min, 550px, 931px);
   @include width-size($screen-sm-min, $screen-xl-min, 300px, 950px);
   .login-content {

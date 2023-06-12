@@ -16,7 +16,10 @@ import { apiOptions } from '../../services/fetch';
 import { user } from '../../utilities/auth';
 
 const CompleteProfile1 = () => {
-  const [formData, setFormData] = useState({ ...user, designation: user.role_id[0]?.name });
+  const [formData, setFormData] = useState({
+    ...user,
+    designation: user.role_id === null ? null : user.role_id[0]?.name
+  });
   const [terms, setTerms] = useState(false);
   const [show, setShow] = useState(false);
   const [errors, setErrors] = useState({});
@@ -105,7 +108,7 @@ const CompleteProfile1 = () => {
   };
   const listMatProps = [
     'they don\'t want us to win. The key is to enjoy life because they don\'t want us to enjoy life. ',
-    'they don\'t want us to win. The key is to enjoy life because they don\'t want us to enjoy life. ',
+    'I promise you, they don’t want you to jetski, they don’t want you to smile. Let’s see what Chef Dee got that they don’t want us to eat.',
     'they don\'t want us to win. The key is to enjoy life because they don\'t want us to enjoy life. ',
     'they don\'t want us to win. The key is to enjoy life because they don\'t want us to enjoy life. ',
     'they don\'t want us to win. The key is to enjoy life because they don\'t want us to enjoy life. ',

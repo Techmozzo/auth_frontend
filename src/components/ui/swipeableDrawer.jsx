@@ -206,7 +206,7 @@ const MiniDrawer = ({
               </div>
               <div className="text-theme">
                 {' '}
-                {sentenceCaps(user?.role_id[0]?.name || user?.role_id.name) || ''}
+                {sentenceCaps(user.role_id === null ? null : user?.role_id[0]?.name || user?.role_id.name) || ''}
               </div>
             </div>
           </div>
