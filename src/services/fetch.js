@@ -66,6 +66,7 @@ const fetchBackend = async (
        && window.location.pathname !== '/forgot-password'
        && window.location.pathname !== '/reset-password'
        && window.location.pathname !== '/home'
+       && !window.location.pathname.startsWith('/invited-user-registration/')
 
       ) {
         // notifiy user

@@ -36,7 +36,7 @@ const registerUserProps = (
       label: 'Last Name',
       type: 'text',
       value: formData?.last_name || '',
-      disabled: true,
+      disabled: false,
       error: errors?.last_name,
       onBlur: handleBlur,
       onChange: handleChange

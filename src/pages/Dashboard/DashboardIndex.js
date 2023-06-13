@@ -13,10 +13,11 @@ const DashboardIndex = () => {
   const [formData, setFormData] = React.useState({});
   const { push } = useHistory();
 
+  console.log(store);
   const options = {
     action: 'DASHBOARD',
     apiOpts: apiOptions({
-      endpoint: 'DASHBOARD',
+      endpoint: 'INDEX',
       auth: true,
       method: 'get'
     })
