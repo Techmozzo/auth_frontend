@@ -35,6 +35,8 @@ const paths = {
   ENGAGEMENTS: engagementEnpoints.engagements,
   EDIT_ENGAGEMENT: engagementEnpoints.engagements,
   DELETE_ENGAGEMENT: engagementEnpoints.engagements,
+  ACCEPT_ENGAGEMENT_INVITE: engagementEnpoints.acceptengangementinvite,
+  DECLINE_ENGAGEMENT_INVITE: engagementEnpoints.declineengangementinvite,
 
   // payment
   STOP_PROJECT: paymentEndpoints.stopProject,
@@ -59,7 +61,8 @@ const paths = {
   PROFILES: profileEndpoints.getProfile,
 
   // index
-  INDEX: authEndpoints.index
+  INDEX: authEndpoints.index,
+  CLIENT_ROLES: engagementEnpoints.clientroles
 };
 
 export default paths;

@@ -46,7 +46,7 @@ export default function DashboardTable({ data }) {
     const theData = data.filter((item) => item.name === row.name);
     push(`/app/engagement/engagement/${theData[0].id}`);
   };
-
+  console.log('Den ', data);
   return (
     <TableContainer component={Box}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">

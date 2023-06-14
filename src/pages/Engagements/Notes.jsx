@@ -15,10 +15,10 @@ const Notes = ({ link, engagementId }) => {
   const { push } = useHistory();
   /* redux hooks */
   const store = useSelector((state) => state.engagement?.notes);
+  const storex = useSelector((state) => state.engagement?.engagement);
   /* state */
   const [notes, setNotes] = useState([]);
   const [addNote, setAddNote] = useState(false);
-
   /* boilerPlate hooks params */
   const options = {
     action: 'NOTES',
@@ -30,7 +30,6 @@ const Notes = ({ link, engagementId }) => {
       method: 'get'
     })
   };
-
   /* boilerPlate hooks */
   const {
     view, status, data
@@ -57,7 +56,8 @@ const Notes = ({ link, engagementId }) => {
           <div>
             {
               addNote
-                ? <AddNotesTemp />
+                // eslint-disable-next-line max-len
+                ? <AddNotesTemp engagementId={engagementId} stageId={storex?.data?.data?.engagement?.status} />
                 : <NoNotesTemp setAdd={setAddNote} />
             }
           </div>
@@ -68,7 +68,12 @@ const Notes = ({ link, engagementId }) => {
           <div>
             {
               addNote
-                ? <AddNotesTemp />
+                ? (
+                  <AddNotesTemp
+                    engagementId={engagementId}
+                    stageId={storex?.data?.data?.engagement?.status}
+                  />
+                )
                 : <div>hi</div>
             }
           </div>

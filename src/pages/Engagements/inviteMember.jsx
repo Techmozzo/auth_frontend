@@ -5,7 +5,7 @@ import { isUndefined } from 'lodash';
 import { RiUserReceivedLine } from 'react-icons/ri';
 import FormBuilder from '../../components/form/builders/form';
 import userProps from './constants/usersProps';
-import { apiOptions } from '../../services/fetch';
+import { apiOptions, get, post } from '../../services/fetch';
 import useCreateBoilerPlate from '../../components/hooks/useCreateBoilerPlate';
 import useStoreParams from '../../components/hooks/useStoreParams';
 import { projectAction } from '../../redux/actions/projectActions';
@@ -15,6 +15,7 @@ import { makeFullName, notifier, stringDoesNotExist } from '../../utilities/stri
 import { user } from '../../utilities/auth';
 import { auditPost } from '../../utilities/dummyData';
 import ListMat from '../../components/ui/listMat';
+import useClientRoles from '../../components/hooks/useClientRoles';
 
 const InviteMember = ({ engagementName, engagementId, cancel }) => {
   /* redux hooks */
@@ -25,12 +26,13 @@ const InviteMember = ({ engagementName, engagementId, cancel }) => {
 
   /* router hooks */
   const { push } = useHistory();
-
+  console.log(store);
   /* state */
   const [formData, setFormData] = useState({});
   const [invitees, setInvitees] = useState([]);
   const [errors, setErrors] = useState({});
-
+  const { clientroles } = useClientRoles();
+  console.log('Client ', clientroles);
   /* boilerPlate hooks params */
   const options = {
     action: 'INVITE_TO_ENGAGEMENT',
@@ -117,10 +119,14 @@ const InviteMember = ({ engagementName, engagementId, cancel }) => {
       const inviteeName = formData?.users.filter(
         (one) => !isUndefined(one.id) && one.id.toString() === formData.user_id
       );
-      const inviteePosition = auditPost?.filter(
+      const inviteePosition = clientroles?.filter(
         (one) => !isUndefined(one.id) && one.id.toString() === formData.engagement_team_role_id
       );
-      const invited = invitees.find((item) => item.name === inviteeName[0]?.name);
+      console.log('Invitee ', inviteePosition);
+      // auditPost?.filter(
+      //   (one) => !isUndefined(one.id) && one.id.toString() === formData.engagement_team_role_id
+      // );
+      const invited = invitees.find((item) => item.id === inviteeName[0]?.id);
       if (isUndefined(invited)) {
         setInvitees(
           [
@@ -129,7 +135,7 @@ const InviteMember = ({ engagementName, engagementId, cancel }) => {
               user_id: formData?.user_id,
               engagement_team_role_id: formData?.engagement_team_role_id,
               name: inviteeName[0]?.name,
-              position: inviteePosition[0]?.type
+              position: inviteePosition[0]?.name
             }
           ]
         );
@@ -149,11 +155,13 @@ const InviteMember = ({ engagementName, engagementId, cancel }) => {
     }
   }, [formData?.engagement_team_role_id, formData?.user_id]);
 
-  const listData = invitees.map((item) => ({
+  const listData = invitees.map((item, idkey) => ({
+    id: idkey,
     name: `${item.name}, ${item.position}`,
     icon: <RiUserReceivedLine />
   }));
 
+  console.log(formData);
   return (
     <div className="my-3">
       {
@@ -182,7 +190,8 @@ const InviteMember = ({ engagementName, engagementId, cancel }) => {
                         formData,
                         handleBlur,
                         handleChange,
-                        errors
+                        errors,
+                        auditPostt: clientroles
                       }
                     )
                   }

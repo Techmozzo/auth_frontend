@@ -44,6 +44,8 @@ const Engagement = () => {
     options
   });
 
+  console.log('Tems ', formData);
+
   return (
     <div className="row">
       <div className="col-md-10">
@@ -73,7 +75,7 @@ const Engagement = () => {
               : (
                 <div>
                   {
-                    isEmpty(formData?.teamMembers)
+                    isEmpty(formData?.engagement?.team_members)
                       ? (
                         <NoData
                           title={`No ${formData?.engagement?.name} team`}
@@ -82,7 +84,7 @@ const Engagement = () => {
                           callback={() => setOpen(true)}
                         />
                       )
-                      : <MembersTable data={formData.teamMembers} />
+                      : <MembersTable data={formData?.engagement?.team_members} />
                   }
                 </div>
               )
