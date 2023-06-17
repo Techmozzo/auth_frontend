@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { isFunction } from 'lodash';
 import { Link, useHistory, useParams } from 'react-router-dom';
@@ -6,12 +6,14 @@ import Loader from '../../../components/microComponents/loader';
 import useCreateBoilerPlate from '../../../components/hooks/useCreateBoilerPlate';
 import { notifier, sentenceCaps } from '../../../utilities/stringOperations';
 import useUpdateStore from '../../../components/hooks/useUpdateStore';
-import useStoreParams from '../../../components/hooks/useStoreParams';
+// import useStoreParams from '../../../components/hooks/useStoreParams';
 import { apiOptions } from '../../../services/fetch';
 import PlanningTemp from '../temps/planning/PlanningTemp';
 import Notes from '../Notes';
 import NewEngagementTemp from '../temps/newEngagement/NewEngagementTemp';
 import HorizontalLinearStepper from '../../../components/microComponents/stepper';
+import useViewBoilerPlate from '../../../components/hooks/useViewBoilerPlate';
+import { projectAction } from '../../../redux/actions/projectActions';
 
 const PlanningClasses = ({ setTempParams, classes }) => {
   const { engagementId } = useParams();
@@ -20,6 +22,7 @@ const PlanningClasses = ({ setTempParams, classes }) => {
   const [errors, setErrors] = useState({});
   /* redux */
   const store = useSelector((state) => state.engagement?.planning);
+  const storer = useSelector((state) => state.engagement);
   const options = {
     action: 'PLANNING',
     apiOpts: apiOptions({
@@ -47,7 +50,8 @@ const PlanningClasses = ({ setTempParams, classes }) => {
     options,
     store,
     action: 'PLANNING_COMPLETE',
-    noRedirect: true
+    noRedirect: true,
+    pushUpdatesArr
     // redirect: '/app/engagements'
   });
 

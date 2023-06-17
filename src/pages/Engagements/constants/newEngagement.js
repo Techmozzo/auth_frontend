@@ -45,7 +45,7 @@ const newEngagementProps = (
           <p className="theme-font text-theme-black">Select Audit Year</p>
           <DatePicker
             style={{ width: '100%' }}
-            selected={formData.year}
+            selected={new Date(formData.year)}
             className="border-faint border-radius-5 theme-padding w-100"
             name="year"
             onChange={(date) => handleDateChange({ date, name: 'year' })}

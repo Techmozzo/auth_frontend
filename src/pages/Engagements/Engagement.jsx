@@ -92,7 +92,7 @@ const Engagement = () => {
         </div>
       </div>
       <div className="col-md-2 bg-white min-h-100">
-        <Notes engagementId={engagementId} />
+        <Notes />
       </div>
       <BackdropModal
         handleClose={() => setOpen(false)}

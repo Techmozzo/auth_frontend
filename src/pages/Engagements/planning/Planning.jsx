@@ -13,11 +13,12 @@ import PageTemp from '../../../components/temps/PageTemp';
 import PlanningTests from './PlanningTests';
 import PlanningMisc from './PlanningMisc';
 import { headerTemp1 } from '../../../components/temps/projectTemps/miscTemps';
+import useClasses from '../../../components/hooks/useClasses';
 
 const Planning = () => {
   /* redux hooks */
   const store = useSelector((state) => state.engagement?.engagement);
-
+  const { planning } = useClasses();
   /* router hooks */
   const { engagementName, engagementId } = useParams();
 
@@ -79,7 +80,9 @@ const Planning = () => {
                           btnMethod: tempParams.create
                         },
                         {
-                          template: <PlanningMateriality setTempParams={setTempParams} />,
+                          template: <PlanningMateriality
+                            setTempParams={setTempParams}
+                          />,
                           optional: false,
                           label: 'Materiality',
                           btn: 'Next',
@@ -87,7 +90,9 @@ const Planning = () => {
                           btnMethod: tempParams.create
                         },
                         {
-                          template: <PlanningMisc setTempParams={setTempParams} />,
+                          template: <PlanningMisc
+                            setTempParams={setTempParams}
+                          />,
                           optional: false,
                           label: 'Misc',
                           btn: 'Next',
@@ -95,7 +100,9 @@ const Planning = () => {
                           btnMethod: tempParams.create
                         },
                         {
-                          template: <PlanningTests setTempParams={setTempParams} />,
+                          template: <PlanningTests
+                            setTempParams={setTempParams}
+                          />,
                           optional: false,
                           label: 'Test',
                           btn: 'Done',

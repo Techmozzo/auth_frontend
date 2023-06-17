@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import FormBuilder from '../../../../components/form/builders/form';
@@ -11,6 +12,7 @@ const NewEngagementTemp = ({
   create, removeItem, loadingMedia, progress, uploads, handleDateChange, link
 }) => {
   const [currentPanel, setCurrentPanel] = useState(0);
+  console.log(formData);
   return (
     <div className="w-600 ">
       <div className="px-3">

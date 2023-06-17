@@ -18,7 +18,8 @@ import CustomCheckbox from '../../../../components/form/inputs/CustomCheckbox';
 import CheckboxComp from '../../../../components/ui/CheckboxComp';
 
 const TestsTemp = ({
-  formData, setFormData, handleChange, errors, handleBlur, setErrors, handleChecked, blurHandler
+  formData, setFormData, handleChange, errors, handleBlur, setErrors, handleChecked, blurHandler,
+  planClasses
 }) => {
   const [currentPanel, setCurrentPanel] = useState(0);
   const [procedures, setProcedures] = useState([1]);
@@ -37,6 +38,25 @@ const TestsTemp = ({
           <div className="d-flex wrap justify-content-between">
             <div className="margin-auto w-100 px-5">
               <div className="px-3">
+                {/* <div className="font-title-small text-theme">Select Class</div> */}
+                <CustomAccordion
+                  data={{
+                    name: 'Select Class',
+                    details: (
+                      <div>
+                        <select onChange={(e) => setFormData({ ...formData, classId: e.target.value })} name="classes" id="classes" className="font-title-small text-theme" style={{ width: '100%' }}>
+                          <option>Choose Class </option>
+                          {planClasses && planClasses.map((classes, i) => (
+                            <option key={classes.id} value={classes.id}>{classes.name}</option>
+                          ))}
+                        </select>
+                      </div>
+                    )
+                  }}
+                  setCurrentPanel={setCurrentPanel}
+                  currentPanel={currentPanel}
+                  panel={1}
+                />
                 <CustomAccordion
                   data={{
                     name: 'Test Name And Assertions',
@@ -54,6 +74,7 @@ const TestsTemp = ({
                             ).test
                           }
                         />
+
                         <div className="font-title-small text-theme">Assertions</div>
                         <div className="d-flex wrap justify-content-between">
                           {
@@ -79,7 +100,7 @@ const TestsTemp = ({
                   }}
                   setCurrentPanel={setCurrentPanel}
                   currentPanel={currentPanel}
-                  panel={1}
+                  panel={2}
                 />
                 <CustomAccordion
                   data={{
@@ -106,7 +127,7 @@ const TestsTemp = ({
                   }}
                   setCurrentPanel={setCurrentPanel}
                   currentPanel={currentPanel}
-                  panel={2}
+                  panel={3}
                 />
               </div>
             </div>
