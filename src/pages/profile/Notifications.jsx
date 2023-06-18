@@ -21,7 +21,7 @@ const Notifications = ({ setCurrent }) => {
   const [month, setMonth] = useState([]);
   const [week, setWeek] = useState([]);
   const [old, setOld] = useState([]);
-
+  console.log(store);
   const mapToView = (items) => items.length > 0 && items.map((item) => (
     <Card className="my-5 hover-wema" key={Math.random()}>
       <CardContent>

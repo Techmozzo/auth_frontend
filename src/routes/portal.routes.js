@@ -165,6 +165,12 @@ const routes = [
     exact: true,
     name: 'clients'
   },
+  {
+    path: '/app/notifications',
+    component: Notifications,
+    exact: true,
+    name: 'notifications'
+  },
 
   {
     path: '/app/clients/new-client',
