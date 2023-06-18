@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { useEffect, useState } from 'react';
 import isThisWeek from 'date-fns/isThisWeek';
 import isThisMonth from 'date-fns/isThisMonth';
@@ -50,11 +51,11 @@ const Notifications = ({ setCurrent }) => {
       dispatch(notifications());
     }
     if (store.status === 'success') {
-      const weekData = store.data?.data?.filter((item) => isThisWeek(new Date(item.dateCreated)));
-      const monthData = store.data?.data?.filter((item) => isThisMonth(new Date(item.dateCreated))
+      const weekData = store.data?.data?.notifications?.filter((item) => isThisWeek(new Date(item.dateCreated)));
+      const monthData = store.data?.data?.notifications?.filter((item) => isThisMonth(new Date(item.dateCreated))
         && !isThisWeek(new Date(item.dateCreated)));
       const joinArr = weekData.concat(monthData);
-      const oldData = store.data?.data?.filter((item) => joinArr.indexOf(item) === -1);
+      const oldData = store.data?.data?.notifications?.filter((item) => joinArr.indexOf(item) === -1);
       setOld(oldData);
       setMonth(monthData);
       setWeek(weekData);
@@ -139,10 +140,10 @@ const Notifications = ({ setCurrent }) => {
   return (
     <div className={setCurrent === undefined ? ' pb-5h' : ''}>
       <div className="w-100 margin-center m-t-40 ">
-
         <PageTemp
           view={temp}
           status={store?.status}
+          data={store.data?.data?.notifications}
         />
 
       </div>
