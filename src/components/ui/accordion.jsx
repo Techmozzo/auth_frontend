@@ -2,7 +2,7 @@ import * as React from 'react';
 import {
   Accordion, AccordionDetails, AccordionSummary, Typography
 } from '@material-ui/core';
-import { FcExpand } from 'react-icons/all';
+import { FcExpand } from 'react-icons/fa';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 

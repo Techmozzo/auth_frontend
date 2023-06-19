@@ -1,4 +1,6 @@
 import { lazy } from 'react';
+import AcceptInvite from '../pages/Engagements/Invites/AcceptInvite';
+import DeclineInvite from '../pages/Engagements/Invites/DeclineInvite';
 
 const Login = lazy(() => import('../pages/authentication/Login'));
 const Register = lazy(() => import('../pages/authentication/Register'));
@@ -97,6 +99,18 @@ const routes = [
     name: 'engagement'
   },
   {
+    path: '/app/engagements/accept-invite/:token',
+    component: AcceptInvite,
+    exact: true,
+    name: 'engagement'
+  },
+  {
+    path: '/app/engagements/decline-invite/:token',
+    component: DeclineInvite,
+    exact: true,
+    name: 'engagement'
+  },
+  {
     path: '/app/engagement/planning/:engagementName/:engagementId',
     component: Planning,
     exact: true,
@@ -150,6 +164,12 @@ const routes = [
     component: Client,
     exact: true,
     name: 'clients'
+  },
+  {
+    path: '/app/notifications',
+    component: Notifications,
+    exact: true,
+    name: 'notifications'
   },
 
   {

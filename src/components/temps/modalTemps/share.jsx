@@ -9,8 +9,15 @@ import {
   WhatsappShareButton
 } from 'react-share';
 import {
-  AiOutlineCloseCircle, GoMail, IoLogoWhatsapp, SiTwitter, GrFacebook, FaLinkedin, ImTelegram
-} from 'react-icons/all';
+  AiOutlineCloseCircle
+} from 'react-icons/ai';
+
+import { GoMail } from 'react-icons/go';
+import { IoLogoWhatsapp } from 'react-icons/io';
+import { SiTwitter } from 'react-icons/si';
+import { GrFacebook } from 'react-icons/gr';
+import { FaLinkedin } from 'react-icons/fa';
+import { ImTelegram } from 'react-icons/im';
 import IconButton from '@material-ui/core/IconButton';
 import SimpleSnackbar from '../../microComponents/snackBar';
 import { copyText, stringCaps } from '../../../utilities/stringOperations';

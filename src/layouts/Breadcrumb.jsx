@@ -4,7 +4,7 @@ import _ from 'lodash';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
-import { FcHome } from 'react-icons/all';
+import { FcHome } from 'react-icons/fc';
 
 const CollapsedBreadcrumbs = ({ prevs, current, max }) => (
   <Breadcrumbs maxItems={max} aria-label="breadcrumb">

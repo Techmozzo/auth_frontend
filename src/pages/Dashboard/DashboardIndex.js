@@ -10,13 +10,14 @@ import { user } from '../../utilities/auth';
 
 const DashboardIndex = () => {
   const store = useSelector((state) => state.engagement.dashboard);
+
   const [formData, setFormData] = React.useState({});
   const { push } = useHistory();
 
   const options = {
     action: 'DASHBOARD',
     apiOpts: apiOptions({
-      endpoint: 'DASHBOARD',
+      endpoint: 'INDEX',
       auth: true,
       method: 'get'
     })

@@ -1,7 +1,7 @@
 /* eslint-disable react/destructuring-assignment */
 import React, { useState } from 'react';
 import CurrencyFormat from 'react-currency-format';
-import { FaEyeSlash, FaEye, FaCheck } from 'react-icons/all';
+import { FaEyeSlash, FaEye, FaCheck } from 'react-icons/fa';
 import Skeleton from '@material-ui/lab/Skeleton';
 import {
   containSpecialChars,

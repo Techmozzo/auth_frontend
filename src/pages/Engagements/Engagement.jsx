@@ -44,6 +44,8 @@ const Engagement = () => {
     options
   });
 
+  console.log('Tems ', formData);
+
   return (
     <div className="row">
       <div className="col-md-10">
@@ -73,7 +75,7 @@ const Engagement = () => {
               : (
                 <div>
                   {
-                    isEmpty(formData?.teamMembers)
+                    isEmpty(formData?.engagement?.team_members)
                       ? (
                         <NoData
                           title={`No ${formData?.engagement?.name} team`}
@@ -82,7 +84,21 @@ const Engagement = () => {
                           callback={() => setOpen(true)}
                         />
                       )
-                      : <MembersTable data={formData.teamMembers} />
+                      : (
+                        <>
+                          <div style={{ marginBottom: '20px' }}>
+                            <NoData
+                              // title={`No ${formData?.engagement?.name} team`}
+                              text="Invite collaborators to this engagement"
+                              btnName="Invite Members"
+                              callback={() => setOpen(true)}
+                            />
+                          </div>
+
+                          <MembersTable data={formData?.engagement?.team_members} />
+                        </>
+                      )
+
                   }
                 </div>
               )
@@ -90,7 +106,7 @@ const Engagement = () => {
         </div>
       </div>
       <div className="col-md-2 bg-white min-h-100">
-        <Notes engagementId={engagementId} />
+        <Notes />
       </div>
       <BackdropModal
         handleClose={() => setOpen(false)}

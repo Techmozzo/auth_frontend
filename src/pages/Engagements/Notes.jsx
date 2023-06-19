@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import {
-  useHistory
+  useHistory, useParams
 } from 'react-router-dom';
-import { HiOutlineChevronRight } from 'react-icons/all';
-import { useSelector } from 'react-redux';
+import { HiOutlineChevronRight } from 'react-icons/hi';
+import { useSelector, connect } from 'react-redux';
 import { apiOptions } from '../../services/fetch';
 import useViewBoilerPlate from '../../components/hooks/useViewBoilerPlate';
 import Loader from '../../components/microComponents/loader';
@@ -11,13 +11,15 @@ import PageTemp from '../../components/temps/PageTemp';
 import NoNotesTemp from './temps/notes/NoNotesTemp';
 import AddNotesTemp from './temps/notes/AddNotesTemp';
 
-const Notes = ({ link, engagementId }) => {
+const Notes = ({ link, store }) => {
   const { push } = useHistory();
   /* redux hooks */
-  const store = useSelector((state) => state.engagement?.notes);
+  // const store = useSelector((state) => state.engagement?.notes);
+  const storex = useSelector((state) => state.engagement?.engagement);
   /* state */
   const [notes, setNotes] = useState([]);
   const [addNote, setAddNote] = useState(false);
+  const { engagementId } = useParams();
 
   /* boilerPlate hooks params */
   const options = {
@@ -30,7 +32,6 @@ const Notes = ({ link, engagementId }) => {
       method: 'get'
     })
   };
-
   /* boilerPlate hooks */
   const {
     view, status, data
@@ -57,7 +58,8 @@ const Notes = ({ link, engagementId }) => {
           <div>
             {
               addNote
-                ? <AddNotesTemp />
+                // eslint-disable-next-line max-len
+                ? <AddNotesTemp engagementId={engagementId} stageId={storex?.data?.data?.engagement?.status} />
                 : <NoNotesTemp setAdd={setAddNote} />
             }
           </div>
@@ -68,8 +70,19 @@ const Notes = ({ link, engagementId }) => {
           <div>
             {
               addNote
-                ? <AddNotesTemp />
-                : <div>hi</div>
+                ? (
+                  <AddNotesTemp
+                    engagementId={engagementId}
+                    stageId={storex?.data?.data?.engagement?.status}
+                  />
+                )
+                : (
+                  <div>
+                    {data && data.notes.map((note, i) => (
+                      <p key={note.id} dangerouslySetInnerHTML={{ __html: note.message }} />
+                    ))}
+                  </div>
+                )
             }
           </div>
         )}
@@ -78,4 +91,10 @@ const Notes = ({ link, engagementId }) => {
   );
 };
 
-export default Notes;
+function mapStateToProps(state) {
+  const { engagement } = state;
+  console.log('Toddddo ', engagement.notes);
+  return { store: engagement.notes };
+}
+
+export default connect(mapStateToProps)(Notes);

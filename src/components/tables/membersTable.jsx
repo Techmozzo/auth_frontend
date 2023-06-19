@@ -10,7 +10,7 @@ import TableRow from '@mui/material/TableRow';
 import { Box } from '@mui/material';
 import { useHistory } from 'react-router';
 import Button from '@mui/material/Button';
-import { CgArrowsExpandUpRight } from 'react-icons/all';
+import { CgArrowsExpandUpRight } from 'react-icons/cg';
 import { makeFullName, sentenceCaps } from '../../utilities/stringOperations';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -35,18 +35,18 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 export default function MembersTable({ data }) {
   const { push } = useHistory();
-  function createData(name, position, date, type, action) {
+  function createData(name, position, date, type, userid) {
     return {
-      name, position, date, type, action
+      name, position, date, type, userid
     };
   }
 
   const rows = data?.map((item) => createData(
-    makeFullName([item.first_name, item.last_name]), item.position,
-    item.created_at, item.engagement_role
+    makeFullName([item.user.first_name, item.user.last_name]), item.role.name,
+    item.created_at, item.engagement_role, item.user_id
   ));
-  const handleRow = (row) => push({ pathname: `/app/view/${row.name}/${row.id}` });
-
+  const handleRow = (row) => push({ pathname: `/app/view/${row.name}/${row.userid}` });
+  console.log('Den ', rows);
   return (
     <TableContainer component={Box}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -55,7 +55,7 @@ export default function MembersTable({ data }) {
             <StyledTableCell>Name</StyledTableCell>
             <StyledTableCell align="right">Position</StyledTableCell>
             <StyledTableCell align="right">Date Added</StyledTableCell>
-            <StyledTableCell align="right">Type</StyledTableCell>
+            {/* <StyledTableCell align="right">Type</StyledTableCell> */}
             <StyledTableCell align="right">Actions</StyledTableCell>
           </TableRow>
         </TableHead>
@@ -67,7 +67,6 @@ export default function MembersTable({ data }) {
               </StyledTableCell>
               <StyledTableCell align="right"><div className="theme-font-2">{row.position}</div></StyledTableCell>
               <StyledTableCell align="right"><div className="theme-font-2">{row.date}</div></StyledTableCell>
-              <StyledTableCell align="right"><div className="theme-font-2">{row.type}</div></StyledTableCell>
               <StyledTableCell align="right">
                 <div className="theme-font-2">
                   <Button type="button" className="btn-small btn text-white" onClick={() => handleRow(row)}>

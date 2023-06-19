@@ -7,8 +7,9 @@ import useCreateBoilerPlate from '../../../components/hooks/useCreateBoilerPlate
 import { apiOptions } from '../../../services/fetch';
 import { stringDoesNotExist } from '../../../utilities/stringOperations';
 import MiscTemp from '../temps/planning/MiscTemp';
+import useClasses from '../../../components/hooks/useClasses';
 
-const PlanningMisc = ({ setTempParams }) => {
+const PlanningMisc = ({ setTempParams, planningid }) => {
   const { engagementId } = useParams();
   /* state */
   const [formData, setFormData] = useState({ risk_assessments: [] });
@@ -17,12 +18,15 @@ const PlanningMisc = ({ setTempParams }) => {
   const [text, setText] = useState('');
   /* redux */
   const store = useSelector((state) => state.engagement?.misc);
+  // eslint-disable-next-line max-len
+  const { planning } = useClasses();
+
   const options = {
     action: 'MISC',
     apiOpts: apiOptions({
       body: { ...formData },
       endpoint: 'MATERIALITY',
-      param: engagementId,
+      param: planning.id,
       auth: true,
       method: 'patch'
     })

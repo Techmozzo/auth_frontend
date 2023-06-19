@@ -66,11 +66,11 @@
   padding: 0;
   @include md {
     position: absolute;
-    top: 40px;
+    top: 10px;
   }
   @include lg {
     margin: auto;
-    padding-top: 33.3%;
+    padding-top: 11.1%;
   }
 }
 .login-form-padding {

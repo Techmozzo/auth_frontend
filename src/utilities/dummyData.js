@@ -1,4 +1,4 @@
-import { RiLockPasswordLine, RiLogoutCircleLine } from 'react-icons/all';
+import { RiLockPasswordLine, RiLogoutCircleLine } from 'react-icons/fa';
 import React from 'react';
 import program0 from '../assets/images/projects/Rectangle 19.svg';
 import program1 from '../assets/images/projects/Rectangle 19 (1).svg';

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import {
   AiOutlineArrowRight, ImMenu3, IoSadOutline
-} from 'react-icons/all';
+} from 'react-icons/fa';
 import { projectAction, projectCategories, uploadMedia } from '../../redux/actions/projectActions';
 import { apiOptions } from '../../services/fetch';
 import Loader from '../../components/microComponents/loader';

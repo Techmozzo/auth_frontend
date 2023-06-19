@@ -25,7 +25,7 @@ const InvitedUser = () => {
   /* redux */
   const store = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-
+  console.log(token);
   const options = {
     action: 'REGISTER_INVITED_USER',
     apiOpts: apiOptions({
@@ -52,6 +52,9 @@ const InvitedUser = () => {
     data: data?.invitedUser,
     action: 'REGISTER_INVITED_USER_COMPLETE'
   }], dispatch);
+
+  console.log(store.invitedUser);
+
   const userInfoStore = useStoreParams(store.invitedUser);
   const usersFail = () => {
     setErrors(backErrors);
@@ -77,19 +80,19 @@ const InvitedUser = () => {
     ));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  // console.log(pullUsers);
   /* custom hooks */
   const pushUpdates = useUpdateStore;
   const fetchData = useFetchData;
-  fetchData({
-    initialCallback: pullUsers,
-    dataIndex: 'invitedUser',
-    successCallback: usersSuccess,
-    emptyRedirect: '/app/team/invite-user',
-    failCallback: usersFail,
-    emptyCallback: updateStore,
-    store: userInfoStore
-  });
+  // fetchData({
+  //   initialCallback: pullUsers,
+  //   dataIndex: 'invitedUser',
+  //   successCallback: usersSuccess,
+  //   emptyRedirect: '/app/team/invite-user',
+  //   failCallback: usersFail,
+  //   emptyCallback: updateStore,
+  //   store: userInfoStore
+  // });
 
   return (
     <div className="m-t-40">

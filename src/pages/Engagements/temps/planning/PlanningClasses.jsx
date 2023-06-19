@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { filter } from 'lodash';
 import uuid from 'react-uuid';
-import { AiOutlineDelete } from 'react-icons/all';
+import { AiOutlineDelete } from 'react-icons/ai';
 import FormBuilder from '../../../../components/form/builders/form';
 import CustomAccordion from '../../../../components/ui/customAccordion';
 import { checkRequiredFields } from '../../../../utilities/validation';

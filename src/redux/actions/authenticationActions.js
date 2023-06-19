@@ -1,5 +1,5 @@
 import localforage from 'localforage';
-import { post, get } from '../../services/fetch';
+import { post, get, patch } from '../../services/fetch';
 import constants from '../constants';
 
 const dispatchConnection = (connection, pending, action) => async (dispatch) => {
@@ -24,10 +24,10 @@ export const register = (payload) => {
 
     return res.then((response) => {
       if (response?.status === 200 || response?.status === 201) {
-        // localforage.setItem('user', response?.data?.data?.user);
-        // localStorage.setItem('token', response?.data?.data?.user?.token);
-        // localStorage.setItem('emailToken', response?.data?.data?.token);
-        // localStorage.setItem('user', JSON.stringify(response?.data?.data?.user));
+        localforage.setItem('user', response?.data?.data?.user);
+        localStorage.setItem('token', response?.data?.data?.user?.token);
+        localStorage.setItem('emailToken', response?.data?.data?.token);
+        localStorage.setItem('user', JSON.stringify(response?.data?.data?.user));
         dispatch(success(response?.data));
       } else if (response) {
         dispatch(failure(response?.errors || response));
@@ -170,8 +170,8 @@ export const resetPassword = (payload) => {
   const failure = (error) => ({ type: constants.RESET_PASSWORD_FAILURE, error });
 
   return async (dispatch) => {
-    const res = post({
-      endpoint: 'RESET_PASSWORD', auth: false, body: payload
+    const res = patch({
+      endpoint: 'FORGOT_PASSWORD', param: payload.code, auth: false, body: payload
     });
 
     dispatch(request(res));

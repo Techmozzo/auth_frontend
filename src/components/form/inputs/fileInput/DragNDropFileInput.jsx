@@ -2,7 +2,8 @@
 import React, { useState } from 'react';
 import { isEmpty } from 'lodash';
 import Dropzone from 'react-dropzone';
-import { AiOutlineFileAdd, MdErrorOutline } from 'react-icons/all';
+import { AiOutlineFileAdd } from 'react-icons/ai';
+import { MdErrorOutline } from 'react-icons/md';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { animatedCheck } from '../../../temps/projectTemps/miscTemps';
 

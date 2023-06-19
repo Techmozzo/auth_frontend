@@ -13,7 +13,7 @@
     "template-curly-spacing": ["error", "never"],
     "no-console":"off",
     "comma-dangle": ["error", "never"],
-    "linebreak-style": ["error", "unix"], // support LF linebreak style for linux
+    "linebreak-style": 0, // support LF linebreak style for linux
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/prop-types": 0,
     "react/destructuring-assignment": 1,

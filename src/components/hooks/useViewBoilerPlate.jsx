@@ -17,7 +17,7 @@ const useViewBoilerPlate = ({
     store, formData, setFormData, dispatch
   });
   const pushUpdates = useUpdateStore;
-
+  console.log(data);
   React.useEffect(() => {
     if (status === 'success') {
       setFormData(data);

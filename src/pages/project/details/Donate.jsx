@@ -13,7 +13,7 @@ import {
 import Chip from '@material-ui/core/Chip';
 import {
   IoArrowBackCircleOutline, IoArrowForwardCircleOutline
-} from 'react-icons/all';
+} from 'react-icons/fa';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {
   projectAction, uploadMedia

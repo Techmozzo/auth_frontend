@@ -22,15 +22,15 @@ const NoData = ({
         )
       }
       <div className="max-w-350 margin-center">
-        <div className="text-center center-vertical-2">
+        <div className="text-center">
           {noDataSvg}
-          <div className="text-theme-black font-title-small bold">
+          <div className="text-theme-black font-title-small bold" style={{ marginTop: '10px' }}>
             {title || ''}
           </div>
-          <div className="text-theme-faint text-center">
+          <div className="text-theme-faint text-center" style={{ marginTop: '10px' }}>
             {text || ''}
           </div>
-          <button className="btn" type="button" onClick={() => (isFunction(callback) ? callback() : push(link))}>
+          <button className="btn" type="button" onClick={() => (isFunction(callback) ? callback() : push(link))} style={{ marginTop: '20px' }}>
             {btnName}
           </button>
         </div>

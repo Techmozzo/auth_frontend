@@ -8,7 +8,8 @@ const userProps = (
     formData,
     handleBlur,
     handleChange,
-    errors
+    errors,
+    auditPostt
   }
 ) => ([
   {
@@ -36,12 +37,12 @@ const userProps = (
       name: 'engagement_team_role_id',
       label: 'Assign Role',
       value: formData?.engagement_team_role_id || '',
-      options: auditPost,
+      options: auditPostt || auditPost,
       validations: {
         required: true
       },
       error: errors?.engagement_team_role_id,
-      optionIndex: 'type',
+      optionIndex: 'name',
       valueIndex: 'id',
       onBlur: handleBlur,
       onChange: handleChange

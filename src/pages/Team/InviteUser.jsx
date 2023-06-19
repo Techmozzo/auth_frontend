@@ -31,6 +31,7 @@ const InviteUser = () => {
       method: 'post'
     })
   };
+
   const {
     handleBlur, handleChange, status, handleChecked, create, data, backErrors, message
   } = useCreateBoilerPlate({

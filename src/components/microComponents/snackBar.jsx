@@ -2,7 +2,7 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
-import { FaTimes } from 'react-icons/all';
+import { FaTimes } from 'react-icons/fa';
 
 export default function SimpleSnackbar({
   open, setOpen, action, actionText, message

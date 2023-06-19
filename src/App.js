@@ -13,6 +13,7 @@ import ScrollUpBtn from './layouts/ScrollUpBtn';
 import Footer from './layouts/Footer';
 import { apiOptions } from './services/fetch';
 import { projectAction } from './redux/actions/projectActions';
+import 'rsuite/dist/rsuite.min.css';
 
 function App() {
   /* redux hooks */

@@ -14,7 +14,8 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { useHistory } from 'react-router-dom';
 import ListItem from '@mui/material/ListItem';
-import { AiOutlineLogout, HiChevronLeft, HiChevronRight } from 'react-icons/all';
+import { HiChevronLeft, HiChevronRight } from 'react-icons/hi';
+import { AiOutlineLogout } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import { doLogin, logout, user } from '../../utilities/auth';
 import { projectAction } from '../../redux/actions/projectActions';
@@ -205,7 +206,7 @@ const MiniDrawer = ({
               </div>
               <div className="text-theme">
                 {' '}
-                {sentenceCaps(user?.role_id[0]?.name || user?.role_id.name) || ''}
+                {sentenceCaps(user.role_id === null ? null : user?.role_id[0]?.name || user?.role_id.name) || ''}
               </div>
             </div>
           </div>

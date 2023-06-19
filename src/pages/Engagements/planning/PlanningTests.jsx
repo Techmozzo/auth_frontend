@@ -6,6 +6,7 @@ import useCreateBoilerPlate from '../../../components/hooks/useCreateBoilerPlate
 import { apiOptions } from '../../../services/fetch';
 import TestsTemp from '../temps/planning/TestsTemp';
 import { stringDoesNotExist } from '../../../utilities/stringOperations';
+import useClasses from '../../../components/hooks/useClasses';
 
 const PlanningTests = ({ setTempParams }) => {
   const { engagementId } = useParams();
@@ -18,17 +19,21 @@ const PlanningTests = ({ setTempParams }) => {
     obligation_right: 0,
     existence: 0,
     valuation: 0,
-    test_procedures: []
+    test_procedures: [],
+    classId: null
   });
   const [errors, setErrors] = useState({});
   /* redux */
   const store = useSelector((state) => state.engagement?.tests);
+  // eslint-disable-next-line max-len
+  const { planning } = useClasses();
+  const planClasses = planning?.transaction_class;
   const options = {
     action: 'TESTS',
     apiOpts: apiOptions({
       body: { ...formData },
       endpoint: 'TESTS',
-      param: engagementId,
+      param: formData.classId,
       afterParam: 'tests',
       auth: true,
       method: 'post'
@@ -76,6 +81,8 @@ const PlanningTests = ({ setTempParams }) => {
       test_procedures: [...formData.test_procedures, { description: formData.description }],
       description: ''
     });
+
+    console.log('On blur form action', formData);
   };
 
   const finish = () => {
@@ -84,7 +91,7 @@ const PlanningTests = ({ setTempParams }) => {
       create();
     }
   };
-
+  console.log('On blur form action', formData);
   return (
     <div className="mt-4">
       {
@@ -103,6 +110,7 @@ const PlanningTests = ({ setTempParams }) => {
               status={status}
               message={message}
               link={`/app/engagement/engagement/${engagementId}`}
+              planClasses={planClasses}
             />
           )
       }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { HiOutlineArrowNarrowLeft, HiOutlineArrowNarrowRight } from 'react-icons/all';
+import { HiOutlineArrowNarrowLeft, HiOutlineArrowNarrowRight } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import localforage from 'localforage';
 import FormBuilder from '../../components/form/builders/form';

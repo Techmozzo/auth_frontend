@@ -26,7 +26,7 @@ const ListMat = ({ props, clss }) => {
         {props.map((prop) => {
           if (prop.link) {
             return (
-              <Link key={prop.name} to={prop.link} className={clss?.item}>
+              <Link key={props.id} to={prop.link} className={clss?.item}>
                 {
                   !_.isEmpty(prop.icon) && <ListItemIcon>{prop.icon}</ListItemIcon>
                 }
@@ -35,7 +35,7 @@ const ListMat = ({ props, clss }) => {
             );
           }
           return (
-            <ListItem key={prop.name} onClick={prop.onClick} className={prop.pointer ? `pointer ${clss?.item}` : clss.item}>
+            <ListItem key={prop.id} onClick={prop.onClick} className={prop.pointer ? `pointer ${clss?.item}` : clss.item}>
               {
                 !_.isEmpty(prop.icon) && <ListItemIcon>{prop.icon}</ListItemIcon>
               }

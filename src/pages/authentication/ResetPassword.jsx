@@ -19,7 +19,7 @@ const ResetPassword = () => {
   const [errors, setErrors] = useState({});
   const [show, setShow] = useState(false);
 
-  const queryParam = window.location.search.substring(1);
+  const queryParam = window.location.search.substring(1).split('=')[2];
 
   useEffect(() => {
     if (store.status === 'success') {
@@ -29,6 +29,7 @@ const ResetPassword = () => {
 
   const handleRegister = () => {
     formData.code = queryParam;
+
     dispatch(resetPassword(formData));
   };
 
@@ -116,7 +117,7 @@ const ResetPassword = () => {
       }
     );
   };
-
+  console.log(formData);
   return (
     <div className="content">
       <p>
@@ -130,7 +131,7 @@ const ResetPassword = () => {
               <div className="login-form-container p-20">
                 <p className="">Change your password below</p>
                 <hr />
-                <div className="login-form">
+                <div className="">
                   <FormBuilder
                     formItems={
                       formBuilderProps(
@@ -143,10 +144,12 @@ const ResetPassword = () => {
                       )
                     }
                   />
-                  <button type="button" className="text-wema float-left viewMoreBtn mt-3" onClick={() => history.back()}>
-                    &lt; Back
-                  </button>
-                  <button className="w-50 btn btn-small float-right" type="button" onClick={handleRegister}>Change Password</button>
+                  <div className="clearfix">
+                    <button type="button" className="text-wema float-left viewMoreBtn mt-3" onClick={() => history.back()}>
+                      &lt; Back
+                    </button>
+                    <button className="w-50 btn btn-small float-right" type="button" onClick={handleRegister}>Change Password</button>
+                  </div>
                 </div>
               </div>
             )

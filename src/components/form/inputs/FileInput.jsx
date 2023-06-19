@@ -1,7 +1,7 @@
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import Skeleton from '@material-ui/lab/Skeleton';
-import { FaPlus } from 'react-icons/all';
+import { FaPlus } from 'react-icons/fa';
 import ProgressBar from '../../microComponents/circularProgress';
 import Loader from '../../microComponents/loader';
 import {

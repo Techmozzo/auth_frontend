@@ -13,7 +13,7 @@ import {
 import Chip from '@material-ui/core/Chip';
 import {
   IoArrowBackCircleOutline, IoArrowForwardCircleOutline
-} from 'react-icons/all';
+} from 'react-icons/io5';
 import {
   projectAction
 } from '../../../redux/actions/projectActions';

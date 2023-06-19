@@ -6,14 +6,19 @@ import useCreateBoilerPlate from '../../../components/hooks/useCreateBoilerPlate
 import { apiOptions } from '../../../services/fetch';
 import MaterialityTemp from '../temps/planning/MaterialityTemp';
 import { formatDonation } from '../../../utilities/stringOperations';
+import useClasses from '../../../components/hooks/useClasses';
 
-const PlanningMateriality = ({ setTempParams }) => {
+const PlanningMateriality = ({ setTempParams, planningid }) => {
   const { engagementId } = useParams();
   /* state */
   const [formData, setFormData] = useState({});
   const [errors, setErrors] = useState({});
   /* redux */
   const store = useSelector((state) => state.engagement?.materiality);
+
+  // eslint-disable-next-line max-len
+  const { planning } = useClasses();
+
   const options = {
     action: 'MATERIALITY',
     apiOpts: apiOptions({
@@ -22,7 +27,7 @@ const PlanningMateriality = ({ setTempParams }) => {
         materiality_benchmark_amount: formatDonation(formData.materiality_benchmark_amount)
       },
       endpoint: 'MATERIALITY',
-      param: engagementId,
+      param: planning.id,
       afterParam: 'materialities',
       auth: true,
       method: 'post'
@@ -44,7 +49,8 @@ const PlanningMateriality = ({ setTempParams }) => {
     options,
     store,
     action: 'MATERIALITY_COMPLETE',
-    noRedirect: true
+    noRedirect: true,
+    pushUpdatesArr
     // redirect: '/app/engagements'
   });
 
