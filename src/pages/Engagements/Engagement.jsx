@@ -84,7 +84,21 @@ const Engagement = () => {
                           callback={() => setOpen(true)}
                         />
                       )
-                      : <MembersTable data={formData?.engagement?.team_members} />
+                      : (
+                        <>
+                          <div style={{ marginBottom: '20px' }}>
+                            <NoData
+                              // title={`No ${formData?.engagement?.name} team`}
+                              text="Invite collaborators to this engagement"
+                              btnName="Invite Members"
+                              callback={() => setOpen(true)}
+                            />
+                          </div>
+
+                          <MembersTable data={formData?.engagement?.team_members} />
+                        </>
+                      )
+
                   }
                 </div>
               )
