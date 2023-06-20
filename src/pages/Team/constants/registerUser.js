@@ -72,6 +72,7 @@ const registerUserProps = (
         required: true,
         pattern: validationPatterns.email
       },
+      disabled: true,
       error: errors?.email,
       onBlur: handleBlur,
       onChange: handleChange

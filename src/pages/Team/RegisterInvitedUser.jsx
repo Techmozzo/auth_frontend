@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { isEmpty } from 'lodash';
 import { Link, useHistory, useParams } from 'react-router-dom';
@@ -9,7 +9,7 @@ import useCreateBoilerPlate from '../../components/hooks/useCreateBoilerPlate';
 import { makeFullName, notifier, splitFullName } from '../../utilities/stringOperations';
 import useUpdateStore from '../../components/hooks/useUpdateStore';
 import useStoreParams from '../../components/hooks/useStoreParams';
-import { apiOptions } from '../../services/fetch';
+import { apiOptions, get } from '../../services/fetch';
 import FormBuilder from '../../components/form/builders/form';
 import registerUserProps from './constants/registerUser';
 import useFetchData from '../../components/hooks/useFetchData';
@@ -60,6 +60,7 @@ const InvitedUser = () => {
     setErrors(backErrors);
     updateStore();
   };
+  console.log(userInfoStore.data);
   const usersSuccess = () => {
     const names = splitFullName(userInfoStore?.data?.invitedUser.name);
     setFormData({
@@ -80,6 +81,29 @@ const InvitedUser = () => {
     ));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    // declare the async data fetching function
+    const fetchData = async () => {
+      // get the data from the api
+      const datax: any = await get({ endpoint: 'INVITE_USER', param: token });
+      // convert the data to json
+      // const json = await data.json();
+      console.log(datax?.data?.data?.invitedUser);
+      const names = splitFullName(datax?.data?.data?.invitedUser.name);
+      setFormData({
+        ...datax?.data?.data?.invitedUser, first_name: names.firstName, last_name: names.lastName
+      });
+      // set state with the result
+      // setData(json);
+    };
+
+    // call the function
+    fetchData()
+      // make sure to catch any error
+      .catch(console.error);
+  }, []);
+
   // console.log(pullUsers);
   /* custom hooks */
   const pushUpdates = useUpdateStore;
