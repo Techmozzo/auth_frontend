@@ -29,7 +29,8 @@ const RegisterPage = () => {
   /* redux */
   const dispatch = useDispatch();
   const store = useSelector((state) => state.auth.register);
-
+  const loginstore = useSelector((state) => state.auth.login);
+  console.log(store);
   useEffect(() => {
     setErrorFree(noErrors(errors));
     setRequiredFields(checkRequiredFields([
@@ -39,18 +40,19 @@ const RegisterPage = () => {
   }, [errors]);
   useEffect(() => { window.scrollTo(0, 0); }, []);
   useEffect(() => {
-    if (store?.status === 'success') {
+    if (loginstore?.status === 'success') {
       notifier({
         title: 'Registered',
         text: 'Signed up successfully',
         type: 'success'
       });
-      setTimeout(handleClose, 500);
+      setTimeout(handleClose, 1000);
     }
-  }, [store.status]);
-  const handleRegister = () => {
+  }, [loginstore.status]);
+  const handleRegister = async () => {
     setShow(true);
-    dispatch(register(formData));
+    await dispatch(register(formData));
+    await dispatch(login({ email_or_phone: formData.email, password: formData.password }));
   };
 
   const handleChange = (e) => {
@@ -70,8 +72,13 @@ const RegisterPage = () => {
   };
   const handleClose = () => {
     setShow(false);
-    return push('/login');
+    onClick('/app/dashboard');
+    // return push('/app/dashboard/complete-registration');
   };
+
+  function onClick(href:string) {
+    window.location.href = href;
+  }
   const goBackAndReset = () => {
     goBack();
     dispatch(resetAction({ action: 'LOGIN_COMPLETE' }));
