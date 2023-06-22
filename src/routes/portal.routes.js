@@ -195,13 +195,18 @@ const routes = [
     exact: true
   },
   {
+    path: '/app/settings',
+    component: ActivityLog,
+    exact: true
+  },
+  {
     path: '/invited-user-registration/:token',
     component: InvitedUser,
     exact: true
   },
 
   {
-    path: '/me',
+    path: '/app/profile',
     component: Profile,
     exact: true
   },

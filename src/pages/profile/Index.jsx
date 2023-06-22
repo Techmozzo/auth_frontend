@@ -57,13 +57,18 @@ const Profile = () => {
   );
   useEffect(() => {
     currentUser.then((result) => {
-      if (result?.status === 'Inactive') {
-        handleOpen();
-      } else if (result?.status === 'Active' || result?.status === 1) {
-        setUser({ ...result });
-      }
+      console.log('yOU aRE ', result);
+      // if (result?.status === 'Inactive') {
+      //   handleOpen();
+      // } else if (result?.status === 'Active' || result?.status === 1) {
+      //   setUser({ ...result });
+      // }
+      setUser({ ...result, status: 'Active' });
     });
   }, [currentUser]);
+
+  console.log('yOU aRE hQERE', user);
+
   return (
     <div>
       {
