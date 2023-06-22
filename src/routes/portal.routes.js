@@ -1,6 +1,7 @@
 import { lazy } from 'react';
 import AcceptInvite from '../pages/Engagements/Invites/AcceptInvite';
 import DeclineInvite from '../pages/Engagements/Invites/DeclineInvite';
+import ActivityLog from '../pages/profile/ActivityLog';
 
 const Login = lazy(() => import('../pages/authentication/Login'));
 const Register = lazy(() => import('../pages/authentication/Register'));
@@ -186,6 +187,11 @@ const routes = [
   {
     path: '/app/team/invite-user',
     component: InviteUser,
+    exact: true
+  },
+  {
+    path: '/app/activitylog',
+    component: ActivityLog,
     exact: true
   },
   {

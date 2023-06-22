@@ -14,6 +14,8 @@ import Footer from './layouts/Footer';
 import { apiOptions } from './services/fetch';
 import { projectAction } from './redux/actions/projectActions';
 import 'rsuite/dist/rsuite.min.css';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import 'react-paginate/theme/basic/react-paginate.css';
 
 function App() {
   /* redux hooks */

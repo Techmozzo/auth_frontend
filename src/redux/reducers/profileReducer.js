@@ -245,6 +245,32 @@ const profileReducer = (state = initialState, { type, response, error }) => {
       }
     };
 
+  case constants.ACTIVITYLOG_PENDING:
+    return {
+      ...state,
+      activitylogs: {
+        data: {},
+        status: 'pending'
+      }
+    };
+  case constants.ACTIVITYLOG_SUCCESS:
+    return {
+      ...state,
+      activitylogs: {
+        ...state.activitylogs,
+        data: response,
+        status: 'success'
+      }
+    };
+  case constants.ACTIVITYLOG_FAILURE:
+    return {
+      ...state,
+      activitylogs: {
+        data: error || {},
+        status: 'failed'
+      }
+    };
+
   case constants.DP_PENDING:
     return {
       ...state,

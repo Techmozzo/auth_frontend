@@ -165,3 +165,31 @@ export const notifications = ({
     });
   };
 };
+
+export const activitylog = ({
+  filter = 'all', datesearch = 0, daterange = ['03-04-2013', ' 03-12-2013'], filteraction = 'invites', page = 1
+}) => {
+  const request = (req) => ({ type: constants.ACTIVITYLOG_PENDING, request: req });
+  const success = (response) => ({ type: constants.ACTIVITYLOG_SUCCESS, response });
+  const failure = (error) => ({ type: constants.ACTIVITYLOG_FAILURE, error });
+
+  return async (dispatch) => {
+    const res = get({
+      endpoint: 'ACTIVITY',
+      auth: true,
+      pQuery: {
+        page
+      }
+    });
+    dispatch(request(res));
+
+    return res.then((response) => {
+      if (response?.status === 200 || response?.status === 201) {
+        dispatch(success(response?.data));
+      } else if (response) {
+        console.log(response?.errors);
+        dispatch(failure(response?.errors || response));
+      } else dispatch(failure('we could not connect to the server at this time, please try again later.!'));
+    });
+  };
+};

@@ -57,6 +57,7 @@ const paths = {
   EDIT_PERSONAL_ACCOUNT: profileEndpoints.editPersonalAccount,
   CHANGE_MANAGER: profileEndpoints.changeManager,
   NOTIFICATIONS: profileEndpoints.notifications,
+  ACTIVITY: profileEndpoints.activitylogs,
   MY_PROJECTS: engagementEnpoints.myEngagements,
   PROFILES: profileEndpoints.getProfile,
 
