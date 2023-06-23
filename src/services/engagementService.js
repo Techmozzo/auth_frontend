@@ -1,5 +1,5 @@
 export const engagements = 'engagements';
-export const dashboard = 'dashboard';
+export const dashboard = 'admin/dashboard';
 export const myEngagements = 'engagements/me';
 export const clients = 'clients';
 export const materiality = 'plannings'; // param => plannningId

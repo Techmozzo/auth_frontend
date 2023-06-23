@@ -4,6 +4,7 @@ import {
 } from 'react-icons/ai';
 import { MdPersonOutline, MdNotificationsNone } from 'react-icons/md';
 import { IoBusinessOutline } from 'react-icons/io5';
+import { RxActivityLog } from 'react-icons/rx';
 import { BsFolder } from 'react-icons/bs';
 import { RiSettings2Line, RiDashboardLine } from 'react-icons/ri';
 import React from 'react';
@@ -45,9 +46,9 @@ const miniMenu = [
     to: '/app/settings'
   },
   {
-    name: 'home',
-    icon: <AiOutlineHome />,
-    to: '/home'
+    name: 'activitylog',
+    icon: <RxActivityLog />,
+    to: '/app/activitylog'
   }
 ];
 export default miniMenu;

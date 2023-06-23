@@ -22,6 +22,7 @@ import { projectAction } from '../../redux/actions/projectActions';
 import { apiOptions } from '../../services/fetch';
 import { notifier, sentenceCaps } from '../../utilities/stringOperations';
 import useUpdateStore from '../hooks/useUpdateStore';
+import { notifications } from '../../redux/actions/profileActions';
 
 /**
  * @param {object} account
@@ -116,9 +117,17 @@ const MiniDrawer = ({
   const dispatch = useDispatch();
 
   const store = useSelector((state) => state);
-
+  const storenotifcation = useSelector((state) => state.profile.notifications);
   const [open, setOpen] = React.useState(false);
   const [active, setActive] = React.useState({ name: 'Dashboard' });
+  useEffect(() => {
+    dispatch(notifications({
+      filter: 'all',
+      datesearch: 0,
+      daterange: ['03-04-2013', ' 03-12-2013'],
+      filteraction: 'invites'
+    }));
+  }, [dispatch]);
 
   const path = (item) => history.location.pathname.startsWith(item);
 
@@ -176,7 +185,7 @@ const MiniDrawer = ({
         }), 500);
     }
   }, [store?.auth?.logout?.status]);
-
+  console.log(storenotifcation.data?.data?.notifications);
   return (
     <Box sx={{ display: 'flex' }}>
       {
@@ -221,6 +230,8 @@ const MiniDrawer = ({
                   <ListItemIcon className={path(`/app/${item.name}`) ? 'text-theme' : 'text-theme-faint'}>
                     <div className="font-title-small">
                       {item.icon}
+                      {' '}
+                      {item.name === 'notifications' && storenotifcation.data?.data?.notifications.length > 0 ? <span className="badge badge-warning ">{storenotifcation.data?.data?.notifications.length}</span> : null}
                     </div>
                   </ListItemIcon>
                 )

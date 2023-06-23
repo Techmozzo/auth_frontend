@@ -40,13 +40,13 @@ export default function DashboardTable({ data }) {
     };
   }
   const rows = data?.map((item) => createData(
-    item?.name, item?.year, item?.client?.name, item?.staff_power, item?.status?.name
+    item?.name, item?.year, item?.client?.name, item?.team_members_count, item?.status?.name
   ));
   const handleRow = (row) => {
     const theData = data.filter((item) => item.name === row.name);
     push(`/app/engagement/engagement/${theData[0].id}`);
   };
-  console.log('Den ', data);
+  // console.log('Den ', data);
   return (
     <TableContainer component={Box}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">

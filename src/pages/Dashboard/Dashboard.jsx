@@ -13,7 +13,7 @@ const Dashboard = () => {
       push('/app/dashboard/complete-registration');
     }
   }, []);
-  const DashIndex = React.lazy(() => import('./DashboardIndex'));
+  const DashIndex = React.lazy(() => import('./AdminDash'));
 
   return (
     <DashIndex />

@@ -7,3 +7,4 @@ export const editPersonalAccount = '/Verification/personal/account';
 export const corporateManagers = '/Verification/corporate/directors';
 export const changeManager = '/Verification/corporate/manager';
 export const notifications = 'notifications';
+export const activitylogs = 'activity-logs';
