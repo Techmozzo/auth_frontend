@@ -52,7 +52,12 @@ const initialState = {
   completeRegistration: {
     data: {},
     status: 'initial'
+  },
+  updateCompany: {
+    data: {},
+    status: 'initial'
   }
+
 };
 
 const authenticationReducer = (state = initialState, { type, response, error }) => {
@@ -180,6 +185,40 @@ const authenticationReducer = (state = initialState, { type, response, error }) 
     return {
       ...state,
       completeRegistration: {
+        data: error || {},
+        status: 'failed'
+      }
+    };
+
+  case constants.UPDATE_COMPANY_PENDING:
+    return {
+      ...state,
+      updateCompany: {
+        data: {},
+        status: 'pending'
+      }
+    };
+  case constants.UPDATE_COMPANY_COMPLETE:
+    return {
+      ...state,
+      updateCompany: {
+        data: {},
+        status: 'initial'
+      }
+    };
+  case constants.UPDATE_COMPANY_SUCCESS:
+    return {
+      ...state,
+      updateCompany: {
+        ...state.updateCompany,
+        data: response,
+        status: 'success'
+      }
+    };
+  case constants.UPDATE_COMPANY_FAILURE:
+    return {
+      ...state,
+      updateCompany: {
         data: error || {},
         status: 'failed'
       }

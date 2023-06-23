@@ -15,6 +15,7 @@ const paths = {
   CHANGE_PASSWORD: authEndpoints.changePasswordApi,
   RESET_PASSWORD: authEndpoints.resetPassword,
   FORGOT_PASSWORD: authEndpoints.forgotPasswordApi,
+  UPDATE_COMPANY: authEndpoints.updateCompanyApi,
 
   // clients
   CREATE_CLIENT: engagementEnpoints.clients,
