@@ -34,18 +34,19 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   }
 }));
 export default function TeamTable({ data }) {
+  console.log('Team ', data);
   const { push } = useHistory();
-  function createData(name, phone, designation, email, action) {
+  function createData(name, phone, designation, email, action, id) {
     return {
-      name, phone, designation, email, action
+      name, phone, designation, email, action, id
     };
   }
 
   const rows = data?.map((item) => createData(
     makeFullName([item.first_name, item.last_name]), item.phone,
-    item.designation, item.email
+    item.designation, item.email, item.id
   ));
-  const handleRow = (row) => push({ pathname: `/app/view/${row.name}/${row.id}` });
+  const handleRow = (row) => push({ pathname: `/app/team/${row.id}` });
 
   return (
     <TableContainer component={Box}>

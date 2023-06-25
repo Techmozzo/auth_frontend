@@ -48,6 +48,8 @@ const HowItWorks = lazy(() => import('../pages/landingPage/HowItWorks'));
 const Terms = lazy(() => import('../pages/landingPage/Terms'));
 const Privacy = lazy(() => import('../pages/landingPage/Privacy'));
 
+const Settings = lazy(() => import('../pages/settings/Index'));
+
 const routes = [
   {
     path: '/home',
@@ -185,6 +187,11 @@ const routes = [
     exact: true
   },
   {
+    path: '/app/team/:id',
+    component: TeamIndex,
+    exact: true
+  },
+  {
     path: '/app/team/invite-user',
     component: InviteUser,
     exact: true
@@ -196,7 +203,7 @@ const routes = [
   },
   {
     path: '/app/settings',
-    component: ActivityLog,
+    component: Settings,
     exact: true
   },
   {
