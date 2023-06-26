@@ -56,6 +56,78 @@ const editProfileProps = (
       onBlur: handleBlur,
       onChange: handleChange
     }
+  },
+  {
+    kind: 'input',
+    props: {
+      className: 'w-100 m-b-20 col-12',
+      name: 'address',
+      type: 'text',
+      label: 'Company  City',
+      placeholder: 'Enter Company City',
+      value: formData?.city || '',
+      validations: {
+        required: true,
+        pattern: validationPatterns.address
+      },
+      error: errors?.city,
+      onBlur: handleBlur,
+      onChange: handleChange
+    }
+  },
+  {
+    kind: 'input',
+    props: {
+      className: 'w-100 m-b-20 col-12',
+      name: 'state',
+      type: 'text',
+      label: 'Company  State',
+      placeholder: 'Enter Company State',
+      value: formData?.state || '',
+      validations: {
+        required: true,
+        pattern: validationPatterns.state
+      },
+      error: errors?.state,
+      onBlur: handleBlur,
+      onChange: handleChange
+    }
+  },
+  {
+    kind: 'input',
+    props: {
+      className: 'w-100 m-b-20 col-12',
+      name: 'address',
+      type: 'text',
+      label: 'Company  Address',
+      placeholder: 'Enter Company Address',
+      value: formData?.address || '',
+      validations: {
+        required: true,
+        pattern: validationPatterns.address
+      },
+      error: errors?.address,
+      onBlur: handleBlur,
+      onChange: handleChange
+    }
+  },
+  {
+    kind: 'input',
+    props: {
+      className: 'w-100 m-b-20 col-12',
+      name: 'zip',
+      type: 'text',
+      label: 'Zip',
+      placeholder: 'Enter Zip Code',
+      value: formData?.zip || '',
+      validations: {
+        required: true,
+        pattern: validationPatterns.zip
+      },
+      error: errors?.zip,
+      onBlur: handleBlur,
+      onChange: handleChange
+    }
   }
 ]);
 export default editProfileProps;

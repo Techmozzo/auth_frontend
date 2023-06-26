@@ -192,7 +192,7 @@ const routes = [
     exact: true
   },
   {
-    path: '/app/team/invite-user',
+    path: '/app/team-invite-user',
     component: InviteUser,
     exact: true
   },
