@@ -118,8 +118,9 @@ export const login = (payload) => {
     return res.then((response) => {
       if (response?.status === 200) {
         console.log(response);
-        localforage.setItem('user', response?.data?.data?.user);
-        localforage.setItem('role', response?.data?.data?.roles);
+        // localforage.setItem('user', response?.data?.data?.user);
+        // localforage.setItem('role', response?.data?.data?.roles);
+        localStorage.role = JSON.stringify(response?.data?.data?.roles);
         localStorage.setItem('token', response?.data?.data?.access_token);
         localStorage.setItem('user', JSON.stringify(response?.data?.data?.user));
         dispatch(success(response?.data));

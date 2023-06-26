@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { isNull } from 'lodash';
 import { useLocation } from 'react-router-dom';
 import { useHistory } from 'react-router';
-import { user } from '../../utilities/auth';
+import { user, role } from '../../utilities/auth';
 
 const Dashboard = () => {
   const { pathname } = useLocation();
@@ -14,9 +14,15 @@ const Dashboard = () => {
     }
   }, []);
   const DashIndex = React.lazy(() => import('./AdminDash'));
-
+  const DashClientIndex = React.lazy(() => import('./ClientDash'));
+  console.log(role[0]);
   return (
-    <DashIndex />
+    <>
+      {role && role[0] === 'admin'
+        ? <DashIndex />
+        : <DashClientIndex />}
+    </>
+
   );
 };
 

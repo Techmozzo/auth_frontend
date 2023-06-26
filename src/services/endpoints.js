@@ -33,6 +33,7 @@ const paths = {
   MATERIALITY: engagementEnpoints.materiality,
   TESTS: engagementEnpoints.tests,
   DASHBOARD: engagementEnpoints.dashboard,
+  CLIENTS_DASHBOARD: engagementEnpoints.clientdashboard,
   ENGAGEMENTS: engagementEnpoints.engagements,
   EDIT_ENGAGEMENT: engagementEnpoints.engagements,
   DELETE_ENGAGEMENT: engagementEnpoints.engagements,
