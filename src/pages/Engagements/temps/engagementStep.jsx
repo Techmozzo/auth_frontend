@@ -1,10 +1,11 @@
+/* eslint-disable max-len */
 import { Link } from 'react-router-dom';
 import React from 'react';
 import { slugify } from '../../../utilities/stringOperations';
 
 const EngagementStep = ({ engagementId, engagementName, status }) => (
   <div className="row">
-    <Link to={`/app/engagement/pre-planning/${slugify(engagementName, '-')}/${engagementId}`} className="col-md-3">
+    {/* <Link to={`/app/engagement/pre-planning/${slugify(engagementName, '-')}/${engagementId}`} className="col-md-3">
       <div className="custom-box mx-1 text-center text-theme-black bold">
         <div className="mb-3 mt-5">
           <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -23,7 +24,7 @@ const EngagementStep = ({ engagementId, engagementName, status }) => (
           <div className="mt-3">Pre-Planning</div>
         </div>
       </div>
-    </Link>
+    </Link> */}
     <Link to={`/app/engagement/planning/${slugify(engagementName, '-')}/${engagementId}`} className="col-md-3">
       <div className={status?.id === 1 ? 'custom-box mx-1 text-center text-theme-black bold border-wema text-theme' : 'custom-box mx-1 text-center text-theme-black bold'}>
         <div className="mb-3 mt-5">

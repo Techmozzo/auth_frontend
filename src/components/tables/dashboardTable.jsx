@@ -8,7 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { Box } from '@mui/material';
 import { useHistory } from 'react-router';
-import { CgArrowsExpandUpRight } from 'react-icons/cg';
+import { CgArrowsExpandDownLeft, CgArrowsExpandUpRight } from 'react-icons/cg';
 import Button from '@mui/material/Button';
 import { sentenceCaps } from '../../utilities/stringOperations';
 
@@ -46,6 +46,10 @@ export default function DashboardTable({ data }) {
     const theData = data.filter((item) => item.name === row.name);
     push(`/app/engagement/engagement/${theData[0].id}`);
   };
+  const viewRow = (row) => {
+    const theData = data.filter((item) => item.name === row.name);
+    push(`/app/engagement/view/${theData[0].id}`);
+  };
   // console.log('Den ', data);
   return (
     <TableContainer component={Box}>
@@ -71,6 +75,11 @@ export default function DashboardTable({ data }) {
               <StyledTableCell align="right"><div className="theme-font-2">{sentenceCaps(row.members)}</div></StyledTableCell>
               <StyledTableCell align="right"><div className="theme-font-2">{sentenceCaps(row.status)}</div></StyledTableCell>
               <StyledTableCell align="right">
+                <div className="theme-font-2">
+                  <Button type="button" className="btn-small btn text-white" onClick={() => viewRow(row)}>
+                    <CgArrowsExpandDownLeft />
+                  </Button>
+                </div>
                 <div className="theme-font-2">
                   <Button type="button" className="btn-small btn text-white" onClick={() => handleRow(row)}>
                     <CgArrowsExpandUpRight />

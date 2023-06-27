@@ -187,7 +187,6 @@ const MiniDrawer = ({
         }), 500);
     }
   }, [store?.auth?.logout?.status]);
-  console.log(storenotifcation.data?.data?.notifications);
   return (
     <Box sx={{ display: 'flex' }}>
       {
