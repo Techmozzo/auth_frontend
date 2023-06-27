@@ -5,7 +5,7 @@ import { notifier } from '../../../utilities/stringOperations';
 import { get } from '../../../services/fetch';
 import Loader from '../../../components/microComponents/loader';
 
-const ViewConculsion = ({ conclusion, engangementid, statusid }) => {
+const ViewExecutions = ({ execution, engangementid, statusid }) => {
   const [state, setState] = useState();
   const { push } = useHistory();
   const [status, setStatus] = useState(false);
@@ -19,7 +19,7 @@ const ViewConculsion = ({ conclusion, engangementid, statusid }) => {
       if (datax.status === 200) {
         notifier({
           type: 'success',
-          text: 'Conclusion Accepted',
+          text: 'Execution Accepted',
           title: 'Success'
         });
         push(`/app/engagement/view/${engangementid}`);
@@ -44,36 +44,36 @@ const ViewConculsion = ({ conclusion, engangementid, statusid }) => {
 
   return (
     <div>
-      <h4>Conclusion</h4>
-      {conclusion && conclusion.length === 0
+      <h4>Execution</h4>
+      {execution && execution.length === 0
         ? (
           <>
-            No Conclusion yet!
+            No Execution Yet!
           </>
         )
         : (
           <>
             <div className="list-group">
-              <div href="#" className="list-group-item list-group-item-action flex-column align-items-start active">
+              <div className="list-group-item list-group-item-action flex-column align-items-start ">
                 <div className="d-flex w-100 justify-content-between">
-                  <h5 className="mb-1">audit_report</h5>
+                  <h5 className="mb-1">contingent_liability_review</h5>
                 </div>
                 {/* <p className="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p> */}
-                <small>{conclusion?.audit_report}</small>
+                <small>{(execution && execution[0]?.contingent_liability_review) || execution?.contingent_liability_review}</small>
               </div>
-              <div href="#" className="list-group-item list-group-item-action flex-column align-items-start ">
+              <div className="list-group-item list-group-item-action flex-column align-items-start active">
                 <div className="d-flex w-100 justify-content-between">
-                  <h5 className="mb-1">audit_summary_misstatement</h5>
+                  <h5 className="mb-1">contract_agreement_review</h5>
                 </div>
                 {/* <p className="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p> */}
-                <small>{conclusion?.audit_summary_misstatement}</small>
+                <small>{(execution && execution[0]?.contract_agreement_review) || execution?.contract_agreement_review}</small>
               </div>
             </div>
             {
               // eslint-disable-next-line no-nested-ternary
               status
                 ? <Loader />
-                : statusid === '3' && conclusion.status !== '1'
+                : statusid === '2'
                   ? <button type="button" className="btn btn-default mt-2" onClick={AcceptPlanning}>Approve</button>
                   : null
 
@@ -84,4 +84,4 @@ const ViewConculsion = ({ conclusion, engangementid, statusid }) => {
   );
 };
 
-export default ViewConculsion;
+export default ViewExecutions;

@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-multi-spaces */
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { isEmpty } from 'lodash';
@@ -5,6 +6,11 @@ import { Link, useParams } from 'react-router-dom';
 import { apiOptions } from '../../services/fetch';
 import useViewBoilerPlate from '../../components/hooks/useViewBoilerPlate';
 import Loader from '../../components/microComponents/loader';
+import { headerTemp1 } from '../../components/temps/projectTemps/miscTemps';
+import { sentenceCaps } from '../../utilities/stringOperations';
+import ViewConculsion from './EngagementInfo/ViewConculsion';
+import ViewExecutions from './EngagementInfo/ViewExecutions';
+import ViewPlanning from './EngagementInfo/ViewPlanning';
 
 const EngagementInfo = () => {
   /* redux hooks */
@@ -42,19 +48,41 @@ const EngagementInfo = () => {
           ? <Loader />
           : (
             <div className="container">
-              <h4>Engaganment Info</h4>
+              {
+                headerTemp1({
+                  text: sentenceCaps(formData?.engagement?.name),
+                  parent: 'Engagements',
+                  name: sentenceCaps(formData?.engagement?.name),
+                  link: '/app/engagement/',
+                  year: `-${formData?.engagement?.year}`
+                })
+
+              }
+
               <div className="row">
                 <div className="col">
                   Pre-Planning
                 </div>
                 <div className="col">
-                  Planning
+                  <ViewPlanning
+                    planning={formData?.engagement?.planning}
+                    engangementid={formData?.engagement?.id}
+                    statusid={formData?.engagement?.status_id}
+                  />
                 </div>
                 <div className="col">
-                  Execution
+                  <ViewExecutions
+                    execution={formData?.engagement?.execution}
+                    engangementid={formData?.engagement?.id}
+                    statusid={formData?.engagement?.status_id}
+                  />
                 </div>
                 <div className="col">
-                  Conculsion
+                  <ViewConculsion
+                    conclusion={formData?.engagement?.conclusion}
+                    engangementid={formData?.engagement?.id}
+                    statusid={formData?.engagement?.status_id}
+                  />
                 </div>
               </div>
             </div>
