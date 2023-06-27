@@ -17,7 +17,9 @@ import ListItem from '@mui/material/ListItem';
 import { HiChevronLeft, HiChevronRight } from 'react-icons/hi';
 import { AiOutlineLogout } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
-import { doLogin, logout, user } from '../../utilities/auth';
+import {
+  doLogin, logout, user, role
+} from '../../utilities/auth';
 import { projectAction } from '../../redux/actions/projectActions';
 import { apiOptions } from '../../services/fetch';
 import { notifier, sentenceCaps } from '../../utilities/stringOperations';
@@ -215,7 +217,7 @@ const MiniDrawer = ({
               </div>
               <div className="text-theme">
                 {' '}
-                {sentenceCaps(user.role_id === null ? null : user?.role_id[0]?.name || user?.role_id.name) || ''}
+                {sentenceCaps(role[0] || '')}
               </div>
             </div>
           </div>
