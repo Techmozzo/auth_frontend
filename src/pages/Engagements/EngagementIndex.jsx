@@ -6,6 +6,7 @@ import useViewBoilerPlate from '../../components/hooks/useViewBoilerPlate';
 import IndexTemp from '../Dashboard/temp/IndexTemp';
 import DashboardTable from '../../components/tables/dashboardTable';
 import { projectAction } from '../../redux/actions/projectActions';
+import { user, role } from '../../utilities/auth';
 
 const EngagementIndex = () => {
   const dispatch = useDispatch();
@@ -52,7 +53,7 @@ const EngagementIndex = () => {
     dispatch(projectAction({
       action: 'DASHBOARD',
       routeOptions: apiOptions({
-        endpoint: 'DASHBOARD',
+        endpoint: role && role[0] === 'admin' ? 'DASHBOARD' : 'CLIENTS_DASHBOARD',
         auth: true,
         method: 'get'
       })
@@ -66,7 +67,7 @@ const EngagementIndex = () => {
       view={(
         <IndexTemp
           formData={formData}
-          infoBarData={infoBarData}
+          infoBarData={indexstore}
           header="recent engagement"
           link={{ name: '+ new engagement', to: '/app/engagement/new-engagement' }}
           parent="engagement"

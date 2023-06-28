@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import DashboardTable from '../../components/tables/dashboardTable';
 import { projectAction } from '../../redux/actions/projectActions';
 import { apiOptions } from '../../services/fetch';
+import { role } from '../../utilities/auth';
+import Dash from './Dash';
 
 const AdminDash = () => {
   const dispatch = useDispatch();
@@ -24,7 +26,7 @@ const AdminDash = () => {
     dispatch(projectAction({
       action: 'DASHBOARD',
       routeOptions: apiOptions({
-        endpoint: 'DASHBOARD',
+        endpoint: role && role[0] === 'admin' ? 'DASHBOARD' : 'CLIENTS_DASHBOARD',
         auth: true,
         method: 'get'
       })
@@ -39,34 +41,7 @@ const AdminDash = () => {
         <input type="text" value="" placeholder="search" className="ml-auto p-2" />
       </div>
       <hr />
-      <div className="container">
-        <div className="row">
-          <div className="card mr-3 col-sm-12 col-md">
-            <div className="card-body">
-              <h5 className="card-title"> Total Engagment</h5>
-              {indexstore?.dashboard?.data?.data?.engagement_count}
-            </div>
-          </div>
-          <div className="card mr-3 col-sm-12 col-md">
-            <div className="card-body">
-              <h5 className="card-title"> Pending Conclusion</h5>
-              {indexstore?.dashboard?.data?.data?.pending_engagement}
-            </div>
-          </div>
-          <div className="card mr-3 col-sm-12 col-md">
-            <div className="card-body">
-              <h5 className="card-title"> Concluded & Closed</h5>
-              {indexstore?.dashboard?.data?.data?.concluded_engagement}
-            </div>
-          </div>
-          <div className="card col-sm-12 col-md">
-            <div className="card-body">
-              <h5 className="card-title"> Total Clients</h5>
-              {indexstore?.dashboard?.data?.data?.clients_count}
-            </div>
-          </div>
-        </div>
-      </div>
+      <Dash indexstore={indexstore} />
       <div>
         <div className="container my-3">
           <div className="d-flex">
