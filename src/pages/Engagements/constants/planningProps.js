@@ -1,8 +1,16 @@
 import React from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { accountingStandards, auditingStandards } from '../../../utilities/dummyData';
+import { auditingStandards } from '../../../utilities/dummyData';
 
+const indexData = { ...JSON.parse(localStorage.getItem('index')) };
+const materialrange = [{ id: 0, name: 'Select Benchmark', value: 0 }, ...indexData.materialRange];
+// {
+//   id: 0,
+//   type: 'select item...',
+//   desc: 'corporate project',
+//   value: 0
+// },
 const planningProps = (
   {
     formData,
@@ -58,12 +66,12 @@ const planningProps = (
         name: 'materiality_level_id',
         label: 'Materiality Benchmark',
         value: formData?.materiality_level_id || '',
-        options: auditingStandards,
+        options: materialrange,
         validations: {
           required: true
         },
         error: errors?.materiality_level_id,
-        optionIndex: 'type',
+        optionIndex: 'name',
         valueIndex: 'id',
         onBlur: handleBlur,
         onChange: handleChange

@@ -60,7 +60,7 @@ const Engagement = () => {
         }
         <div className="content">
 
-          { formData?.engagement?.status_id === '3' && formData?.engagement?.planning?.status !== '1'
+          { formData?.engagement?.status_id !== '3' && formData?.engagement?.planning?.status !== '1'
             ? (
               <>
                 <div className="mb-4 font-title-small">
