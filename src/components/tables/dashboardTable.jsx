@@ -76,13 +76,17 @@ export default function DashboardTable({ data }) {
               <StyledTableCell align="right"><div className="theme-font-2">{sentenceCaps(row.status)}</div></StyledTableCell>
               <StyledTableCell align="right">
                 <div className="theme-font-2">
-                  <Button type="button" className="btn-small btn text-white" onClick={() => viewRow(row)}>
-                    <CgArrowsExpandDownLeft />
+                  <Button type="button" className="btn-small btn text-black" onClick={() => viewRow(row)}>
+                    {/* <CgArrowsExpandDownLeft />
+                    {' '} */}
+                    View Engagement
                   </Button>
                 </div>
                 <div className="theme-font-2">
-                  <Button type="button" className="btn-small btn text-white" onClick={() => handleRow(row)}>
-                    <CgArrowsExpandUpRight />
+                  <Button type="button" className="btn-small btn " style={{ color: 'black' }} onClick={() => handleRow(row)}>
+
+                    Edit Engagement
+                    {/* <CgArrowsExpandUpRight /> */}
                   </Button>
                 </div>
               </StyledTableCell>

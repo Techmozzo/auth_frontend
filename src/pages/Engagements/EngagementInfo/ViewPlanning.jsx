@@ -58,14 +58,13 @@ const ViewPlanning = ({ planning, engangementid, statusid }) => {
                 <div className="d-flex w-100 justify-content-between">
                   <h5 className="mb-1">combine_risk_assessment</h5>
                 </div>
-                {/* <p className="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p> */}
                 <small>{planning?.combine_risk_assessment}</small>
               </div>
               <div href="#" className="list-group-item list-group-item-action flex-column align-items-start ">
                 <div className="d-flex w-100 justify-content-between">
                   <h5 className="mb-1">control_testing</h5>
                 </div>
-                {/* <p className="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p> */}
+
                 <small>{planning?.control_testing}</small>
               </div>
             </div>
