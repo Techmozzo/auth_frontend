@@ -72,7 +72,7 @@ const ViewConculsion = ({ conclusion, engangementid, statusid }) => {
             {
               // eslint-disable-next-line no-nested-ternary
               status
-                ? <Loader />
+                ? <Loader text="Approving Conclusion" />
                 : statusid === '3' && conclusion.status !== '1'
                   ? <button type="button" className="btn btn-default mt-2" onClick={AcceptPlanning}>Approve</button>
                   : null
