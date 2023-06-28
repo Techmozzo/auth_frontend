@@ -13,6 +13,8 @@ import planningProps from '../../constants/planningProps';
 import { index } from '../../../../utilities/auth';
 import { slugToString } from '../../../../utilities/stringOperations';
 
+const indexData = { ...JSON.parse(localStorage.getItem('index')) };
+const materialrange = indexData.materialRange;
 const MaterialityTemp = ({
   formData, setFormData, handleChange, errors, handleBlur, setErrors,
   create, status, link, message
@@ -21,7 +23,11 @@ const MaterialityTemp = ({
   const [show, setShow] = useState(false);
 
   const reason = (name) => `${name}_reason`;
-
+  const selectedMaterialRange = materialrange
+ && materialrange
+   .filter((a) => String(a.id) === formData.materiality_level_id)[0];
+  // console.log('FData ', formData);
+  // console.log('Range ', selectedMaterialRange.lower_limit);
   return (
     <div className="w-750 ">
 
@@ -65,6 +71,12 @@ const MaterialityTemp = ({
                               <SliderSizes
                                 max={item.upper_limit}
                                 min={item.lower_limit}
+                                overallmax={
+                                  selectedMaterialRange && selectedMaterialRange.upper_limit
+                                }
+                                overallmin={
+                                  selectedMaterialRange && selectedMaterialRange.lower_limit
+                                }
                                 formData={formData}
                                 levelId={item.id}
                                 setFormData={setFormData}
