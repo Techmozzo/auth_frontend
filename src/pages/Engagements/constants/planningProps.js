@@ -63,14 +63,14 @@ const planningProps = (
       kind: 'select',
       props: {
         className: 'w-100 m-b-20 col-12 col-md-7',
-        name: 'materiality_level_id',
+        name: 'materiality_benchmark_range_id',
         label: 'Materiality Benchmark',
-        value: formData?.materiality_level_id || '',
+        value: formData?.materiality_benchmark_range_id || '',
         options: materialrange,
         validations: {
           required: true
         },
-        error: errors?.materiality_level_id,
+        error: errors?.materiality_benchmark_range_id,
         optionIndex: 'name',
         valueIndex: 'id',
         onBlur: handleBlur,

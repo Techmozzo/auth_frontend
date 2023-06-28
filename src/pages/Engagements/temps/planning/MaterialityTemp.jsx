@@ -25,7 +25,7 @@ const MaterialityTemp = ({
   const reason = (name) => `${name}_reason`;
   const selectedMaterialRange = materialrange
  && materialrange
-   .filter((a) => String(a.id) === formData.materiality_level_id)[0];
+   .filter((a) => String(a.id) === formData.materiality_benchmark_range_id)[0];
   // console.log('FData ', formData);
   // console.log('Range ', selectedMaterialRange.lower_limit);
   return (
