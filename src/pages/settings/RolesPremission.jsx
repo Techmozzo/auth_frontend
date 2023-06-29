@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { get } from '../../services/fetch';
+import { sentenceCaps } from '../../utilities/stringOperations';
 
 const RolesPremission = ({ setCurrent }) => {
   const [roles, setRoles] = useState([]);
@@ -79,7 +80,7 @@ const RolesPremission = ({ setCurrent }) => {
                     <select name="roles" id="roles" onChange={getRolePermission} className="font-title-small text-theme">
                       <option value="">Select Role</option>
                       {roles && roles.map((r) => (
-                        <option value={r.id} key={r.id}>{r.name}</option>
+                        <option value={r.id} key={r.id}>{sentenceCaps(r.name.split('_').join(' '))}</option>
                       ))}
 
                     </select>
