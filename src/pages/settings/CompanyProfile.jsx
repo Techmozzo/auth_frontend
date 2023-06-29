@@ -129,7 +129,6 @@ const CompanyProfile = ({ setCurrent }) => {
     e.preventDefault();
     setLoading(true);
     const formDat = new FormData();
-    console.log(e.target.files[0]);
     formDat.append('document', e.target.files[0]);
     try {
       const upfile = await post({ endpoint: 'PROJECT_MEDIA', auth: true, body: formDat });

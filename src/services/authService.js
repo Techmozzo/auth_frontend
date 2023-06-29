@@ -9,3 +9,4 @@ export const resetPassword = 'auth/reset-password';
 export const forgotPasswordApi = 'auth/forgot-password';
 export const index = 'index';
 export const updateCompanyApi = 'company';
+export const roles = 'roles';

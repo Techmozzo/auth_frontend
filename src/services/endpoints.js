@@ -65,7 +65,10 @@ const paths = {
 
   // index
   INDEX: authEndpoints.index,
-  CLIENT_ROLES: engagementEnpoints.clientroles
+  CLIENT_ROLES: engagementEnpoints.clientroles,
+
+  // roles
+  ROLES: authEndpoints.roles
 };
 
 export default paths;
