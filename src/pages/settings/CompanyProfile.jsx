@@ -20,6 +20,7 @@ const CompanyProfile = ({ setCurrent }) => {
   const [terms, setTerms] = useState(false);
   const [show, setShow] = useState(false);
   const [load, setLoading] = useState(false);
+  const [formload, setFormLoading] = useState('initial');
   const [errors, setErrors] = useState({});
 
   const { goBack, push } = useHistory();
@@ -31,7 +32,7 @@ const CompanyProfile = ({ setCurrent }) => {
   const [formData, setFormData] = useState({
     ...indexstore?.data?.data?.company
   });
-  console.log(indexstore?.data?.data?.company);
+  console.log(store);
 
   useEffect(() => {
     dispatch(projectAction({
@@ -74,8 +75,9 @@ const CompanyProfile = ({ setCurrent }) => {
   //       setTimeout(() => window.location.assign('/app/dashboard'), 500);
   //     }
   //   }, [store.status]);
-  const completeRegistration = useCallback((data) => {
-    dispatch(projectAction(
+  const completeRegistration = useCallback(async (data) => {
+    setFormLoading('pending');
+    await dispatch(projectAction(
       {
         action: 'UPDATE_COMPANY',
         routeOptions: apiOptions({
@@ -86,6 +88,7 @@ const CompanyProfile = ({ setCurrent }) => {
         })
       }
     ));
+    setFormLoading('initial');
   }, []);
 
   const handleLogin = () => {
@@ -100,23 +103,7 @@ const CompanyProfile = ({ setCurrent }) => {
       [name]: value
     }));
   };
-  const handleChecked = (e) => {
-    const { name } = e.target;
-    setFormData({
-      ...formData,
-      [name]: !formData[name]
-    });
-  };
-  const checkboxText = (
-    <div className="font-small">
-      I agree to the
-      <Link className="mx-1 text-theme-blue" to="privacy">Terms and Conditions</Link>
-    </div>
-  );
-  const handleClose = () => {
-    setShow(false);
-    return window.location.assign('/me');
-  };
+
   const goBackAndReset = () => {
     goBack();
     dispatch(resetAction({ action: 'LOGIN_COMPLETE' }));
@@ -250,7 +237,7 @@ const CompanyProfile = ({ setCurrent }) => {
         <PageTemp
           initial={initialTemp({ formData })}
           view={initialTemp({ formData })}
-          status={store?.status}
+          status={formload}
           error={initialTemp({ formData })}
         />
       </div>
