@@ -21,12 +21,12 @@ const RolesPremission = ({ setCurrent }) => {
   }, []);
 
   // Mapping the permission array to the state variable
-  useEffect(() => {
-    if (submitted) {
-      setCurrentRolePermissionx([]);
-      setRoleId('');
-    }
-  }, [submitted]);
+  // useEffect(() => {
+  //   if (submitted) {
+  //     setCurrentRolePermissionx([]);
+  //     setRoleId('');
+  //   }
+  // }, [submitted]);
 
   useEffect(() => {
     // declare the async data fetching function
@@ -45,7 +45,7 @@ const RolesPremission = ({ setCurrent }) => {
     fetchData()
       // make sure to catch any error
       .catch(console.error);
-  }, [sreq]);
+  }, [singleroleid]);
 
   // eslint-disable-next-line consistent-return
   useEffect(() => {
@@ -145,12 +145,15 @@ const RolesPremission = ({ setCurrent }) => {
       const req = await post({
         endpoint: 'ROLES', auth: true, param: singleroleid, body: { permissions: permissionId }
       });
-      console.log(req);
-      setRequest(true);
+      // console.log(req);
+      // setRequest(true);
       // getCurrentArryOfSameLenght();
       // setRoleId('');
       // setCurrentRolePermission([]);
       // setSubmitted(true);
+      notifier({
+        type: 'success', title: 'Success', text: 'Permissions For Role Update'
+      });
     } catch (e) {
       notifier({
         type: 'error', title: 'Error', text: 'Something'
