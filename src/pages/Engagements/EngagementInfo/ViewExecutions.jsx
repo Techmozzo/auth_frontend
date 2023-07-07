@@ -4,11 +4,13 @@ import { Link, useParams, useHistory } from 'react-router-dom';
 import { notifier, sentenceCaps } from '../../../utilities/stringOperations';
 import { get } from '../../../services/fetch';
 import Loader from '../../../components/microComponents/loader';
+import usePermission from '../../../components/hooks/usePermission';
 
 const ViewExecutions = ({ execution, engangementid, statusid }) => {
   const [state, setState] = useState();
   const { push } = useHistory();
   const [status, setStatus] = useState(false);
+  const editEnganagment = usePermission('edit-engagement');
 
   const AcceptPlanning = async () => {
     try {
@@ -42,11 +44,11 @@ const ViewExecutions = ({ execution, engangementid, statusid }) => {
     }
     setStatus(false);
   };
-
+  console.log(execution);
   return (
     <div className="card p-2 mt-5">
-      <h4>Execution</h4>
-      {execution && execution.length === 0
+      <h4 className="mb-4">Execution</h4>
+      {typeof execution && execution == null
         ? (
           <>
             No Execution Yet!
@@ -72,13 +74,15 @@ const ViewExecutions = ({ execution, engangementid, statusid }) => {
 
             <div className="mt-5">
               {
-              // eslint-disable-next-line no-nested-ternary
-                status
-                  ? <Loader text="Approving Executions" />
-                  : statusid === '2'
-                    ? <button type="button" className="btn btn-default mt-2" onClick={AcceptPlanning}>Approve</button>
-                    : null
+                editEnganagment && (
+                // eslint-disable-next-line no-nested-ternary
+                  status
+                    ? <Loader text="Approving Executions" />
+                    : statusid === '2'
+                      ? <button type="button" className="btn btn-default mt-2" onClick={AcceptPlanning}>Approve</button>
+                      : null
 
+                )
               }
             </div>
 

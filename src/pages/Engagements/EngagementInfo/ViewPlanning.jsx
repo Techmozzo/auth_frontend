@@ -4,11 +4,12 @@ import { Link, useParams, useHistory } from 'react-router-dom';
 import { notifier, sentenceCaps } from '../../../utilities/stringOperations';
 import { get } from '../../../services/fetch';
 import Loader from '../../../components/microComponents/loader';
+import usePermission from '../../../components/hooks/usePermission';
 
 const ViewPlanning = ({ planning, engangementid, statusid }) => {
   const { push } = useHistory();
   const [status, setStatus] = useState(false);
-
+  const editEnganagment = usePermission('edit-engagement');
   const AcceptPlanning = async () => {
     try {
       setStatus(true);
@@ -45,7 +46,7 @@ const ViewPlanning = ({ planning, engangementid, statusid }) => {
   return (
     <div className="card p-2">
       <h4 className="mb-4">Planning</h4>
-      {planning && planning.length === 0
+      {typeof planning && planning === null
         ? (
           <>
             No Planning yet!
@@ -99,7 +100,7 @@ const ViewPlanning = ({ planning, engangementid, statusid }) => {
                       <dd className="col-sm-8">{it.name}</dd>
                     </dl>
                     <dl className="row">
-                      <dt className="col-sm-4">process_flow_document</dt>
+                      <dt className="col-sm-4 text-truncate">{sentenceCaps('process flow document')}</dt>
                       <dd className="col-sm-8">{it.process_flow_document}</dd>
                     </dl>
                     <hr />
@@ -132,7 +133,7 @@ const ViewPlanning = ({ planning, engangementid, statusid }) => {
               <dd className="col-sm-9">{planning?.planning_analytics}</dd>
             </dl>
             <div className="mt-5">
-              {
+              {editEnganagment && (
               // eslint-disable-next-line no-nested-ternary
                 status
                   ? <Loader text="Approving Planning" />
@@ -140,7 +141,7 @@ const ViewPlanning = ({ planning, engangementid, statusid }) => {
                     ? <button type="button" className="btn btn-default mt-2" onClick={AcceptPlanning}>Approve</button>
                     : null
 
-              }
+              ) }
             </div>
 
           </>

@@ -4,12 +4,14 @@ import { Link, useParams, useHistory } from 'react-router-dom';
 import { notifier, sentenceCaps } from '../../../utilities/stringOperations';
 import { get } from '../../../services/fetch';
 import Loader from '../../../components/microComponents/loader';
+import usePermission from '../../../components/hooks/usePermission';
 
 const ViewConculsion = ({ conclusion, engangementid, statusid }) => {
   const [state, setState] = useState();
   const { push } = useHistory();
   const [status, setStatus] = useState(false);
-  console.log('Conclusion ', conclusion);
+  const editEnganagment = usePermission('edit-engagement');
+
   const AcceptPlanning = async () => {
     try {
       setStatus(true);
@@ -45,8 +47,8 @@ const ViewConculsion = ({ conclusion, engangementid, statusid }) => {
 
   return (
     <div className="card p-2 mt-5">
-      <h4>Conclusion</h4>
-      {conclusion && conclusion.length === 0
+      <h4 className="mb-4">Conclusion</h4>
+      {typeof conclusion && conclusion === null
         ? (
           <>
             No Conclusion yet!
@@ -91,15 +93,15 @@ const ViewConculsion = ({ conclusion, engangementid, statusid }) => {
             </dl>
 
             <div className="mt-5">
-              {
+
+              {editEnganagment && (
               // eslint-disable-next-line no-nested-ternary
                 status
                   ? <Loader text="Approving Conclusion" />
                   : statusid === '3' && conclusion.status !== '1'
                     ? <button type="button" className="btn btn-default mt-2" onClick={AcceptPlanning}>Approve</button>
                     : null
-
-              }
+              )}
             </div>
           </>
         )}
