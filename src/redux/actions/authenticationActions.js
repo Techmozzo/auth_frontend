@@ -121,6 +121,7 @@ export const login = (payload) => {
         // localforage.setItem('user', response?.data?.data?.user);
         // localforage.setItem('role', response?.data?.data?.roles);
         localStorage.role = JSON.stringify(response?.data?.data?.roles);
+        localStorage.permissions = JSON.stringify(response?.data?.data?.permissions);
         localStorage.setItem('token', response?.data?.data?.access_token);
         localStorage.setItem('user', JSON.stringify(response?.data?.data?.user));
         dispatch(success(response?.data));

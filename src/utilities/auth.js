@@ -79,4 +79,5 @@ export const currentUser = localforage.getItem('user', (err, value) => {
 
 export const user = { ...JSON.parse(localStorage.getItem('user')) };
 export const role = { ...JSON.parse(localStorage.role || null) };
+export const permissions = { ...JSON.parse(localStorage.permissions || null) };
 export const index = { ...JSON.parse(localStorage.getItem('index')) };

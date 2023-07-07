@@ -13,11 +13,12 @@ import NoData from '../authentication/NoData';
 import BackdropModal from '../../components/microComponents/backdropModal';
 import InviteMember from './inviteMember';
 import { headerTemp1 } from '../../components/temps/projectTemps/miscTemps';
+import usePermission from '../../components/hooks/usePermission';
 
 const Engagement = () => {
   /* redux hooks */
   const store = useSelector((state) => state.engagement?.engagement);
-
+  const viewEngangment = usePermission('view-engagement');
   /* router hooks */
   const { engagementId, engagementName } = useParams();
 
@@ -102,7 +103,6 @@ const Engagement = () => {
                               callback={() => setOpen(true)}
                             />
                           </div>
-
                           <MembersTable data={formData?.engagement?.team_members} />
                         </>
                       )

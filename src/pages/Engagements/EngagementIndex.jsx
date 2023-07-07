@@ -7,12 +7,15 @@ import IndexTemp from '../Dashboard/temp/IndexTemp';
 import DashboardTable from '../../components/tables/dashboardTable';
 import { projectAction } from '../../redux/actions/projectActions';
 import { user, role } from '../../utilities/auth';
+import usePermission from '../../components/hooks/usePermission';
 
 const EngagementIndex = () => {
   const dispatch = useDispatch();
   const store = useSelector((state) => state.engagement.engagements);
   const [formData, setFormData] = React.useState({});
   const indexstore = useSelector((state) => state.engagement);
+  const viewEngangment = usePermission('view-engagement');
+  console.log(viewEngangment);
   const options = {
     action: 'ENGAGEMENTS',
     apiOpts: apiOptions({
@@ -48,7 +51,7 @@ const EngagementIndex = () => {
       val: indexstore?.dashboard?.data?.data?.clients_count || '0'
     }
   ];
-  console.log('Data', formData);
+  // console.log('Data', formData);
   useEffect(() => {
     dispatch(projectAction({
       action: 'DASHBOARD',
@@ -72,7 +75,8 @@ const EngagementIndex = () => {
           link={{ name: '+ new engagement', to: '/app/engagement/new-engagement' }}
           parent="engagement"
           // eslint-disable-next-line max-len
-          table={<DashboardTable data={indexstore?.dashboard?.data?.data?.engagements} />}
+          table={viewEngangment
+            && <DashboardTable data={indexstore?.dashboard?.data?.data?.engagements} />}
         />
       )}
       action="ENGAGEMENTS_COMPLETE"
