@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import React, { useState } from 'react';
 import { Link, useParams, useHistory } from 'react-router-dom';
-import { notifier } from '../../../utilities/stringOperations';
+import { notifier, sentenceCaps } from '../../../utilities/stringOperations';
 import { get } from '../../../services/fetch';
 import Loader from '../../../components/microComponents/loader';
 
@@ -43,8 +43,8 @@ const ViewPlanning = ({ planning, engangementid, statusid }) => {
   };
 
   return (
-    <div>
-      <h4>Planning</h4>
+    <div className="card p-2">
+      <h4 className="mb-4">Planning</h4>
       {planning && planning.length === 0
         ? (
           <>
@@ -53,30 +53,96 @@ const ViewPlanning = ({ planning, engangementid, statusid }) => {
         )
         : (
           <>
-            <div className="list-group">
-              <div href="#" className="list-group-item list-group-item-action flex-column align-items-start active">
-                <div className="d-flex w-100 justify-content-between">
-                  <h5 className="mb-1">combine_risk_assessment</h5>
-                </div>
-                <small>{planning?.combine_risk_assessment}</small>
-              </div>
-              <div href="#" className="list-group-item list-group-item-action flex-column align-items-start ">
-                <div className="d-flex w-100 justify-content-between">
-                  <h5 className="mb-1">control_testing</h5>
-                </div>
 
-                <small>{planning?.control_testing}</small>
-              </div>
-            </div>
-            {
+            <dl className="row">
+              <dt className="col-sm-3 text-truncate" title="combine risk assessment">{sentenceCaps('combine risk assessment')}</dt>
+              <dd className="col-sm-9">{planning?.combine_risk_assessment}</dd>
+
+              <dt className="col-sm-3">{sentenceCaps('control testing')}</dt>
+              <dd className="col-sm-9">
+                <p>{planning?.control_testing}</p>
+              </dd>
+
+              <dt className="col-sm-3">{sentenceCaps('journal entries')}</dt>
+              <dd className="col-sm-9">{planning?.journal_entries}</dd>
+
+              <dt className="col-sm-3">{sentenceCaps('test details')}</dt>
+              <dd className="col-sm-9">{planning?.test_details}</dd>
+
+              <dt className="col-sm-3">{sentenceCaps('trial balance')}</dt>
+              <dd className="col-sm-9">{planning?.trial_balance}</dd>
+
+              <dt className="col-sm-3">i_t_risk_assessment</dt>
+              <dd className="col-sm-9">
+                {planning?.i_t_risk_assessment.map((it, i) => (
+                  <>
+                    <dl className="row">
+                      <dt className="col-sm-4">Name</dt>
+                      <dd className="col-sm-8">{it.name}</dd>
+                    </dl>
+                    <dl className="row">
+                      <dt className="col-sm-4">Function</dt>
+                      <dd className="col-sm-8">{it.function}</dd>
+                    </dl>
+                    <hr />
+                  </>
+
+                ))}
+
+              </dd>
+              <dt className="col-sm-3">{sentenceCaps('transaction class')}</dt>
+              <dd className="col-sm-9">
+                {planning?.transaction_class.map((it, i) => (
+                  <>
+                    <dl className="row">
+                      <dt className="col-sm-4">Name</dt>
+                      <dd className="col-sm-8">{it.name}</dd>
+                    </dl>
+                    <dl className="row">
+                      <dt className="col-sm-4">process_flow_document</dt>
+                      <dd className="col-sm-8">{it.process_flow_document}</dd>
+                    </dl>
+                    <hr />
+                  </>
+
+                ))}
+
+              </dd>
+              <dt className="col-sm-3">{sentenceCaps('materiality benchmark')}</dt>
+              <dd className="col-sm-9">
+                {planning?.materiality_benchmark.map((it, i) => (
+                  <>
+                    <dl className="row">
+                      <dt className="col-sm-4">Amount</dt>
+                      <dd className="col-sm-8">{it.amount}</dd>
+                    </dl>
+                    <dl className="row">
+                      <dt className="col-sm-4">Reason</dt>
+                      <dd className="col-sm-8">{it.reason}</dd>
+                    </dl>
+                    <hr />
+                  </>
+
+                ))}
+
+              </dd>
+              <dt className="col-sm-3">{sentenceCaps('material misstatement')}</dt>
+              <dd className="col-sm-9">{planning?.material_misstatement}</dd>
+              <dt className="col-sm-3">{sentenceCaps('planning analytics')}</dt>
+              <dd className="col-sm-9">{planning?.planning_analytics}</dd>
+            </dl>
+            <div className="mt-5">
+              {
               // eslint-disable-next-line no-nested-ternary
-              status
-                ? <Loader text="Approving Planning" />
-                : statusid === '1'
-                  ? <button type="button" className="btn btn-default mt-2" onClick={AcceptPlanning}>Approve</button>
-                  : null
+                status
+                  ? <Loader text="Approving Planning" />
+                  : statusid === '1'
+                    ? <button type="button" className="btn btn-default mt-2" onClick={AcceptPlanning}>Approve</button>
+                    : null
 
-            }
+              }
+            </div>
+
           </>
         )}
     </div>

@@ -60,17 +60,17 @@ const EngagementInfo = () => {
               }
 
               <div className="row">
-                <div className="col">
+                {/* <div className="col">
                   Pre-Planning
-                </div>
-                <div className="col">
+                </div> */}
+                <div className="col-sm-12">
                   <ViewPlanning
                     planning={formData?.engagement?.planning}
                     engangementid={formData?.engagement?.id}
                     statusid={formData?.engagement?.status_id}
                   />
                 </div>
-                <div className="col">
+                <div className="col-sm-12">
                   <ViewExecutions
                     execution={formData?.engagement?.execution}
                     engangementid={formData?.engagement?.id}

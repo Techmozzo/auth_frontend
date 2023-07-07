@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import React, { useState } from 'react';
 import { Link, useParams, useHistory } from 'react-router-dom';
-import { notifier } from '../../../utilities/stringOperations';
+import { notifier, sentenceCaps } from '../../../utilities/stringOperations';
 import { get } from '../../../services/fetch';
 import Loader from '../../../components/microComponents/loader';
 
@@ -9,6 +9,7 @@ const ViewExecutions = ({ execution, engangementid, statusid }) => {
   const [state, setState] = useState();
   const { push } = useHistory();
   const [status, setStatus] = useState(false);
+
   const AcceptPlanning = async () => {
     try {
       setStatus(true);
@@ -43,7 +44,7 @@ const ViewExecutions = ({ execution, engangementid, statusid }) => {
   };
 
   return (
-    <div>
+    <div className="card p-2 mt-5">
       <h4>Execution</h4>
       {execution && execution.length === 0
         ? (
@@ -53,31 +54,34 @@ const ViewExecutions = ({ execution, engangementid, statusid }) => {
         )
         : (
           <>
-            <div className="list-group">
-              <div className="list-group-item list-group-item-action flex-column align-items-start ">
-                <div className="d-flex w-100 justify-content-between">
-                  <h5 className="mb-1">contingent_liability_review</h5>
-                </div>
-                {/* <p className="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p> */}
-                <small>{(execution && execution[0]?.contingent_liability_review) || execution?.contingent_liability_review}</small>
-              </div>
-              <div className="list-group-item list-group-item-action flex-column align-items-start active">
-                <div className="d-flex w-100 justify-content-between">
-                  <h5 className="mb-1">contract_agreement_review</h5>
-                </div>
-                {/* <p className="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p> */}
-                <small>{(execution && execution[0]?.contract_agreement_review) || execution?.contract_agreement_review}</small>
-              </div>
-            </div>
-            {
-              // eslint-disable-next-line no-nested-ternary
-              status
-                ? <Loader text="Approving Executions" />
-                : statusid === '2'
-                  ? <button type="button" className="btn btn-default mt-2" onClick={AcceptPlanning}>Approve</button>
-                  : null
 
-            }
+            <dl className="row">
+              <dt className="col-sm-3 text-truncate" title="combine risk assessment">{sentenceCaps('contract agreement review')}</dt>
+              <dd className="col-sm-9">{execution?.contract_agreement_review}</dd>
+              <dt className="col-sm-3 text-truncate">{sentenceCaps('contingent liability review')}</dt>
+              <dd className="col-sm-9">{execution?.contingent_liability_review}</dd>
+              <dt className="col-sm-3 text-truncate">{sentenceCaps('expert work review')}</dt>
+              <dd className="col-sm-9">{execution?.expert_work_review}</dd>
+              <dt className="col-sm-3 text-truncate">{sentenceCaps('legal counsel review')}</dt>
+              <dd className="col-sm-9">{execution?.legal_counsel_review}</dd>
+              <dt className="col-sm-3 text-truncate">{sentenceCaps('other estimate review')}</dt>
+              <dd className="col-sm-9">{execution?.other_estimate_review}</dd>
+              <dt className="col-sm-3 text-truncate">{sentenceCaps('party transaction review')}</dt>
+              <dd className="col-sm-9">{execution?.party_transaction_review}</dd>
+            </dl>
+
+            <div className="mt-5">
+              {
+              // eslint-disable-next-line no-nested-ternary
+                status
+                  ? <Loader text="Approving Executions" />
+                  : statusid === '2'
+                    ? <button type="button" className="btn btn-default mt-2" onClick={AcceptPlanning}>Approve</button>
+                    : null
+
+              }
+            </div>
+
           </>
         )}
     </div>

@@ -15,6 +15,7 @@ const EngagementIndex = () => {
   const [formData, setFormData] = React.useState({});
   const indexstore = useSelector((state) => state.engagement);
   const viewEngangment = usePermission('view-engagement');
+  const addEnganagment = usePermission('add-engagement');
   console.log(viewEngangment);
   const options = {
     action: 'ENGAGEMENTS',
@@ -72,7 +73,7 @@ const EngagementIndex = () => {
           formData={formData}
           infoBarData={indexstore}
           header="recent engagement"
-          link={{ name: '+ new engagement', to: '/app/engagement/new-engagement' }}
+          link={addEnganagment ? { name: '+ new engagement', to: '/app/engagement/new-engagement' } : null}
           parent="engagement"
           // eslint-disable-next-line max-len
           table={viewEngangment

@@ -11,6 +11,7 @@ import { useHistory } from 'react-router';
 import { CgArrowsExpandDownLeft, CgArrowsExpandUpRight } from 'react-icons/cg';
 import Button from '@mui/material/Button';
 import { sentenceCaps } from '../../utilities/stringOperations';
+import usePermission from '../hooks/usePermission';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -33,6 +34,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   }
 }));
 export default function DashboardTable({ data }) {
+  const editEnganagment = usePermission('edit-engagement');
+
   const { push } = useHistory();
   function createData(name, date, client, members, status, action) {
     return {
@@ -76,6 +79,7 @@ export default function DashboardTable({ data }) {
               <StyledTableCell align="right"><div className="theme-font-2">{sentenceCaps(row.status)}</div></StyledTableCell>
               <StyledTableCell align="right">
                 <div className="theme-font-2">
+
                   <Button type="button" className="btn-small btn text-black" onClick={() => viewRow(row)}>
                     {/* <CgArrowsExpandDownLeft />
                     {' '} */}
@@ -83,11 +87,14 @@ export default function DashboardTable({ data }) {
                   </Button>
                 </div>
                 <div className="theme-font-2">
-                  <Button type="button" className="btn-small btn " style={{ color: 'black' }} onClick={() => handleRow(row)}>
+                  {editEnganagment
+                  && (
+                    <Button type="button" className="btn-small btn " style={{ color: 'black' }} onClick={() => handleRow(row)}>
 
-                    Edit Engagement
-                    {/* <CgArrowsExpandUpRight /> */}
-                  </Button>
+                      Edit Engagement
+                      {/* <CgArrowsExpandUpRight /> */}
+                    </Button>
+                  ) }
                 </div>
               </StyledTableCell>
             </StyledTableRow>
