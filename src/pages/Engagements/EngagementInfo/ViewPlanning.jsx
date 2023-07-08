@@ -170,6 +170,20 @@ const ViewPlanning = ({ planning, engangementid, statusid }) => {
                     : null
 
               ) }
+              <div className="flex">
+                <button
+                  type="button"
+                  className="btn btn-default mt-2 mr-2"
+                  onClick={() => push(`/app/engagement/edit/class/${engangementid}`)}
+                >
+                  Edit Class
+
+                </button>
+                <button type="button" className="btn btn-default mt-2 mr-2">Edit Materiality</button>
+                <button type="button" className="btn btn-default mt-2 mr-2">Edit Misc</button>
+                <button type="button" className="btn btn-default mt-2">Edit Test</button>
+              </div>
+
             </div>
 
           </>

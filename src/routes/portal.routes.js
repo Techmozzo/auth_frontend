@@ -2,6 +2,7 @@ import { lazy } from 'react';
 import AcceptInvite from '../pages/Engagements/Invites/AcceptInvite';
 import DeclineInvite from '../pages/Engagements/Invites/DeclineInvite';
 import ActivityLog from '../pages/profile/ActivityLog';
+import EditClass from '../pages/Engagements/Edit/Planning/EditClass';
 
 const Login = lazy(() => import('../pages/authentication/Login'));
 const Register = lazy(() => import('../pages/authentication/Register'));
@@ -93,6 +94,12 @@ const routes = [
   {
     path: '/app/engagement/view/:engagementId',
     component: EngagementInfoView,
+    exact: true,
+    name: 'engagement'
+  },
+  {
+    path: '/app/engagement/edit/class/:engagementId',
+    component: EditClass,
     exact: true,
     name: 'engagement'
   },

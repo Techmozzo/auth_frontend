@@ -107,6 +107,7 @@ const DragNDropTemp = ({
         <QuillEditorBubble
           setFormData={setFormData}
           name={name}
+          values="weee"
           formData={formData}
           handleBlur={handleBlur}
         />
