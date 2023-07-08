@@ -28,7 +28,7 @@ const DragNDropTemp = ({
   // const engagementStore = useSelector((state) => state.engagement.engagement);
   const pushUpdates = useUpdateStore;
   const fetchData = useFetchData;
-  console.log(name);
+
   const {
     status, data, backErrors, message
   } = useStoreParams(store);
@@ -50,7 +50,7 @@ const DragNDropTemp = ({
 
   const uploadMediaSuccess = () => {
     setUploaded(true);
-    console.log(data.url);
+    // console.log(data.url);
     // setFormData({
     //   ...formData,
     //   [data.name]: data.url,
