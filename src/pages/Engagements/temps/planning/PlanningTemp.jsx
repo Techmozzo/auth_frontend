@@ -19,6 +19,7 @@ const PlanningTemp = ({
   useEffect(() => {
     setInitialData(formData);
   }, []);
+  console.log('Form ', formData);
   return (
     <div className="w-600 ">
 

@@ -48,17 +48,26 @@ const PlanningClasses = ({
         process_flow_document: formData.process_flow_document
       }
     ]);
-    setFormData({
-      ...formData,
+    // setFormData({
+    //   ...formData,
+    //   process_flow_document: '',
+    //   name: ''
+    // });
+
+    setFormData((prevStreamData: any) => ({
+      ...prevStreamData,
       process_flow_document: '',
       name: ''
-    });
+    }));
   };
   const removeItem = (e, item) => {
     e.stopPropagation();
     const newArr = filter(engagementClasses, (sub) => sub !== item);
     setEngagementClasses(newArr);
   };
+
+  // console.log('Fast ', formData);
+  // console.log(engagementClasses);
   return (
     <div className="">
       <CustomAccordion
@@ -113,6 +122,7 @@ const PlanningClasses = ({
                   </div>
                 </div>
                 <div>
+                  {/* disabled={!submittable} */}
                   <button type="button" disabled={!submittable} onClick={addSub} className="simple-hover btn text-white">Add Class</button>
                 </div>
               </div>
