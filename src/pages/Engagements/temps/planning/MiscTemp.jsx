@@ -22,6 +22,7 @@ const MiscTemp = ({
   const [currentPanel, setCurrentPanel] = useState(0);
   const [currentPanel1, setCurrentPanel1] = useState(50);
   const [procedures, setProcedures] = useState([1]);
+  const [itentity, setItEntity] = useState('');
   const name = (item) => `Assessment ${item}`;
 
   const addProcess = () => {
@@ -40,6 +41,13 @@ const MiscTemp = ({
     return setTimeout(fun(), 500);
   };
 
+  const OnChange = (e) => {
+    e.preventDefault();
+    setItEntity(e.target.value);
+    console.log(e.target.value);
+    setFormData({ ...formData, risk_assessment_status: e.target.value });
+  };
+  console.log(itentity);
   return (
     <div className="w-750 ">
 
@@ -48,6 +56,7 @@ const MiscTemp = ({
           <div className="d-flex wrap justify-content-between">
             <div className="margin-auto w-100 px-5">
               <div className="px-3">
+
                 <CustomAccordion
                   data={{
                     name: 'Tests, Assessments, and Entries',
@@ -81,75 +90,91 @@ const MiscTemp = ({
                     name: 'IT Risk Assessment',
                     details: (
                       <div>
-                        {
-                          formData?.risk_assessments?.map((item, key) => (
-                            <div key={item.name}>
-                              <CustomAccordion
-                                data={{
-                                  name: name((key + 1)),
-                                  details: (
+                        <div>
+                          <p>Does the entity have any IT system</p>
+                          <label>
+                            <input type="radio" name="it_risk" onClick={OnChange} checked={itentity === 'yes'} value="yes" id="" />
+                            {' '}
+                            Yes
+                            {' '}
+                            <input type="radio" name="it_risk" id="" onClick={OnChange} checked={itentity === 'no'} value="no" />
+                            {' '}
+                            No
+                          </label>
+
+                        </div>
+                        {/* {formData?.risk_assessments?.map((item, key) => (
+                          <div key={item.name}>
+                            <CustomAccordion
+                              data={{
+                                name: name((key + 1)),
+                                details: (
+                                  <div>
+                                    <FormBuilder
+                                      formItems={
+                                        planningProps(
+                                          {
+                                            formData,
+                                            handleBlur,
+                                            handleChange,
+                                            errors,
+                                            val: { name: item.name, function: item.function }
+                                          }
+                                        ).misc2
+                                      }
+                                    />
                                     <div>
-                                      <FormBuilder
-                                        formItems={
-                                          planningProps(
-                                            {
-                                              formData,
-                                              handleBlur,
-                                              handleChange,
-                                              errors,
-                                              val: { name: item.name, function: item.function }
-                                            }
-                                          ).misc2
-                                        }
-                                      />
-                                      <div>
-                                        <QuillEditor theme="bubble" value={item.review_performed} />
-                                      </div>
+                                      <QuillEditor theme="bubble" value={item.review_performed} />
                                     </div>
-                                  )
+                                  </div>
+                                )
+                              }}
+                              setCurrentPanel={setCurrentPanel1}
+                              currentPanel={currentPanel1}
+                              panel={key + 51}
+                            />
+                          </div>
+                        ))} */}
+                        {itentity && itentity === 'yes'
+                          ? (
+                            <div>
+                              {/* <CustomAccordion
+                                data={{
+                                  name: 'New Assessment',
+                                  details: ( */}
+                              <div>
+                                <FormBuilder
+                                  formItems={
+                                    planningProps(
+                                      {
+                                        formData,
+                                        handleBlur,
+                                        handleChange,
+                                        errors
+                                      }
+                                    ).misc
+                                  }
+                                />
+                                <DragNDropTemp
+                                  formData={formData}
+                                  setFormData={setFormData}
+                                  setErrors={setErrors}
+                                  name="review_performed"
+                                  label="Reviews Performed"
+                                  handleBlur={blurHandler}
+                                />
+                              </div>
+                              <button type="button" className="btn mt-4" onClick={addProcess}>Add Procedure</button>
+                              {/* )
                                 }}
                                 setCurrentPanel={setCurrentPanel1}
                                 currentPanel={currentPanel1}
-                                panel={key + 51}
-                              />
+                                panel={formData.risk_assessments?.length + 100}
+                              /> */}
                             </div>
-                          ))
-                        }
-                        <div>
-                          <CustomAccordion
-                            data={{
-                              name: 'New Assessment',
-                              details: (
-                                <div>
-                                  <FormBuilder
-                                    formItems={
-                                      planningProps(
-                                        {
-                                          formData,
-                                          handleBlur,
-                                          handleChange,
-                                          errors
-                                        }
-                                      ).misc
-                                    }
-                                  />
-                                  <DragNDropTemp
-                                    formData={formData}
-                                    setFormData={setFormData}
-                                    setErrors={setErrors}
-                                    name="review_performed"
-                                    label="Reviews Performed"
-                                    handleBlur={blurHandler}
-                                  />
-                                </div>
-                              )
-                            }}
-                            setCurrentPanel={setCurrentPanel1}
-                            currentPanel={currentPanel1}
-                            panel={formData.risk_assessments?.length + 100}
-                          />
-                        </div>
-                        <button type="button" className="btn" onClick={addProcess}>Add Procedure</button>
+                          )
+                          : null}
+
                       </div>
                     )
                   }}

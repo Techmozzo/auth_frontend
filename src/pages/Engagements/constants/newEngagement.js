@@ -91,7 +91,7 @@ const newEngagementProps = (
   //   }
   // },
   {
-    kind: 'select',
+    kind: 'select2',
     props: {
       className: 'w-100 m-b-20 col-12 col-md-6',
       name: 'auditing_standard',
@@ -109,7 +109,7 @@ const newEngagementProps = (
     }
   },
   {
-    kind: 'select',
+    kind: 'select2',
     props: {
       className: 'w-100 m-b-20 col-12 col-md-6',
       name: 'accounting_standard',

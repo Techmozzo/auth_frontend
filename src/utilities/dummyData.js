@@ -374,39 +374,39 @@ export const projectType = [
 ];
 export const designations = [
   'select designation',
-  {
-    id: 1,
-    type: 'Partner',
-    desc: 'corporate project',
-    value: 1
-  },
-  {
-    id: 2,
-    type: 'Manager',
-    desc: 'organisational project',
-    value: 2
-  },
-  {
-    id: 3,
-    type: 'Senior Manager',
-    desc: 'organisational project',
-    value: 3
-  },
+  // {
+  //   id: 1,
+  //   type: 'Partner',
+  //   desc: 'corporate project',
+  //   value: 1
+  // },
+  // {
+  //   id: 2,
+  //   type: 'Manager',
+  //   desc: 'organisational project',
+  //   value: 2
+  // },
+  // {
+  //   id: 3,
+  //   type: 'Senior Manager',
+  //   desc: 'organisational project',
+  //   value: 3
+  // },
   {
     id: 4,
-    type: 'Director',
+    type: 'Managing Director',
     desc: 'organisational project',
     value: 4
   },
   {
     id: 5,
-    type: 'Associate',
+    type: 'Executive Director',
     desc: 'organisational project',
     value: 5
   },
   {
     id: 6,
-    type: 'Senior Associate',
+    type: 'Chairman',
     desc: 'organisational project',
     value: 6
   },
@@ -669,19 +669,25 @@ export const accountingStandards = [
     id: 0,
     type: 'select item...',
     desc: 'corporate project',
-    value: 0
+    value: ''
   },
   {
     id: 1,
-    type: 'standard',
-    desc: 'corporate project',
-    value: 2
+    type: 'IFRS',
+    desc: 'individual project',
+    value: 'IFRS'
+  },
+  {
+    id: 2,
+    type: 'UK GAAP',
+    desc: 'individual project',
+    value: 'UK GAAP'
   },
   {
     id: 3,
-    type: 'advance',
+    type: 'US GAAP',
     desc: 'individual project',
-    value: 1
+    value: 'US GAAP'
   }
 ];
 export const auditingStandards = [
@@ -689,19 +695,25 @@ export const auditingStandards = [
     id: 0,
     type: 'select item...',
     desc: 'corporate project',
-    value: 0
+    value: 'n'
   },
   {
     id: 1,
-    type: 'routine',
+    type: 'ISA',
     desc: 'corporate project',
-    value: 2
+    value: 'ISA'
   },
   {
     id: 3,
-    type: 'intensive',
+    type: 'ISRS 400 (Revised)',
     desc: 'individual project',
-    value: 1
+    value: 'ISRS'
+  },
+  {
+    id: 4,
+    type: 'ISRE',
+    desc: 'individual project',
+    value: 'ISRE'
   }
 ];
 export const managers = [
