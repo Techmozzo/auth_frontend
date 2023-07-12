@@ -98,17 +98,17 @@ const Planning = () => {
                           btn: 'Next',
                           status: tempParams.status,
                           btnMethod: tempParams.create
-                        },
-                        {
-                          template: <PlanningTests
-                            setTempParams={setTempParams}
-                          />,
-                          optional: false,
-                          label: 'Test',
-                          btn: 'Done',
-                          status: tempParams.status,
-                          btnMethod: tempParams.create
                         }
+                        // {
+                        //   template: <PlanningTests
+                        //     setTempParams={setTempParams}
+                        //   />,
+                        //   optional: false,
+                        //   label: 'Test',
+                        //   btn: 'Done',
+                        //   status: tempParams.status,
+                        //   btnMethod: tempParams.create
+                        // }
                       ]}
                       active={0}
                       link={`/app/engagement/execution/${slugify(engagementName, '-')}/${engagementId}`}

@@ -181,16 +181,23 @@ export const index = () => {
   };
 };
 
-export const uploadMedia = ({ file, setProgress, name }) => {
+export const uploadMedia = ({
+  file, setProgress, name, route
+}) => {
   const request = (req) => ({ type: constants.UPLOAD_MEDIA_PENDING, request: req });
   const success = (response) => ({ type: constants.UPLOAD_MEDIA_SUCCESS, response });
   const failure = (error) => ({ type: constants.UPLOAD_MEDIA_FAILURE, error });
   const formData = new FormData();
-  formData.append('document', file);
-  formData.append('name', name);
+  if (route) {
+    formData.append(name, file);
+  } else {
+    formData.append('document', file);
+    formData.append('name', name);
+  }
+
   return async (dispatch) => {
     const res = post({
-      endpoint: 'PROJECT_MEDIA',
+      endpoint: route || 'PROJECT_MEDIA',
       auth: true,
       body: formData,
       setProgress,

@@ -3,7 +3,6 @@ import { last } from 'lodash';
 import Box from '@material-ui/core/Box';
 import FormBuilder from '../../../../components/form/builders/form';
 import DragNDropTemp from '../newEngagement/DragNDropInputTemp';
-import PlanningClasses from './PlanningClasses';
 import userProps from '../../constants/usersProps';
 import NewEngagementTemp from '../newEngagement/NewEngagementTemp';
 import SliderSizes from '../../../../components/microComponents/slider';

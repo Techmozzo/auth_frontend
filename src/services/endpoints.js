@@ -27,6 +27,7 @@ const paths = {
   PROJECT_MEDIA: fileUploads.upload,
   DELETE_PROJECT_MEDIA: fileUploads.deleteProjectMedia,
   LOGO: fileUploads.logo,
+  TRIAL_UPLOAD: fileUploads.trialupload,
   // engagements
   CREATE_ENGAGEMENT: engagementEnpoints.engagements,
   ENGAGEMENT: engagementEnpoints.engagements,

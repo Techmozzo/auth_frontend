@@ -8,13 +8,17 @@ import { checkRequiredFields } from '../../../../utilities/validation';
 import planningProps from '../../constants/planningProps';
 import DragNDropTemp from '../newEngagement/DragNDropInputTemp';
 import { notifier, stringCaps } from '../../../../utilities/stringOperations';
+// eslint-disable-next-line import/no-cycle
+import PlanningTests from '../../planning/PlanningTests';
+import PlanningPTest from './PlanningPTest';
 
 const PlanningClasses = ({
   formData, setFormData, handleChange, errors, setErrors,
-  handleBlur, currentPanel, setCurrentPanel, status, message, link
+  handleBlur, currentPanel, setCurrentPanel, status, message, link, classes
 }) => {
   const [engagementClasses, setEngagementClasses] = useState([]);
   const [submittable, setSubmittable] = useState(false);
+  const [formSub, setFormSub] = useState([]);
 
   useEffect(() => {
     setSubmittable(checkRequiredFields([
@@ -68,6 +72,22 @@ const PlanningClasses = ({
 
   // console.log('Fast ', formData);
   // console.log(engagementClasses);
+  const updateState = (propertyPath, newValue) => {
+    setFormSub((prevState) => {
+      const newState = { ...prevState };
+      const properties = propertyPath.split('.');
+      let current = newState;
+
+      // eslint-disable-next-line no-plusplus
+      for (let i = 0; i < properties.length - 1; i++) {
+        current = current[properties[i]];
+      }
+
+      current[properties[properties.length - 1]] = newValue;
+
+      return newState;
+    });
+  };
   return (
     <div className="">
       <CustomAccordion
@@ -99,6 +119,16 @@ const PlanningClasses = ({
 
                 }
                 <div className="">
+                  <div>
+                    <label htmlFor="classes">Select Class</label>
+                    <select name="" id="classes" className="w-100 m-b-20 col-12 form-group">
+                      <option value="">d</option>
+                      {classes && classes.map((e) => (
+                        <option key={`${e}_1`} value={e}>{e}</option>
+                      ))}
+                    </select>
+                  </div>
+
                   <FormBuilder
                     formItems={
                       planningProps(
@@ -118,6 +148,24 @@ const PlanningClasses = ({
                       setErrors={setErrors}
                       name="process_flow_document"
                       label="Process Flow Document"
+                    />
+                  </div>
+                  <div className="px-2">
+                    <DragNDropTemp
+                      formData={formData}
+                      setFormData={setFormData}
+                      setErrors={setErrors}
+                      name="work_through"
+                      label="Work Through"
+                    />
+                  </div>
+                  <div>
+                    <PlanningPTest
+                      formData={formData}
+                      setFormData={setFormData}
+                      setErrors={setErrors}
+                      updateState={updateState}
+                      // handleChecked={handleChecked}
                     />
                   </div>
                 </div>
