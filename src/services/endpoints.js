@@ -52,7 +52,8 @@ const paths = {
   // users
   USERS: profileEndpoints.users,
   INVITATIONS: profileEndpoints.invitations,
-
+  ASSERTIONS: engagementEnpoints.assertions,
+  PROCEDURES: engagementEnpoints.procedures,
   // profile
   ME: profileEndpoints.me,
   PERSONAL_ACCOUNTS: profileEndpoints.personalAccounts,

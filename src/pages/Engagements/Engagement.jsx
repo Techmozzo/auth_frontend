@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { isEmpty } from 'lodash';
@@ -45,7 +46,7 @@ const Engagement = () => {
     options
   });
 
-  console.log('Tems ', formData);
+  // console.log('Tems ', formData);
 
   return (
     <div className="row">
@@ -61,23 +62,24 @@ const Engagement = () => {
         }
         <div className="content">
 
-          { formData?.engagement?.status_id !== '3' && formData?.engagement?.planning?.status !== '1'
-            ? (
-              <>
-                <div className="mb-4 font-title-small">
-                  Select engagement step to continue
-                </div>
-                <div className="my-4 row">
-                  <EngagementStep
-                    engagementId={engagementId}
-                    engagementName={formData?.engagement?.name}
-                    status={formData?.engagement?.status}
-                  />
-                </div>
-              </>
+          {/* { formData?.engagement?.status_id !== '3' && formData?.engagement?.planning?.status !== '1'
+            ? */}
+          { (
+            <>
+              <div className="mb-4 font-title-small">
+                Select engagement step to continue
+              </div>
+              <div className="my-4 row">
+                <EngagementStep
+                  engagementId={engagementId}
+                  engagementName={formData?.engagement?.name}
+                  status={formData?.engagement?.status}
+                />
+              </div>
+            </>
 
-            )
-            : <Link to={`/app/engagement/view/${formData?.engagement?.id}`}>Veiw Engangement</Link>}
+          )}
+          {/* : <Link to={`/app/engagement/view/${formData?.engagement?.id}`}>Veiw Engangement</Link>} */}
           {
             status === 'pending'
               ? <Loader />

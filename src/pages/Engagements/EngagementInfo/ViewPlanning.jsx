@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable max-len */
 import React, { useState } from 'react';
 import { Link, useParams, useHistory } from 'react-router-dom';
@@ -44,7 +45,7 @@ const ViewPlanning = ({ planning, engangementid, statusid }) => {
     }
     setStatus(false);
   };
-
+  console.log(planning);
   return (
     <div className="card p-2">
       <h4 className="mb-4">Planning</h4>
@@ -88,22 +89,24 @@ const ViewPlanning = ({ planning, engangementid, statusid }) => {
                 <DisplayContent contents={planning?.trial_balance || 'dd'} />
               </dd>
 
-              <dt className="col-sm-3">i_t_risk_assessment</dt>
+              <dt className="col-sm-3">IT Risk Assessment</dt>
               <dd className="col-sm-9">
-                {planning?.i_t_risk_assessment.map((it, i) => (
-                  <>
-                    <dl className="row">
-                      <dt className="col-sm-4">Name</dt>
-                      <dd className="col-sm-8">{it.name}</dd>
-                    </dl>
-                    <dl className="row">
-                      <dt className="col-sm-4">Function</dt>
-                      <dd className="col-sm-8">{it.function}</dd>
-                    </dl>
-                    <hr />
-                  </>
 
-                ))}
+                <>
+                  <dl className="row">
+                    <dt className="col-sm-4">Name</dt>
+                    <dd className="col-sm-8">{planning?.i_t_risk_assessment?.name || ''}</dd>
+                  </dl>
+                  <dl className="row">
+                    <dt className="col-sm-4">Function</dt>
+                    <dd className="col-sm-8">{planning?.i_t_risk_assessment?.function || ''}</dd>
+                  </dl>
+                  <dl className="row">
+                    <dt className="col-sm-4">Review Performed</dt>
+                    <dd className="col-sm-8">{planning?.i_t_risk_assessment?.review_performed || ''}</dd>
+                  </dl>
+                  <hr />
+                </>
 
               </dd>
               <dt className="col-sm-3">{sentenceCaps('transaction class')}</dt>
@@ -121,6 +124,53 @@ const ViewPlanning = ({ planning, engangementid, statusid }) => {
                         <DisplayContent contents={it?.process_flow_document || 'dd'} />
                       </dd>
                     </dl>
+                    <dl className="row">
+                      <dt className="col-sm-4 text-truncate">{sentenceCaps('work through')}</dt>
+                      <dd className="col-sm-8">
+                        {/* {it.process_flow_document} */}
+                        <DisplayContent contents={it?.work_through || 'dd'} />
+                      </dd>
+                    </dl>
+                    <dd className="col-sm-9">
+                      <p>
+                        {sentenceCaps('Procedures')}
+                        {' '}
+                      </p>
+                      {it && it.procedures.map((pr) => (
+                        <>
+                          <dl className="row">
+                            <dt className="col-sm-4 text-truncate">{sentenceCaps('description')}</dt>
+                            <dd className="col-sm-8">
+                              {/* {it.process_flow_document} */}
+                              <DisplayContent contents={pr?.description || 'dd'} />
+                            </dd>
+                            <dt className="col-sm-4 text-truncate">{sentenceCaps('other info')}</dt>
+                            <dd className="col-sm-8">
+                              {/* {it.process_flow_document} */}
+                              <DisplayContent contents={pr?.other_info || 'dd'} />
+                            </dd>
+                          </dl>
+                          <dd className="col-sm-9">
+
+                            {pr && pr.assertions.map((as) => {
+                              if (as.value === '1') {
+                                return (
+                                  <dl className="row">
+                                    <dt className="col-sm-4 text-truncate">{sentenceCaps('Assertions')}</dt>
+                                    <dd className="col-sm-8">
+                                      {/* {it.process_flow_document} */}
+                                      <DisplayContent contents={as?.name || 'dd'} />
+                                    </dd>
+                                  </dl>
+                                );
+                              }
+                              return null;
+                            })}
+                          </dd>
+                        </>
+
+                      ))}
+                    </dd>
                     <hr />
                   </>
 
@@ -162,7 +212,6 @@ const ViewPlanning = ({ planning, engangementid, statusid }) => {
             </dl>
             <div className="mt-5">
               {editEnganagment && (
-              // eslint-disable-next-line no-nested-ternary
                 status
                   ? <Loader text="Approving Planning" />
                   : statusid === '1'
@@ -181,7 +230,7 @@ const ViewPlanning = ({ planning, engangementid, statusid }) => {
                 </button>
                 <button type="button" className="btn btn-default mt-2 mr-2">Edit Materiality</button>
                 <button type="button" className="btn btn-default mt-2 mr-2">Edit Misc</button>
-                <button type="button" className="btn btn-default mt-2">Edit Test</button>
+                {/* <button type="button" className="btn btn-default mt-2">Edit Test</button> */}
               </div>
 
             </div>

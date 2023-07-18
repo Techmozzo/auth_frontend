@@ -140,7 +140,7 @@ const PlanningTemp = ({
                       message={message}
                       errors={errors}
                       setErrors={setErrors}
-                      classes={newClasses}
+                      newClasses={newClasses}
                     />
                   )}
             </div>

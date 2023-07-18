@@ -44,7 +44,7 @@ const Planning = () => {
     store,
     options
   });
-
+  // console.log(formData);
   return (
     <div className="row">
       <div className="col-md-10">

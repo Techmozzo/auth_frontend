@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { useEffect, useState } from 'react';
 import { last } from 'lodash';
 import Box from '@material-ui/core/Box';
@@ -24,7 +25,7 @@ const MiscTemp = ({
   const [procedures, setProcedures] = useState([1]);
   const [itentity, setItEntity] = useState('');
   const name = (item) => `Assessment ${item}`;
-
+  console.log(formData);
   const addProcess = () => {
     const fun = () => setProcedures([...procedures, (last(procedures) + 1)]);
     blurHandler();
@@ -164,7 +165,7 @@ const MiscTemp = ({
                                   handleBlur={blurHandler}
                                 />
                               </div>
-                              <button type="button" className="btn mt-4" onClick={addProcess}>Add Procedure</button>
+                              {/* <button type="button" className="btn mt-4" onClick={addProcess}>Add Procedure</button> */}
                               {/* )
                                 }}
                                 setCurrentPanel={setCurrentPanel1}
