@@ -25,7 +25,7 @@ const EngagementStep = ({ engagementId, engagementName, status }) => (
         </div>
       </div>
     </Link> */}
-    <Link to={status?.id === 1 ? `/app/engagement/planning/${slugify(engagementName, '-')}/${engagementId}` : null} className="col-md-3">
+    <Link to={status?.id === 1 ? `/app/engagement/planning/${slugify(engagementName, '-')}/${engagementId}` : '#'} className="col-md-3">
       <div className={status?.id === 1 ? 'custom-box mx-1 text-center text-theme-black bold border-wema text-theme' : 'custom-box mx-1 text-center text-theme-black bold'}>
         <div className="mb-3 mt-5">
           <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -52,7 +52,7 @@ const EngagementStep = ({ engagementId, engagementName, status }) => (
         </div>
       </div>
     </Link>
-    <Link to={status?.id === 2 ? `/app/engagement/execution/${slugify(engagementName, '-')}/${engagementId}` : null} className="col-md-3">
+    <Link to={status?.id === 2 ? `/app/engagement/execution/${slugify(engagementName, '-')}/${engagementId}` : '#'} className="col-md-3">
       <div className={status?.id === 2 ? 'custom-box mx-1 text-center text-theme-black bold border-wema text-theme' : 'custom-box mx-1 text-center text-theme-black bold'}>
         <div className="mb-3 mt-5">
           <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -74,7 +74,7 @@ const EngagementStep = ({ engagementId, engagementName, status }) => (
         </div>
       </div>
     </Link>
-    <Link to={status?.id === 3 ? `/app/engagement/conclusion/${slugify(engagementName, '-')}/${engagementId}` : null} className="col-md-3">
+    <Link to={status?.id === 3 ? `/app/engagement/conclusion/${slugify(engagementName, '-')}/${engagementId}` : '#'} className="col-md-3">
       <div className={status?.id === 3 ? 'custom-box mx-1 text-center text-theme-black bold border-wema text-theme' : 'custom-box mx-1 text-center text-theme-black bold'}>
         <div className="mb-3 mt-5">
           <svg width="50" height="56" viewBox="0 0 50 56" fill="none" xmlns="http://www.w3.org/2000/svg">

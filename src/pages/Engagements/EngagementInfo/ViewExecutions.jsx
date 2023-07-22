@@ -84,6 +84,16 @@ const ViewExecutions = ({ execution, engangementid, statusid }) => {
 
                 )
               }
+              <div className="flex">
+                <button
+                  type="button"
+                  className="btn btn-default mt-2 mr-2"
+                  onClick={() => push(`/app/engagement/edit/execution/${engangementid}`)}
+                >
+                  Edit Execution
+
+                </button>
+              </div>
             </div>
 
           </>

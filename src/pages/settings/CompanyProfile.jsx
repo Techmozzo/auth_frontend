@@ -211,7 +211,7 @@ const CompanyProfile = ({ setCurrent }) => {
           mapBackendErrors(store?.data).map(
             (err) => (
               typeof err !== 'undefined' && (
-                <li key={`${err}`} className="text-warning">
+                <li key={err} className="text-warning">
                   {err}
                 </li>
               )

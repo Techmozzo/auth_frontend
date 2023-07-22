@@ -3,6 +3,7 @@ import AcceptInvite from '../pages/Engagements/Invites/AcceptInvite';
 import DeclineInvite from '../pages/Engagements/Invites/DeclineInvite';
 import ActivityLog from '../pages/profile/ActivityLog';
 import EditClass from '../pages/Engagements/Edit/Planning/EditClass';
+import EditExecution from '../pages/Engagements/Edit/Planning/EditExecution';
 
 const Login = lazy(() => import('../pages/authentication/Login'));
 const Register = lazy(() => import('../pages/authentication/Register'));
@@ -100,6 +101,12 @@ const routes = [
   {
     path: '/app/engagement/edit/class/:engagementId',
     component: EditClass,
+    exact: true,
+    name: 'engagement'
+  },
+  {
+    path: '/app/engagement/edit/execution/:engagementId',
+    component: EditExecution,
     exact: true,
     name: 'engagement'
   },
