@@ -54,7 +54,7 @@ const TeamIndex = () => {
           formData={formData}
           infoBarData={infoBarData}
           header="registered staffs"
-          link={{ name: '+ invite', to: '/app/team-invite-user' }}
+          link={{ name: 'invite to platform', to: '/app/team-invite-user' }}
           parent="team"
           table={<TeamTable data={formData.users} />}
         />

@@ -44,7 +44,6 @@ const InviteUser = () => {
     action: 'INVITE_USER_COMPLETE',
     redirect: '/app/dashboard'
   });
-
   return (
     <div className="">
       <div className="d-flex ml-4 custom-top-bar justify-content-between">

@@ -651,17 +651,20 @@ export const userRoles = [
   {
     id: 1,
     type: 'Admin',
-    desc: 'corporate project'
+    desc: 'corporate project',
+    role: 'admin'
   },
   {
     id: 2,
-    type: 'Manager',
-    desc: 'individual project'
+    type: 'Manager Partner',
+    desc: 'individual project',
+    role: 'managing_partner'
   },
   {
     id: 3,
-    type: 'Auditor',
-    desc: 'individual project'
+    type: 'Staff',
+    desc: 'individual project',
+    role: 'staff'
   }
 ];
 export const accountingStandards = [

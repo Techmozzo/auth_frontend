@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -10,8 +11,13 @@ import { Box } from '@mui/material';
 import { useHistory } from 'react-router';
 import { CgArrowsExpandDownLeft, CgArrowsExpandUpRight } from 'react-icons/cg';
 import Button from '@mui/material/Button';
-import { sentenceCaps } from '../../utilities/stringOperations';
+import { IconButton } from '@material-ui/core';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { MdOutlineMoreVert } from 'react-icons/md';
 import usePermission from '../hooks/usePermission';
+import { sentenceCaps } from '../../utilities/stringOperations';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -54,6 +60,15 @@ export default function DashboardTable({ data }) {
     push(`/app/engagement/view/${theData[0].id}`);
   };
   // console.log('Den ', data);
+  const ITEM_HEIGHT = 48;
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <TableContainer component={Box}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -78,11 +93,50 @@ export default function DashboardTable({ data }) {
               <StyledTableCell align="right"><div className="theme-font-2">{sentenceCaps(row.members)}</div></StyledTableCell>
               <StyledTableCell align="right"><div className="theme-font-2">{sentenceCaps(row.status)}</div></StyledTableCell>
               <StyledTableCell align="right">
-                <div className="theme-font-2">
+
+                <div>
+                  <IconButton
+                    aria-label="more"
+                    id="long-button"
+                    aria-controls="long-menu"
+                    aria-expanded={open ? 'true' : undefined}
+                    aria-haspopup="true"
+                    onClick={handleClick}
+                  >
+                    {/* <MoreVertIcon /> */}
+                    <MdOutlineMoreVert />
+                  </IconButton>
+                  <Menu
+                    id="long-menu"
+                    MenuListProps={{
+                      'aria-labelledby': 'long-button'
+                    }}
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                    PaperProps={{
+                      style: {
+                        maxHeight: ITEM_HEIGHT * 4.5,
+                        width: '20ch'
+                      }
+                    }}
+                  >
+
+                    <MenuItem onClick={() => viewRow(row)}>
+                      View Engagement
+                    </MenuItem>
+                    {editEnganagment
+                  && (
+                    <MenuItem onClick={() => handleRow(row)}>
+                      Edit Engagement
+                    </MenuItem>
+                  ) }
+                  </Menu>
+                </div>
+                {/* <div className="theme-font-2">
 
                   <Button type="button" className="btn-small btn text-black" onClick={() => viewRow(row)}>
-                    {/* <CgArrowsExpandDownLeft />
-                    {' '} */}
+
                     View Engagement
                   </Button>
                 </div>
@@ -92,10 +146,10 @@ export default function DashboardTable({ data }) {
                     <Button type="button" className="btn-small btn " style={{ color: 'black' }} onClick={() => handleRow(row)}>
 
                       Edit Engagement
-                      {/* <CgArrowsExpandUpRight /> */}
+
                     </Button>
                   ) }
-                </div>
+                </div> */}
               </StyledTableCell>
             </StyledTableRow>
           ))}
