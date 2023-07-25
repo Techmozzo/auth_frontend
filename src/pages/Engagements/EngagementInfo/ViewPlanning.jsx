@@ -228,8 +228,8 @@ const ViewPlanning = ({ planning, engangementid, statusid }) => {
                   Edit Class
 
                 </button>
-                <button type="button" className="btn btn-default mt-2 mr-2">Edit Materiality</button>
-                <button type="button" className="btn btn-default mt-2 mr-2">Edit Misc</button>
+                <button type="button" className="btn btn-default mt-2 mr-2" onClick={() => push(`/app/engagement/edit/materiality/${engangementid}`)}>Edit Materiality</button>
+                <button type="button" className="btn btn-default mt-2 mr-2" onClick={() => push(`/app/engagement/edit/misc/${engangementid}`)}>Edit Misc</button>
                 {/* <button type="button" className="btn btn-default mt-2">Edit Test</button> */}
               </div>
 

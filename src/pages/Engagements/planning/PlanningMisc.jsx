@@ -53,7 +53,7 @@ const PlanningMisc = ({ setTempParams, planningid }) => {
   /* component methods */
   const blurHandler = () => {
     if (
-      stringDoesNotExist(formData.IT_name)
+      stringDoesNotExist(formData.name)
       || stringDoesNotExist(formData.function) || stringDoesNotExist(formData.review_performed)) {
       return false;
     }
@@ -61,11 +61,11 @@ const PlanningMisc = ({ setTempParams, planningid }) => {
     return setFormData({
       ...formData,
       risk_assessments: [...formData.risk_assessments, {
-        name: formData.IT_name,
+        name: formData.name,
         function: formData.function,
         review_performed: formData.review_performed
       }],
-      IT_name: '',
+      name: '',
       function: '',
       review_performed: ''
     });
@@ -74,7 +74,7 @@ const PlanningMisc = ({ setTempParams, planningid }) => {
   const finish = () => {
     blurHandler();
     if (
-      stringDoesNotExist(formData.IT_name)
+      stringDoesNotExist(formData.name)
       && stringDoesNotExist(formData.function) && stringDoesNotExist(formData.review_performed)
     ) {
       create();

@@ -46,11 +46,14 @@ const EditExecution = () => {
     e.preventDefault();
     setStatus(true);
     try {
-      const data = await patch({ endpoint: 'MATERIALITY', auth: true, param: engagementId });
+      const data = await post({
+        endpoint: 'ENGAGEMENT', auth: true, param: engagementId, afterParam: 'executions', body: state
+      });
       console.log('Response ', data);
       notifier({
         title: 'Success Message',
-        text: 'Execution updated successfully'
+        text: 'Execution updated successfully',
+        type: 'success'
       });
     } catch (ex) {
       console.log(ex);
@@ -106,7 +109,7 @@ const EditExecution = () => {
                                       {item.split('_').join(' ')}
                                     </label>
 
-                                    <textarea name={item} id={item} onChange={(e) => setState({ [item]: e.target.value })} value={state[item]} cols="30" rows="10" />
+                                    <textarea name={item} id={item} onChange={(e) => setState({ ...state, [item]: e.target.value })} value={state[item]} cols="30" rows="10" />
 
                                     {/* <TextareaInput
                                     value={formData.engagement.execution[item]}

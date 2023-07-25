@@ -228,8 +228,8 @@ const MiniDrawer = ({
               {
                 item.icon
                 && (
-                  <ListItemIcon className={path(`/app/${item.name}`) ? 'text-theme' : 'text-theme-faint'}>
-                    <div className="font-title-small">
+                  <ListItemIcon title={item.name} className={path(`/app/${item.name}`) ? 'text-theme' : 'text-theme-faint'}>
+                    <div title={item.name} className="font-title-small">
                       {item.icon}
                       {' '}
                       {item.name === 'notifications' && storenotifcation.data?.data?.notifications.length > 0 ? <span className="badge badge-warning ">{storenotifcation.data?.data?.notifications.length}</span> : null}

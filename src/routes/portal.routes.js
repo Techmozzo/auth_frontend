@@ -4,6 +4,8 @@ import DeclineInvite from '../pages/Engagements/Invites/DeclineInvite';
 import ActivityLog from '../pages/profile/ActivityLog';
 import EditClass from '../pages/Engagements/Edit/Planning/EditClass';
 import EditExecution from '../pages/Engagements/Edit/Planning/EditExecution';
+import EditMisc from '../pages/Engagements/Edit/Planning/EditMisc';
+import EditMateriality from '../pages/Engagements/Edit/Planning/EditMateriality';
 
 const Login = lazy(() => import('../pages/authentication/Login'));
 const Register = lazy(() => import('../pages/authentication/Register'));
@@ -101,6 +103,18 @@ const routes = [
   {
     path: '/app/engagement/edit/class/:engagementId',
     component: EditClass,
+    exact: true,
+    name: 'engagement'
+  },
+  {
+    path: '/app/engagement/edit/materiality/:engagementId',
+    component: EditMateriality,
+    exact: true,
+    name: 'engagement'
+  },
+  {
+    path: '/app/engagement/edit/misc/:engagementId',
+    component: EditMisc,
     exact: true,
     name: 'engagement'
   },

@@ -28,7 +28,7 @@ const ExecutionTemp = ({
     const fun = () => setProcedures([...procedures, (last(procedures) + 1)]);
     blurHandler();
     if (
-      stringDoesNotExist(formData.IT_name)
+      stringDoesNotExist(formData.name)
       || stringDoesNotExist(formData.function) || stringDoesNotExist(formData.review_performed)
     ) {
       return notifier({

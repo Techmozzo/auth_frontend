@@ -41,13 +41,13 @@ const EditClass = () => {
       <form>
         <div className="px-2">
 
-          <DragNDropTemp
+          {/* <DragNDropTemp
             formData={formData}
             setFormData={setFormData}
             // setErrors={setErrors}
             name="process_flow_document"
             label="Process Flow Document"
-          />
+          /> */}
         </div>
       </form>
     </div>

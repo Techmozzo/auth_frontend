@@ -116,15 +116,15 @@ const planningProps = (
       kind: 'input',
       props: {
         className: 'w-100 m-b-20 col-12',
-        name: 'IT_name',
+        name: 'name',
         type: 'text',
         label: 'IT Item Name',
         placeholder: 'Enter Item Name',
-        value: formData?.IT_name || '',
+        value: formData?.name || '',
         validations: {
           required: true
         },
-        error: errors?.IT_name,
+        error: errors?.name,
         onBlur: handleBlur,
         onChange: handleChange
       }
@@ -152,7 +152,7 @@ const planningProps = (
       kind: 'input',
       props: {
         className: 'w-100 m-b-20 col-12',
-        name: 'IT_name',
+        name: 'name',
         type: 'text',
         label: 'IT Item Name',
         placeholder: 'Enter Item Name',
@@ -160,7 +160,7 @@ const planningProps = (
         validations: {
           required: true
         },
-        error: errors?.IT_name,
+        error: errors?.name,
         onBlur: handleBlur,
         onChange: handleChange
       }
