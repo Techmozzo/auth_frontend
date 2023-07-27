@@ -4,7 +4,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { auditingStandards } from '../../../utilities/dummyData';
 
 const indexData = { ...JSON.parse(localStorage.getItem('index')) };
-const materialrange = [{ id: 0, name: 'Select Benchmark', value: 0 }, ...indexData.materialRange];
+const materialrange = [{ id: 0, name: 'Select Benchmark', value: 0 }, ...indexData?.materialRange || []];
 // {
 //   id: 0,
 //   type: 'select item...',
