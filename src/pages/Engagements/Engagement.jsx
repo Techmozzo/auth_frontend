@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { isEmpty } from 'lodash';
@@ -13,11 +14,12 @@ import NoData from '../authentication/NoData';
 import BackdropModal from '../../components/microComponents/backdropModal';
 import InviteMember from './inviteMember';
 import { headerTemp1 } from '../../components/temps/projectTemps/miscTemps';
+import usePermission from '../../components/hooks/usePermission';
 
 const Engagement = () => {
   /* redux hooks */
   const store = useSelector((state) => state.engagement?.engagement);
-
+  const viewEngangment = usePermission('view-engagement');
   /* router hooks */
   const { engagementId, engagementName } = useParams();
 
@@ -44,7 +46,7 @@ const Engagement = () => {
     options
   });
 
-  console.log('Tems ', formData);
+  // console.log('Tems ', formData);
 
   return (
     <div className="row">
@@ -59,16 +61,25 @@ const Engagement = () => {
           })
         }
         <div className="content">
-          <div className="mb-4 font-title-small">
-            Select engagement step to continue
-          </div>
-          <div className="my-4 row">
-            <EngagementStep
-              engagementId={engagementId}
-              engagementName={formData?.engagement?.name}
-              status={formData?.engagement?.status}
-            />
-          </div>
+
+          {/* { formData?.engagement?.status_id !== '3' && formData?.engagement?.planning?.status !== '1'
+            ? */}
+          { (
+            <>
+              <div className="mb-4 font-title-small">
+                Select engagement step to continue
+              </div>
+              <div className="my-4 row">
+                <EngagementStep
+                  engagementId={engagementId}
+                  engagementName={formData?.engagement?.name}
+                  status={formData?.engagement?.status}
+                />
+              </div>
+            </>
+
+          )}
+          {/* : <Link to={`/app/engagement/view/${formData?.engagement?.id}`}>Veiw Engangement</Link>} */}
           {
             status === 'pending'
               ? <Loader />
@@ -94,7 +105,6 @@ const Engagement = () => {
                               callback={() => setOpen(true)}
                             />
                           </div>
-
                           <MembersTable data={formData?.engagement?.team_members} />
                         </>
                       )

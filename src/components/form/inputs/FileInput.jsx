@@ -1,7 +1,5 @@
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';
-import Skeleton from '@material-ui/lab/Skeleton';
-import { FaPlus } from 'react-icons/fa';
 import ProgressBar from '../../microComponents/circularProgress';
 import Loader from '../../microComponents/loader';
 import {
@@ -150,7 +148,7 @@ const FileInput = (
               <ul className="error-msg">
                 {
                   error.map(
-                    (err, index) => <li key={`${err}`}>{err}</li>
+                    (err, index) => <li key={err}>{err}</li>
                   )
                 }
               </ul>

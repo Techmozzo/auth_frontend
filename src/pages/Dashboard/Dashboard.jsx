@@ -2,11 +2,14 @@ import React, { useEffect } from 'react';
 import { isNull } from 'lodash';
 import { useLocation } from 'react-router-dom';
 import { useHistory } from 'react-router';
-import { user } from '../../utilities/auth';
+import { user, role } from '../../utilities/auth';
+import usePermission from '../../components/hooks/usePermission';
 
 const Dashboard = () => {
   const { pathname } = useLocation();
   const { push } = useHistory();
+  const canAddUser = usePermission('add-permission');
+
   const path = (route) => pathname.startsWith(route);
   useEffect(() => {
     if (isNull(user.company_id)) {
@@ -14,9 +17,15 @@ const Dashboard = () => {
     }
   }, []);
   const DashIndex = React.lazy(() => import('./AdminDash'));
-
+  const DashClientIndex = React.lazy(() => import('./ClientDash'));
+  console.log(canAddUser);
   return (
-    <DashIndex />
+    <>
+      {role && role[0] === 'admin'
+        ? <DashIndex />
+        : <DashClientIndex />}
+    </>
+
   );
 };
 

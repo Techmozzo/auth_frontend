@@ -2,6 +2,10 @@ import { lazy } from 'react';
 import AcceptInvite from '../pages/Engagements/Invites/AcceptInvite';
 import DeclineInvite from '../pages/Engagements/Invites/DeclineInvite';
 import ActivityLog from '../pages/profile/ActivityLog';
+import EditClass from '../pages/Engagements/Edit/Planning/EditClass';
+import EditExecution from '../pages/Engagements/Edit/Planning/EditExecution';
+import EditMisc from '../pages/Engagements/Edit/Planning/EditMisc';
+import EditMateriality from '../pages/Engagements/Edit/Planning/EditMateriality';
 
 const Login = lazy(() => import('../pages/authentication/Login'));
 const Register = lazy(() => import('../pages/authentication/Register'));
@@ -16,6 +20,7 @@ const CompleteProfile = lazy(() => import('../pages/authentication/CompleteProfi
 const Engagement = lazy(() => import('../pages/Engagements/EngagementIndex'));
 const NewEngagement = lazy(() => import('../pages/Engagements/NewEngagement'));
 const EngagementView = lazy(() => import('../pages/Engagements/Engagement'));
+const EngagementInfoView = lazy(() => import('../pages/Engagements/EngagementInfo'));
 const PrePlanning = lazy(() => import('../pages/Engagements/PrePlanning'));
 const Planning = lazy(() => import('../pages/Engagements/planning/Planning'));
 const Execution = lazy(() => import('../pages/Engagements/Execution'));
@@ -86,6 +91,36 @@ const routes = [
   {
     path: '/app/engagement/engagement/:engagementId',
     component: EngagementView,
+    exact: true,
+    name: 'engagement'
+  },
+  {
+    path: '/app/engagement/view/:engagementId',
+    component: EngagementInfoView,
+    exact: true,
+    name: 'engagement'
+  },
+  {
+    path: '/app/engagement/edit/class/:engagementId',
+    component: EditClass,
+    exact: true,
+    name: 'engagement'
+  },
+  {
+    path: '/app/engagement/edit/materiality/:engagementId',
+    component: EditMateriality,
+    exact: true,
+    name: 'engagement'
+  },
+  {
+    path: '/app/engagement/edit/misc/:engagementId',
+    component: EditMisc,
+    exact: true,
+    name: 'engagement'
+  },
+  {
+    path: '/app/engagement/edit/execution/:engagementId',
+    component: EditExecution,
     exact: true,
     name: 'engagement'
   },
@@ -192,7 +227,7 @@ const routes = [
     exact: true
   },
   {
-    path: '/app/team/invite-user',
+    path: '/app/team-invite-user',
     component: InviteUser,
     exact: true
   },

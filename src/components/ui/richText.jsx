@@ -4,9 +4,9 @@ import 'react-quill/dist/quill.bubble.css';
 import 'react-quill/dist/quill.snow.css';
 
 export const QuillEditorBubble = ({
-  setFormData, name, formData, handleBlur
+  setFormData, name, formData, handleBlur, values
 }) => {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(values || '');
   const handleData = () => setFormData({
     ...formData,
     [name]: value

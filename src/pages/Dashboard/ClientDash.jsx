@@ -7,7 +7,7 @@ import { apiOptions } from '../../services/fetch';
 import { role } from '../../utilities/auth';
 import Dash from './Dash';
 
-const AdminDash = () => {
+const ClientDash = () => {
   const dispatch = useDispatch();
   const store = useSelector((state) => state.engagement.engagements);
   const indexstore = useSelector((state) => state.engagement);
@@ -33,11 +33,11 @@ const AdminDash = () => {
     }));
   }, [dispatch]);
 
-  // console.log('Problem ', indexstore?.dashboard?.data?.data);
+  console.log('Problem ', indexstore?.dashboard?.data?.data);
   return (
     <div className="container">
       <div className="d-flex">
-        <h2>Dashboard</h2>
+        <h2>Staff Dashboard</h2>
         <input type="text" value="" placeholder="search" className="ml-auto p-2" />
       </div>
       <hr />
@@ -89,4 +89,4 @@ const AdminDash = () => {
   );
 };
 
-export default AdminDash;
+export default ClientDash;

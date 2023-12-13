@@ -46,7 +46,7 @@ const miniMenu = [
     to: '/app/settings'
   },
   {
-    name: 'activitylog',
+    name: 'activity log',
     icon: <RxActivityLog />,
     to: '/app/activitylog'
   }

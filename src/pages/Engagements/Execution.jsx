@@ -8,6 +8,7 @@ import Loader from '../../components/microComponents/loader';
 import ExecutionTemp from './temps/ExecutionTemp';
 import Notes from './Notes';
 import { headerTemp1 } from '../../components/temps/projectTemps/miscTemps';
+import useViewBoilerPlate from '../../components/hooks/useViewBoilerPlate';
 
 const Execution = () => {
   /* router hooks */
@@ -15,6 +16,7 @@ const Execution = () => {
   const { engagementName, engagementId } = useParams();
   /* state */
   const [formData, setFormData] = useState({ });
+  const [formDataa, setFormDataa] = useState({ });
   const [errors, setErrors] = useState({});
 
   /* redux */
@@ -44,12 +46,32 @@ const Execution = () => {
     noRedirect: true
   });
 
+  /* boilerPlate hooks params */
+  const optionsx = {
+    action: 'ENGAGEMENT',
+    apiOpts: apiOptions({
+      endpoint: 'ENGAGEMENT',
+      auth: true,
+      param: engagementId,
+      method: 'get'
+    })
+  };
+
+  /* boilerPlate hooks */
+  const { status: syayys } = useViewBoilerPlate({
+    setFormData: setFormDataa,
+    formData: formDataa,
+    store,
+    options: optionsx
+  });
+
   useEffect(() => {
     if (status === 'success') {
       push(`/app/engagement/conclusion/${slugify(engagementName, '-')}/${engagementId}`);
     }
   });
 
+  console.log('Wicked ', formDataa);
   return (
     <div className="row">
       <div className="col-md-10">

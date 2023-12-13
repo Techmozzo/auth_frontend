@@ -1,15 +1,22 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import PageTemp from '../../components/temps/PageTemp';
 import { apiOptions } from '../../services/fetch';
 import useViewBoilerPlate from '../../components/hooks/useViewBoilerPlate';
 import IndexTemp from '../Dashboard/temp/IndexTemp';
 import DashboardTable from '../../components/tables/dashboardTable';
+import { projectAction } from '../../redux/actions/projectActions';
+import { user, role } from '../../utilities/auth';
+import usePermission from '../../components/hooks/usePermission';
 
 const EngagementIndex = () => {
+  const dispatch = useDispatch();
   const store = useSelector((state) => state.engagement.engagements);
   const [formData, setFormData] = React.useState({});
-
+  const indexstore = useSelector((state) => state.engagement);
+  const viewEngangment = usePermission('view-engagement');
+  const addEnganagment = usePermission('add-engagement');
+  console.log(viewEngangment);
   const options = {
     action: 'ENGAGEMENTS',
     apiOpts: apiOptions({
@@ -26,25 +33,37 @@ const EngagementIndex = () => {
     store,
     options
   });
+
   const infoBarData = [
     {
       title: 'Total Engagement',
-      val: formData?.engagement_count || '0'
+      val: indexstore?.dashboard?.data?.data?.engagement_count || '0'
     },
     {
       title: 'Pending Conclusion',
-      val: formData?.pending_engagement || '0'
+      val: indexstore?.dashboard?.data?.data?.pending_engagement || '0'
     },
     {
       title: 'Concluded And Closed',
-      val: formData?.concluded_engagement || '0'
+      val: indexstore?.dashboard?.data?.data?.concluded_engagement || '0'
     },
     {
       title: 'Total Client',
-      val: formData?.clients_count || '0'
+      val: indexstore?.dashboard?.data?.data?.clients_count || '0'
     }
   ];
-  console.log('Data', formData);
+  // console.log('Data', formData);
+  useEffect(() => {
+    dispatch(projectAction({
+      action: 'DASHBOARD',
+      routeOptions: apiOptions({
+        endpoint: role && role[0] === 'admin' ? 'DASHBOARD' : 'CLIENTS_DASHBOARD',
+        auth: true,
+        method: 'get'
+      })
+    }));
+  }, [dispatch]);
+
   return (
     <PageTemp
       status={status}
@@ -52,11 +71,13 @@ const EngagementIndex = () => {
       view={(
         <IndexTemp
           formData={formData}
-          infoBarData={infoBarData}
+          infoBarData={indexstore}
           header="recent engagement"
-          link={{ name: '+ new engagement', to: '/app/engagement/new-engagement' }}
+          link={addEnganagment ? { name: '+ new engagement', to: '/app/engagement/new-engagement' } : null}
           parent="engagement"
-          table={<DashboardTable data={formData.engagements} />}
+          // eslint-disable-next-line max-len
+          table={viewEngangment
+            && <DashboardTable data={indexstore?.dashboard?.data?.data?.engagements} />}
         />
       )}
       action="ENGAGEMENTS_COMPLETE"

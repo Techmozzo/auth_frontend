@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable no-nested-ternary */
 import * as React from 'react';
 import uuid from 'react-uuid';
 import { isEmpty, isUndefined } from 'lodash';
@@ -15,25 +17,51 @@ import {
 import FormBuilder from '../form/builders/form';
 import sliderProps from './constants/sliderprops';
 
+function newNum(numberString) {
+  let number;
+
+  if (typeof numberString === 'string' && numberString.includes(',')) {
+    number = parseFloat(numberString.replace(/,/g, ''));
+  } else {
+    number = parseFloat(numberString);
+  }
+
+  return number;
+}
+
 export default function SliderSizes({
-  max, min, formData, setFormData, name, label, props, val, levelId
+  max, min, formData, setFormData, name, label, props, val, levelId, overallmax, overallmin
 }) {
   const [value, setValue] = React.useState(val || min || 0);
   const [disableSlider, setDisableSlider] = React.useState(false);
-  const ma = Number(max) || 100;
-  const mi = Number(min) || 0;
+  const ma = Number(levelId === 1 ? overallmax : max) || 100;
+  const mi = Number(levelId === 1 ? overallmin : min) || 0;
 
   useEffect(() => {
     handleValue(value);
   }, [value]);
 
+  console.log(formData);
   const handleValue = (amt) => {
+    // console.log('==========');
+    // console.log('Amount ', amt);
+    // console.log(name);
+    // console.log(levelId);
     const amount = parseInt(amt, 10)
-      * formatDonation(formData.materiality_benchmark_amount)
+      * newNum(levelId === 1 ? formData.materiality_benchmark_amount : levelId === 2
+        ? formData.overall_materiality_amount : levelId === 3
+          ? formData.performance_materiality_amount : formData.materiality_benchmark_amount)
       / 100;
+
+    // console.log('Level ', levelId === 1 ? formData.materiality_benchmark_amount : levelId === 2
+    //   ? formData.overall_materiality_amount : levelId === 3
+    //     ? formData.performance_materiality_amount : formData.materiality_benchmark_amount);
+    // console.log('Amount', amount);
     setFormData({
       ...formData, [`${name}_level_id`]: levelId, [`${name}_amount`]: amount, [`${name}_limit`]: amt
     });
+
+    // console.log('==========');
   };
   const handleSliderChange = (event, newValue) => {
     if (stringDoesNotExist(formData.materiality_benchmark_amount)) {
@@ -44,12 +72,17 @@ export default function SliderSizes({
         text: 'First fill out the materiality amount.'
       });
     }
+
     return setValue(newValue);
   };
 
   const handleInputChange = (event) => {
     const amt = formatDonation(event.target.value);
-    const percent = 100 * amt / formatDonation(formData.materiality_benchmark_amount);
+
+    // eslint-disable-next-line max-len
+    const percent = 100 * amt / formatDonation(levelId === 1 ? formData.materiality_benchmark_amount : levelId === 2
+      ? formData.overall_materiality_amount : levelId === 3
+        ? formData.performance_materiality_amount : formData.materiality_benchmark_amount);
     setValue(percent);
   };
 
@@ -96,7 +129,8 @@ export default function SliderSizes({
                   name: `${name}_amount`,
                   handleChange: handleInputChange,
                   handleBlur,
-                  formData
+                  formData,
+                  disabled: true
                 }
               )
             }

@@ -11,18 +11,16 @@ import { notifier, slugToString } from '../../utilities/stringOperations';
 
 import FormBuilder from '../../components/form/builders/form';
 import CheckboxComp from '../../components/ui/CheckboxComp';
-import { apiOptions } from '../../services/fetch';
+import { apiOptions, post } from '../../services/fetch';
 import { user } from '../../utilities/auth';
 import completeProfile1Props from '../authentication/constants/completeProfile1';
 import editProfileProps from '../authentication/constants/editProfile';
 
 const CompanyProfile = ({ setCurrent }) => {
-  const [formData, setFormData] = useState({
-    ...user,
-    designation: user.role_id === null ? null : user.role_id[0]?.name
-  });
   const [terms, setTerms] = useState(false);
   const [show, setShow] = useState(false);
+  const [load, setLoading] = useState(false);
+  const [formload, setFormLoading] = useState('initial');
   const [errors, setErrors] = useState({});
 
   const { goBack, push } = useHistory();
@@ -31,7 +29,11 @@ const CompanyProfile = ({ setCurrent }) => {
   const dispatch = useDispatch();
   const store = useSelector((state) => state.auth.updateCompany);
   const indexstore = useSelector((state) => state.engagement.dashboard);
-  console.log(indexstore);
+  const [formData, setFormData] = useState({
+    ...indexstore?.data?.data?.company
+  });
+  console.log(store);
+
   useEffect(() => {
     dispatch(projectAction({
       action: 'DASHBOARD',
@@ -43,6 +45,22 @@ const CompanyProfile = ({ setCurrent }) => {
     }));
   }, [dispatch]);
 
+  useEffect(() => {
+    updateForm();
+  }, [indexstore]);
+
+  const updateForm = () => {
+    setFormData({
+      name: indexstore?.data?.data?.company?.name,
+      address: indexstore?.data?.data?.company?.address,
+      city: indexstore?.data?.data?.company?.city,
+      country: indexstore?.data?.data?.company?.country,
+      zip: indexstore?.data?.data?.company?.zip,
+      phone: indexstore?.data?.data?.company?.phone,
+      state: indexstore?.data?.data?.company?.state,
+      dp: indexstore?.data?.data?.company?.dp
+    });
+  };
   //   useEffect(() => {
   //     setCurrent('My projects');
   //     if (store?.status === 'success') {
@@ -57,8 +75,9 @@ const CompanyProfile = ({ setCurrent }) => {
   //       setTimeout(() => window.location.assign('/app/dashboard'), 500);
   //     }
   //   }, [store.status]);
-  const completeRegistration = useCallback((data) => {
-    dispatch(projectAction(
+  const completeRegistration = useCallback(async (data) => {
+    setFormLoading('pending');
+    await dispatch(projectAction(
       {
         action: 'UPDATE_COMPANY',
         routeOptions: apiOptions({
@@ -69,6 +88,7 @@ const CompanyProfile = ({ setCurrent }) => {
         })
       }
     ));
+    setFormLoading('initial');
   }, []);
 
   const handleLogin = () => {
@@ -83,23 +103,7 @@ const CompanyProfile = ({ setCurrent }) => {
       [name]: value
     }));
   };
-  const handleChecked = (e) => {
-    const { name } = e.target;
-    setFormData({
-      ...formData,
-      [name]: !formData[name]
-    });
-  };
-  const checkboxText = (
-    <div className="font-small">
-      I agree to the
-      <Link className="mx-1 text-theme-blue" to="privacy">Terms and Conditions</Link>
-    </div>
-  );
-  const handleClose = () => {
-    setShow(false);
-    return window.location.assign('/me');
-  };
+
   const goBackAndReset = () => {
     goBack();
     dispatch(resetAction({ action: 'LOGIN_COMPLETE' }));
@@ -119,6 +123,27 @@ const CompanyProfile = ({ setCurrent }) => {
     );
     // setIsError(errorsChecker(errors));
     // canContinue();
+  };
+
+  const uploadImage = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    const formDat = new FormData();
+    formDat.append('document', e.target.files[0]);
+    try {
+      const upfile = await post({ endpoint: 'PROJECT_MEDIA', auth: true, body: formDat });
+      if (upfile?.data?.success) {
+        console.log(upfile);
+        setFormData({ ...formData, dp: upfile?.data?.data?.url });
+      }
+    } catch (em) {
+      notifier({
+        type: 'error',
+        title: 'error',
+        text: em.message
+      });
+    }
+    setLoading(false);
   };
 
   /* on visiting */
@@ -148,6 +173,21 @@ const CompanyProfile = ({ setCurrent }) => {
                       )
                     }
                   />
+                  <div className="m-3">
+                    {load
+                      ? (
+                        <>
+                          Uploading image
+                        </>
+                      ) : (
+                        <>
+                          <img src={formData.dp} alt={formData.name} style={{ width: '150px', height: '150px' }} />
+                          <input type="file" accept="image/*" name="dp" id="dp" onChange={uploadImage} />
+
+                        </>
+                      )}
+                  </div>
+
                 </div>
                 <div className="row justify-content-between mb-2">
                   <div>
@@ -171,7 +211,7 @@ const CompanyProfile = ({ setCurrent }) => {
           mapBackendErrors(store?.data).map(
             (err) => (
               typeof err !== 'undefined' && (
-                <li key={`${err}`} className="text-warning">
+                <li key={err} className="text-warning">
                   {err}
                 </li>
               )
@@ -196,7 +236,7 @@ const CompanyProfile = ({ setCurrent }) => {
         <PageTemp
           initial={initialTemp({ formData })}
           view={initialTemp({ formData })}
-          status={store?.status}
+          status={formload}
           error={initialTemp({ formData })}
         />
       </div>

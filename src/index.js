@@ -4,10 +4,20 @@ import { BrowserRouter } from 'react-router-dom';
 
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+
+import { PrimeReactProvider, PrimeReactContext } from 'primereact/api';
 import appStore from './redux/appStore';
 
 import './assets/css/bootstrap.css';
 import './assets/css/index.scss';
+// theme
+import 'primereact/resources/themes/lara-light-indigo/theme.css';
+
+// eslint-disable-next-line import/no-extraneous-dependencies
+import 'primeicons/primeicons.css';
+
+// core
+import 'primereact/resources/primereact.min.css';
 import App from './App';
 
 import reportWebVitals from './reportWebVitals';
@@ -18,7 +28,10 @@ ReactDOM.render(
   <Provider store={store}>
     <PersistGate loading={<div className="p-40"><center>Loading...</center></div>} persistor={persistor}>
       <BrowserRouter>
-        <App />
+        <PrimeReactProvider>
+          <App />
+        </PrimeReactProvider>
+
       </BrowserRouter>
     </PersistGate>
   </Provider>,

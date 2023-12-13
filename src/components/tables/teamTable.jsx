@@ -36,9 +36,9 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export default function TeamTable({ data }) {
   console.log('Team ', data);
   const { push } = useHistory();
-  function createData(name, phone, designation, email, action, id) {
+  function createData(name, phone, designation, email, id) {
     return {
-      name, phone, designation, email, action, id
+      name, phone, designation, email, id
     };
   }
 
@@ -47,7 +47,6 @@ export default function TeamTable({ data }) {
     item.designation, item.email, item.id
   ));
   const handleRow = (row) => push({ pathname: `/app/team/${row.id}` });
-
   return (
     <TableContainer component={Box}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">

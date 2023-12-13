@@ -15,7 +15,7 @@ import useUpdateStore from '../../../../components/hooks/useUpdateStore';
 import useFetchData from '../../../../components/hooks/useFetchData';
 
 const DragNDropTemp = ({
-  formData, setFormData, name, label, setErrors, handleBlur
+  formData, setFormData, name, label, setErrors, handleBlur, value
 }) => {
   const dispatch = useDispatch();
   const store = useSelector((state) => state?.engagement?.uploads);
@@ -50,10 +50,16 @@ const DragNDropTemp = ({
 
   const uploadMediaSuccess = () => {
     setUploaded(true);
-    setFormData({
-      ...formData,
-      [data.name]: data.url
-    });
+    // console.log(data.url);
+    // setFormData({
+    //   ...formData,
+    //   [data.name]: data.url,
+    //   [name]: data.url
+    // });
+    setFormData((prevStreamData) => ({
+      ...prevStreamData,
+      [name]: data.url
+    }));
     isFunction(handleBlur) && handleBlur();
   };
 
@@ -101,6 +107,7 @@ const DragNDropTemp = ({
         <QuillEditorBubble
           setFormData={setFormData}
           name={name}
+          // values={value}
           formData={formData}
           handleBlur={handleBlur}
         />

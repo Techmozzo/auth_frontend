@@ -1,8 +1,16 @@
 import React from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { accountingStandards, auditingStandards } from '../../../utilities/dummyData';
+import { auditingStandards } from '../../../utilities/dummyData';
 
+const indexData = { ...JSON.parse(localStorage.getItem('index')) };
+const materialrange = [{ id: 0, name: 'Select Benchmark', value: 0 }, ...indexData?.materialRange || []];
+// {
+//   id: 0,
+//   type: 'select item...',
+//   desc: 'corporate project',
+//   value: 0
+// },
 const planningProps = (
   {
     formData,
@@ -55,15 +63,15 @@ const planningProps = (
       kind: 'select',
       props: {
         className: 'w-100 m-b-20 col-12 col-md-7',
-        name: 'materiality_level_id',
+        name: 'materiality_benchmark_range_id',
         label: 'Materiality Benchmark',
-        value: formData?.materiality_level_id || '',
-        options: auditingStandards,
+        value: formData?.materiality_benchmark_range_id || '',
+        options: materialrange,
         validations: {
           required: true
         },
-        error: errors?.materiality_level_id,
-        optionIndex: 'type',
+        error: errors?.materiality_benchmark_range_id,
+        optionIndex: 'name',
         valueIndex: 'id',
         onBlur: handleBlur,
         onChange: handleChange
@@ -108,15 +116,15 @@ const planningProps = (
       kind: 'input',
       props: {
         className: 'w-100 m-b-20 col-12',
-        name: 'IT_name',
+        name: 'name',
         type: 'text',
         label: 'IT Item Name',
         placeholder: 'Enter Item Name',
-        value: formData?.IT_name || '',
+        value: formData?.name || '',
         validations: {
           required: true
         },
-        error: errors?.IT_name,
+        error: errors?.name,
         onBlur: handleBlur,
         onChange: handleChange
       }
@@ -144,7 +152,7 @@ const planningProps = (
       kind: 'input',
       props: {
         className: 'w-100 m-b-20 col-12',
-        name: 'IT_name',
+        name: 'name',
         type: 'text',
         label: 'IT Item Name',
         placeholder: 'Enter Item Name',
@@ -152,7 +160,7 @@ const planningProps = (
         validations: {
           required: true
         },
-        error: errors?.IT_name,
+        error: errors?.name,
         onBlur: handleBlur,
         onChange: handleChange
       }

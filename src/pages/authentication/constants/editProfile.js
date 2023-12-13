@@ -14,15 +14,15 @@ const editProfileProps = (
     kind: 'input',
     props: {
       className: 'w-100 m-b-20 col-12',
-      name: 'company_name',
+      name: 'name',
       type: 'text',
       label: 'Name of Audit Firm',
       placeholder: 'Enter name of audit firm',
-      value: formData?.company_name || '',
+      value: formData?.name || '',
       validations: {
         required: true
       },
-      error: errors?.company_name,
+      error: errors?.name,
       onBlur: handleBlur,
       onChange: handleChange
     }
@@ -31,11 +31,11 @@ const editProfileProps = (
     kind: 'input',
     props: {
       className: 'w-100 m-b-20 col-12',
-      name: 'company_phone',
+      name: 'phone',
       type: 'tel',
       label: 'Company Phone',
       placeholder: 'Enter Company Phone Number',
-      value: formData?.company_phone || '',
+      value: formData?.phone || '',
       onChange: handleChange
     }
   },
@@ -43,16 +43,88 @@ const editProfileProps = (
     kind: 'input',
     props: {
       className: 'w-100 m-b-20 col-12',
-      name: 'company_email',
+      name: 'email',
       type: 'email',
       label: 'Company Email Address',
       placeholder: 'Enter Company Email Address',
-      value: formData?.company_email || '',
+      value: formData?.email || '',
       validations: {
         required: true,
         pattern: validationPatterns.email
       },
-      error: errors?.company_email,
+      error: errors?.email,
+      onBlur: handleBlur,
+      onChange: handleChange
+    }
+  },
+  {
+    kind: 'input',
+    props: {
+      className: 'w-100 m-b-20 col-12',
+      name: 'city',
+      type: 'text',
+      label: 'Company  City',
+      placeholder: 'Enter Company City',
+      value: formData?.city || '',
+      validations: {
+        required: true,
+        pattern: validationPatterns.city
+      },
+      error: errors?.city,
+      onBlur: handleBlur,
+      onChange: handleChange
+    }
+  },
+  {
+    kind: 'input',
+    props: {
+      className: 'w-100 m-b-20 col-12',
+      name: 'state',
+      type: 'text',
+      label: 'Company  State',
+      placeholder: 'Enter Company State',
+      value: formData?.state || '',
+      validations: {
+        required: true,
+        pattern: validationPatterns.state
+      },
+      error: errors?.state,
+      onBlur: handleBlur,
+      onChange: handleChange
+    }
+  },
+  {
+    kind: 'input',
+    props: {
+      className: 'w-100 m-b-20 col-12',
+      name: 'address',
+      type: 'text',
+      label: 'Company  Address',
+      placeholder: 'Enter Company Address',
+      value: formData?.address || '',
+      validations: {
+        required: true,
+        pattern: validationPatterns.address
+      },
+      error: errors?.address,
+      onBlur: handleBlur,
+      onChange: handleChange
+    }
+  },
+  {
+    kind: 'input',
+    props: {
+      className: 'w-100 m-b-20 col-12',
+      name: 'zip',
+      type: 'text',
+      label: 'Zip',
+      placeholder: 'Enter Zip Code',
+      value: formData?.zip || '',
+      validations: {
+        required: true,
+        pattern: validationPatterns.zip
+      },
+      error: errors?.zip,
       onBlur: handleBlur,
       onChange: handleChange
     }

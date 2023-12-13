@@ -5,13 +5,17 @@ import { apiOptions } from '../../../../services/fetch';
 import useCreateBoilerPlate from '../../../../components/hooks/useCreateBoilerPlate';
 import PageTemp from '../../../../components/temps/PageTemp';
 
+const indexData = { ...JSON.parse(localStorage.getItem('index')) };
 const AddNotesTemp = ({ engagementId, stageId }) => {
   /* redux hooks */
   const dispatch = useDispatch();
   const store = useSelector((state) => state.engagement?.newNote);
   const enguagement = useSelector((state) => state.engagement?.dashboard?.data?.data);
   /* state */
-  const [formData, setFormData] = useState({ engagement_stage_id: stageId });
+  const [formData, setFormData] = useState({
+    engagement_stage_id: stageId,
+    engagement_note_flag_id: indexData.engagementNoteFlags[0]?.id
+  });
   const [errors, setErrors] = useState({});
   const [progress, setProgress] = useState(0);
   /* boilerPlate hooks params */
@@ -26,7 +30,7 @@ const AddNotesTemp = ({ engagementId, stageId }) => {
       method: 'post'
     })
   };
-  console.log('Dashboard ', enguagement);
+  console.log('Dashboard ', store);
   /* boilerPlate hooks */
   const {
     handleBlur, handleChange, status, handleChecked, create, data
@@ -70,8 +74,8 @@ const AddNotesTemp = ({ engagementId, stageId }) => {
                   setProgress={setProgress}
                 />
 
-                <select name="" id="" onChange={(e) => setFormData({ ...formData, engagement_note_flag_id: e.target.value })}>
-                  {enguagement && enguagement.engagementNoteFlags.map((enguagemen, i) => (
+                <select name="" id="" value={formData.engagement_note_flag_id} onChange={(e) => setFormData({ ...formData, engagement_note_flag_id: e.target.value })}>
+                  {indexData.engagementNoteFlags.map((enguagemen, i) => (
                     <option key={enguagemen.id} value={enguagemen.id}>{enguagemen.name}</option>
                   ))}
 

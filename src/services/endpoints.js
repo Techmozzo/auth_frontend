@@ -27,12 +27,15 @@ const paths = {
   PROJECT_MEDIA: fileUploads.upload,
   DELETE_PROJECT_MEDIA: fileUploads.deleteProjectMedia,
   LOGO: fileUploads.logo,
+  TRIAL_UPLOAD: fileUploads.trialupload,
   // engagements
   CREATE_ENGAGEMENT: engagementEnpoints.engagements,
   ENGAGEMENT: engagementEnpoints.engagements,
   MATERIALITY: engagementEnpoints.materiality,
+  EXECUTIONS: 'executions',
   TESTS: engagementEnpoints.tests,
   DASHBOARD: engagementEnpoints.dashboard,
+  CLIENTS_DASHBOARD: engagementEnpoints.clientdashboard,
   ENGAGEMENTS: engagementEnpoints.engagements,
   EDIT_ENGAGEMENT: engagementEnpoints.engagements,
   DELETE_ENGAGEMENT: engagementEnpoints.engagements,
@@ -50,7 +53,8 @@ const paths = {
   // users
   USERS: profileEndpoints.users,
   INVITATIONS: profileEndpoints.invitations,
-
+  ASSERTIONS: engagementEnpoints.assertions,
+  PROCEDURES: engagementEnpoints.procedures,
   // profile
   ME: profileEndpoints.me,
   PERSONAL_ACCOUNTS: profileEndpoints.personalAccounts,
@@ -64,7 +68,10 @@ const paths = {
 
   // index
   INDEX: authEndpoints.index,
-  CLIENT_ROLES: engagementEnpoints.clientroles
+  CLIENT_ROLES: engagementEnpoints.clientroles,
+
+  // roles
+  ROLES: authEndpoints.roles
 };
 
 export default paths;

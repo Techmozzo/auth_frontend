@@ -1,26 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   useHistory, useParams
 } from 'react-router-dom';
 import { HiOutlineChevronRight } from 'react-icons/hi';
-import { useSelector, connect } from 'react-redux';
+import { useSelector, connect, useDispatch } from 'react-redux';
 import { apiOptions } from '../../services/fetch';
 import useViewBoilerPlate from '../../components/hooks/useViewBoilerPlate';
 import Loader from '../../components/microComponents/loader';
 import PageTemp from '../../components/temps/PageTemp';
 import NoNotesTemp from './temps/notes/NoNotesTemp';
 import AddNotesTemp from './temps/notes/AddNotesTemp';
+import { projectAction } from '../../redux/actions/projectActions';
+import useIndex from '../../components/hooks/useIndex';
 
-const Notes = ({ link, store }) => {
+const indexData = { ...JSON.parse(localStorage.getItem('index')) };
+const Notes = ({ link, store, fstore }) => {
   const { push } = useHistory();
   /* redux hooks */
   // const store = useSelector((state) => state.engagement?.notes);
+  const dispatch = useDispatch();
   const storex = useSelector((state) => state.engagement?.engagement);
+  const enguagement = useSelector((state) => state.engagement?.dashboard?.data?.data);
+  const indexstore = useSelector((state) => state.engagement);
   /* state */
   const [notes, setNotes] = useState([]);
   const [addNote, setAddNote] = useState(false);
   const { engagementId } = useParams();
-
+  const { planning, loading } = useIndex();
+  // useEffect(() => {
+  //   dispatch(projectAction({
+  //     action: 'INDEX',
+  //     routeOptions: apiOptions({
+  //       endpoint: 'INDEX',
+  //       auth: true,
+  //       method: 'get'
+  //     })
+  //   }));
+  // }, [dispatch]);
   /* boilerPlate hooks params */
   const options = {
     action: 'NOTES',
@@ -41,7 +57,25 @@ const Notes = ({ link, store }) => {
     store,
     options
   });
+  console.log('Note In', indexstore);
+  // const [formDatax, setFormDatax] = React.useState({});
 
+  // const optionsx = {
+  //   action: 'INDEX',
+  //   apiOpts: apiOptions({
+  //     endpoint: 'INDEX',
+  //     auth: true,
+  //     method: 'get'
+  //   })
+  // };
+  // const vic = useViewBoilerPlate({
+  //   setFormData: setFormDatax,
+  //   formData: formDatax,
+  //   store: fstore,
+  //   options: optionsx
+  // });
+
+  console.log('Index ', storex?.data?.data?.engagement?.status?.id);
   return (
     <div className="w-100">
       <div className="d-flex custom-top-bar-borderless left-14-neg min-w-300-w justify-content-between bg-white">
@@ -59,7 +93,7 @@ const Notes = ({ link, store }) => {
             {
               addNote
                 // eslint-disable-next-line max-len
-                ? <AddNotesTemp engagementId={engagementId} stageId={storex?.data?.data?.engagement?.status} />
+                ? <AddNotesTemp engagementId={engagementId} stageId={storex?.data?.data?.engagement?.status?.id} />
                 : <NoNotesTemp setAdd={setAddNote} />
             }
           </div>
@@ -73,7 +107,7 @@ const Notes = ({ link, store }) => {
                 ? (
                   <AddNotesTemp
                     engagementId={engagementId}
-                    stageId={storex?.data?.data?.engagement?.status}
+                    stageId={storex?.data?.data?.engagement?.status?.id}
                   />
                 )
                 : (
@@ -94,7 +128,7 @@ const Notes = ({ link, store }) => {
 function mapStateToProps(state) {
   const { engagement } = state;
   console.log('Toddddo ', engagement.notes);
-  return { store: engagement.notes };
+  return { store: engagement.notes, fstore: engagement.index };
 }
 
 export default connect(mapStateToProps)(Notes);

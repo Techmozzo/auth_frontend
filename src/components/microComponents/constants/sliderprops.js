@@ -10,7 +10,8 @@ const sliderProps = (
     handleChange,
     errors,
     name,
-    placeholder
+    placeholder,
+    disabled
   }
 ) => ([
   {
@@ -20,6 +21,7 @@ const sliderProps = (
       name,
       label: 'Amount',
       type: 'text',
+      disabled,
       value: formData[name],
       validations: {
         required: true

@@ -47,8 +47,8 @@ const ProgressBar = ({
           strokeDashoffset={offset}
         />
         <text
-          x={`${center}`}
-          y={`${center}`}
+          x={center}
+          y={center}
           className="svg-circle-text"
         >
           {progress}
