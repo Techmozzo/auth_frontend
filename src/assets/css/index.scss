@@ -37,10 +37,6 @@
   src: local('Noto Sans Regular'), url('./Noto_Sans/NotoSans-Regular.ttf');
 }
 
-iframe {
-  display: none;
-}
-
 * {
   box-sizing: border-box;
   @extend .theme-font
