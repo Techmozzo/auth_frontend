@@ -24,7 +24,7 @@ const ActivityLog = () => {
       page: itemOffset
     }));
   }, [dispatch]);
-  console.log(store?.data?.data?.logs?.data);
+  // console.log(store?.data?.data?.logs?.data);
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % store?.data?.data?.logs?.total;
     console.log(
@@ -41,7 +41,7 @@ const ActivityLog = () => {
         ? <Loader />
         : (
           <>
-            <table className="table table-hover">
+            <table className="table">
               <thead>
                 <tr>
                   <th scope="col">#</th>
@@ -56,7 +56,7 @@ const ActivityLog = () => {
               <tbody>
                 {store && store?.data?.data?.logs?.data.map((log, i) => (
                   <tr key={log.id}>
-                    <th scope="row">{i + 1}</th>
+                    <td>{i + 1}</td>
                     <td>{log.name}</td>
                     <td>
                       {log.causer.first_name}
@@ -80,11 +80,22 @@ const ActivityLog = () => {
             <ReactPaginate
               breakLabel="..."
               nextLabel="next >"
+              previousLabel="< previous"
               onPageChange={handlePageClick}
               pageRangeDisplayed={5}
               pageCount={pageCount}
-              previousLabel="< previous"
               renderOnZeroPageCount={null}
+              marginPagesDisplayed={2}
+              pageClassName="page-item"
+              pageLinkClassName="page-link"
+              previousClassName="page-item"
+              previousLinkClassName="page-link"
+              nextClassName="page-item"
+              nextLinkClassName="page-link"
+              breakClassName="page-item"
+              breakLinkClassName="page-link"
+              containerClassName="pagination"
+              activeClassName="active"
             />
           </>
 

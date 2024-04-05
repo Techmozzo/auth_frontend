@@ -6,6 +6,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { Link } from 'react-router-dom';
+import uuid from 'react-uuid';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,7 +27,7 @@ const ListMat = ({ props, clss }) => {
         {props.map((prop) => {
           if (prop.link) {
             return (
-              <Link key={props.id} to={prop.link} className={clss?.item}>
+              <Link key={uuid()} to={prop.link} className={clss?.item}>
                 {
                   !_.isEmpty(prop.icon) && <ListItemIcon>{prop.icon}</ListItemIcon>
                 }
@@ -35,7 +36,7 @@ const ListMat = ({ props, clss }) => {
             );
           }
           return (
-            <ListItem key={prop.id} onClick={prop.onClick} className={prop.pointer ? `pointer ${clss?.item}` : clss.item}>
+            <ListItem key={uuid()} onClick={prop.onClick} className={prop.pointer ? `pointer ${clss?.item}` : clss.item}>
               {
                 !_.isEmpty(prop.icon) && <ListItemIcon>{prop.icon}</ListItemIcon>
               }
