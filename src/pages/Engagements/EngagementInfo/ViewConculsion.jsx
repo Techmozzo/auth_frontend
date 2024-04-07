@@ -5,6 +5,8 @@ import { notifier, sentenceCaps } from '../../../utilities/stringOperations';
 import { get } from '../../../services/fetch';
 import Loader from '../../../components/microComponents/loader';
 import usePermission from '../../../components/hooks/usePermission';
+import Collapsible from '../../../components/microComponents/Collapsible';
+import DisplayContent from './DisplayContent';
 
 const ViewConculsion = ({ conclusion, engangementid, statusid }) => {
   const [state, setState] = useState();
@@ -18,7 +20,7 @@ const ViewConculsion = ({ conclusion, engangementid, statusid }) => {
       const datax = await get({
         endpoint: 'ENGAGEMENT', auth: true, param: engangementid, afterParam: 'approve'
       });
-      console.log(datax);
+      // console.log(datax);
       if (datax.status === 200) {
         notifier({
           type: 'success',
@@ -35,7 +37,7 @@ const ViewConculsion = ({ conclusion, engangementid, statusid }) => {
         // throw new Error(datax);
       }
     } catch (e) {
-      console.log(e);
+      // console.log(e);
       notifier({
         type: 'error',
         text: e.message,
@@ -46,8 +48,7 @@ const ViewConculsion = ({ conclusion, engangementid, statusid }) => {
   };
 
   return (
-    <div className="card p-2 mt-5">
-      <h4 className="mb-4">Conclusion</h4>
+    <Collapsible title="Conclusion">
       {typeof conclusion && conclusion === null
         ? (
           <>
@@ -73,23 +74,41 @@ const ViewConculsion = ({ conclusion, engangementid, statusid }) => {
 
             <dl className="row">
               <dt className="col-sm-3 text-truncate">{sentenceCaps('audit report')}</dt>
-              <dd className="col-sm-9">{conclusion?.audit_report}</dd>
+              <dd className="col-sm-9">
+                <DisplayContent contents={conclusion?.audit_report || ''} />
+              </dd>
               <dt className="col-sm-3 text-truncate" title="audit summary misstatement">{sentenceCaps('audit summary misstatement')}</dt>
-              <dd className="col-sm-9">{conclusion?.audit_summary_misstatement}</dd>
+              <dd className="col-sm-9">
+                <DisplayContent contents={conclusion?.audit_summary_misstatement || ''} />
+              </dd>
               <dt className="col-sm-3 text-truncate" title="audited financial statement">{sentenceCaps('audited financial statement')}</dt>
-              <dd className="col-sm-9">{conclusion?.audited_financial_statement}</dd>
+              <dd className="col-sm-9">
+                <DisplayContent contents={conclusion?.audited_financial_statement || ''} />
+              </dd>
               <dt className="col-sm-3 text-truncate">{sentenceCaps('going concern procedures')}</dt>
-              <dd className="col-sm-9">{conclusion?.going_concern_procedures}</dd>
+              <dd className="col-sm-9">
+                <DisplayContent contents={conclusion?.going_concern_procedures || ''} />
+              </dd>
               <dt className="col-sm-3 text-truncate">{sentenceCaps('management letter')}</dt>
-              <dd className="col-sm-9">{conclusion?.management_letter}</dd>
+              <dd className="col-sm-9">
+                <DisplayContent contents={conclusion?.management_letter || ''} />
+              </dd>
               <dt className="col-sm-3 text-truncate">{sentenceCaps('management representation letter')}</dt>
-              <dd className="col-sm-9">{conclusion?.management_representation_letter}</dd>
+              <dd className="col-sm-9">
+                <DisplayContent contents={conclusion?.management_representation_letter || ''} />
+              </dd>
               <dt className="col-sm-3 text-truncate">{sentenceCaps('other financial info')}</dt>
-              <dd className="col-sm-9">{conclusion?.other_financial_info}</dd>
+              <dd className="col-sm-9">
+                <DisplayContent contents={conclusion?.other_financial_info || ''} />
+              </dd>
               <dt className="col-sm-3 text-truncate">{sentenceCaps('overall analytical review')}</dt>
-              <dd className="col-sm-9">{conclusion?.overall_analytical_review}</dd>
+              <dd className="col-sm-9">
+                <DisplayContent contents={conclusion?.overall_analytical_review || ''} />
+              </dd>
               <dt className="col-sm-3 text-truncate">{sentenceCaps('subsequent procedures')}</dt>
-              <dd className="col-sm-9">{conclusion?.subsequent_procedures}</dd>
+              <dd className="col-sm-9">
+                <DisplayContent contents={conclusion?.subsequent_procedures || ''} />
+              </dd>
             </dl>
 
             <div className="mt-5">
@@ -105,7 +124,7 @@ const ViewConculsion = ({ conclusion, engangementid, statusid }) => {
             </div>
           </>
         )}
-    </div>
+    </Collapsible>
   );
 };
 

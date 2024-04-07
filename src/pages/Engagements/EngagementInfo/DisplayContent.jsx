@@ -1,4 +1,7 @@
 import React from 'react';
+import DOMPurify from 'dompurify';
+import renderHTML from 'react-render-html';
+import { IoMdCloudDownload } from 'react-icons/io';
 
 const DisplayContent = ({ contents }) => {
   // Helper function to determine the type of content based on the string
@@ -31,12 +34,19 @@ const DisplayContent = ({ contents }) => {
       <div>
         <a href={contents} target="_blank" rel="noopener noreferrer">
           Download File
+          <span className="mt-1 ml-2">
+            <IoMdCloudDownload style={{ color: '#202020' }} />
+          </span>
         </a>
       </div>
     );
   }
 
-  return <div>{contents}</div>;
+  const cleanContent = DOMPurify.sanitize(contents, { USE_PROFILES: { html: true } });
+
+  return (
+    <div>{renderHTML(cleanContent)}</div>
+  );
 };
 
 export default DisplayContent;

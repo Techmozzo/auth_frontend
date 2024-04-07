@@ -8,6 +8,7 @@ import { get } from '../../../services/fetch';
 import Loader from '../../../components/microComponents/loader';
 import usePermission from '../../../components/hooks/usePermission';
 import DisplayContent from './DisplayContent';
+import Collapsible from '../../../components/microComponents/Collapsible';
 
 const ViewPlanning = ({ planning, engangementid, statusid }) => {
   const { push } = useHistory();
@@ -19,7 +20,7 @@ const ViewPlanning = ({ planning, engangementid, statusid }) => {
       const datax = await get({
         endpoint: 'ENGAGEMENT', auth: true, param: engangementid, afterParam: 'approve'
       });
-      console.log(datax);
+      // console.log(datax);
       if (datax.status === 200) {
         notifier({
           type: 'success',
@@ -36,7 +37,7 @@ const ViewPlanning = ({ planning, engangementid, statusid }) => {
         // throw new Error(datax);
       }
     } catch (e) {
-      console.log(e);
+      // console.log(e);
       notifier({
         type: 'error',
         text: e.message,
@@ -45,10 +46,9 @@ const ViewPlanning = ({ planning, engangementid, statusid }) => {
     }
     setStatus(false);
   };
-  console.log(planning);
+  // console.log(planning);
   return (
-    <div className="card p-2">
-      <h4 className="mb-4">Planning</h4>
+    <Collapsible title="Planning" isOpen>
       {typeof planning && planning === null
         ? (
           <>
@@ -131,26 +131,23 @@ const ViewPlanning = ({ planning, engangementid, statusid }) => {
                         <DisplayContent contents={it?.work_through || 'dd'} />
                       </dd>
                     </dl>
-                    <dd className="col-sm-9">
-                      <p>
-                        {sentenceCaps('Procedures')}
-                        {' '}
-                      </p>
-                      {it && it.procedures.map((pr) => (
-                        <>
-                          <dl className="row">
-                            <dt className="col-sm-4 text-truncate">{sentenceCaps('description')}</dt>
-                            <dd className="col-sm-8">
-                              {/* {it.process_flow_document} */}
-                              <DisplayContent contents={pr?.description || 'dd'} />
-                            </dd>
-                            <dt className="col-sm-4 text-truncate">{sentenceCaps('other info')}</dt>
-                            <dd className="col-sm-8">
-                              {/* {it.process_flow_document} */}
-                              <DisplayContent contents={pr?.other_info || 'dd'} />
-                            </dd>
-                          </dl>
-                          <dd className="col-sm-9">
+                    <dl className="row">
+                      <dt className="col-sm-3 text-truncate">{sentenceCaps('Procedures')}</dt>
+                      <dd className="col-sm-9">
+                        {it && it.procedures.map((pr) => (
+                          <>
+                            <dl className="row">
+                              <dt className="col-sm-4 text-truncate">{sentenceCaps('description')}</dt>
+                              <dd className="col-sm-8">
+                                {/* {it.process_flow_document} */}
+                                <DisplayContent contents={pr?.description || 'dd'} />
+                              </dd>
+                              <dt className="col-sm-4 text-truncate">{sentenceCaps('other info')}</dt>
+                              <dd className="col-sm-8">
+                                {/* {it.process_flow_document} */}
+                                <DisplayContent contents={pr?.other_info || 'dd'} />
+                              </dd>
+                            </dl>
 
                             {pr && pr.assertions.map((as) => {
                               if (as.value === '1') {
@@ -166,11 +163,10 @@ const ViewPlanning = ({ planning, engangementid, statusid }) => {
                               }
                               return null;
                             })}
-                          </dd>
-                        </>
-
-                      ))}
-                    </dd>
+                          </>
+                        ))}
+                      </dd>
+                    </dl>
                     <hr />
                   </>
 
@@ -183,11 +179,11 @@ const ViewPlanning = ({ planning, engangementid, statusid }) => {
                   <>
                     <dl className="row">
                       <dt className="col-sm-4">Amount</dt>
-                      <dd className="col-sm-8">{it.amount}</dd>
+                      <dd className="col-sm-8">{it?.amount}</dd>
                     </dl>
                     <dl className="row">
                       <dt className="col-sm-4">Reason</dt>
-                      <dd className="col-sm-8">{it.reason}</dd>
+                      <dd className="col-sm-8">{it?.reason}</dd>
                     </dl>
                     <hr />
                   </>
@@ -237,7 +233,7 @@ const ViewPlanning = ({ planning, engangementid, statusid }) => {
 
           </>
         )}
-    </div>
+    </Collapsible>
   );
 };
 

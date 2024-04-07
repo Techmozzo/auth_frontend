@@ -26,6 +26,7 @@
 @import "insane/animatedCheck";
 @import "customTable";
 @import "react-paginate";
+@import "accordion";
 
 //@import "insane";
 @font-face {
@@ -35,6 +36,10 @@
 @font-face {
   font-family: Notosans-regular;
   src: local('Noto Sans Regular'), url('./Noto_Sans/NotoSans-Regular.ttf');
+}
+
+iframe {
+  display: none;
 }
 
 * {

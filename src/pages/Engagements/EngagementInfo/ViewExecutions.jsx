@@ -5,6 +5,8 @@ import { notifier, sentenceCaps } from '../../../utilities/stringOperations';
 import { get } from '../../../services/fetch';
 import Loader from '../../../components/microComponents/loader';
 import usePermission from '../../../components/hooks/usePermission';
+import Collapsible from '../../../components/microComponents/Collapsible';
+import DisplayContent from './DisplayContent';
 
 const ViewExecutions = ({ execution, engangementid, statusid }) => {
   const [state, setState] = useState();
@@ -18,7 +20,7 @@ const ViewExecutions = ({ execution, engangementid, statusid }) => {
       const datax = await get({
         endpoint: 'ENGAGEMENT', auth: true, param: engangementid, afterParam: 'approve'
       });
-      console.log(datax);
+      // console.log(datax);
       if (datax.status === 200) {
         notifier({
           type: 'success',
@@ -35,7 +37,7 @@ const ViewExecutions = ({ execution, engangementid, statusid }) => {
         // throw new Error(datax);
       }
     } catch (e) {
-      console.log(e);
+      // console.log(e);
       notifier({
         type: 'error',
         text: e.message,
@@ -44,10 +46,9 @@ const ViewExecutions = ({ execution, engangementid, statusid }) => {
     }
     setStatus(false);
   };
-  console.log(execution);
+  // console.log(execution);
   return (
-    <div className="card p-2 mt-5">
-      <h4 className="mb-4">Execution</h4>
+    <Collapsible title="Execution">
       {typeof execution && execution == null
         ? (
           <>
@@ -59,46 +60,58 @@ const ViewExecutions = ({ execution, engangementid, statusid }) => {
 
             <dl className="row">
               <dt className="col-sm-3 text-truncate" title="combine risk assessment">{sentenceCaps('contract agreement review')}</dt>
-              <dd className="col-sm-9">{execution?.contract_agreement_review}</dd>
+              <dd className="col-sm-9">
+                <DisplayContent contents={execution?.contract_agreement_review || ''} />
+              </dd>
               <dt className="col-sm-3 text-truncate">{sentenceCaps('contingent liability review')}</dt>
-              <dd className="col-sm-9">{execution?.contingent_liability_review}</dd>
+              <dd className="col-sm-9">
+                <DisplayContent contents={execution?.contingent_liability_review || ''} />
+              </dd>
               <dt className="col-sm-3 text-truncate">{sentenceCaps('expert work review')}</dt>
-              <dd className="col-sm-9">{execution?.expert_work_review}</dd>
+              <dd className="col-sm-9">
+                <DisplayContent contents={execution?.expert_work_review || ''} />
+              </dd>
               <dt className="col-sm-3 text-truncate">{sentenceCaps('legal counsel review')}</dt>
-              <dd className="col-sm-9">{execution?.legal_counsel_review}</dd>
+              <dd className="col-sm-9">
+                <DisplayContent contents={execution?.legal_counsel_review || ''} />
+              </dd>
               <dt className="col-sm-3 text-truncate">{sentenceCaps('other estimate review')}</dt>
-              <dd className="col-sm-9">{execution?.other_estimate_review}</dd>
+              <dd className="col-sm-9">
+                <DisplayContent contents={execution?.other_estimate_review || ''} />
+              </dd>
               <dt className="col-sm-3 text-truncate">{sentenceCaps('party transaction review')}</dt>
-              <dd className="col-sm-9">{execution?.party_transaction_review}</dd>
+              <dd className="col-sm-9">
+                <DisplayContent contents={execution?.party_transaction_review || ''} />
+              </dd>
             </dl>
 
-            <div className="mt-5">
+            <div className="flex mt-5">
               {
                 editEnganagment && (
                 // eslint-disable-next-line no-nested-ternary
                   status
                     ? <Loader text="Approving Executions" />
                     : statusid === '2'
-                      ? <button type="button" className="btn btn-default mt-2" onClick={AcceptPlanning}>Approve</button>
+                      ? <button type="button" className="btn btn-default mr-2" onClick={AcceptPlanning}>Approve</button>
                       : null
 
                 )
               }
-              <div className="flex">
-                <button
-                  type="button"
-                  className="btn btn-default mt-2 mr-2"
-                  onClick={() => push(`/app/engagement/edit/execution/${engangementid}`)}
-                >
-                  Edit Execution
+              {/* <div className="flex"> */}
+              <button
+                type="button"
+                className="btn btn-default mr-2"
+                onClick={() => push(`/app/engagement/edit/execution/${engangementid}`)}
+              >
+                Edit Execution
 
-                </button>
-              </div>
+              </button>
+              {/* </div> */}
             </div>
 
           </>
         )}
-    </div>
+    </Collapsible>
   );
 };
 

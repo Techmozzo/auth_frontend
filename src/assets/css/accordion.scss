@@ -1,0 +1,35 @@
+/* Collapsible/Accordion component */
+
+.collapsible-accordion {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+  margin-bottom: 8px;
+
+  &.open {
+    border: 1px solid #ffa500;
+  }
+  
+  button.collapsible-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 18px 14px;
+    appearance: none;
+    background: #fff;
+    border-radius: 0.25rem;
+
+    h5 {
+      color: #202020;
+      font-weight: bold;
+      font-size: 16px;
+    }
+    span.arrow {
+      margin: 6px 4px 0 0;
+    }
+  }
+
+  .collapsible-content {
+    padding: 18px 14px;
+  }
+}

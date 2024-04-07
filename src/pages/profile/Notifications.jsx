@@ -36,7 +36,7 @@ const Notifications = ({ setCurrent }) => {
   const {
     filter, datesearch, daterange, filteraction
   } = queryString.parse(search);
-  console.log(store);
+  console.log('notif', store);
   // console.log(values);
   const formatDate = (date) => {
     const year = date.getFullYear();
