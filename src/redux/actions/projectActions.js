@@ -23,7 +23,7 @@ export const createProjectName = (payload) => {
       if (response?.status === 200 || response?.status === 201) {
         dispatch(success(response?.data));
       } else if (response) {
-        console.log(response.message);
+        // console.log(response.message);
         dispatch(failure(response?.errors || response));
       } else {
         // console.log(response);
@@ -74,7 +74,7 @@ export const editProject1 = (payload) => {
   const request = (req) => ({ type: constants.EDIT_PROJECT_1_PENDING, request: req });
   const success = (response) => ({ type: constants.EDIT_PROJECT_1_SUCCESS, response });
   const failure = (error) => ({ type: constants.EDIT_PROJECT_1_FAILURE, error });
-  console.log(payload.id);
+  // console.log(payload.id);
   const connection = patch({
     endpoint: 'EDIT_PROJECT', auth: true, body: payload, param: payload.id
   });

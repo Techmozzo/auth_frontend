@@ -30,7 +30,7 @@ const RegisterPage = () => {
   const dispatch = useDispatch();
   const store = useSelector((state) => state.auth.register);
   const loginstore = useSelector((state) => state.auth.login);
-  console.log(store);
+  // console.log(store);
   useEffect(() => {
     setErrorFree(noErrors(errors));
     setRequiredFields(checkRequiredFields([
@@ -76,7 +76,7 @@ const RegisterPage = () => {
     // return push('/app/dashboard/complete-registration');
   };
 
-  function onClick(href:string) {
+  function onClick(href) {
     window.location.href = href;
   }
   const goBackAndReset = () => {

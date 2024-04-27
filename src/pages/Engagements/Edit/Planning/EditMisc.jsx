@@ -48,22 +48,22 @@ const EditMisc = () => {
   useEffect(() => {
     loadfile();
   }, [formData]);
-  console.log(state);
+  // console.log(state);
   const OnChange = (e) => {
     e.preventDefault();
     setItEntity(e.target.value === 'yes' ? '1' : '0');
-    console.log(e.target.value);
+    // console.log(e.target.value);
     setFormData({ ...formData, risk_assessment_status: e.target.value === 'yes' ? '1' : '0' });
   };
   const SubmitForm = async (e) => {
     e.preventDefault();
     setStatus(true);
     try {
-      console.log('time ', { ...state, risk_assessments: { ...state.i_t_risk_assessment } });
+      // console.log('time ', { ...state, risk_assessments: { ...state.i_t_risk_assessment } });
       const data = await patch({
         endpoint: 'MATERIALITY', auth: true, param: engagementId, body: { ...state, i_t_risk_assessment: { ...state.i_t_risk_assessment, name: state?.i_t_risk_assessment?.name } }
       });
-      console.log('End ', data);
+      // console.log('End ', data);
       notifier({
         title: 'Success Message',
         text: 'Planning Misc updated successfully',

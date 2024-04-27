@@ -16,7 +16,7 @@ const ActivityLog = () => {
   // (This could be items from props; or items loaded in a local state
   // from an API endpoint with useEffect and useState)
   const endOffset = itemOffset + itemsPerPage;
-  console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+  // console.log(`Loading items from ${itemOffset} to ${endOffset}`);
   const currentItems = store?.data?.data?.logs?.data.slice(itemOffset, endOffset);
   const pageCount = Math.ceil(store?.data?.data?.logs?.total / itemsPerPage);
   useEffect(() => {
@@ -27,13 +27,13 @@ const ActivityLog = () => {
   // console.log(store?.data?.data?.logs?.data);
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % store?.data?.data?.logs?.total;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
+    // console.log(
+    //   `User requested page number ${event.selected}, which is offset ${newOffset}`
+    // );
     setItemOffset(newOffset);
   };
 
-  console.log('Offset ', itemOffset);
+  // console.log('Offset ', itemOffset);
   return (
     <div className="container">
       <h2>Activity Log </h2>

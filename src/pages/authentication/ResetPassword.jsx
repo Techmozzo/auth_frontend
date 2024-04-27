@@ -117,7 +117,7 @@ const ResetPassword = () => {
       }
     );
   };
-  console.log(formData);
+  // console.log(formData);
   return (
     <div className="content">
       <p>

@@ -46,7 +46,7 @@ export default function MembersTable({ data }) {
     item.created_at, item.engagement_role, item.user_id
   ));
   const handleRow = (row) => push({ pathname: `/app/view/${row.name}/${row.userid}` });
-  console.log('Den ', rows);
+  // console.log('Den ', rows);
   return (
     <TableContainer component={Box}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">

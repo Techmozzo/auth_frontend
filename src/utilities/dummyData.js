@@ -828,3 +828,117 @@ export const raisersCategory = [
   'sports', 'charity', 'emergency', 'health', 'finance',
   'community', 'NGOs', 'government'
 ];
+
+export const statusCategoryOption = [
+  {
+    id: 0,
+    type: 'Status',
+    desc: 'Status',
+    value: ''
+  },
+  {
+    id: 1,
+    type: 'all',
+    desc: 'all',
+    value: 'all'
+  },
+  {
+    id: 2,
+    type: 'un_read',
+    desc: 'Unread',
+    value: 'un_read'
+  },
+  {
+    id: 3,
+    type: 'read',
+    desc: 'Read',
+    value: 'read'
+  }
+];
+
+export const moduleCategoryOption = [
+  {
+    id: 0,
+    type: 'Module',
+    desc: 'Module',
+    value: ''
+  },
+  {
+    id: 1,
+    type: 'approval',
+    desc: 'approval',
+    value: 'approval'
+  },
+  {
+    id: 2,
+    type: 'invites',
+    desc: 'invites',
+    value: 'invites'
+  }
+];
+
+export const dateSearchOption = [
+  {
+    id: 0,
+    type: 'Date search',
+    desc: 'Date search',
+    value: ''
+  },
+  {
+    id: 1,
+    type: 'yes',
+    desc: 'yes',
+    value: 'true'
+  },
+  {
+    id: 2,
+    type: 'no',
+    desc: 'no',
+    value: 'false'
+  }
+];
+
+export const dateRangeOption = [
+  {
+    id: 0,
+    type: 'Date range',
+    desc: 'Date range',
+    value: ''
+  },
+  {
+    id: 1,
+    type: 'custom',
+    desc: 'custom',
+    value: 'custom'
+  },
+  {
+    id: 2,
+    type: 'today',
+    desc: 'today',
+    value: 'today'
+  },
+  {
+    id: 3,
+    type: 'yesterday',
+    desc: 'yesterday',
+    value: 'yesterday'
+  },
+  {
+    id: 4,
+    type: 'last7days',
+    desc: 'last 7 days',
+    value: 'last7days'
+  },
+  {
+    id: 5,
+    type: 'last30days',
+    desc: 'last 30 days',
+    value: 'last30days'
+  },
+  {
+    id: 6,
+    type: 'thismonth',
+    desc: 'this month',
+    value: 'thismonth'
+  }
+];

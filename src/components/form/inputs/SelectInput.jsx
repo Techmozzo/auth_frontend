@@ -30,7 +30,7 @@ const SelectInput = (
     typeof option === 'object'
       ? (
         <option
-          value={Number(option[valueIndex])}
+          value={valueIndex === 'id' ? Number(option[valueIndex]) : option[valueIndex]}
           key={option[optionIndex]}
           title={option[titleIndex]}
         >

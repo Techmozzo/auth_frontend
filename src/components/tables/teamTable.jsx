@@ -34,7 +34,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   }
 }));
 export default function TeamTable({ data }) {
-  console.log('Team ', data);
+  // console.log('Team ', data);
   const { push } = useHistory();
   function createData(name, phone, designation, email, id) {
     return {

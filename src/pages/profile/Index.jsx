@@ -57,7 +57,7 @@ const Profile = () => {
   );
   useEffect(() => {
     currentUser.then((result) => {
-      console.log('yOU aRE ', result);
+      // console.log('yOU aRE ', result);
       // if (result?.status === 'Inactive') {
       //   handleOpen();
       // } else if (result?.status === 'Active' || result?.status === 1) {
@@ -67,7 +67,7 @@ const Profile = () => {
     });
   }, [currentUser]);
 
-  console.log('yOU aRE hQERE', user);
+  // console.log('yOU aRE hQERE', user);
 
   return (
     <div>

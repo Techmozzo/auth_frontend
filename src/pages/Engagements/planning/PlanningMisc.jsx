@@ -84,7 +84,7 @@ const PlanningMisc = ({ setTempParams, planningid }) => {
   const handleText = () => {
     const dat = formData.risk_assessments;
     dat[curIndex] = text;
-    console.log(dat);
+    // console.log(dat);
     setFormData({
       ...formData,
       risk_assessments: dat

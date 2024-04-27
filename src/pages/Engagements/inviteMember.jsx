@@ -26,13 +26,13 @@ const InviteMember = ({ engagementName, engagementId, cancel }) => {
 
   /* router hooks */
   const { push } = useHistory();
-  console.log(store);
+  // console.log(store);
   /* state */
   const [formData, setFormData] = useState({});
   const [invitees, setInvitees] = useState([]);
   const [errors, setErrors] = useState({});
   const { clientroles } = useClientRoles();
-  console.log('Client ', clientroles);
+  // console.log('Client ', clientroles);
   /* boilerPlate hooks params */
   const options = {
     action: 'INVITE_TO_ENGAGEMENT',
@@ -122,7 +122,7 @@ const InviteMember = ({ engagementName, engagementId, cancel }) => {
       const inviteePosition = clientroles?.filter(
         (one) => !isUndefined(one.id) && one.id.toString() === formData.engagement_team_role_id
       );
-      console.log('Invitee ', inviteePosition);
+      // console.log('Invitee ', inviteePosition);
       // auditPost?.filter(
       //   (one) => !isUndefined(one.id) && one.id.toString() === formData.engagement_team_role_id
       // );
@@ -161,7 +161,7 @@ const InviteMember = ({ engagementName, engagementId, cancel }) => {
     icon: <RiUserReceivedLine />
   }));
 
-  console.log(formData);
+  // console.log(formData);
   return (
     <div className="my-3">
       {

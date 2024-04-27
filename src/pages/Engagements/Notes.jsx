@@ -57,7 +57,7 @@ const Notes = ({ link, store, fstore }) => {
     store,
     options
   });
-  console.log('Note In', indexstore);
+  // console.log('Note In', indexstore);
   // const [formDatax, setFormDatax] = React.useState({});
 
   // const optionsx = {
@@ -75,7 +75,7 @@ const Notes = ({ link, store, fstore }) => {
   //   options: optionsx
   // });
 
-  console.log('Index ', storex?.data?.data?.engagement?.status?.id);
+  // console.log('Index ', storex?.data?.data?.engagement?.status?.id);
   return (
     <div className="w-100">
       <div className="d-flex custom-top-bar-borderless left-14-neg min-w-300-w justify-content-between bg-white">
@@ -84,6 +84,7 @@ const Notes = ({ link, store, fstore }) => {
         </div>
         <button type="button" className="font-title-small bg-theme-light text-theme">
           <HiOutlineChevronRight className="mt-2" />
+          {' '}
         </button>
       </div>
       <PageTemp
@@ -127,7 +128,7 @@ const Notes = ({ link, store, fstore }) => {
 
 function mapStateToProps(state) {
   const { engagement } = state;
-  console.log('Toddddo ', engagement.notes);
+  // console.log('Toddddo ', engagement.notes);
   return { store: engagement.notes, fstore: engagement.index };
 }
 

@@ -71,6 +71,7 @@ const Planning = () => {
                         {
                           template: <PlanningClasses
                             setTempParams={setTempParams}
+                            tempParams={tempParams}
                             classes={formData?.engagement?.planning}
                           />,
                           optional: false,

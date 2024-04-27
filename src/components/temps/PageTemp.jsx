@@ -58,63 +58,59 @@ const PageTemp = ({
   }, [status]);
   return (
     <>
-
-      <div>
+      {
+        status === 'initial' && initial
+      }
+      {
+        (status === 'pending' || isPending) && <div className="min-w-300-w center-vertical-2"><Loader /></div>
+      }
+      <div className={_.isUndefined(noDataTemp) ? '' : 'd-none'}>
         {
-          status === 'initial' && initial
-        }
-        {
-          (status === 'pending' || isPending) && <div className="min-w-300-w center-vertical-2"><Loader /></div>
-        }
-        <div className={_.isUndefined(noDataTemp) ? '' : 'd-none'}>
-          {
-            status === 'success' && (_.isEmpty(data)) && redirect && (
-              <NoData
-                link={redirect.link}
-                name={redirect.name}
-                title={redirect.title}
-                text={redirect.text}
-                btnName={redirect.btnName}
-              />
-            )
-          }
-        </div>
-        <div className={_.isUndefined(noDataTemp) ? 'd-none' : ''}>
-          {
-            status === 'success' && (_.isEmpty(data)) && noDataTemp
-          }
-        </div>
-        {
-          status === 'success' && !_.isEmpty(data) && view
-        }
-        {
-          status === 'failed' && retry && (
-            <div className="content center-vertical-2 text-center">
-              <div className="row justify-content-center">
-                <div className="">
-                  <div>
-                    {noDataSvg}
-                  </div>
-                  <div className="theme-font-bold font-title-small text-theme-black mr-3">
-                    Failed To Load Content
-                  </div>
-                  <div className="">
-                    <small className="text-theme-sub wrap">
-                      The network resources failed to connect.
-                      Click on the button below to retry loading this content.
-                    </small>
-                  </div>
-                  <div className="row justify-content-center">
-                    <button className="btn" type="button" onClick={retry}>Try again</button>
-                    <Link to="/" className="btn-plain border-bottom">Quit</Link>
-                  </div>
-                </div>
-              </div>
-            </div>
+          status === 'success' && (_.isEmpty(data)) && redirect && (
+            <NoData
+              link={redirect.link}
+              name={redirect.name}
+              title={redirect.title}
+              text={redirect.text}
+              btnName={redirect.btnName}
+            />
           )
         }
       </div>
-
+      <div className={_.isUndefined(noDataTemp) ? 'd-none' : ''}>
+        {
+          status === 'success' && (_.isEmpty(data)) && noDataTemp
+        }
+      </div>
+      {
+        status === 'success' && !_.isEmpty(data) && view
+      }
+      {
+        status === 'failed' && retry && (
+          <div className="content center-vertical-2 text-center">
+            <div className="row justify-content-center">
+              <div className="">
+                <div>
+                  {noDataSvg}
+                </div>
+                <div className="theme-font-bold font-title-small text-theme-black mr-3">
+                  Failed To Load Content
+                </div>
+                <div className="">
+                  <small className="text-theme-sub wrap">
+                    The network resources failed to connect.
+                    Click on the button below to retry loading this content.
+                  </small>
+                </div>
+                <div className="row justify-content-center">
+                  <button className="btn" type="button" onClick={retry}>Try again</button>
+                  <Link to="/" className="btn-plain border-bottom">Quit</Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        )
+      }
     </>
   );
 };

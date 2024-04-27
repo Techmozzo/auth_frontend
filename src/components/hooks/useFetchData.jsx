@@ -42,7 +42,7 @@ const useFetchData = ({
         isFunction(push) && push(emptyRedirect);
         isFunction(emptyCallback) && emptyCallback();
       } else {
-        console.log('call success');
+        // console.log('call success');
         isFunction(successCallback) && successCallback();
       }
     }

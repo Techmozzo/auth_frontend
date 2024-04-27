@@ -32,7 +32,7 @@ const CompanyProfile = ({ setCurrent }) => {
   const [formData, setFormData] = useState({
     ...indexstore?.data?.data?.company
   });
-  console.log(store);
+  // console.log(store);
 
   useEffect(() => {
     dispatch(projectAction({

@@ -12,7 +12,7 @@ const NewEngagementTemp = ({
   create, removeItem, loadingMedia, progress, uploads, handleDateChange, link
 }) => {
   const [currentPanel, setCurrentPanel] = useState(0);
-  console.log(formData);
+  // console.log(formData);
   return (
     <div className="w-600 ">
       <div className="px-3">

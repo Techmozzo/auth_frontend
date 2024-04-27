@@ -71,7 +71,7 @@ const Execution = () => {
     }
   });
 
-  console.log('Wicked ', formDataa);
+  // console.log('Wicked ', formDataa);
   return (
     <div className="row">
       <div className="col-md-10">

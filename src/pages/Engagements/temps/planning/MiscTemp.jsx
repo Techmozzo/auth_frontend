@@ -25,7 +25,7 @@ const MiscTemp = ({
   const [procedures, setProcedures] = useState([1]);
   const [itentity, setItEntity] = useState('');
   const name = (item) => `Assessment ${item}`;
-  console.log(formData);
+  // console.log(formData);
   const addProcess = () => {
     const fun = () => setProcedures([...procedures, (last(procedures) + 1)]);
     blurHandler();
@@ -45,10 +45,10 @@ const MiscTemp = ({
   const OnChange = (e) => {
     e.preventDefault();
     setItEntity(e.target.value);
-    console.log(e.target.value);
+    // console.log(e.target.value);
     setFormData({ ...formData, risk_assessment_status: e.target.value });
   };
-  console.log(itentity);
+  // console.log(itentity);
   return (
     <div className="w-750 ">
 

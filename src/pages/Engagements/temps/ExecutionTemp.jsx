@@ -147,13 +147,13 @@ const Prod = ({ setisSuccess }) => {
 
     if (isFormDataValid) {
       // Perform any desired action with the form data
-      console.log('Form Data:', formDatax);
+      // console.log('Form Data:', formDatax);
 
       try {
         setStatus(true);
 
         const datax = await post({ endpoint: 'PROCEDURES', auth: true, body: { procedures: formDatax } });
-        console.log('Success ', datax);
+        // console.log('Success ', datax);
         if (datax.status === 201) {
           setisSuccess(true);
           notifier({
@@ -170,7 +170,7 @@ const Prod = ({ setisSuccess }) => {
           // throw new Error(datax);
         }
       } catch (e) {
-        console.log(e);
+        // console.log(e);
         notifier({
           type: 'error',
           text: e.message,
@@ -179,7 +179,7 @@ const Prod = ({ setisSuccess }) => {
       }
       setStatus(false);
     } else {
-      console.log('Form data is not available yet.');
+      // console.log('Form data is not available yet.');
       notifier({
         type: 'error',
         text: 'Invalid form data.',

@@ -33,7 +33,7 @@ const ClientDash = () => {
     }));
   }, [dispatch]);
 
-  console.log('Problem ', indexstore?.dashboard?.data?.data);
+  // console.log('Problem ', indexstore?.dashboard?.data?.data);
   return (
     <div className="container">
       <div className="d-flex">

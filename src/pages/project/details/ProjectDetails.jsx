@@ -158,9 +158,11 @@ const ProjectDetails = (items) => {
                         <div className="d-flex">
                           <button type="button" className="border-radius-50 btn-small btn-plain text-wema  hover-wema bg-wema-light h-50 mt-3">
                             <IoArrowBackCircleOutline className="" onClick={() => handleSelectSlide(true)} />
+                            {' '}
                           </button>
                           <button type="button" className="border-radius-50 btn-small btn-plain text-wema  hover-wema bg-wema-light top-neg-7 ml-2 h-50 mt-4">
                             <IoArrowForwardCircleOutline onClick={() => handleSelectSlide(false)} />
+                            {' '}
                           </button>
                         </div>
                         <div className="d-md-flex d-none w-600 pl-5 overflow-x-hidden h-50">

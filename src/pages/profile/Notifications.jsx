@@ -3,10 +3,6 @@ import React, { useEffect, useState } from 'react';
 import isThisWeek from 'date-fns/isThisWeek';
 import isThisMonth from 'date-fns/isThisMonth';
 import { useDispatch, useSelector } from 'react-redux';
-import _ from 'lodash';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import { RiNotification4Line } from 'react-icons/ri';
 import Badge from '@material-ui/core/Badge';
 import { useHistory, useLocation, useParams } from 'react-router';
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -18,8 +14,29 @@ import { notifications } from '../../redux/actions/profileActions';
 // import NoData from '../authentication/NoData';
 import PageTemp from '../../components/temps/PageTemp';
 import { notifier } from '../../utilities/stringOperations';
+import SelectInput from '../../components/form/inputs/SelectInput';
+import {
+  statusCategoryOption, moduleCategoryOption, dateSearchOption, dateRangeOption
+} from '../../utilities/dummyData';
 
 const user = { ...JSON.parse(localStorage.getItem('user')) };
+
+const NotificationTable = ({ children }) => (
+  <table className="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th>Title</th>
+        <th scope="col">Type</th>
+        <th scope="col">Created At</th>
+        {/* <th scope="col">Action</th> */}
+      </tr>
+    </thead>
+    <tbody>
+      {children}
+    </tbody>
+  </table>
+);
 
 const Notifications = ({ setCurrent }) => {
   const dispatch = useDispatch();
@@ -33,10 +50,11 @@ const Notifications = ({ setCurrent }) => {
   const [selectedRange, setSelectedRange] = useState('');
   const [dateRanger, setDateRange] = useState([]);
   const [checked, setChecked] = useState(false);
+  const [storeData, setStoreData] = useState([]);
   const {
     filter, datesearch, daterange, filteraction
   } = queryString.parse(search);
-  console.log('notif', store);
+  // console.log('notif', store);
   // console.log(values);
   const formatDate = (date) => {
     const year = date.getFullYear();
@@ -96,12 +114,12 @@ const Notifications = ({ setCurrent }) => {
     const { name, value } = event?.target;
     setSelectedRange(value);
     const paramsx = new URLSearchParams(location.search);
-    console.log(value);
+    // console.log(value);
     // { [name]: value }
     if (name === 'datesearch') {
       setChecked(!checked);
       const dat = paramsx.get(name);
-      console.log('From here ', dat);
+      // console.log('From here ', dat);
       paramsx.set(name, !(dat === 'true'));
       if (value === 'false') {
         paramsx.delete('daterange');
@@ -124,26 +142,6 @@ const Notifications = ({ setCurrent }) => {
     }));
   }, [dispatch]);
 
-  const mapToView = (items) => items.length > 0 && items.map((item) => (
-    <Card className="my-5 hover-wema" key={Math.random()}>
-      <CardContent>
-        <div className="d-flex">
-          <div>
-            <RiNotification4Line className="text-wema font-1-5" />
-          </div>
-          <div className="pl-1">
-            {item?.data?.title}
-          </div>
-        </div>
-        <div>
-          <small>
-            {item?.data?.type}
-          </small>
-        </div>
-      </CardContent>
-    </Card>
-  ));
-
   useEffect(() => {
     if (store.status === 'initial') {
       if (setCurrent !== undefined) {
@@ -156,6 +154,7 @@ const Notifications = ({ setCurrent }) => {
         filteraction
       }));
     }
+
     if (store.status === 'success') {
       const weekData = store.data?.data?.notifications?.filter((item) => isThisWeek(new Date(item.dateCreated)));
       const monthData = store.data?.data?.notifications?.filter((item) => isThisMonth(new Date(item.dateCreated))
@@ -165,6 +164,7 @@ const Notifications = ({ setCurrent }) => {
       setOld(oldData);
       setMonth(monthData);
       setWeek(weekData);
+      setStoreData(store?.data?.data?.notifications ?? []);
     }
     if (store?.status === 'failed') {
       notifier({
@@ -177,127 +177,155 @@ const Notifications = ({ setCurrent }) => {
     }
   }, [store.status]);
 
+  const converDate = (createdAt) => {
+    const isDate = new Date(createdAt);
+
+    const isDay = isDate.getDate();
+    const isMonth = isDate.getMonth() + 1;
+    const isYear = isDate.getFullYear();
+    // return `${isDay < 10 ? '0' + isDay : isDay}-${isMonth < 10 ? '0' + isMonth : isMonth}-${isYear}`;
+    return `${isDay < 10 ? `0${isDay}` : isDay}-${isMonth < 10 ? `0${isMonth}` : isMonth}-${isYear}`;
+  };
+
+  const mapToView = (items) => items.length > 0 && items.map((item, i) => (
+    <tr key={item.id}>
+      <td>{i + 1}</td>
+      <td>{item?.data?.title}</td>
+      <td>{item?.data?.type || '-'}</td>
+      <td>{converDate(item?.created_at)}</td>
+      {/* <td>
+        <button type="button">View Details</button>
+      </td> */}
+    </tr>
+  ));
+
   const temp = (
-    <div className="login-form-container p-20 mt-5">
-      <div className="w-100">
-        <div className="login-form pb-5h">
-          <h3 className="bold text-dark mt-2">
-            <Badge badgeContent={store?.data?.data?.length} color="secondary">
-              <span className=" border-bottom">
-                Notifications
-              </span>
-            </Badge>
-          </h3>
-          <div className="row">
-            {
-              week.length > 0
-             && (
-               <div className="py-3 ">
-                 <h5 className="bold text-dark mb-2">
-                   <Badge badgeContent={week.length} color="secondary">
-                     this week
-                   </Badge>
-
-                 </h5>
-                 {
-                   mapToView(week)
-                 }
-               </div>
-             )
-            }
-            {
-              month.length > 0
-             && (
-               <div className="py-3 ">
-                 <h5 className="bold text-dark mb-2">
-                   <Badge badgeContent={month.length} color="secondary">
-                     this month
-                   </Badge>
-
-                 </h5>
-                 {
-                   mapToView(month)
-                 }
-               </div>
-             )
-            }
-            {
-              old.length > 0
-             && (
-               <div className="py-3 ">
-                 <h5 className="bold text-dark mb-2">
-                   <Badge badgeContent={month.length} color="secondary">
-                     Earlier
-                   </Badge>
-
-                 </h5>
-                 {
-                   mapToView(old)
-                 }
-               </div>
-             )
-            }
+    <>
+      {
+        week.length > 0
+        && (
+          <div className="py-1">
+            {/* <h6 className="bold text-dark mb-2">
+              <Badge badgeContent={week.length} color="secondary">
+                this week
+              </Badge>
+            </h6> */}
+            <NotificationTable>
+              {
+                mapToView(week)
+              }
+            </NotificationTable>
           </div>
-        </div>
-      </div>
-    </div>
+        )
+      }
+      {
+        month.length > 0
+        && (
+          <div className="py-1">
+            <NotificationTable>
+              {
+                mapToView(month)
+              }
+            </NotificationTable>
+          </div>
+        )
+      }
+      {
+        old.length > 0
+        && (
+          <div className="py-1">
+            <NotificationTable>
+              {
+                mapToView(old)
+              }
+            </NotificationTable>
+          </div>
+        )
+      }
+    </>
   );
-  console.log(dateRanger);
+  // console.log(dateRanger);
+
   return (
-    <div className={setCurrent === undefined ? ' pb-5h' : ''}>
-      <div>
-        <div>
-          Status
-          <select name="filter" id="" value={filter} onChange={onChange}>
-            <option value="all">all</option>
-            <option value="un_read">Unread</option>
-            <option value="read">read</option>
-          </select>
-          module
-          <select name="filteraction" id="" value={filteraction} onChange={onChange}>
-            <option value="approval">approval</option>
-            <option value="invites">invites</option>
-          </select>
-          date search
-          {/* <input type="checkbox" name="datesearch" id="" value={checked} onChange={onChange} /> */}
-          <select name="datesearch" id="" value={datesearch} onChange={onChange}>
-            <option value="se">date search</option>
-            <option value="true">Yes</option>
-            <option value="false">No</option>
-          </select>
+    // <div className={setCurrent === undefined ? ' pb-5h pl-4' : ''}>
+    <div className="pb-5h pl-4">
+      <div className="pt-3">
+        <h3 className="bold text-dark mt-2">
+          <Badge badgeContent={storeData && storeData.length} color="secondary">
+            <span>
+              Notifications
+            </span>
+          </Badge>
+        </h3>
+        <div className="d-flex align-items-center">
+          <div>
+            <SelectInput
+              options={statusCategoryOption}
+              valueIndex="value"
+              optionIndex="desc"
+              titleIndex="type"
+              value={filter}
+              onChange={onChange}
+              name="filter"
+              className="theme-font font-black font-14 mr-4"
+            />
+          </div>
+          <div>
+            <SelectInput
+              options={moduleCategoryOption}
+              valueIndex="value"
+              optionIndex="desc"
+              titleIndex="type"
+              value={filteraction}
+              onChange={onChange}
+              name="filteraction"
+              className="theme-font font-black font-14 mr-4"
+            />
+          </div>
+          <div>
+            {/* <input type="checkbox" name="datesearch" id="" value={checked} onChange={onChange} /> */}
+            <SelectInput
+              options={dateSearchOption}
+              valueIndex="value"
+              optionIndex="desc"
+              titleIndex="type"
+              value={datesearch}
+              onChange={onChange}
+              name="datesearch"
+              className="theme-font font-black font-14 mr-4"
+            />
+          </div>
           {datesearch === 'true'
             ? (
-              <>
-                date range
-                <select name="daterange" value={daterange} onChange={onChange}>
-                  <option value="custom">Custom</option>
-                  <option value="today">Today</option>
-                  <option value="yesterday">Yesterday</option>
-                  <option value="last7days">Last 7 days</option>
-                  <option value="last30days">Last 30 days</option>
-                  <option value="thismonth">This Month</option>
-                </select>
-                Date Range Results
-                <div id="daterangedata">
+              <div className="d-flex">
+                <SelectInput
+                  options={dateRangeOption}
+                  valueIndex="value"
+                  optionIndex="desc"
+                  titleIndex="type"
+                  value={daterange}
+                  onChange={onChange}
+                  name="daterange"
+                  className="theme-font font-black h-25 font-14 mr-4"
+                />
+                <div className="theme-font font-black font-12 mr-4" id="daterangedata">
                   {daterange === 'custom'
-                    ? <DateRangePicker format="MM-dd-yyyy" onChange={(e) => setDateRange([formatDate(new Date(e[0])), formatDate(new Date(e[1]))])} />
-                    : <input type="text" value={getDateRange()} readOnly />}
+                    ? <DateRangePicker format="MM-dd-yyyy" size="lg" onChange={(e) => setDateRange([formatDate(new Date(e[0])), formatDate(new Date(e[1]))])} />
+                    : <div className="p-3 bg-white border-1">{getDateRange()}</div>}
                 </div>
-              </>
+              </div>
             ) : null}
-
+          <div>
+            <button type="button" className="text-theme-blue float-right mb-3  viewMoreBtn">Mark all as Read</button>
+          </div>
         </div>
-        <div>
-          <button type="button">Mark all as Read</button>
+        <div className="w-100 margin-center mt-1">
+          <PageTemp
+            view={temp}
+            status={store?.status}
+            data={store.data?.data?.notifications}
+          />
         </div>
-      </div>
-      <div className="w-100 margin-center m-t-40 ">
-        <PageTemp
-          view={temp}
-          status={store?.status}
-          data={store.data?.data?.notifications}
-        />
-
       </div>
     </div>
 

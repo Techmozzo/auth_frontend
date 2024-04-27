@@ -143,7 +143,7 @@ const Donate = () => {
     transactionRef: formData?.transactionReference,
 
     onTransaction(response) {
-      console.log(response);
+      // console.log(response);
       const donationPayload = {
         customerFirstName: response?.data?.customer?.firstName,
         customerLastName: response?.data?.customer?.lastName,

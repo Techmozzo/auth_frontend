@@ -5,7 +5,7 @@ import uuid from 'react-uuid';
 import { AiOutlineDelete } from 'react-icons/ai';
 import FormBuilder from '../../../../components/form/builders/form';
 import CustomAccordion from '../../../../components/ui/customAccordion';
-import { checkRequiredFields } from '../../../../utilities/validation';
+import { checkRequiredFields, validateClassesData } from '../../../../utilities/validation';
 import planningProps from '../../constants/planningProps';
 import DragNDropTemp from '../newEngagement/DragNDropInputTemp';
 import { notifier, stringCaps } from '../../../../utilities/stringOperations';
@@ -23,17 +23,29 @@ const PlanningClasses = ({
   const [className, setClassName] = useState('');
   const [classes, setClasses] = useState([
     {
-      name: 'Revenue',
-      process_flow_document: 'test',
-      work_through: 'test',
+      name: '',
+      process_flow_document: '',
+      work_through: '',
       procedures: [
         {
-          name: 'test procedure A',
-          description: 'test procedure',
-          assertions: [1, 4, 6]
+          name: '',
+          description: '',
+          assertions: [4, 6]
         }
       ]
     }
+    // {
+    //   name: 'Revenue',
+    //   process_flow_document: 'test',
+    //   work_through: 'test',
+    //   procedures: [
+    //     {
+    //       name: 'test procedure A',
+    //       description: 'test procedure',
+    //       assertions: [1, 4, 6]
+    //     }
+    //   ]
+    // }
   ]);
   useEffect(() => {
     setSubmittable(checkRequiredFields([
@@ -59,6 +71,23 @@ const PlanningClasses = ({
     });
   }, [engagementClasses]);
 
+  useEffect(() => {
+    console.log('formData', formData);
+    console.log('classes', classes);
+    if (validateClassesData(classes)) {
+      setFormData((prevStreamData) => ({
+        ...prevStreamData,
+        classes
+      }));
+    }
+  }, [classes]);
+
+  const handleClassesChange = (index, key, value) => {
+    const updatedClasses = [...classes];
+    updatedClasses[index][key] = value;
+    setClasses(updatedClasses);
+  };
+
   const addSub = () => {
     setEngagementClasses([
       ...engagementClasses,
@@ -73,7 +102,7 @@ const PlanningClasses = ({
     //   name: ''
     // });
 
-    setFormData((prevStreamData: any) => ({
+    setFormData((prevStreamData) => ({
       ...prevStreamData,
       process_flow_document: '',
       name: ''
@@ -86,7 +115,7 @@ const PlanningClasses = ({
   };
 
   // console.log('Fast ', formData);
-  console.log('engagementClasses ', engagementClasses);
+  // console.log('engagementClasses ', engagementClasses);
   const updateState = (propertyPath, newValue) => {
     setFormSub((prevState) => {
       const newState = { ...prevState };
@@ -102,11 +131,6 @@ const PlanningClasses = ({
 
       return newState;
     });
-  };
-
-  const AddClassName = (e) => {
-    console.log(e.target.value);
-    setClassName(e.target.value);
   };
 
   const handleAddProcedure = (classIndex) => {
@@ -125,7 +149,7 @@ const PlanningClasses = ({
     setClasses(updatedClasses);
   };
 
-  console.log('Classes ', classes);
+  // console.log('Classes ', classes);
   const handleAddClass = () => {
     setClasses([
       ...classes,
@@ -142,15 +166,15 @@ const PlanningClasses = ({
     //   classes
     // });
 
-    setFormData((prevStreamData: any) => ({
+    setFormData((prevStreamData) => ({
       ...prevStreamData,
-      classes,
-      process_flow_document: '',
-      name: ''
+      classes
+      // process_flow_document: '',
+      // name: ''
     }));
   };
 
-  console.log('Form Dat ', formData);
+  // console.log('Form Dat ', formData);
   return (
     <div className="">
       <CustomAccordion
@@ -191,15 +215,15 @@ const PlanningClasses = ({
                           name=""
                           id="classes"
                           onChange={(event) => {
-                            const updatedClasses = [...classes];
-                            updatedClasses[classIndex].name = event.target.value;
-                            setClasses(updatedClasses);
-                            // AddClassName(event.target.value);
+                            // const updatedClasses = [...classes];
+                            // updatedClasses[classIndex].name = event.target.value;
+                            // setClasses(updatedClasses);
+                            handleClassesChange(classIndex, 'name', event.target.value);
                             setClassName(event.target.value);
                           }}
                           className="w-100 m-b-20 col-12 form-group"
                         >
-                          <option value="">d</option>
+                          <option value="">Choose a class</option>
                           {newClasses && newClasses.map((e) => (
                             <option key={`${e}_1`} value={e}>{e}</option>
                           ))}
@@ -224,9 +248,10 @@ const PlanningClasses = ({
                             <DragNDropTemp
                               formData={formData}
                               setFormData={(dd) => {
-                                const updatedClasses = [...classes];
-                                updatedClasses[classIndex].process_flow_document = dd.process_flow_document;
-                                setClasses(updatedClasses);
+                                // const updatedClasses = [...classes];
+                                // updatedClasses[classIndex].process_flow_document = dd.process_flow_document;
+                                // setClasses(updatedClasses);
+                                handleClassesChange(classIndex, 'process_flow_document', dd.process_flow_document);
                               }}
                               setErrors={setErrors}
                               name="process_flow_document"
@@ -238,9 +263,10 @@ const PlanningClasses = ({
                               formData={formData}
                               // setFormData={setFormData}
                               setFormData={(dd) => {
-                                const updatedClasses = [...classes];
-                                updatedClasses[classIndex].work_through = dd.work_through;
-                                setClasses(updatedClasses);
+                                // const updatedClasses = [...classes];
+                                // updatedClasses[classIndex].work_through = dd.work_through;
+                                // setClasses(updatedClasses);
+                                handleClassesChange(classIndex, 'work_through', dd.work_through);
                               }}
                               setErrors={setErrors}
                               name="work_through"

@@ -13,7 +13,7 @@ const AcceptInvite = () => {
     try {
       setStatus(true);
       const datax = await get({ endpoint: 'ACCEPT_ENGAGEMENT_INVITE', auth: true, param: token });
-      console.log(datax);
+      // console.log(datax);
       if (datax.status === 201) {
         notifier({
           type: 'success',
@@ -30,7 +30,7 @@ const AcceptInvite = () => {
         // throw new Error(datax);
       }
     } catch (e) {
-      console.log(e);
+      // console.log(e);
       notifier({
         type: 'error',
         text: e.message,

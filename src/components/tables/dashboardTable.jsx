@@ -66,8 +66,8 @@ export default function DashboardTable({ data }) {
               label: 'View Engangment',
               icon: 'pi pi-refresh',
               command: () => {
-                console.log('CLicked');
-                console.log(id);
+                // console.log('CLicked');
+                // console.log(id);
                 // viewRow(id);
                 // toast.current.show({
                 //   severity: 'success', summary: 'Updated', detail: 'Data Updated', life: 3000
@@ -78,7 +78,7 @@ export default function DashboardTable({ data }) {
               label: 'Edit Engangment',
               icon: 'pi pi-times',
               command: () => {
-                console.log('CLicked');
+                // console.log('CLicked');
                 // toast.current.show({
                 //   severity: 'warn', summary: 'Delete', detail: 'Data Deleted', life: 3000
                 // });
@@ -88,7 +88,7 @@ export default function DashboardTable({ data }) {
               label: 'Delete Engangment',
               icon: 'pi pi-times',
               command: () => {
-                console.log('CLicked');
+                // console.log('CLicked');
                 handleRow(id);
                 // toast.current.show({
                 //   severity: 'warn', summary: 'Delete', detail: 'Data Deleted', life: 3000
@@ -104,7 +104,7 @@ export default function DashboardTable({ data }) {
   const rows = data?.map((item) => createData(
     item?.name, item?.year, item?.client?.name, item?.team_members_count, item?.status?.name, item?.id
   ));
-  console.log('Row ', data);
+  // console.log('Row ', data);
   const handleRow = (row) => {
     // const theData = data.filter((item) => item.name === row.name);
     push(`/app/engagement/engagement/${row}`);
@@ -112,7 +112,7 @@ export default function DashboardTable({ data }) {
   const viewRow = (row) => {
     // const theData = data.filter((item) => item.name === row.name);
     push(`/app/engagement/view/${row}`);
-    console.log('cliers', row);
+    // console.log('cliers', row);
   };
   // console.log('Den ', data);
   const ITEM_HEIGHT = 48;
@@ -128,7 +128,7 @@ export default function DashboardTable({ data }) {
     setLoading(true);
     try {
       const res = await del({ endpoint: 'ENGAGEMENT', param: id, auth: true });
-      console.log(res);
+      // console.log(res);
       toast.current.show({
         severity: 'info', summary: 'Confirmed', detail: 'Engangment deleted', life: 3000
       });

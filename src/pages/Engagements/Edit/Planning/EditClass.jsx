@@ -62,7 +62,7 @@ const EditClass = () => {
   useEffect(() => {
     loadfile();
   }, [formData]);
-  console.log('FOrm Dataa', formData?.engagement?.planning?.transaction_class);
+  // console.log('FOrm Dataa', formData?.engagement?.planning?.transaction_class);
   const uploadMediaFail = () => {
     setUploaded(false);
     setErrors(backErrors);
@@ -87,7 +87,7 @@ const EditClass = () => {
     //   [data.name]: data.url,
     //   [name]: data.url
     // });
-    console.log('Data', data);
+    // console.log('Data', data);
     setClasses(data.classes);
     setFormData((prevStreamData) => ({
       ...prevStreamData,
@@ -97,7 +97,7 @@ const EditClass = () => {
   };
 
   useEffect(() => {
-    console.log(Uploadstat);
+    // console.log(Uploadstat);
     switch (Uploadstat) {
     case 'failed':
       return uploadMediaFail();

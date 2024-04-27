@@ -38,7 +38,7 @@ const PlanningTemp = ({
   useEffect(() => {
     setInitialData(formData);
   }, []);
-  console.log('Form ', formData);
+  // console.log('Form ', formData);
   const uploadMediaFail = () => {
     setUploaded(false);
     setErrors(backErrors);
@@ -63,9 +63,9 @@ const PlanningTemp = ({
     //   [data.name]: data.url,
     //   [name]: data.url
     // });
-    console.log('Data', data);
+    // console.log('Data', data);
     setClasses(data.classes);
-    setFormData((prevStreamData: any) => ({
+    setFormData((prevStreamData) => ({
       ...prevStreamData,
       [name]: data.url
     }));
@@ -73,7 +73,7 @@ const PlanningTemp = ({
   };
 
   useEffect(() => {
-    console.log(Uploadstat);
+    // console.log(Uploadstat);
     switch (Uploadstat) {
     case 'failed':
       return uploadMediaFail();
@@ -127,7 +127,7 @@ const PlanningTemp = ({
               {Uploadstat === 'pending'
                 ? <Loader />
                 : Uploadstat === 'failed'
-                  ? <p> dd</p>
+                  ? <> </>
                   : (
                     <PlanningClasses
                       setFormData={setFormData}

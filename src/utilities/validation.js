@@ -138,7 +138,7 @@ export const mapBackendErrors = (storeData) => {
         );
       }
       if (val?.constructor === Object) {
-        console.log('object', val);
+        // console.log('object', val);
         backErrors.push(val.message);
       }
     }
@@ -176,3 +176,100 @@ export const containCaps = (str) => /(?=.*[A-Z])/.test(str);
 export const containNums = (str) => /(?=.*[0-9])/.test(str);
 export const containSpecialChars = (str) => /(?=.*[!@#$%^&*])/.test(str);
 export const eightOrLonger = (str) => /(?=.{8,})/.test(str);
+
+// classes data check validateData
+export const validateData = (classes) => {
+  for (const classObj of classes) {
+    // Check if any key has an empty string value
+    for (const key in classObj) {
+      if (typeof classObj[key] === 'string' && classObj[key].trim() === '') {
+        // Empty string found, return false
+        return false;
+      }
+    }
+
+    // Check procedures array (if present)
+    if (Array.isArray(classObj.procedures)) {
+      for (const procedure of classObj.procedures) {
+        for (const key in procedure) {
+          if (typeof procedure[key] === 'string' && procedure[key].trim() === '') {
+            console.log('proce', procedure[key]);
+            // Empty string found, return false
+            return false;
+          }
+        }
+      }
+    }
+  }
+
+  // All keys have valid data, return true
+  return true;
+};
+
+export const validateClassesDatass = (classes) => {
+  // Iterate through each class object
+  for (const classObj of classes) {
+    // Check if any key has an empty string value
+    for (const key in classObj) {
+      if ((typeof classObj[key] === 'string' && classObj[key].trim() === '') || (Array.isArray(classObj[key]) && classObj[key].length === 0)) {
+        // Empty string found, return false
+        return false;
+      }
+    }
+
+    // Check procedures array (if present)
+    if (Array.isArray(classObj.procedures)) {
+      for (const procedure of classObj.procedures) {
+        for (const key in procedure) {
+          if ((typeof procedure[key] === 'string' && procedure[key].trim() === '') || (Array.isArray(procedure[key]) && procedure[key].length === 0) || typeof procedure[key] === 'undefined') {
+            // Empty string found, return false
+            return false;
+          }
+        }
+      }
+    }
+  }
+
+  // All keys have valid data, return true
+  return true;
+};
+
+export const validateClassesData = (classes) => {
+  // Iterate through each class object
+  for (const classObj of classes) {
+    // Check if any key has an empty string value, empty array, or undefined
+    // eslint-disable-next-line guard-for-in
+    for (const key in classObj) {
+      const value = classObj[key];
+      if (
+        (typeof value === 'string' && value.trim() === '')
+        || (Array.isArray(value) && value.length === 0)
+        || value === undefined
+      ) {
+        // Empty string, empty array, or undefined found, return false
+        return false;
+      }
+    }
+
+    // Check procedures array (if present)
+    if (Array.isArray(classObj.procedures)) {
+      for (const procedure of classObj.procedures) {
+        // eslint-disable-next-line guard-for-in
+        for (const key in procedure) {
+          const value = procedure[key];
+          if (
+            (typeof value === 'string' && value.trim() === '')
+            || (Array.isArray(value) && value.length === 0)
+            || value === undefined
+          ) {
+            // Empty string, empty array, or undefined found, return false
+            return false;
+          }
+        }
+      }
+    }
+  }
+
+  // All keys have valid data, return true
+  return true;
+};

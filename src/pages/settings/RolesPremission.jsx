@@ -85,7 +85,7 @@ const RolesPremission = ({ setCurrent }) => {
     if (currentRolePermission.length === 0) {
       setCurrentRolePermissionx([]);
     } else {
-      console.log('tigger ', perission);
+      // console.log('tigger ', perission);
       setCurrentRolePermissionx(currentRolPermission);
     }
   };
@@ -111,7 +111,7 @@ const RolesPremission = ({ setCurrent }) => {
   const getRolePermission = (e) => {
     e.preventDefault();
     const roleId = e.target.value;
-    console.log(roles);
+    // console.log(roles);
     setRoleId(roleId);
     const mek = roles.filter((a) => String(a.id) === roleId);
     setCurrentRolePermission(mek[0].permissions);
@@ -120,18 +120,17 @@ const RolesPremission = ({ setCurrent }) => {
 
   const handleCheckboxChange = (event, pid) => {
     if (event.target.checked) {
-      console.log(`Checkbox ${pid} is checked.`);
+      // console.log(`Checkbox ${pid} is checked.`);
       setPermissionsId([...permissionId, pid]);
     } else {
-      console.log(`Checkbox ${pid} is unchecked.`);
+      // console.log(`Checkbox ${pid} is unchecked.`);
       setPermissionsId(permissionId.filter((id) => id !== pid));
     }
     setCheckedState((prevState) => ({ ...prevState, [pid]: event.target.checked }));
   };
 
   const UpdatePermission = async () => {
-    console.log('How is life');
-    console.log(permissionId);
+    // console.log(permissionId);
     if (!singleroleid) {
       notifier({
         type: 'error', title: 'Error', text: 'Please select Role'

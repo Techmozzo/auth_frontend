@@ -13,7 +13,7 @@ const useIndex = () => {
       // get the data from the api
       const datax = await get({ endpoint: 'INDEX', auth: true });
       // convert data to json
-      console.log('From Hooks ', datax);
+      // console.log('From Hooks ', datax);
       setData(datax);
 
       setLoading(false);

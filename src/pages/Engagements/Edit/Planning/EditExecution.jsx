@@ -41,7 +41,7 @@ const EditExecution = () => {
   });
   //   const { engagement: { planning } } = formData;
   //   console.log('View Engangmentinfo ', planning);
-  console.log(formData);
+  // console.log(formData);
   const SubmitForm = async (e) => {
     e.preventDefault();
     setStatus(true);
@@ -49,14 +49,14 @@ const EditExecution = () => {
       const data = await post({
         endpoint: 'ENGAGEMENT', auth: true, param: engagementId, afterParam: 'executions', body: state
       });
-      console.log('Response ', data);
+      // console.log('Response ', data);
       notifier({
         title: 'Success Message',
         text: 'Execution updated successfully',
         type: 'success'
       });
     } catch (ex) {
-      console.log(ex);
+      // console.log(ex);
     }
     setStatus(false);
   };
@@ -66,7 +66,7 @@ const EditExecution = () => {
   useEffect(() => {
     loadfile();
   }, [formData]);
-  console.log(state);
+  // console.log(state);
   return (
     <div className="row">
       <div className="col-md-10">

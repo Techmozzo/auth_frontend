@@ -18,7 +18,7 @@ const Dashboard = () => {
   }, []);
   const DashIndex = React.lazy(() => import('./AdminDash'));
   const DashClientIndex = React.lazy(() => import('./ClientDash'));
-  console.log(canAddUser);
+  // console.log(canAddUser);
   return (
     <>
       {role && role[0] === 'admin'

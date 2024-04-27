@@ -12,7 +12,7 @@ const DeclineInvite = () => {
     try {
       setStatus(true);
       const datax = await post({ endpoint: 'DECLINE_ENGAGEMENT_INVITE', auth: true, param: token });
-      console.log(datax);
+      // console.log(datax);
       if (datax.status === 200) {
         notifier({
           type: 'success',
@@ -24,7 +24,7 @@ const DeclineInvite = () => {
         throw new Error(datax);
       }
     } catch (e) {
-      console.log(e);
+      // console.log(e);
       notifier({
         type: 'error',
         text: e.message,

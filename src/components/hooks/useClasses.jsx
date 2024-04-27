@@ -13,7 +13,7 @@ const useClasses = () => {
       // get the data from the api
       const datax = await get({ endpoint: 'ENGAGEMENT', auth: true, param: engagementId });
       // convert data to json
-      console.log('From Hooks ', datax?.data?.data?.engagement?.planning);
+      // console.log('From Hooks ', datax?.data?.data?.engagement?.planning);
       setData(datax?.data?.data?.engagement?.planning);
 
       setLoading(false);

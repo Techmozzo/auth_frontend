@@ -16,7 +16,7 @@ const EngagementIndex = () => {
   const indexstore = useSelector((state) => state.engagement);
   const viewEngangment = usePermission('view-engagement');
   const addEnganagment = usePermission('add-engagement');
-  console.log(viewEngangment);
+  // console.log(viewEngangment);
   const options = {
     action: 'ENGAGEMENTS',
     apiOpts: apiOptions({

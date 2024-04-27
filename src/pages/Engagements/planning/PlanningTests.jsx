@@ -82,7 +82,7 @@ const PlanningTests = ({ setTempParams }) => {
       description: ''
     });
 
-    console.log('On blur form action', formData);
+    // console.log('On blur form action', formData);
   };
 
   const finish = () => {
@@ -91,7 +91,7 @@ const PlanningTests = ({ setTempParams }) => {
       create();
     }
   };
-  console.log('On blur form action', formData);
+  // console.log('On blur form action', formData);
   return (
     <div className="mt-4">
       {

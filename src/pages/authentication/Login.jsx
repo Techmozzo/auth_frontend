@@ -99,7 +99,7 @@ const LoginPage = () => {
   /* on visiting */
   const initialTemp = ({ ...props }) => (
     <div className=" margin-center m-t-40">
-      {console.log(goBack)}
+      {/* {console.log(goBack)} */}
       <div className="box-shadow row">
         <div className="login position-relative col-md-5">
           <div className="login-content text-center mr-4 p-0 m-0 p-lg-3 ml-lg-5">

@@ -56,7 +56,7 @@ const PlanningPTest = ({
   //   console.log(x.target.value);
   //   setData({ ...dataos, test_name: x.target.value });
   // };
-  console.log(assertions);
+  // console.log(assertions);
   if (loading) {
     return <p>Loading Accessions</p>;
   }

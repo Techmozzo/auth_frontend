@@ -21,10 +21,10 @@ export const register = (payload) => {
     const res = post({ endpoint: 'REGISTER', auth: false, body: payload });
 
     dispatch(request(res));
-    console.log('You Hit Register');
+    // console.log('You Hit Register');
     return res.then((response) => {
       if (response?.status === 200 || response?.status === 201) {
-        console.log(response);
+        // console.log(response);
         // localforage.setItem('user', response?.data?.data?.user);
         // localStorage.setItem('token', response?.data?.data?.user?.token);
         // localStorage.setItem('emailToken', response?.data?.data?.token);
@@ -114,10 +114,10 @@ export const login = (payload) => {
     const res = post({ endpoint: 'LOGIN', body: payload, auth: false });
 
     dispatch(request(res));
-    console.log('You Hit Login');
+    // console.log('You Hit Login');
     return res.then((response) => {
       if (response?.status === 200) {
-        console.log(response);
+        // console.log(response);
         // localforage.setItem('user', response?.data?.data?.user);
         // localforage.setItem('role', response?.data?.data?.roles);
         localStorage.role = JSON.stringify(response?.data?.data?.roles);

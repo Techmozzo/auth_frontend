@@ -30,7 +30,7 @@ const AddNotesTemp = ({ engagementId, stageId }) => {
       method: 'post'
     })
   };
-  console.log('Dashboard ', store);
+  // console.log('Dashboard ', store);
   /* boilerPlate hooks */
   const {
     handleBlur, handleChange, status, handleChecked, create, data

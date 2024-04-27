@@ -25,7 +25,7 @@ const InvitedUser = () => {
   /* redux */
   const store = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  console.log(token);
+  // console.log(token);
   const options = {
     action: 'REGISTER_INVITED_USER',
     apiOpts: apiOptions({
@@ -53,14 +53,14 @@ const InvitedUser = () => {
     action: 'REGISTER_INVITED_USER_COMPLETE'
   }], dispatch);
 
-  console.log(store.invitedUser);
+  // console.log(store.invitedUser);
 
   const userInfoStore = useStoreParams(store.invitedUser);
   const usersFail = () => {
     setErrors(backErrors);
     updateStore();
   };
-  console.log(userInfoStore.data);
+  // console.log(userInfoStore.data);
   const usersSuccess = () => {
     const names = splitFullName(userInfoStore?.data?.invitedUser.name);
     setFormData({
@@ -86,10 +86,10 @@ const InvitedUser = () => {
     // declare the async data fetching function
     const fetchData = async () => {
       // get the data from the api
-      const datax: any = await get({ endpoint: 'INVITE_USER', param: token });
+      const datax = await get({ endpoint: 'INVITE_USER', param: token });
       // convert the data to json
       // const json = await data.json();
-      console.log(datax?.data?.data?.invitedUser);
+      // console.log(datax?.data?.data?.invitedUser);
       const names = splitFullName(datax?.data?.data?.invitedUser.name);
       setFormData({
         ...datax?.data?.data?.invitedUser, first_name: names.firstName, last_name: names.lastName

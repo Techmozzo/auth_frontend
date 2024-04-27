@@ -12,7 +12,7 @@ const useAssertions = () => {
       // get the data from the api
       const datax = await get({ endpoint: 'ASSERTIONS', auth: true });
       // convert data to json
-      console.log('From Hooks ', datax);
+      // console.log('From Hooks ', datax);
       if (datax.status === 200) {
         setData(datax?.data?.data?.assertions || []);
         setLoading(false);

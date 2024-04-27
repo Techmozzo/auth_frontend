@@ -28,10 +28,10 @@ const EditMateriality = () => {
   const selectedMaterialRange = materialrange
  && materialrange
    .filter((a) => String(a.id) === formData.materiality_benchmark_range_id)[0];
-  console.log('Log ', index);
-  console.log('SELECTED MATERIAL RANGE', selectedMaterialRange);
-  console.log('FOrm Data ', formData);
-  console.log('Error', errors);
+  // console.log('Log ', index);
+  // console.log('SELECTED MATERIAL RANGE', selectedMaterialRange);
+  // console.log('FOrm Data ', formData);
+  // console.log('Error', errors);
   const SubmitForm = async (e) => {
     e.preventDefault();
   };
@@ -61,7 +61,7 @@ const EditMateriality = () => {
   useEffect(() => {
     loadfile();
   }, [formDataa]);
-  console.log('FOrm Dataa', formDataa?.engagement?.planning);
+  // console.log('FOrm Dataa', formDataa?.engagement?.planning);
   return (
     <div className="w-750 ">
 
