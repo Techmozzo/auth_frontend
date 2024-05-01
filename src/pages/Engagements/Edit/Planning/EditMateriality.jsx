@@ -8,9 +8,11 @@ import planningProps from '../../constants/planningProps';
 import { index } from '../../../../utilities/auth';
 import DragNDropTemp from '../../temps/newEngagement/DragNDropInputTemp';
 import SliderSizes from '../../../../components/microComponents/slider';
-import { slugToString } from '../../../../utilities/stringOperations';
+import { slugToString, sentenceCaps } from '../../../../utilities/stringOperations';
 import { apiOptions } from '../../../../services/fetch';
 import useViewBoilerPlate from '../../../../components/hooks/useViewBoilerPlate';
+import { headerTemp1 } from '../../../../components/temps/projectTemps/miscTemps';
+import Notes from '../../Notes';
 
 const indexData = { ...JSON.parse(localStorage.getItem('index')) };
 const materialrange = indexData.materialRange;
@@ -63,90 +65,112 @@ const EditMateriality = () => {
   }, [formDataa]);
   // console.log('FOrm Dataa', formDataa?.engagement?.planning);
   return (
-    <div className="w-750 ">
+    <div className="row">
+      <div className="col-md-10">
+        {
+          headerTemp1({
+            text: 'Execution',
+            parent: 'Engagements',
+            name: sentenceCaps(engagementName),
+            link: '/app/engagement/',
+            link1: `/app/engagement/view/${engagementId}`
+          })
+        }
+        <div className="content">
+          <div>
+            <h4 className="d-flex justify-content-center">Edit Materiality</h4>
+            <div className="d-flex justify-content-center">
+              <div className="w-750">
+                <div className="box-shadow ">
+                  <div className="pt-5">
+                    <div className="d-flex wrap justify-content-between">
+                      <div className="margin-auto w-100 px-5">
+                        <form onSubmit={SubmitForm}>
+                          <div className="px-3">
 
-      <div className="box-shadow ">
-        <div className="pt-5">
-          <div className="d-flex wrap justify-content-between">
-            <div className="margin-auto w-100 px-5">
-              <form onSubmit={SubmitForm}>
-                <div className="px-3">
+                            <CustomAccordion
+                              data={{
+                                name: 'Materiality Benchmark',
+                                details: (
+                                  <div>
+                                    <FormBuilder
+                                      formItems={
+                                        planningProps(
+                                          {
+                                            formData,
+                                            // handleBlur,
+                                            handleChange: (e) => setFormData({ ...formData, [e.target.name]: e.target.value }),
+                                            errors
+                                          }
+                                        ).materiality
+                                      }
+                                    />
+                                  </div>
+                                )
+                              }}
+                              setCurrentPanel={setCurrentPanel}
+                              currentPanel={currentPanel}
+                              panel={1}
+                            />
+                            <CustomAccordion
+                              data={{
+                                name: 'Materiality',
+                                details: (
+                                  <div>
+                                    {
+                                      index?.materialLevels?.map((item) => (
+                                        <div key={item.name}>
+                                          <SliderSizes
+                                            max={item.upper_limit}
+                                            min={item.lower_limit}
+                                            overallmax={
+                                              selectedMaterialRange && selectedMaterialRange.upper_limit
+                                            }
+                                            overallmin={
+                                              selectedMaterialRange && selectedMaterialRange.lower_limit
+                                            }
+                                            formData={formData}
+                                            levelId={item.id}
+                                            setFormData={setFormData}
+                                            label={slugToString(item.name)}
+                                            name={item.name}
+                                            props={{
+                                              errors,
+                                              setErrors,
+                                              placeholder: 'Enter Amount'
+                                            }}
+                                          />
 
-                  <CustomAccordion
-                    data={{
-                      name: 'Materiality Benchmark',
-                      details: (
-                        <div>
-                          <FormBuilder
-                            formItems={
-                              planningProps(
-                                {
-                                  formData,
-                                  // handleBlur,
-                                  handleChange: (e) => setFormData({ ...formData, [e.target.name]: e.target.value }),
-                                  errors
-                                }
-                              ).materiality
-                            }
-                          />
-                        </div>
-                      )
-                    }}
-                    setCurrentPanel={setCurrentPanel}
-                    currentPanel={currentPanel}
-                    panel={1}
-                  />
-                  <CustomAccordion
-                    data={{
-                      name: 'Materiality',
-                      details: (
-                        <div>
-                          {
-                            index?.materialLevels?.map((item) => (
-                              <div key={item.name}>
-                                <SliderSizes
-                                  max={item.upper_limit}
-                                  min={item.lower_limit}
-                                  overallmax={
-                                    selectedMaterialRange && selectedMaterialRange.upper_limit
-                                  }
-                                  overallmin={
-                                    selectedMaterialRange && selectedMaterialRange.lower_limit
-                                  }
-                                  formData={formData}
-                                  levelId={item.id}
-                                  setFormData={setFormData}
-                                  label={slugToString(item.name)}
-                                  name={item.name}
-                                  props={{
-                                    errors,
-                                    setErrors,
-                                    placeholder: 'Enter Amount'
-                                  }}
-                                />
-
-                                <DragNDropTemp
-                                  formData={formData}
-                                  setFormData={setFormData}
-                                  setErrors={setErrors}
-                                  name={reason(item.name)}
-                                  label="Purpose"
-                                />
-                              </div>
-                            ))
-                          }
-                        </div>
-                      )
-                    }}
-                    setCurrentPanel={setCurrentPanel}
-                    currentPanel={currentPanel}
-                    panel={2}
-                  />
+                                          <DragNDropTemp
+                                            formData={formData}
+                                            setFormData={setFormData}
+                                            setErrors={setErrors}
+                                            name={reason(item.name)}
+                                            label="Purpose"
+                                          />
+                                        </div>
+                                      ))
+                                    }
+                                  </div>
+                                )
+                              }}
+                              setCurrentPanel={setCurrentPanel}
+                              currentPanel={currentPanel}
+                              panel={2}
+                            />
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
+      </div>
+      <div className="col-md-2 bg-white min-h-100">
+        <Notes />
       </div>
     </div>
   );

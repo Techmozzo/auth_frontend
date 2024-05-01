@@ -7,10 +7,13 @@ import { apiOptions } from '../../../../services/fetch';
 import useViewBoilerPlate from '../../../../components/hooks/useViewBoilerPlate';
 import DragNDropTemp from '../../temps/newEngagement/DragNDropInputTemp';
 import DragNDropFileInput from '../../../../components/form/inputs/fileInput/DragNDropFileInput';
+import { sentenceCaps } from '../../../../utilities/stringOperations';
 import Loader from '../../../../components/microComponents/loader';
 import PlanningClasses from '../../temps/planning/PlanningClasses';
 import useStoreParams from '../../../../components/hooks/useStoreParams';
 import { uploadMedia } from '../../../../redux/actions/projectActions';
+import { headerTemp1 } from '../../../../components/temps/projectTemps/miscTemps';
+import Notes from '../../Notes';
 
 const name = 'trial_balance';
 const route = 'TRIAL_UPLOAD';
@@ -123,61 +126,81 @@ const EditClass = () => {
   };
 
   return (
-    <div>
-      Edit Class
-      <form>
-        <div className="w-600 ">
+    <div className="row">
+      <div className="col-md-10">
+        {
+          headerTemp1({
+            text: 'Execution',
+            parent: 'Engagements',
+            name: sentenceCaps(engagementName),
+            link: '/app/engagement/',
+            link1: `/app/engagement/view/${engagementId}`
+          })
+        }
+        <div className="content">
+          <div>
+            <h4 className="d-flex justify-content-center">Edit Class</h4>
+            <div className="d-flex justify-content-center">
+              <form>
+                <div className="w-600 ">
 
-          <div className="box-shadow ">
-            <div className="pt-5">
-              <div className="d-flex wrap justify-content-between">
-                <div className="margin-auto w-100 px-5">
-                  <div className="px-3">
-                    {/* {console.log(formData?.trial_balance)} */}
-                    {/* <DocViewer documents={[formData?.trial_balance]} /> */}
-                    {/* <DragNDropTemp
-            formData={formData}
-            setFormData={setFormData}
-            setErrors={setErrors}
-            name="trial_balance"
-            label="Compose/Upload Trial Balance"
-          /> */}
+                  <div className="box-shadow ">
+                    <div className="pt-5">
+                      <div className="d-flex wrap justify-content-between">
+                        <div className="margin-auto w-100 px-5">
+                          <div className="px-3">
+                            {/* {console.log(formData?.trial_balance)} */}
+                            {/* <DocViewer documents={[formData?.trial_balance]} /> */}
+                            {/* <DragNDropTemp
+                    formData={formData}
+                    setFormData={setFormData}
+                    setErrors={setErrors}
+                    name="trial_balance"
+                    label="Compose/Upload Trial Balance"
+                  /> */}
 
-                    <label htmlFor="trial_balance">Compose/Upload Trial Balance</label>
-                    <DragNDropFileInput
-                      name="trial_balance"
-                      handleData={handleData}
-                      label="Compose/Upload Trial Balance"
-                      uploaded={status}
-                    />
+                            <label htmlFor="trial_balance">Compose/Upload Trial Balance</label>
+                            <DragNDropFileInput
+                              name="trial_balance"
+                              handleData={handleData}
+                              label="Compose/Upload Trial Balance"
+                              uploaded={status}
+                            />
 
+                          </div>
+
+                          {Uploadstat === 'pending'
+                            ? <Loader />
+                            : Uploadstat === 'failed'
+                              ? <p> dd</p>
+                              : (
+                                <PlanningClasses
+                                  setFormData={setFormData}
+                                  formData={formData}
+                                  currentPanel={currentPanel}
+                                  setCurrentPanel={setCurrentPanel}
+                                  handleBlur={(e) => console.log(e)}
+                                  handleChange={(e) => console.log(e)}
+                                  status={status}
+                                  message="message"
+                                  errors={errors}
+                                  setErrors={setErrors}
+                                  newClasses={newClasses}
+                                />
+                              )}
+                        </div>
+                      </div>
+                    </div>
                   </div>
-
-                  {Uploadstat === 'pending'
-                    ? <Loader />
-                    : Uploadstat === 'failed'
-                      ? <p> dd</p>
-                      : (
-                        <PlanningClasses
-                          setFormData={setFormData}
-                          formData={formData}
-                          currentPanel={currentPanel}
-                          setCurrentPanel={setCurrentPanel}
-                          handleBlur={(e) => console.log(e)}
-                          handleChange={(e) => console.log(e)}
-                          status={status}
-                          message="message"
-                          errors={errors}
-                          setErrors={setErrors}
-                          newClasses={newClasses}
-                        />
-                      )}
                 </div>
-              </div>
+              </form>
             </div>
           </div>
         </div>
-      </form>
+      </div>
+      <div className="col-md-2 bg-white min-h-100">
+        <Notes />
+      </div>
     </div>
   );
 };

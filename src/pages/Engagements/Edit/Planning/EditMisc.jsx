@@ -12,8 +12,8 @@ import { miscTests } from '../../../../utilities/dummyData';
 import FormBuilder from '../../../../components/form/builders/form';
 import planningProps from '../../constants/planningProps';
 import DragNDropTemp from '../../temps/newEngagement/DragNDropInputTemp';
-
 import { headerTemp1 } from '../../../../components/temps/projectTemps/miscTemps';
+import Notes from '../../Notes';
 
 const EditMisc = () => {
   const { engagementId, engagementName } = useParams();
@@ -89,6 +89,7 @@ const EditMisc = () => {
         }
         <div className="content">
           <div className="">
+            <h4 className="d-flex justify-content-center">Edit Misc</h4>
             <div className="mb-4 font-title-small mb-4">
               <div className="w-750 ">
 
@@ -180,6 +181,9 @@ const EditMisc = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="col-md-2 bg-white min-h-100">
+        <Notes />
       </div>
     </div>
   );

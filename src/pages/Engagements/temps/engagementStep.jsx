@@ -4,7 +4,7 @@ import React from 'react';
 import { slugify } from '../../../utilities/stringOperations';
 
 const EngagementStep = ({ engagementId, engagementName, status }) => (
-  <div className="row">
+  <div className="row d-flex justify-content-center">
     {/* <Link to={`/app/engagement/pre-planning/${slugify(engagementName, '-')}/${engagementId}`} className="col-md-3">
       <div className="custom-box mx-1 text-center text-theme-black bold">
         <div className="mb-3 mt-5">

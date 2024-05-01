@@ -10,6 +10,7 @@ import CustomAccordion from '../../../../components/ui/customAccordion';
 import { slugToString, sentenceCaps, notifier } from '../../../../utilities/stringOperations';
 import TextareaInput from '../../../../components/form/inputs/TextareaInput';
 import { headerTemp1 } from '../../../../components/temps/projectTemps/miscTemps';
+import Notes from '../../Notes';
 
 const EditExecution = () => {
   /* redux hooks */
@@ -81,6 +82,7 @@ const EditExecution = () => {
         }
         <div className="content">
           <div className="">
+            <h4 className="d-flex justify-content-center">Edit Execution</h4>
             <div className="mb-4 font-title-small mb-4">
               <div className="w-750 ">
 
@@ -132,6 +134,9 @@ const EditExecution = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="col-md-2 bg-white min-h-100">
+        <Notes />
       </div>
     </div>
   );
