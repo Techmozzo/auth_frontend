@@ -41,7 +41,7 @@ export default function SliderSizes({
     handleValue(value);
   }, [value]);
 
-  console.log(formData);
+  // console.log(formData);
   const handleValue = (amt) => {
     // console.log('==========');
     // console.log('Amount ', amt);
