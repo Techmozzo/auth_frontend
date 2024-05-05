@@ -8,9 +8,9 @@ import { sentenceCaps } from '../../../utilities/stringOperations';
 const IndexTemp = ({
   infoBarData, parent, header, link, table
 }) => (
-  <div className="row ">
-    <div className="col-md-10 offset-1">
-      <div className="d-flex custom-top-bar justify-content-between">
+  <div className="row">
+    <div className="col-md-12">
+      <div className="container d-flex custom-top-bar justify-content-between">
         <div className="theme-font-2 text-theme-black bold p-3">
           {parent?.toUpperCase()}
         </div>
@@ -19,7 +19,7 @@ const IndexTemp = ({
         </div>
       </div>
       <InfoBarTemp data={infoBarData} />
-      <div className="">
+      <div className="container mt-3">
         <div className="d-flex justify-content-between">
           <div className="text-theme-black font-regular bold">{sentenceCaps(header)}</div>
           <div>
