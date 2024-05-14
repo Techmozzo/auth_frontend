@@ -44,7 +44,7 @@ const AdminDash = () => {
       <hr className="nav-line" />
       <Dash indexstore={indexstore} />
       <div>
-        <div className="container mt-4 mb-3 pt-1">
+        <div className="container mt-4 pt-1">
           <div className="d-flex">
             <h3 className="font-regular">Recent Engagement</h3>
 

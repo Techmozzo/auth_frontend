@@ -6,16 +6,10 @@ import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
+import { makeStyles } from '@material-ui/core/styles';
 import TableRow from '@mui/material/TableRow';
 import { Box } from '@mui/material';
 import { useHistory } from 'react-router';
-import { CgArrowsExpandDownLeft, CgArrowsExpandUpRight } from 'react-icons/cg';
-// import Button from '@mui/material/Button';
-import { IconButton } from '@material-ui/core';
-// import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { MdOutlineMoreVert } from 'react-icons/md';
 import { Button } from 'primereact/button';
 import { Menu } from 'primereact/menu';
 import { ConfirmPopup, confirmPopup } from 'primereact/confirmpopup';
@@ -24,25 +18,39 @@ import usePermission from '../hooks/usePermission';
 import { sentenceCaps } from '../../utilities/stringOperations';
 import { del } from '../../services/fetch';
 
+const useStyles = makeStyles((theme) => ({
+  table: {
+    overflowY: 'auto',
+    borderCollapse: 'separate',
+    borderSpacing: '0 1em'
+  },
+  tableRow: {
+    borderBottom: '1px solid rgb(151, 151, 151, 0.4)'
+  }
+}));
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: 'rgb(249 249 249)',
-    color: '#828282',
-    fontWeight: 600
+    color: '#393939',
+    fontSize: '13px',
+    fontWeight: 500,
+    padding: '8px 16px'
   },
   [`&.${tableCellClasses.body}`]: {
-    fontSize: 14
+    fontSize: '14px',
+    padding: '8px 16px'
   }
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(even)': {
-    backgroundColor: theme.palette.action.hover
-  },
+  backgroundColor: '#ffffff'
+  // '&:nth-of-type(even)': {
+  //   backgroundColor: theme.palette.action.hover
+  // },
   // hide last border
-  '&:last-child td, &:last-child th': {
-    border: 0
-  }
+  // '&:last-child td, &:last-child th': {
+  //   border: 0
+  // }
 }));
 export default function DashboardTable({ data }) {
   const editEnganagment = usePermission('edit-engagement');
@@ -147,17 +155,19 @@ export default function DashboardTable({ data }) {
       accept: () => acceptDelete(id)
     });
   };
+
+  const classes = useStyles();
   return (
     <TableContainer component={Box}>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
+      <Table sx={{ minWidth: 700 }} aria-label="customized table" className={classes.table}>
         <TableHead>
-          <TableRow>
+          <TableRow className={classes.tableRow}>
             <StyledTableCell>Name</StyledTableCell>
             <StyledTableCell align="right">Year</StyledTableCell>
             <StyledTableCell align="right">Client</StyledTableCell>
             <StyledTableCell align="right">No. of Member</StyledTableCell>
             <StyledTableCell align="right">Status</StyledTableCell>
-            <StyledTableCell align="right">Action</StyledTableCell>
+            <StyledTableCell align="right">Actions</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>

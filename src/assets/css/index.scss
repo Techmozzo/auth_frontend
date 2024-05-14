@@ -85,7 +85,7 @@ iframe {
 
 }
 body {
-  font-family: 'Noto San', sans-serif;
+  font-family: 'Noto Sans', sans-serif;
   margin: 0;
   font-size: 1rem;
   overflow-x: hidden;
@@ -459,7 +459,7 @@ a.gray:hover {
 .nav-line {
   margin-bottom: 30px !important;
   margin-top: 10px !important;
-  border-top: 1px solid rgb(151, 151, 151, 0.4) !important;
+  border-top: 1px solid rgba(151, 151, 151, 0.4) !important;
 }
 .font-09 {
   font-size: 0.6rem !important;
@@ -789,7 +789,7 @@ button:focus {
     padding: 15px;
     border-radius: 5px;
     border: 1px solid #C6C6C6;
-    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-family: "Noto Sans", "Roboto", "Helvetica", "Arial", sans-serif;
     font-size: .9rem;
     height: 50px;
     color: #777;

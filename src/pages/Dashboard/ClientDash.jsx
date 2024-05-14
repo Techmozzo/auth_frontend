@@ -45,9 +45,9 @@ const ClientDash = () => {
       <hr className="nav-line" />
       <Dash indexstore={indexstore} />
       <div>
-        <div className="container my-3">
+        <div className="container mt-4 pt-1">
           <div className="d-flex">
-            <h3>Recent Engagement</h3>
+            <h3 className="font-regular">Recent Engagement</h3>
 
             <Link to="/app/engagement" className="ml-auto p-2">See All</Link>
           </div>
