@@ -6,6 +6,7 @@ import { projectAction } from '../../redux/actions/projectActions';
 import { apiOptions } from '../../services/fetch';
 import { role } from '../../utilities/auth';
 import Dash from './Dash';
+import SearchInputTwo from '../../components/form/inputs/SearchTwo';
 
 const AdminDash = () => {
   const dispatch = useDispatch();
@@ -36,16 +37,16 @@ const AdminDash = () => {
   // console.log('Problem ', indexstore?.dashboard?.data?.data);
   return (
     <div className="container">
-      <div className="d-flex">
-        <h2>Dashboard</h2>
-        <input type="text" value="" placeholder="search" className="ml-auto p-2" />
+      <div className="d-flex justify-content-between">
+        <h2 className="font-title-small">DASHBOARD</h2>
+        <SearchInputTwo placeholder="Search" className="" />
       </div>
-      <hr />
+      <hr className="nav-line" />
       <Dash indexstore={indexstore} />
       <div>
-        <div className="container my-3">
+        <div className="container mt-4 mb-3 pt-1">
           <div className="d-flex">
-            <h3>Recent Engagement</h3>
+            <h3 className="font-regular">Recent Engagement</h3>
 
             <Link to="/app/engagement" className="ml-auto p-2">See All</Link>
           </div>

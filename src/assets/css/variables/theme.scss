@@ -4,6 +4,8 @@ $theme-color-light: rgba(255, 165, 0, 0.22);
 $theme-color-black: #202020;
 $theme-color-grey: #828282;
 $theme-color-faint: #B3B3B3;
+$theme-color-gray-dark: #7D86A9;
+$theme-color-gray-faint: #97A4BA;
 // $theme-color-faint-1: rgba(198, 198, 198, 0.11);
 $theme-color-faint-1: #f4f4f4;
 $theme-color-off-white: #D8D8D8;
@@ -35,4 +37,11 @@ $theme-line-small: 25px;
 $theme-line-smaller: 20px;
 $theme-line-tiny: 18px;
 $theme-line-tinier: 15px;
+
+// Font weight variables
+$theme-weight-light: 300;
+$theme-weight-regular: 400;
+$theme-weight-medium: 500;
+$theme-weight-bold: 700;
+$theme-weight-bolder: 900;
 

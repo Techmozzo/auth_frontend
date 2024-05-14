@@ -6,6 +6,7 @@ import { projectAction } from '../../redux/actions/projectActions';
 import { apiOptions } from '../../services/fetch';
 import { role } from '../../utilities/auth';
 import Dash from './Dash';
+import SearchInputTwo from '../../components/form/inputs/SearchTwo';
 
 const ClientDash = () => {
   const dispatch = useDispatch();
@@ -37,10 +38,11 @@ const ClientDash = () => {
   return (
     <div className="container">
       <div className="d-flex">
-        <h2>Staff Dashboard</h2>
+        <h2 className="font-header-small">Staff Dashboard</h2>
         <input type="text" value="" placeholder="search" className="ml-auto p-2" />
+        <SearchInputTwo placeholder="Search" className="" />
       </div>
-      <hr />
+      <hr className="nav-line" />
       <Dash indexstore={indexstore} />
       <div>
         <div className="container my-3">

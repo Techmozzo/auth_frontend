@@ -37,6 +37,21 @@
 .font-30 {
   @include font-size($screen-sm-min, $screen-xl-min, 20, 30, 20, 45);
 }
+.font-weight-light {
+  font-weight: $theme-weight-light;
+}
+.font-weight-regular {
+  font-weight: $theme-weight-regular;
+}
+.font-weight-medium {
+  font-weight: $theme-weight-medium;
+}
+.font-weight-bold {
+  font-weight: $theme-weight-bold;
+}
+.font-weight-bolder {
+  font-weight: $theme-weight-bolder;
+}
 .text-theme-black {
   color: $theme-color-black !important;
 }
@@ -46,10 +61,15 @@
 .text-theme-faint {
   color: $theme-color-faint !important;
 }
+.text-theme-gray-dark {
+  color: $theme-color-gray-dark !important;
+}
+.text-theme-gray-faint {
+  color: $theme-color-gray-faint !important;
+}
 .text-theme-blue {
   color: $theme-blue;
 }
-
 .text-theme {
   color: $theme-color !important;
 }
@@ -101,6 +121,7 @@ svg:not(:root) {
 .center-horizontal {
   margin: auto;
   width: fit-content;
+  width: -moz-fit-content;
 }
 .center-vertical {
   position: absolute;

@@ -425,6 +425,42 @@ a.gray:hover {
 
   }
 }
+.search-input-two {
+  position: relative;
+  background: #ffffff;
+  border-radius: 3px;
+  padding: 6px;
+
+  input {
+    border: none !important;
+    width: 12.3rem;
+    padding-left: 8px;
+    background: #ffffff;
+      &::placeholder,
+      &::-webkit-input-placeholder,
+      &:-moz-placeholder {
+        color: #202020;
+        font-family: 'Noto Sans', sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 19px;
+      }
+  }
+
+  button {
+    position: absolute;
+    appearance: none;
+    background: transparent;
+    right: 6px;
+    font-size: 16px;
+    top: 10px;
+  }
+}
+.nav-line {
+  margin-bottom: 30px !important;
+  margin-top: 10px !important;
+  border-top: 1px solid rgb(151, 151, 151, 0.4) !important;
+}
 .font-09 {
   font-size: 0.6rem !important;
 }

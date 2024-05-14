@@ -32,7 +32,7 @@ const SearchInput = ({
               onKeyPress={onKeyPress}
               onKeyDown={onKeyDown}
             />
-            <button type="button" className="searchBtn text-theme">
+            <button type="button" className="searchBtn text-theme" aria-label="search">
               <FaSearch />
             </button>
           </>

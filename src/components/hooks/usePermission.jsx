@@ -20,7 +20,7 @@ export default function usePermission(permissionName) {
         // console.log('Inside ', data.data.data.roles);
         // // eslint-disable-next-line max-len
         // console.log(permissionsData);
-        setPermissions(permissionsData[0].permissions || []);
+        setPermissions(permissionsData[0]?.permissions || []);
       }
 
       setLoading(false);
