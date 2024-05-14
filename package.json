@@ -57,6 +57,7 @@
     "react-scroll": "^1.8.4",
     "react-scroll-up-button": "^1.6.4",
     "react-share": "^4.4.0",
+    "react-toastify": "^10.0.5",
     "react-uuid": "^1.0.2",
     "react-water-wave": "^1.0.5",
     "redux": "^4.0.5",
@@ -87,6 +88,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@babel/plugin-transform-private-property-in-object": "7.23.4",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-plugin-import": "^2.22.0",

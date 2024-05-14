@@ -92,7 +92,12 @@ const NewClientDirectors = ({
                         currentPanel={currPan}
                         setCurrentPanel={setCurrPan}
                         removeAccordion={(
-                          <button type="button" onClick={(e) => removeSub(e, item)} className="btn-del border-radius-5 text-white">
+                          <button
+                            type="button"
+                            onClick={(e) => removeSub(e, item)}
+                            className="btn-del border-radius-5 text-white"
+                            aria-label="Remove Accordion"
+                          >
                             <AiOutlineDelete />
                           </button>
                         )}

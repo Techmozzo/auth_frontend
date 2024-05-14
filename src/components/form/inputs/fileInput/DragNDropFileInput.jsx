@@ -26,7 +26,7 @@ const DragNDropFileInput = ({ handleData, label, uploaded }) => {
                   ? (
                     <div className="font-regular">
                       <p>
-                        <button type="button" className="btn-plain">
+                        <button type="button" className="btn-plain" aria-label="Add file">
                           <AiOutlineFileAdd className="font-black font-title-small" />
                         </button>
                       </p>

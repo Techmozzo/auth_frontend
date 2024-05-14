@@ -117,7 +117,7 @@ $dial-loader-timing: ease-in-out;
     animation-duration: 1.8s;
     animation-iteration-count: infinite;
     animation-timing-function: $dial-loader-timing;
-    filter: drop-shadow(0 0 $dial-loader-offset/2.25 rgba($dial-loader-color, 0.75));
+    filter: drop-shadow(0 0 calc(#{$dial-loader-offset} / 2.25) rgba($dial-loader-color, 0.75));
   }
   &:before {
     width: 100%;

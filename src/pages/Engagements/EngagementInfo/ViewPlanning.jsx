@@ -133,41 +133,39 @@ const ViewPlanning = ({ planning, engangementid, statusid }) => {
                     </dl>
                     <dl className="row">
                       <dt className="col-sm-4 text-truncate">{sentenceCaps('Procedures')}</dt>
-                      <div className="card pt-4 px-1">
-                        <dd className="col-sm-8">
-                          {it && it.procedures.map((pr) => (
-                            <>
-                              <dl className="row">
-                                <dt className="col-sm-5 text-truncate">{sentenceCaps('description')}</dt>
-                                <dd className="col-sm-7">
-                                  {/* {it.process_flow_document} */}
-                                  <DisplayContent contents={pr?.description || 'dd'} />
-                                </dd>
-                                <dt className="col-sm-5 text-truncate">{sentenceCaps('other info')}</dt>
-                                <dd className="col-sm-7">
-                                  {/* {it.process_flow_document} */}
-                                  <DisplayContent contents={pr?.other_info || 'dd'} />
-                                </dd>
-                              </dl>
+                      <dd className="col-sm-8">
+                        {it && it.procedures.map((pr) => (
+                          <div className="card pt-3 px-2">
+                            <dl className="row">
+                              <dt className="col-sm-4 text-truncate">{sentenceCaps('description')}</dt>
+                              <dd className="col-sm-8">
+                                {/* {it.process_flow_document} */}
+                                <DisplayContent contents={pr?.description || 'dd'} />
+                              </dd>
+                              <dt className="col-sm-4 text-truncate">{sentenceCaps('other info')}</dt>
+                              <dd className="col-sm-8">
+                                {/* {it.process_flow_document} */}
+                                <DisplayContent contents={pr?.other_info || 'dd'} />
+                              </dd>
+                            </dl>
 
-                              {pr && pr.assertions.map((as) => {
-                                if (as.value === '1') {
-                                  return (
-                                    <dl className="row">
-                                      <dt className="col-sm-5 text-truncate">{sentenceCaps('Assertions')}</dt>
-                                      <dd className="col-sm-7">
-                                        {/* {it.process_flow_document} */}
-                                        <DisplayContent contents={as?.name || 'dd'} />
-                                      </dd>
-                                    </dl>
-                                  );
-                                }
-                                return null;
-                              })}
-                            </>
-                          ))}
-                        </dd>
-                      </div>
+                            {pr && pr.assertions.map((as) => {
+                              if (as.value === '1') {
+                                return (
+                                  <dl className="row">
+                                    <dt className="col-sm-4 text-truncate">{sentenceCaps('Assertions')}</dt>
+                                    <dd className="col-sm-8">
+                                      {/* {it.process_flow_document} */}
+                                      <DisplayContent contents={as?.name || 'dd'} />
+                                    </dd>
+                                  </dl>
+                                );
+                              }
+                              return null;
+                            })}
+                          </div>
+                        ))}
+                      </dd>
                     </dl>
                     <hr />
                   </>
