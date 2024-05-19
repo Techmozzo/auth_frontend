@@ -48,7 +48,7 @@ const PlanningTemp = ({
     //     action: 'UPLOAD_MEDIA_COMPLETE'
     //   }
     // ], dispatch);
-    // return notifier({
+    // return toastNotifier({
     //   title: 'Download Failed',
     //   text: message,
     //   type: 'info'

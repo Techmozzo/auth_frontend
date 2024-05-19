@@ -1,8 +1,8 @@
 import React from 'react';
-import _, { isFunction } from 'lodash';
+import _ from 'lodash';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
-import { notifier, stringDoesNotExist } from '../../utilities/stringOperations';
+import { stringDoesNotExist, toastNotifier } from '../../utilities/stringOperations';
 import useStoreParams from './useStoreParams';
 import useBoilerPlate from './useBoilerPlate';
 import useUpdateStore from './useUpdateStore';
@@ -42,7 +42,7 @@ const useCreateBoilerPlate = ({
             ...pushUpdatesArr
           ], dispatch);
       }
-      notifier({
+      toastNotifier({
         type: 'success',
         text: message,
         title: 'Success'
@@ -52,7 +52,7 @@ const useCreateBoilerPlate = ({
       }
     }
     if (status === 'failed') {
-      notifier({
+      toastNotifier({
         type: 'error',
         text: message,
         title: 'Error'

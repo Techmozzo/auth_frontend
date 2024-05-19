@@ -12,7 +12,7 @@ import { logout } from '../../utilities/auth';
 import ListMat from '../../components/ui/listMat';
 import { projectAction } from '../../redux/actions/projectActions';
 import { apiOptions } from '../../services/fetch';
-import { notifier } from '../../utilities/stringOperations';
+import { toastNotifier } from '../../utilities/stringOperations';
 import PageTemp from '../../components/temps/PageTemp';
 
 const user = { ...JSON.parse(localStorage.getItem('user')) };
@@ -39,7 +39,7 @@ const MyAccount = ({ setCurrent }) => {
     if (name === 'profile_pic_url') {
       const fileSize = (files[0]?.size / 1024 / 1024).toFixed(3);
       if (fileSize > 1) {
-        return notifier({
+        return toastNotifier({
           type: 'error',
           title: 'error',
           text: `the media size of ${fileSize}MB is too large, size must not be larger than 1MB`
@@ -73,7 +73,7 @@ const MyAccount = ({ setCurrent }) => {
       localStorage.setItem('user', JSON.stringify({ ...formData, profile_pic_url: store?.dp?.data?.data?.uri }));
     }
     if (store?.dp?.status === 'failed') {
-      notifier({
+      toastNotifier({
         title: 'Upload Failed',
         text: 'Your profile picture failed to upload to the server. Please try again',
         type: 'error'

@@ -4,7 +4,7 @@ import { useHistory } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Loader from '../microComponents/loader';
-import { notifier, stringDoesNotExist } from '../../utilities/stringOperations';
+import { toastNotifier, stringDoesNotExist } from '../../utilities/stringOperations';
 import { resetAction } from '../../redux/actions/projectActions';
 import NoData from '../../pages/authentication/NoData';
 import useRefresh from '../hooks/useRefresh';
@@ -37,7 +37,7 @@ const PageTemp = ({
 
       /* conditionally render notifiers and page refresh */
       if (history.location.pathname !== '/home') {
-        return notifier({
+        return toastNotifier({
           title: 'Error Occurred',
           text: message,
           type: 'error'
@@ -46,7 +46,7 @@ const PageTemp = ({
     }
     // if (status === 'success') {
     //   if (_.isEmpty(data)) {
-    //     notifier({
+    //     toastNotifier({
     //       title: 'No content',
     //       text: message || 'There is no data to display yet',
     //       type: 'info'

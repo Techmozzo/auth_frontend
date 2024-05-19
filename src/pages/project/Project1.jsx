@@ -11,7 +11,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Avatar from '@material-ui/core/Avatar';
 import FormBuilder from '../../components/form/builders/form';
 import { validateField } from '../../utilities/validation';
-import { camelToString, notifier, stringDoesNotExist } from '../../utilities/stringOperations';
+import { camelToString, toastNotifier, stringDoesNotExist } from '../../utilities/stringOperations';
 import Modal from '../../components/microComponents/modal';
 import { formBuilderProjectsStartProps, title } from './constants/startProject1Props';
 import {
@@ -61,7 +61,7 @@ const Project1 = () => {
   const [loading, setLoading] = useState(false);
 
   const indexData = { ...JSON.parse(localStorage.getItem('index')) };
-  const showUpload = (err) => notifier({
+  const showUpload = (err) => toastNotifier({
     type: 'error',
     title: 'error',
     text: 'media upload failed'
@@ -87,7 +87,7 @@ const Project1 = () => {
       return removeAtIndex(formData.deleteMedia);
     }
     if (store.deleteMedia.status === 'failed') {
-      return notifier({
+      return toastNotifier({
         title: 'error',
         type: 'error',
         text: store.deleteMedia?.data || store.deleteMedia?.data?.message || 'failed to delete project'
@@ -100,7 +100,7 @@ const Project1 = () => {
   useEffect(() => {
     if (store.project1?.status === 'success' && history.state.prevPath !== `/project/create/form-2/${id}`) {
       setTimeout(() => handleClose(), 5000);
-      notifier({
+      toastNotifier({
         type: 'success',
         title: 'Progress Saved',
         text: `Your project ${formData.title} has been updated`
@@ -159,7 +159,7 @@ const Project1 = () => {
     if (name === 'media' && formData?.file?.indexOf(files[0] === -1)) {
       const fileSize = (files[0]?.size / 1024 / 1024).toFixed(3);
       if (fileSize > 1) {
-        return notifier({
+        return toastNotifier({
           type: 'error',
           title: 'error',
           text: `the media size of ${fileSize}MB is too large, size must not be larger than 1MB`

@@ -29,7 +29,7 @@ import Kat from '../../assets/images/kat-yukawa-K0E6E0a0R3A-unsplash 1.svg';
 import LazyImage from '../../components/microComponents/lazyImg';
 import BackdropModal from '../../components/microComponents/backdropModal';
 import DeleteProjectTemp from '../../components/temps/modalTemps/deleteProject';
-import { notifier } from '../../utilities/stringOperations';
+import { toastNotifier } from '../../utilities/stringOperations';
 import Loader from '../../components/microComponents/loader';
 
 /**
@@ -83,7 +83,7 @@ const CreateProject = () => {
       ]);
     }
     if (store.status === 'failed') {
-      notifier({
+      toastNotifier({
         title: 'error',
         type: 'error',
         text: store.data || store.medssage || 'we could not retrieve any draft information'

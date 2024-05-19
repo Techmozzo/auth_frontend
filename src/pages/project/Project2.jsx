@@ -16,7 +16,7 @@ import {
 import { BiArrowBack } from 'react-icons/fa';
 import FormBuilder from '../../components/form/builders/form';
 import { validateField } from '../../utilities/validation';
-import { camelToString, notifier, stringDoesNotExist } from '../../utilities/stringOperations';
+import { camelToString, toastNotifier, stringDoesNotExist } from '../../utilities/stringOperations';
 import Modal from '../../components/microComponents/modal';
 import { formBuilderProjectsStartProps, title } from './constants/startProject1Props';
 import formBuilderProjectsStart2Props from './constants/startProject2Props';
@@ -78,14 +78,14 @@ const Project2 = () => {
 
   useEffect(() => {
     if (store.project?.status === 'failed') {
-      notifier({
+      toastNotifier({
         type: 'error',
         title: 'Progress Failed To Save',
         text: `Your project ${formData.title} could not be updated. Try again`
       });
     }
     if (store.project?.status === 'success') {
-      notifier({
+      toastNotifier({
         type: 'success',
         title: 'Project Saved',
         text: `Kindly review your project ${formData.title}`

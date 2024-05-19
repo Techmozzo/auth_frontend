@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useParams, useHistory } from 'react-router-dom';
 import { get, post } from '../../../services/fetch';
-import { notifier } from '../../../utilities/stringOperations';
+import { toastNotifier } from '../../../utilities/stringOperations';
 import Loader from '../../../components/microComponents/loader';
 
 const AcceptInvite = () => {
@@ -15,14 +15,14 @@ const AcceptInvite = () => {
       const datax = await get({ endpoint: 'ACCEPT_ENGAGEMENT_INVITE', auth: true, param: token });
       // console.log(datax);
       if (datax.status === 201) {
-        notifier({
+        toastNotifier({
           type: 'success',
           text: 'Enganagment Invite Accepted',
           title: 'Success'
         });
         push('/app/engagement');
       } else {
-        notifier({
+        toastNotifier({
           type: 'error',
           text: datax.message,
           title: 'Error'
@@ -31,7 +31,7 @@ const AcceptInvite = () => {
       }
     } catch (e) {
       // console.log(e);
-      notifier({
+      toastNotifier({
         type: 'error',
         text: e.message,
         title: 'Error'

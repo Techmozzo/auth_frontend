@@ -3,7 +3,7 @@ import React from 'react';
 import _ from 'lodash';
 import { uploadMedia } from '../../redux/actions/projectActions';
 import useStoreParams from './useStoreParams';
-import { notifier } from '../../utilities/stringOperations';
+import { toastNotifier } from '../../utilities/stringOperations';
 import useUpdateStore from './useUpdateStore';
 
 /**
@@ -34,7 +34,7 @@ const useFileUploadService = ({
   React.useEffect(() => {
     switch (status) {
     case 'failed':
-      notifier({
+      toastNotifier({
         title: 'Upload Failed',
         text: message || 'failed to upload file',
         type: 'error'

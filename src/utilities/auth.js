@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
 import localforage from 'localforage';
-import { notifier } from './stringOperations';
+// import { toastNotifier } from './stringOperations';
 
 /**
  * This function encodes its payload into a token

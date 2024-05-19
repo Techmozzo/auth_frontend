@@ -7,7 +7,7 @@ import uuid from 'react-uuid';
 import { mapBackendErrors, validateField } from '../../utilities/validation';
 import PageTemp from '../../components/temps/PageTemp';
 import { projectAction, resetAction } from '../../redux/actions/projectActions';
-import { notifier, slugToString } from '../../utilities/stringOperations';
+import { toastNotifier, slugToString } from '../../utilities/stringOperations';
 
 import FormBuilder from '../../components/form/builders/form';
 import CheckboxComp from '../../components/ui/CheckboxComp';
@@ -35,7 +35,7 @@ const CompleteProfile1 = () => {
       localforage.setItem('user', store?.data?.data?.user);
       localStorage.setItem('company', store?.data?.data?.company);
       localStorage.setItem('user', JSON.stringify(store?.data?.data?.user));
-      notifier({
+      toastNotifier({
         title: 'Logged In As an Auditor',
         text: 'Profile updated successfully',
         type: 'success'

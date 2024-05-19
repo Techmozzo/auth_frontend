@@ -1,6 +1,6 @@
 import axios from 'axios';
 import paths from './endpoints';
-import { notifier } from '../utilities/stringOperations';
+import { toastNotifier } from '../utilities/stringOperations';
 import { logout } from '../utilities/auth';
 
 // const getToken = () => {
@@ -70,7 +70,7 @@ const fetchBackend = async (
 
       ) {
         // notifiy user
-        notifier({
+        toastNotifier({
           type: 'info',
           title: 'Protected Route',
           text: 'You need to be authenticated to access this content'

@@ -10,7 +10,7 @@ import { FiFilter } from 'react-icons/fi';
 import { GiThumbUp } from 'react-icons/gi';
 import { myProfile } from '../../redux/actions/profileActions';
 import {
-  notifier, stringCaps
+  toastNotifier, stringCaps
 } from '../../utilities/stringOperations';
 import OrdinaryTable from '../../components/table';
 import { projectAction } from '../../redux/actions/projectActions';
@@ -160,7 +160,7 @@ const Transactions = () => {
       setFormData(store?.data?.data);
     }
     if (store?.status === 'failed') {
-      notifier({
+      toastNotifier({
         title: 'error',
         type: 'error',
         text: store?.data

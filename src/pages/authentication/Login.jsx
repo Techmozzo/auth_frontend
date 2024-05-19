@@ -12,7 +12,7 @@ import {
 } from '../../utilities/validation';
 import PageTemp from '../../components/temps/PageTemp';
 import { resetAction } from '../../redux/actions/projectActions';
-import { notifier, slugToString } from '../../utilities/stringOperations';
+import { toastNotifier, slugToString } from '../../utilities/stringOperations';
 import { safetySvg } from '../../utilities/dummyData';
 import loginProps from './constants/loginProps';
 import FormBuilder from '../../components/form/builders/form';
@@ -37,7 +37,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (store?.status === 'success') {
-      notifier({
+      toastNotifier({
         title: 'Logged In',
         text: 'Logged in successfully',
         type: 'success'
@@ -107,7 +107,7 @@ const LoginPage = () => {
               Fast. Secure. Safe.
             </p>
             <p className="font-regular text-white">
-              Find peace, life is like a water fall, you’ve gotta flow.
+              Find peace, life is like a water fall, you&#x2019;ve gotta flow.
               They will try to close the door on you, just open it.
               The ladies always say Khaled you smell good
             </p>

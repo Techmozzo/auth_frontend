@@ -4,7 +4,7 @@ import { isFunction } from 'lodash';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import Loader from '../../../components/microComponents/loader';
 import useCreateBoilerPlate from '../../../components/hooks/useCreateBoilerPlate';
-import { notifier, sentenceCaps } from '../../../utilities/stringOperations';
+import { toastNotifier, sentenceCaps } from '../../../utilities/stringOperations';
 import useUpdateStore from '../../../components/hooks/useUpdateStore';
 // import useStoreParams from '../../../components/hooks/useStoreParams';
 import { apiOptions } from '../../../services/fetch';

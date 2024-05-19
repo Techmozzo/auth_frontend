@@ -8,7 +8,7 @@ import DragNDropFileInput from '../../../../components/form/inputs/fileInput/Dra
 import useStoreParams from '../../../../components/hooks/useStoreParams';
 import { uploadMedia } from '../../../../redux/actions/projectActions';
 import { QuillEditorBubble } from '../../../../components/ui/richText';
-import { notifier } from '../../../../utilities/stringOperations';
+import { toastNotifier } from '../../../../utilities/stringOperations';
 import useCreateBoilerPlate from '../../../../components/hooks/useCreateBoilerPlate';
 import { apiOptions } from '../../../../services/fetch';
 import useUpdateStore from '../../../../components/hooks/useUpdateStore';
@@ -41,7 +41,7 @@ const DragNDropTemp = ({
     //     action: 'UPLOAD_MEDIA_COMPLETE'
     //   }
     // ], dispatch);
-    // return notifier({
+    // return toastNotifier({
     //   title: 'Download Failed',
     //   text: message,
     //   type: 'info'

@@ -11,7 +11,7 @@ import {
 } from '../../utilities/validation';
 import PageTemp from '../../components/temps/PageTemp';
 import { resetAction } from '../../redux/actions/projectActions';
-import { notifier, slugToString } from '../../utilities/stringOperations';
+import { toastNotifier, slugToString } from '../../utilities/stringOperations';
 
 import FormBuilder from '../../components/form/builders/form';
 import registerProps from './constants/register';
@@ -41,7 +41,7 @@ const RegisterPage = () => {
   useEffect(() => { window.scrollTo(0, 0); }, []);
   useEffect(() => {
     if (loginstore?.status === 'success') {
-      notifier({
+      toastNotifier({
         title: 'Registered',
         text: 'Signed up successfully',
         type: 'success'

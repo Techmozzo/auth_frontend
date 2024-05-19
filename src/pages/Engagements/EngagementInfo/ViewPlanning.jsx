@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Link, useParams, useHistory } from 'react-router-dom';
 import FileViewer from 'react-file-viewer';
-import { notifier, sentenceCaps } from '../../../utilities/stringOperations';
+import { toastNotifier, sentenceCaps } from '../../../utilities/stringOperations';
 import { get } from '../../../services/fetch';
 import Loader from '../../../components/microComponents/loader';
 import usePermission from '../../../components/hooks/usePermission';
@@ -22,14 +22,14 @@ const ViewPlanning = ({ planning, engangementid, statusid }) => {
       });
       // console.log(datax);
       if (datax.status === 200) {
-        notifier({
+        toastNotifier({
           type: 'success',
           text: 'Planning Accepted',
           title: 'Success'
         });
         push(`/app/engagement/view/${engangementid}`);
       } else {
-        notifier({
+        toastNotifier({
           type: 'error',
           text: datax.message,
           title: 'Error'
@@ -38,7 +38,7 @@ const ViewPlanning = ({ planning, engangementid, statusid }) => {
       }
     } catch (e) {
       // console.log(e);
-      notifier({
+      toastNotifier({
         type: 'error',
         text: e.message,
         title: 'Error'

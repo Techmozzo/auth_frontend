@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import React, { useState } from 'react';
 import { Link, useParams, useHistory } from 'react-router-dom';
-import { notifier, sentenceCaps } from '../../../utilities/stringOperations';
+import { toastNotifier, sentenceCaps } from '../../../utilities/stringOperations';
 import { get } from '../../../services/fetch';
 import Loader from '../../../components/microComponents/loader';
 import usePermission from '../../../components/hooks/usePermission';
@@ -9,7 +9,7 @@ import Collapsible from '../../../components/microComponents/Collapsible';
 import DisplayContent from './DisplayContent';
 
 const ViewConculsion = ({ conclusion, engangementid, statusid }) => {
-  const [state, setState] = useState();
+  // const [state, setState] = useState();
   const { push } = useHistory();
   const [status, setStatus] = useState(false);
   const editEnganagment = usePermission('edit-engagement');
@@ -22,14 +22,14 @@ const ViewConculsion = ({ conclusion, engangementid, statusid }) => {
       });
       // console.log(datax);
       if (datax.status === 200) {
-        notifier({
+        toastNotifier({
           type: 'success',
           text: 'Conclusion Accepted',
           title: 'Success'
         });
         push(`/app/engagement/view/${engangementid}`);
       } else {
-        notifier({
+        toastNotifier({
           type: 'error',
           text: datax.message,
           title: 'Error'
@@ -38,7 +38,7 @@ const ViewConculsion = ({ conclusion, engangementid, statusid }) => {
       }
     } catch (e) {
       // console.log(e);
-      notifier({
+      toastNotifier({
         type: 'error',
         text: e.message,
         title: 'Error'

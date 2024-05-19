@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { isEmpty, isFunction } from 'lodash';
-import { notifier } from '../../utilities/stringOperations';
+import { toastNotifier } from '../../utilities/stringOperations';
 
 /**
  * @param history {any}
@@ -17,12 +17,12 @@ const useFetchData = ({
   push, emptyRedirect, dataIndex, emptyState, emptyCallback,
   store, initialCallback, failCallback, successCallback, emptyMsg
 }) => {
-  useEffect(() => {
+  React.useEffect(() => {
     if (store?.status === 'initial') {
       isFunction(initialCallback) && initialCallback();
     }
     if (store?.status === 'failed') {
-      notifier({
+      toastNotifier({
         title: 'Connection Failed',
         text: store?.message || 'Failed to connect to resource. Please retry',
         type: 'error'
@@ -34,7 +34,7 @@ const useFetchData = ({
         isEmpty(store.data[dataIndex])
         || (isFunction(emptyState) && emptyState(store.data[dataIndex]))
       ) {
-        notifier({
+        toastNotifier({
           title: '',
           text: emptyMsg,
           type: 'info'

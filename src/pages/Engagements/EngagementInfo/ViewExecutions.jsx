@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import React, { useState } from 'react';
 import { Link, useParams, useHistory } from 'react-router-dom';
-import { notifier, sentenceCaps } from '../../../utilities/stringOperations';
+import { toastNotifier, sentenceCaps } from '../../../utilities/stringOperations';
 import { get } from '../../../services/fetch';
 import Loader from '../../../components/microComponents/loader';
 import usePermission from '../../../components/hooks/usePermission';
@@ -22,14 +22,14 @@ const ViewExecutions = ({ execution, engangementid, statusid }) => {
       });
       // console.log(datax);
       if (datax.status === 200) {
-        notifier({
+        toastNotifier({
           type: 'success',
           text: 'Execution Accepted',
           title: 'Success'
         });
         push(`/app/engagement/view/${engangementid}`);
       } else {
-        notifier({
+        toastNotifier({
           type: 'error',
           text: datax.message,
           title: 'Error'
@@ -38,7 +38,7 @@ const ViewExecutions = ({ execution, engangementid, statusid }) => {
       }
     } catch (e) {
       // console.log(e);
-      notifier({
+      toastNotifier({
         type: 'error',
         text: e.message,
         title: 'Error'

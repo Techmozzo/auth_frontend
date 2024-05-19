@@ -22,7 +22,7 @@ import {
 } from '../../utilities/auth';
 import { projectAction } from '../../redux/actions/projectActions';
 import { apiOptions } from '../../services/fetch';
-import { notifier, sentenceCaps } from '../../utilities/stringOperations';
+import { toastNotifier, sentenceCaps } from '../../utilities/stringOperations';
 import useUpdateStore from '../hooks/useUpdateStore';
 import { notifications } from '../../redux/actions/profileActions';
 
@@ -165,7 +165,7 @@ const MiniDrawer = ({
 
   useEffect(() => {
     if (store?.auth?.logout?.status === 'success') {
-      notifier({
+      toastNotifier({
         type: 'success',
         text: store?.auth?.logout?.data?.message,
         title: 'Goodbye...'

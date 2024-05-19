@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { notifier, slugToString, stringDoesNotExist } from './stringOperations';
+import { toastNotifier, slugToString, stringDoesNotExist } from './stringOperations';
 import { validateField } from './validation';
 import { uploadMedia } from '../redux/actions/projectActions';
 
@@ -42,7 +42,7 @@ export const fileUploadMultiple = ({ setProgress, e, dispatch }) => {
     / Number(process.env.REACT_APP_FILE_LIMIT)).toFixed(3);
 
   // if (fileSize > 1) {
-  //   return notifier({
+  //   return toastNotifier({
   //     type: 'error',
   //     title: 'error',
   //     text: `the media size of ${fileSize}MB is too large,

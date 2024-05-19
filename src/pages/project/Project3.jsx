@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
 import { IoSadOutline } from 'react-icons/fa';
 import FormBuilder from '../../components/form/builders/form';
 import { validateField } from '../../utilities/validation';
-import { camelToString, notifier } from '../../utilities/stringOperations';
+import { camelToString, toastNotifier } from '../../utilities/stringOperations';
 import formBuilderProjectsPreviewProps from './constants/startProject3Props';
 import {
   editProject, submitProject, uploadMedia, getProject, projectAction, projectCategories
@@ -53,7 +53,7 @@ const Project3 = () => {
     name: ar
   }));
 
-  const showUpload = (err) => notifier({
+  const showUpload = (err) => toastNotifier({
     type: 'error',
     title: 'error',
     text: 'media upload failed'
@@ -86,7 +86,7 @@ const Project3 = () => {
     if (store.deleteMedia.status === 'success') {
       removeAtIndex(formData.deleteMedia);
     } else if (store.deleteMedia?.status === 'failed') {
-      notifier({
+      toastNotifier({
         type: 'error',
         title: 'error',
         text: 'this media could not be deleted at this time, try again later'
@@ -138,14 +138,14 @@ const Project3 = () => {
       setMessage(`${formData.title} is not yet submitted. Do you wish to Submit Now?`);
     }
     if (store?.submitProject?.status === 'success' || store?.editProjectRequest?.status === 'success' || (store?.project?.status === 'success' && formData.approvalStatus !== 6)) {
-      notifier({
+      toastNotifier({
         type: 'success',
         title: 'success',
         text: 'project submitted, an admin will attend to it accordingly.'
       });
       setTimeout(() => window.location.replace('/me'), 5000);
     } else if (store?.submitProject?.status === 'failed' || store?.project?.status === 'failed' || store?.editProjectRequest?.status === 'failed') {
-      notifier({
+      toastNotifier({
         type: 'error',
         title: 'error',
         text: 'this action failed to execute, ensure your profile is verified'
@@ -234,7 +234,7 @@ const Project3 = () => {
     if (name === 'media' && formData?.file?.indexOf(files[0] === -1)) {
       const fileSize = (files[0]?.size / 1024 / 1024).toFixed(3);
       if (fileSize > 1) {
-        return notifier({
+        return toastNotifier({
           type: 'error',
           title: 'error',
           text: `the media size of ${fileSize}MB is too large, size must not be larger than 1MB`

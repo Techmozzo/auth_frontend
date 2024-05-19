@@ -6,7 +6,7 @@ import MiscTemp from '../../temps/planning/MiscTemp';
 import useClasses from '../../../../components/hooks/useClasses';
 import { apiOptions, patch } from '../../../../services/fetch';
 import useCreateBoilerPlate from '../../../../components/hooks/useCreateBoilerPlate';
-import { stringDoesNotExist, sentenceCaps, notifier } from '../../../../utilities/stringOperations';
+import { stringDoesNotExist, sentenceCaps, toastNotifier } from '../../../../utilities/stringOperations';
 import useViewBoilerPlate from '../../../../components/hooks/useViewBoilerPlate';
 import { miscTests } from '../../../../utilities/dummyData';
 import FormBuilder from '../../../../components/form/builders/form';
@@ -64,7 +64,7 @@ const EditMisc = () => {
         endpoint: 'MATERIALITY', auth: true, param: engagementId, body: { ...state, i_t_risk_assessment: { ...state.i_t_risk_assessment, name: state?.i_t_risk_assessment?.name } }
       });
       // console.log('End ', data);
-      notifier({
+      toastNotifier({
         title: 'Success Message',
         text: 'Planning Misc updated successfully',
         type: 'success'

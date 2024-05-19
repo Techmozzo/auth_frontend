@@ -7,7 +7,7 @@ import useViewBoilerPlate from '../../../../components/hooks/useViewBoilerPlate'
 import DragNDropTemp from '../../temps/newEngagement/DragNDropInputTemp';
 import { executions } from '../../../../utilities/dummyData';
 import CustomAccordion from '../../../../components/ui/customAccordion';
-import { slugToString, sentenceCaps, notifier } from '../../../../utilities/stringOperations';
+import { slugToString, sentenceCaps, toastNotifier } from '../../../../utilities/stringOperations';
 import TextareaInput from '../../../../components/form/inputs/TextareaInput';
 import { headerTemp1 } from '../../../../components/temps/projectTemps/miscTemps';
 import Notes from '../../Notes';
@@ -51,7 +51,7 @@ const EditExecution = () => {
         endpoint: 'ENGAGEMENT', auth: true, param: engagementId, afterParam: 'executions', body: state
       });
       // console.log('Response ', data);
-      notifier({
+      toastNotifier({
         title: 'Success Message',
         text: 'Execution updated successfully',
         type: 'success'

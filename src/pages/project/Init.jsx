@@ -10,7 +10,7 @@ import { Redirect } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import FormBuilder from '../../components/form/builders/form';
 import { validateField } from '../../utilities/validation';
-import { camelToString, notifier, stringDoesNotExist } from '../../utilities/stringOperations';
+import { camelToString, toastNotifier, stringDoesNotExist } from '../../utilities/stringOperations';
 import Modal from '../../components/microComponents/modal';
 import { title } from './constants/startProject1Props';
 import {
@@ -40,7 +40,7 @@ const Init = ({ setAccordionTab, setData }) => {
   useEffect(() => {
     if (store?.status === 'failed') {
       // setShow(true);
-      notifier({
+      toastNotifier({
         type: 'error',
         title: 'Initialisation Failed',
         text: store?.message
@@ -49,7 +49,7 @@ const Init = ({ setAccordionTab, setData }) => {
       });
     }
     if (store?.status === 'success') {
-      notifier({
+      toastNotifier({
         type: 'success',
         title: 'Progress Saved',
         text: 'Your project has been recorded'

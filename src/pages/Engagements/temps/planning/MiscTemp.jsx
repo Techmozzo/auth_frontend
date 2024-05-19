@@ -12,7 +12,7 @@ import CustomAccordion from '../../../../components/ui/customAccordion';
 import Creatable from '../../../../components/form/inputs/Creatable';
 import planningProps from '../../constants/planningProps';
 import { index } from '../../../../utilities/auth';
-import { notifier, slugToString, stringDoesNotExist } from '../../../../utilities/stringOperations';
+import { toastNotifier, slugToString, stringDoesNotExist } from '../../../../utilities/stringOperations';
 import { CheckboxField } from '../../../../components/form/inputs/Checkbox';
 import { assertions, miscTests } from '../../../../utilities/dummyData';
 import { QuillEditor } from '../../../../components/ui/richText';
@@ -33,7 +33,7 @@ const MiscTemp = ({
       stringDoesNotExist(formData.name)
       || stringDoesNotExist(formData.function) || stringDoesNotExist(formData.review_performed)
     ) {
-      return notifier({
+      return toastNotifier({
         text: 'You have to fill every field in this form before adding a new entry',
         title: 'Unfilled/Incomplete Form',
         type: 'info'

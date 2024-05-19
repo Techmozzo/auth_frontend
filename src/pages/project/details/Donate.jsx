@@ -24,7 +24,12 @@ import { apiOptions } from '../../../services/fetch';
 import FormBuilder from '../../../components/form/builders/form';
 import donationProps from './constants/donationProps';
 import {
-  camelToString, formatDonation, localStringToNumber, notifier, splitFullName, stringDoesNotExist
+  camelToString,
+  formatDonation,
+  localStringToNumber,
+  toastNotifier,
+  splitFullName,
+  stringDoesNotExist
 } from '../../../utilities/stringOperations';
 import { validateField } from '../../../utilities/validation';
 import Poster1 from '../../../components/temps/projectTemps/poster1';
@@ -81,7 +86,7 @@ const Donate = () => {
     if (store?.paymentComplete?.status === 'success') {
       setOpen(false);
       if (item?.paid) {
-        notifier({
+        toastNotifier({
           text: 'Thanks for supporting a good course',
           title: 'Grateful',
           type: 'success'
@@ -121,7 +126,7 @@ const Donate = () => {
       }
     }
     if (store.paymentInitiate?.status === 'failed') {
-      notifier({
+      toastNotifier({
         text: 'Failed to initiate transaction',
         title: 'Transaction Failed',
         type: 'error'

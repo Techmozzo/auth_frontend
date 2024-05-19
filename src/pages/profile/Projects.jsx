@@ -19,7 +19,7 @@ import {
 } from 'react-reveal';
 import { myProjects } from '../../redux/actions/profileActions';
 import LazyImage from '../../components/microComponents/lazyImg';
-import { notifier, stringCaps } from '../../utilities/stringOperations';
+import { toastNotifier, stringCaps } from '../../utilities/stringOperations';
 import { approvalColors } from '../../utilities/dummyData';
 import { positiveDiffs } from '../../utilities/dateOperations';
 import BackdropModal from '../../components/microComponents/backdropModal';
@@ -120,7 +120,7 @@ const Projects = ({ setCurrent }) => {
       setShowView(true);
     }
     if (store.profile?.projects?.status === 'failed') {
-      notifier({
+      toastNotifier({
         title: 'error',
         type: 'error',
         text: store.profile?.projects?.data

@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
 /* eslint-disable no-nested-ternary */
 import * as React from 'react';
-import uuid from 'react-uuid';
-import { isEmpty, isUndefined } from 'lodash';
+// import uuid from 'react-uuid';
+import { isUndefined } from 'lodash';
 // import Slider, { Range } from 'rc-slider';
 // import 'rc-slider/assets/index.css';
 import Box from '@mui/material/Box';
@@ -10,7 +10,7 @@ import Slider from '@mui/material/Slider';
 import { useEffect } from 'react';
 import {
   formatDonation,
-  notifier,
+  toastNotifier,
   sentenceCaps,
   stringDoesNotExist
 } from '../../utilities/stringOperations';
@@ -66,7 +66,7 @@ export default function SliderSizes({
   const handleSliderChange = (event, newValue) => {
     if (stringDoesNotExist(formData.materiality_benchmark_amount)) {
       setDisableSlider(true);
-      return notifier({
+      return toastNotifier({
         type: 'info',
         title: 'Amount is Empty',
         text: 'First fill out the materiality amount.'

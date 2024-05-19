@@ -1,8 +1,7 @@
 import React from 'react';
-import PNotify from 'pnotify/dist/es/PNotify';
-import 'pnotify/dist/PNotifyBrightTheme.css';
 import _ from 'lodash';
 import SvgIcon from '@material-ui/core/SvgIcon';
+import { toast } from 'react-toastify';
 
 export const CustomIcon = ({ props, path }) => (
   // eslint-disable-next-line react/jsx-props-no-spreading
@@ -97,7 +96,7 @@ export const percentCalculator = ({
  */
 export const localStringToNumber = (str) => {
   if (stringDoesNotExist(str)) {
-    return notifier({
+    return toastNotifier({
       type: 'error',
       title: 'Not supported',
       text: 'not a valid string'
@@ -114,7 +113,7 @@ export const localStringToNumber = (str) => {
  */
 export const copyText = ({ str, callback }) => {
   if (stringDoesNotExist(str)) {
-    return notifier({
+    return toastNotifier({
       type: 'error',
       title: 'Not Copied',
       text: 'not a valid string'
@@ -124,13 +123,50 @@ export const copyText = ({ str, callback }) => {
   return callback();
 };
 export const stringDoesNotExist = (str) => (typeof str !== 'string' || str?.length === 0 || /^\s*$/.test(str) || !str?.trim());
-export const notifier = ({
-  type, title, text, stack
-}) => {
-  PNotify[type]({
-    title,
-    text
-  });
+
+const ToastTitleMessage = ({ title, message }) => (
+  <div>
+    <strong>{title}</strong>
+    <br />
+    {' '}
+    {message}
+  </div>
+);
+
+export const toastNotifier = ({ type = 'info', title = '', text = '' }) => {
+  const toastProperty = {
+    position: 'top-center',
+    autoClose: 3000
+  };
+  const customId = '124042-toast-id';
+
+  if (!toast.isActive(customId)) {
+    switch (type) {
+    case 'success':
+      toast.success(
+        <ToastTitleMessage title={title} message={text} />,
+        { ...toastProperty, toastId: customId }
+      );
+      break;
+    case 'error':
+      toast.error(
+        <ToastTitleMessage title={title} message={text} />,
+        { ...toastProperty, toastId: customId }
+      );
+      break;
+    case 'warning':
+      toast.warning(
+        <ToastTitleMessage title={title} message={text} />,
+        { ...toastProperty, toastId: customId }
+      );
+      break;
+    default:
+      toast.info(
+        <ToastTitleMessage title={title} message={text} />,
+        { ...toastProperty, toastId: customId }
+      );
+    }
+  }
 };
 
 export const stringCaps = (string) => {
@@ -178,7 +214,7 @@ export const formatDonation = (amount) => Number(removeCommas(amount));
  */
 export const splitFullName = (fullName) => {
   if (stringDoesNotExist(fullName)) {
-    return notifier({
+    return toastNotifier({
       type: 'error',
       title: 'Empty Full Name',
       text: 'Please Enter Your Full Name'

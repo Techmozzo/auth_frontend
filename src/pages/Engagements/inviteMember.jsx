@@ -11,7 +11,7 @@ import useStoreParams from '../../components/hooks/useStoreParams';
 import { projectAction } from '../../redux/actions/projectActions';
 import useUpdateStore from '../../components/hooks/useUpdateStore';
 import useFetchData from '../../components/hooks/useFetchData';
-import { makeFullName, notifier, stringDoesNotExist } from '../../utilities/stringOperations';
+import { makeFullName, toastNotifier, stringDoesNotExist } from '../../utilities/stringOperations';
 import { user } from '../../utilities/auth';
 import { auditPost } from '../../utilities/dummyData';
 import ListMat from '../../components/ui/listMat';
@@ -140,7 +140,7 @@ const InviteMember = ({ engagementName, engagementId, cancel }) => {
           ]
         );
       } else {
-        notifier({
+        toastNotifier({
           type: 'info',
           title: 'Duplicate invites',
           text: `${invited.name} already queued for invites`

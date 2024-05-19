@@ -11,7 +11,7 @@ import { apiOptions } from '../../services/fetch';
 import Loader from '../../components/microComponents/loader';
 import ProjectInfo from '../../components/ui/projectInfo';
 import {
-  notifier,
+  toastNotifier,
   sentenceCaps, slugify, stringCaps, stringDoesNotExist
 } from '../../utilities/stringOperations';
 import SelectInput from '../../components/form/inputs/SelectInput';
@@ -41,7 +41,7 @@ const Explore = () => {
       }
     }
     if (store?.searchProjects?.status === 'failed') {
-      notifier({
+      toastNotifier({
         title: 'error',
         type: 'error',
         text: store?.searchProjects?.data

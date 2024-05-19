@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useParams, useHistory } from 'react-router-dom';
 import { post } from '../../../services/fetch';
-import { notifier } from '../../../utilities/stringOperations';
+import { toastNotifier } from '../../../utilities/stringOperations';
 import Loader from '../../../components/microComponents/loader';
 
 const DeclineInvite = () => {
@@ -14,7 +14,7 @@ const DeclineInvite = () => {
       const datax = await post({ endpoint: 'DECLINE_ENGAGEMENT_INVITE', auth: true, param: token });
       // console.log(datax);
       if (datax.status === 200) {
-        notifier({
+        toastNotifier({
           type: 'success',
           text: 'Enganagment Invite Has been declined',
           title: 'Success'
@@ -25,7 +25,7 @@ const DeclineInvite = () => {
       }
     } catch (e) {
       // console.log(e);
-      notifier({
+      toastNotifier({
         type: 'error',
         text: e.message,
         title: 'Error'

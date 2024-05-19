@@ -2,7 +2,7 @@
 /* eslint-disable max-len */
 import React, { useEffect, useState } from 'react';
 import { get, post } from '../../services/fetch';
-import { notifier, sentenceCaps } from '../../utilities/stringOperations';
+import { toastNotifier, sentenceCaps } from '../../utilities/stringOperations';
 import Loader from '../../components/microComponents/loader';
 
 const RolesPremission = ({ setCurrent }) => {
@@ -132,7 +132,7 @@ const RolesPremission = ({ setCurrent }) => {
   const UpdatePermission = async () => {
     // console.log(permissionId);
     if (!singleroleid) {
-      notifier({
+      toastNotifier({
         type: 'error', title: 'Error', text: 'Please select Role'
       });
 
@@ -150,11 +150,11 @@ const RolesPremission = ({ setCurrent }) => {
       // setRoleId('');
       // setCurrentRolePermission([]);
       // setSubmitted(true);
-      notifier({
+      toastNotifier({
         type: 'success', title: 'Success', text: 'Permissions For Role Update'
       });
     } catch (e) {
-      notifier({
+      toastNotifier({
         type: 'error', title: 'Error', text: 'Something'
       });
     }

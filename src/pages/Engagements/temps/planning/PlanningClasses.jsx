@@ -8,7 +8,7 @@ import CustomAccordion from '../../../../components/ui/customAccordion';
 import { checkRequiredFields, validateClassesData } from '../../../../utilities/validation';
 import planningProps from '../../constants/planningProps';
 import DragNDropTemp from '../newEngagement/DragNDropInputTemp';
-import { notifier, stringCaps } from '../../../../utilities/stringOperations';
+import { toastNotifier, stringCaps } from '../../../../utilities/stringOperations';
 // eslint-disable-next-line import/no-cycle
 import PlanningTests from '../../planning/PlanningTests';
 import PlanningPTest from './PlanningPTest';
@@ -56,7 +56,7 @@ const PlanningClasses = ({
 
   useEffect(() => {
     if (status === 'failed') {
-      notifier({
+      toastNotifier({
         text: 'at least a class must be added and the trial balance field must be filled.',
         title: stringCaps(status),
         type: 'error'

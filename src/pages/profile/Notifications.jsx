@@ -13,7 +13,7 @@ import { notifications } from '../../redux/actions/profileActions';
 // import Loader from '../../components/microComponents/loader';
 // import NoData from '../authentication/NoData';
 import PageTemp from '../../components/temps/PageTemp';
-import { notifier } from '../../utilities/stringOperations';
+import { toastNotifier } from '../../utilities/stringOperations';
 import SelectInput from '../../components/form/inputs/SelectInput';
 import {
   statusCategoryOption, moduleCategoryOption, dateSearchOption, dateRangeOption
@@ -167,7 +167,7 @@ const Notifications = ({ setCurrent }) => {
       setStoreData(store?.data?.data?.notifications ?? []);
     }
     if (store?.status === 'failed') {
-      notifier({
+      toastNotifier({
         title: 'error',
         type: 'error',
         text: store?.data

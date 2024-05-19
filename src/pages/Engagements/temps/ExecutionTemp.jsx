@@ -7,7 +7,7 @@ import { BsArrowsCollapse } from 'react-icons/bs';
 import { GiExpand } from 'react-icons/gi';
 import { MdDone } from 'react-icons/md';
 import { useSelector } from 'react-redux';
-import { notifier, slugToString, stringDoesNotExist } from '../../../utilities/stringOperations';
+import { toastNotifier, slugToString, stringDoesNotExist } from '../../../utilities/stringOperations';
 import CustomAccordion from '../../../components/ui/customAccordion';
 import DragNDropTemp from './newEngagement/DragNDropInputTemp';
 import { executions } from '../../../utilities/dummyData';
@@ -31,7 +31,7 @@ const ExecutionTemp = ({
       stringDoesNotExist(formData.name)
       || stringDoesNotExist(formData.function) || stringDoesNotExist(formData.review_performed)
     ) {
-      return notifier({
+      return toastNotifier({
         text: 'You have to fill every field in this form before adding a new entry',
         title: 'Unfilled/Incomplete Form',
         type: 'info'
@@ -156,13 +156,13 @@ const Prod = ({ setisSuccess }) => {
         // console.log('Success ', datax);
         if (datax.status === 201) {
           setisSuccess(true);
-          notifier({
+          toastNotifier({
             type: 'success',
             text: 'Major Procedure Added Please Continue',
             title: 'Success'
           });
         } else {
-          notifier({
+          toastNotifier({
             type: 'error',
             text: datax.message,
             title: 'Error'
@@ -171,7 +171,7 @@ const Prod = ({ setisSuccess }) => {
         }
       } catch (e) {
         // console.log(e);
-        notifier({
+        toastNotifier({
           type: 'error',
           text: e.message,
           title: 'Error'
@@ -180,7 +180,7 @@ const Prod = ({ setisSuccess }) => {
       setStatus(false);
     } else {
       // console.log('Form data is not available yet.');
-      notifier({
+      toastNotifier({
         type: 'error',
         text: 'Invalid form data.',
         title: 'Error'

@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
 import { PrimeReactProvider, PrimeReactContext } from 'primereact/api';
+import { ToastContainer } from 'react-toastify';
 import appStore from './redux/appStore';
 
 import './assets/css/bootstrap.css';
@@ -21,6 +22,7 @@ import 'primereact/resources/primereact.min.css';
 import App from './App';
 
 import reportWebVitals from './reportWebVitals';
+import 'react-toastify/dist/ReactToastify.css';
 
 const { store, persistor } = appStore;
 
@@ -30,6 +32,7 @@ ReactDOM.render(
       <BrowserRouter>
         <PrimeReactProvider>
           <App />
+          <ToastContainer />
         </PrimeReactProvider>
 
       </BrowserRouter>
