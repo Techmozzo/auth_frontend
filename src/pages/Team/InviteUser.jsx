@@ -20,6 +20,11 @@ const InviteUser = () => {
   const [formData, setFormData] = useState({});
   const [errors, setErrors] = useState({});
 
+  React.useEffect(() => {
+    setFormData({});
+    setErrors({});
+  }, []);
+
   /* redux */
   const store = useSelector((state) => state.auth?.inviteUser);
   const options = {

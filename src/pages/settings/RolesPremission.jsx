@@ -2,8 +2,9 @@
 /* eslint-disable max-len */
 import React, { useEffect, useState } from 'react';
 import { get, post } from '../../services/fetch';
-import { toastNotifier, sentenceCaps } from '../../utilities/stringOperations';
+import { toastNotifier } from '../../utilities/stringOperations';
 import Loader from '../../components/microComponents/loader';
+import SelectInput from '../../components/form/inputs/SelectInput';
 
 const RolesPremission = ({ setCurrent }) => {
   const [roles, setRoles] = useState([]);
@@ -111,26 +112,26 @@ const RolesPremission = ({ setCurrent }) => {
   const getRolePermission = (e) => {
     e.preventDefault();
     const roleId = e.target.value;
-    // console.log(roles);
     setRoleId(roleId);
-    const mek = roles.filter((a) => String(a.id) === roleId);
-    setCurrentRolePermission(mek[0].permissions);
-    // console.log('Staff ', mek);
+
+    if (!!roleId && roleId.length) {
+      const mek = roles.filter((a) => String(a.id) === roleId);
+      setCurrentRolePermission(mek[0].permissions);
+    } else {
+      setCurrentRolePermission([]);
+    }
   };
 
   const handleCheckboxChange = (event, pid) => {
     if (event.target.checked) {
-      // console.log(`Checkbox ${pid} is checked.`);
       setPermissionsId([...permissionId, pid]);
     } else {
-      // console.log(`Checkbox ${pid} is unchecked.`);
       setPermissionsId(permissionId.filter((id) => id !== pid));
     }
     setCheckedState((prevState) => ({ ...prevState, [pid]: event.target.checked }));
   };
 
   const UpdatePermission = async () => {
-    // console.log(permissionId);
     if (!singleroleid) {
       toastNotifier({
         type: 'error', title: 'Error', text: 'Please select Role'
@@ -168,85 +169,74 @@ const RolesPremission = ({ setCurrent }) => {
   return (
     <div className="content">
       <div className="box-shadow row">
-        <div className="col-md-12 pt-5">
-          <div className="offset-1">
-            <div className="row">
-              <div className="pl-3">
-                <div className="font-regular text-theme-grey">
-                  Edit Roles and permissions
-                </div>
-                {isLoading
-                  ? <Loader />
-                  : (
-                    <div className="col-md-10 mt-2">
-                      <div>
-                        <div>
-                          {/* <label htmlFor="roles">Select Role</label> */}
-                          <select name="roles" id="roles" value={singleroleid} onChange={getRolePermission} className="font-title-small text-theme">
-                            <option value="">Select Role</option>
-                            {roles && roles.map((r) => (
-                              <option value={r.id} key={r.id}>{sentenceCaps(r.name.split('_').join(' '))}</option>
-                            ))}
-
-                          </select>
-                        </div>
-
-                        <div className="my-5">
-                          <div className="container">
-                            <div className="mb-4">
-                              <h4>Permissions:</h4>
-                            </div>
-                            <div>
-                              <div className="row">
-                                {permission && permission.map((p, i) => (
-                                  <div className="col-md-4" key={p.id}>
-                                    {/* {currentRolePermissionx[i]?.id === p.id ? 'true' : 'false'} */}
-                                    {/* {p.id} */}
-                                    {/* {String(checkedState[p.id])} */}
-                                    <input
-                                      type="checkbox"
-                                      checked={checkedState[p.id] || false}
-                                      value={p.id}
-                                      name={`permission_${p.id}`}
-                                      id={`permission_${p.id}`}
-                                      className="text-theme"
-                                      onChange={(event) => handleCheckboxChange(event, p.id)} // Added OnChange event here
-                                    />
-                                    {' '}
-                                    <label htmlFor={`permission_${p.id}`}>{p.name}</label>
-                                  </div>
-                                ))}
-                              </div>
-
-                              {singleroleid === '' ? null : <button className="mt-4 btn btn-small" type="button" onClick={UpdatePermission}>Update Permissions</button> }
-                            </div>
-
-                            {/* <div className="row">
-                        {permission && permission.map((p, i) => (
-                          <div className="col-md-4" key={p.id}>
-                            {currentRolePermissionx.includes(p.id) ? 'true' : 'false'}
-                            <input
-                              type="checkbox"
-                              checked={currentRolePermissionx.includes(p.id)}
-                              value={p.id}
-                              id="permission"
-                              onChange={(event) => handleCheckboxChange(event, p.id)}
-                            />
-                            {' '}
-                            <label htmlFor="permission">{p.name}</label>
-                          </div>
-                        ))}
-
-                      </div> */}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-              </div>
-
-            </div>
+        <div className="col-md-12 p-5">
+          <div className="font-regular text-theme-grey">
+            <SelectInput
+              options={roles}
+              valueIndex="id"
+              optionIndex="name"
+              titleIndex="name"
+              value={singleroleid}
+              isCamelcase
+              name="roles"
+              label="Edit Roles and permissions"
+              isOptionLabel="Select Role"
+              className="theme-font font-black font-14 w-25"
+              onChange={getRolePermission}
+            />
           </div>
+          {isLoading
+            ? <Loader />
+            : (
+              <div className="my-3">
+                <div className="mb-3">
+                  <h4>Permissions:</h4>
+                </div>
+                <div>
+                  <div className="row">
+                    {permission && permission.map((p, i) => (
+                      <div className="col-md-4" key={p.id}>
+                        {/* {currentRolePermissionx[i]?.id === p.id ? 'true' : 'false'} */}
+                        {/* {p.id} */}
+                        {/* {String(checkedState[p.id])} */}
+                        <input
+                          type="checkbox"
+                          checked={checkedState[p.id] || false}
+                          value={p.id}
+                          name={`permission_${p.id}`}
+                          id={`permission_${p.id}`}
+                          className="text-theme"
+                          onChange={(event) => handleCheckboxChange(event, p.id)} // Added OnChange event here
+                        />
+                        {' '}
+                        <label htmlFor={`permission_${p.id}`}>{p.name}</label>
+                      </div>
+                    ))}
+                  </div>
+
+                  {singleroleid === '' ? null : <button className="mt-4 btn btn-small" type="button" onClick={UpdatePermission}>Update Permissions</button> }
+                </div>
+
+                {/*
+                  <div className="row">
+                    {permission && permission.map((p, i) => (
+                      <div className="col-md-4" key={p.id}>
+                        {currentRolePermissionx.includes(p.id) ? 'true' : 'false'}
+                        <input
+                          type="checkbox"
+                          checked={currentRolePermissionx.includes(p.id)}
+                          value={p.id}
+                          id="permission"
+                          onChange={(event) => handleCheckboxChange(event, p.id)}
+                        />
+                        {' '}
+                        <label htmlFor="permission">{p.name}</label>
+                      </div>
+                    ))}
+                  </div>
+                */}
+              </div>
+            )}
         </div>
       </div>
     </div>

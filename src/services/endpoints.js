@@ -71,7 +71,8 @@ const paths = {
   CLIENT_ROLES: engagementEnpoints.clientroles,
 
   // roles
-  ROLES: authEndpoints.roles
+  ROLES: authEndpoints.roles,
+  USER_ROLES: authEndpoints.userRoles
 };
 
 export default paths;

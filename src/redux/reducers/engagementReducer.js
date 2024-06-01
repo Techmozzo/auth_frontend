@@ -7,10 +7,12 @@ const initialState = {
   },
   dashboard: {
     data: {},
+    isLoading: false,
     status: 'initial'
   },
   engagement: {
     data: {},
+    isLoading: false,
     status: 'initial'
   },
   newEngagement: {
@@ -99,6 +101,7 @@ const engagementReducer = (state = initialState, { type, response, error }) => {
       ...state,
       dashboard: {
         data: {},
+        isLoading: true,
         status: 'pending'
       }
     };
@@ -107,6 +110,7 @@ const engagementReducer = (state = initialState, { type, response, error }) => {
       ...state,
       dashboard: {
         data: {},
+        isLoading: false,
         status: 'initial'
       }
     };
@@ -116,6 +120,7 @@ const engagementReducer = (state = initialState, { type, response, error }) => {
       dashboard: {
         ...state.dashboard,
         data: response,
+        isLoading: false,
         status: 'success'
       }
     };
@@ -124,6 +129,7 @@ const engagementReducer = (state = initialState, { type, response, error }) => {
       ...state,
       dashboard: {
         data: error || {},
+        isLoading: false,
         status: 'failed'
       }
     };
@@ -133,6 +139,7 @@ const engagementReducer = (state = initialState, { type, response, error }) => {
       ...state,
       engagement: {
         data: {},
+        isLoading: true,
         status: 'pending'
       }
     };
@@ -141,6 +148,7 @@ const engagementReducer = (state = initialState, { type, response, error }) => {
       ...state,
       engagement: {
         data: {},
+        isLoading: false,
         status: 'initial'
       }
     };
@@ -150,6 +158,7 @@ const engagementReducer = (state = initialState, { type, response, error }) => {
       engagement: {
         ...state.engagement,
         data: response,
+        isLoading: false,
         status: 'success'
       }
     };
@@ -158,6 +167,7 @@ const engagementReducer = (state = initialState, { type, response, error }) => {
       ...state,
       engagement: {
         data: error || {},
+        isLoading: false,
         status: 'failed'
       }
     };

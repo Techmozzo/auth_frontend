@@ -52,7 +52,12 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   //   border: 0
   // }
 }));
-export default function DashboardTable({ data }) {
+
+const LargeSpinner = styled('i')({
+  fontSize: '2rem'
+});
+
+export default function DashboardTable({ data, isLoadingTableData }) {
   const editEnganagment = usePermission('edit-engagement');
   const menuLeft = React.useRef(null);
   const { push } = useHistory();
@@ -74,7 +79,6 @@ export default function DashboardTable({ data }) {
               label: 'View Engangment',
               icon: 'pi pi-refresh',
               command: () => {
-                // console.log('CLicked');
                 // console.log(id);
                 // viewRow(id);
                 // toast.current.show({
@@ -112,7 +116,7 @@ export default function DashboardTable({ data }) {
   const rows = data?.map((item) => createData(
     item?.name, item?.year, item?.client?.name, item?.team_members_count, item?.status?.name, item?.id
   ));
-  // console.log('Row ', data);
+
   const handleRow = (row) => {
     // const theData = data.filter((item) => item.name === row.name);
     push(`/app/engagement/engagement/${row}`);
@@ -171,33 +175,43 @@ export default function DashboardTable({ data }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows?.map((row) => (
-            <StyledTableRow key={sentenceCaps(row.name)}>
-              <StyledTableCell component="th" scope="row">
-                <div className="bold theme-font font-small">{sentenceCaps(row.name)}</div>
-              </StyledTableCell>
-              <StyledTableCell align="right"><div className="theme-font-2">{row.date}</div></StyledTableCell>
-              <StyledTableCell align="right"><div className="theme-font-2">{sentenceCaps(row.client)}</div></StyledTableCell>
-              <StyledTableCell align="right"><div className="theme-font-2">{sentenceCaps(row.members)}</div></StyledTableCell>
-              <StyledTableCell align="right"><div className="theme-font-2">{sentenceCaps(row.status)}</div></StyledTableCell>
-              <StyledTableCell align="right">
-                <Menu model={row.action} popup ref={menuLeft} id="popup_menu_left" />
-                <Toast ref={toast} />
-                <ConfirmPopup />
-                <Button icon="pi pi-eye" className="mr-2" rounded text onClick={() => viewRow(row.id)} aria-controls="popup_menu_left" aria-haspopup />
-                {editEnganagment
-                  && (
-                    <>
-                      <Button icon="pi pi-file-edit" className="mr-2" rounded text onClick={() => handleRow(row.id)} aria-controls="popup_menu_left" aria-haspopup />
-                      {loading
-                        ? <i className="pi pi-spin pi-spinner mr-2" />
-                        : <Button icon="pi pi-trash" className="mr-2" type="button" rounded text onClick={(e) => confirm1(e, row.id)} style={{ color: 'red' }} aria-controls="popup_menu_left" aria-haspopup /> }
+          {isLoadingTableData
+            ? (
+              <TableRow>
+                <TableCell colSpan={6}>
+                  <Box display="flex" justifyContent="center" alignItems="center" height="100px">
+                    <LargeSpinner className="pi pi-spin pi-spinner" />
+                  </Box>
+                </TableCell>
+              </TableRow>
+            )
+            : rows?.map((row) => (
+              <StyledTableRow key={sentenceCaps(row.name)}>
+                <StyledTableCell component="th" scope="row">
+                  <div className="bold theme-font font-small">{sentenceCaps(row.name)}</div>
+                </StyledTableCell>
+                <StyledTableCell align="right"><div className="theme-font-2">{row.date}</div></StyledTableCell>
+                <StyledTableCell align="right"><div className="theme-font-2">{sentenceCaps(row.client)}</div></StyledTableCell>
+                <StyledTableCell align="right"><div className="theme-font-2">{sentenceCaps(row.members)}</div></StyledTableCell>
+                <StyledTableCell align="right"><div className="theme-font-2">{sentenceCaps(row.status)}</div></StyledTableCell>
+                <StyledTableCell align="right">
+                  <Menu model={row.action} popup ref={menuLeft} id="popup_menu_left" />
+                  <Toast ref={toast} />
+                  <ConfirmPopup />
+                  <Button icon="pi pi-eye" className="mr-2" rounded text onClick={() => viewRow(row.id)} aria-controls="popup_menu_left" aria-haspopup />
+                  {editEnganagment
+                    && (
+                      <>
+                        <Button icon="pi pi-file-edit" className="mr-2" rounded text onClick={() => handleRow(row.id)} aria-controls="popup_menu_left" aria-haspopup />
+                        {loading
+                          ? <i className="pi pi-spin pi-spinner mr-2" />
+                          : <Button icon="pi pi-trash" className="mr-2" type="button" rounded text onClick={(e) => confirm1(e, row.id)} style={{ color: 'red' }} aria-controls="popup_menu_left" aria-haspopup /> }
 
-                    </>
-                  )}
-              </StyledTableCell>
-            </StyledTableRow>
-          ))}
+                      </>
+                    )}
+                </StyledTableCell>
+              </StyledTableRow>
+            ))}
         </TableBody>
       </Table>
     </TableContainer>

@@ -13,14 +13,14 @@ export default function usePermission(permissionName) {
     const fetchData = async () => {
       setLoading(true);
 
-      const data = await get({ endpoint: 'ROLES', auth: true });
+      const data = await get({ endpoint: 'USER_ROLES', auth: true });
 
-      if (data?.data?.data.roles) {
-        const permissionsData = data?.data?.data?.roles.filter((id) => String(id.name) === String(role && role[0]));
+      if (data?.data?.data?.roles) {
+        // const permissionsData = data?.data?.data?.roles.filter((id) => String(id.name) === String(role && role[0]));
+        const permissionsData = data?.data?.data;
         // console.log('Inside ', data.data.data.roles);
         // // eslint-disable-next-line max-len
-        // console.log(permissionsData);
-        setPermissions(permissionsData[0]?.permissions || []);
+        setPermissions(permissionsData?.permissions || []);
       }
 
       setLoading(false);

@@ -1,7 +1,7 @@
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import Skeleton from '@material-ui/lab/Skeleton';
-import { stringDoesNotExist } from '../../../utilities/stringOperations';
+import { stringDoesNotExist, sentenceCaps } from '../../../utilities/stringOperations';
 import Loader from '../../microComponents/loader';
 
 const SelectInput = (
@@ -23,9 +23,17 @@ const SelectInput = (
     excuseSkeleton,
     loading,
     btnMethod,
-    btn
+    btn,
+    isCamelcase,
+    isOptionLabel
   }
 ) => {
+  const handleCamelcase = (text) => {
+    if (isCamelcase) {
+      return sentenceCaps(text.split('_').join(' '));
+    }
+    return text.toUpperCase();
+  };
   const optionsProp = options?.map((option) => (
     typeof option === 'object'
       ? (
@@ -33,8 +41,9 @@ const SelectInput = (
           value={valueIndex === 'id' ? Number(option[valueIndex]) : option[valueIndex]}
           key={option[optionIndex]}
           title={option[titleIndex]}
+          aria-label="cdc"
         >
-          {option[optionIndex].toUpperCase()}
+          {handleCamelcase(option[optionIndex])}
         </option>
       ) : (
         <option
@@ -65,6 +74,7 @@ const SelectInput = (
                   && onBlur(e, validations))}
                   disabled={disabled}
                 >
+                  {isOptionLabel && isOptionLabel?.length && (<option value="">{ isOptionLabel }</option>)}
                   {optionsProp}
                 </select>
                 {
@@ -126,6 +136,7 @@ const SelectInput = (
                         && onBlur(e, validations))}
                       disabled={disabled}
                     >
+                      {isOptionLabel && isOptionLabel?.length && (<option value="">{ isOptionLabel }</option>)}
                       {optionsProp}
                     </select>
                   )
