@@ -142,6 +142,7 @@ const NewEngagement = () => {
                 handleChecked={handleChecked}
                 create={create}
                 uploads={uploads}
+                link="/app/engagement/"
                 // removeItem={removeItem}
                 handleDateChange={handleDateChange}
               />

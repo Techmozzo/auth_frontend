@@ -24,7 +24,7 @@ const IndexTemp = ({
           <div className="text-theme-black font-regular bold">{sentenceCaps(header)}</div>
           <div>
             <Link
-              to={link?.to}
+              to={link?.to ?? '/app/dashboard'}
               className={_.isEmpty(link) ? 'd-none' : 'font-regular text-theme-blue'}
             >
               {sentenceCaps(link?.name)}

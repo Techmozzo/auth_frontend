@@ -14,6 +14,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { useHistory } from 'react-router-dom';
 import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
 import { HiChevronLeft, HiChevronRight } from 'react-icons/hi';
 import { AiOutlineLogout } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
@@ -224,28 +225,32 @@ const MiniDrawer = ({
         <Divider color="white" />
         <List className="position-relative">
           {menu.map((item) => (
-            <ListItem button key={uuid()} className="my-2" onClick={() => handleClick(item)}>
-              {
-                item.icon
-                && (
-                  <ListItemIcon title={item.name} className={path(`/app/${item.name}`) ? 'text-theme' : 'text-theme-faint'}>
-                    <div title={item.name} className="font-title-small">
-                      {item.icon}
-                      {' '}
-                      {item.name === 'notifications' && storenotifcation.data?.data?.notifications.length > 0 ? <span className="badge badge-warning ">{storenotifcation.data?.data?.notifications.length}</span> : null}
-                    </div>
-                  </ListItemIcon>
-                )
-              }
-              <ListItemText className={open ? `${path(`/app/${item.name}`) ? 'text-white' : 'text-pale'} theme-font font-title ml-2` : 'd-none'} primary={sentenceCaps(item.name)} />
+            <ListItem key={item?.to} className="my-2">
+              <ListItemButton onClick={() => handleClick(item)}>
+                {
+                  item?.icon
+                  && (
+                    <ListItemIcon title={item?.name} className={path(`/app/${item?.name}`) ? 'text-theme' : 'text-theme-faint'}>
+                      <div title={item?.name} className="font-title-small">
+                        {item?.icon}
+                        {' '}
+                        {item?.name === 'notifications' && storenotifcation?.data?.data?.notifications?.length > 0 ? <span className="badge badge-warning ">{storenotifcation.data?.data?.notifications?.length}</span> : null}
+                      </div>
+                    </ListItemIcon>
+                  )
+                }
+                <ListItemText className={open ? `${path(`/app/${item?.name}`) ? 'text-white' : 'text-pale'} theme-font font-title ml-2` : 'd-none'} primary={sentenceCaps(item?.name)} />
+              </ListItemButton>
             </ListItem>
           ))}
           <Divider color="white" />
-          <ListItem button onClick={logoutNow}>
-            <ListItemIcon className="text-white">
-              <div className="font-title-small"><AiOutlineLogout /></div>
-            </ListItemIcon>
-            <ListItemText className={open ? 'text-theme-blue theme-font bold font-title ml-2' : 'd-none'} primary="Logout" />
+          <ListItem>
+            <ListItemButton onClick={logoutNow}>
+              <ListItemIcon className="text-white">
+                <div className="font-title-small"><AiOutlineLogout /></div>
+              </ListItemIcon>
+              <ListItemText className={open ? 'text-theme-blue theme-font bold font-title ml-2' : 'd-none'} primary="Logout" />
+            </ListItemButton>
           </ListItem>
         </List>
       </Drawer>

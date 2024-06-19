@@ -88,6 +88,12 @@ const routes = [
     exact: true,
     name: 'engagement'
   },
+  // {
+  //   path: '/app/engagement/new-engagement',
+  //   component: NewEngagement,
+  //   exact: true,
+  //   name: 'engagement'
+  // },
   {
     path: '/app/engagement/engagement/:engagementId',
     component: EngagementView,
@@ -121,12 +127,6 @@ const routes = [
   {
     path: '/app/engagement/edit/execution/:engagementId',
     component: EditExecution,
-    exact: true,
-    name: 'engagement'
-  },
-  {
-    path: '/app/engagement/new-engagement',
-    component: NewEngagement,
     exact: true,
     name: 'engagement'
   },

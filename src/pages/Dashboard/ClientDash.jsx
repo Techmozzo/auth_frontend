@@ -14,8 +14,6 @@ const ClientDash = () => {
   const indexstore = useSelector((state) => state.engagement);
   const isLoadingEngagement = useSelector((state) => state.engagement.dashboard.isLoading);
 
-  console.log('isLoading', isLoadingEngagement);
-  console.log('indexstore', indexstore);
   useEffect(() => {
     dispatch(projectAction({
       action: 'ENGAGEMENTS',

@@ -24,10 +24,9 @@ export const QuillEditorBubble = ({
         items: [
           'undo', 'redo',
           '|', 'heading',
-          '|', 'fontfamily', 'fontsize', 'fontColor', 'fontBackgroundColor',
-          '|', 'bold', 'italic', 'strikethrough', 'subscript', 'superscript', 'code',
-          '|', 'link', 'table', 'blockQuote', 'codeBlock',
-          '|', 'bulletedList', 'numberedList', 'todoList', 'outdent', 'indent'
+          '|', 'bold', 'italic',
+          '|', 'link', 'blockQuote',
+          '|', 'bulletedList', 'numberedList', 'outdent', 'indent'
         ],
         removeItems: ['uploadImage', 'mediaUpload'],
         shouldNotGroupWhenFull: false
