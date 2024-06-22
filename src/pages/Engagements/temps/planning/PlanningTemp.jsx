@@ -99,7 +99,7 @@ const PlanningTemp = ({
   };
 
   return (
-    <div className="w-600 ">
+    <div className="w-800 ">
 
       <div className="box-shadow ">
         <div className="pt-5">

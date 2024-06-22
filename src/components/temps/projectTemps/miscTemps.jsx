@@ -98,7 +98,7 @@ export const headerTemp1 = ({
     <div>
       <Link to={link} className="text-theme-blue mr-1">{parent}</Link>
       <Link
-        to={link1}
+        to={link1 ?? ''}
         className={stringDoesNotExist(link1) ? 'd-none' : 'text-theme-blue mr-1'}
       >
         {`/${sentenceCaps(name)}`}

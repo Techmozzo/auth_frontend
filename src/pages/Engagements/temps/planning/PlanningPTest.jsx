@@ -1,6 +1,5 @@
 /* eslint-disable max-len */
-import React, { useEffect, useState } from 'react';
-import { last } from 'lodash';
+import React from 'react';
 import CustomCheckbox from '../../../../components/form/inputs/CustomCheckbox';
 import { slugToString } from '../../../../utilities/stringOperations';
 // import { assertions } from '../../../../utilities/dummyData';
@@ -115,7 +114,7 @@ const PlanningPTest = ({
                         // handleChecked={handleChecked}
                         className="w-100 neg-m-l-20 mt-4"
                         handleChecked={(event) => handleAssertionChange(event, itemm.id)}
-                        checked={procedure.assertions.includes(itemm.id)}
+                        // checked={procedure.assertions.includes(itemm.id)}
                       />
                       <div className="neg-m-t-10">{slugToString(itemm.name)}</div>
                     </div>

@@ -73,7 +73,7 @@ const PlanningClasses = ({
 
   useEffect(() => {
     console.log('formData', formData);
-    console.log('classes', classes);
+    // console.log('classes', classes);
     if (validateClassesData(classes)) {
       setFormData((prevStreamData) => ({
         ...prevStreamData,
@@ -293,6 +293,7 @@ const PlanningClasses = ({
                       ) }
 
                     </div>
+                    <hr />
                     <div>
                       <button type="button" onClick={handleAddClass} className="simple-hover btn text-white">Add Class</button>
                     </div>
