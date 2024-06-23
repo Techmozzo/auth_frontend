@@ -63,7 +63,7 @@ const Planning = () => {
                   year: `- ${formData?.engagement?.year}`
                 })
               }
-              <div className="content">
+              <div className="content w-800">
                 <div className="">
                   <div className="mb-4 font-title-small mb-4">
                     <HorizontalLinearStepper

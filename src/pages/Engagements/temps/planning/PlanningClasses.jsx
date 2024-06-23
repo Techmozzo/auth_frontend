@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { filter } from 'lodash';
 import uuid from 'react-uuid';
-import { AiOutlineDelete } from 'react-icons/ai';
+// import { AiOutlineDelete } from 'react-icons/ai';
 import FormBuilder from '../../../../components/form/builders/form';
 import CustomAccordion from '../../../../components/ui/customAccordion';
 import { checkRequiredFields, validateClassesData } from '../../../../utilities/validation';
@@ -10,8 +10,9 @@ import planningProps from '../../constants/planningProps';
 import DragNDropTemp from '../newEngagement/DragNDropInputTemp';
 import { toastNotifier, stringCaps } from '../../../../utilities/stringOperations';
 // eslint-disable-next-line import/no-cycle
-import PlanningTests from '../../planning/PlanningTests';
+// import PlanningTests from '../../planning/PlanningTests';
 import PlanningPTest from './PlanningPTest';
+import SelectInput from '../../../../components/form/inputs/SelectInput';
 
 const PlanningClasses = ({
   formData, setFormData, handleChange, errors, setErrors, newClasses,
@@ -30,7 +31,7 @@ const PlanningClasses = ({
         {
           name: '',
           description: '',
-          assertions: [4, 6]
+          assertions: []
         }
       ]
     }
@@ -47,6 +48,9 @@ const PlanningClasses = ({
     //   ]
     // }
   ]);
+
+  const uniqueValue = uuid();
+
   useEffect(() => {
     setSubmittable(checkRequiredFields([
       formData?.process_flow_document,
@@ -72,7 +76,7 @@ const PlanningClasses = ({
   }, [engagementClasses]);
 
   useEffect(() => {
-    console.log('formData', formData);
+    // console.log('formData', formData);
     // console.log('classes', classes);
     if (validateClassesData(classes)) {
       setFormData((prevStreamData) => ({
@@ -210,10 +214,18 @@ const PlanningClasses = ({
                   <div key={classIndex}>
                     <div className="">
                       <div>
-                        <label htmlFor="classes">Select Class</label>
-                        <select
-                          name=""
-                          id="classes"
+                        <label htmlFor={uniqueValue}>Select Class</label>
+                        <SelectInput
+                          id={uniqueValue}
+                          options={newClasses}
+                          valueIndex="name"
+                          optionIndex="name"
+                          titleIndex="name"
+                          value={className}
+                          isCamelcase
+                          name="class"
+                          isOptionLabel="Select Class"
+                          className="theme-font font-black font-14 w-100"
                           onChange={(event) => {
                             // const updatedClasses = [...classes];
                             // updatedClasses[classIndex].name = event.target.value;
@@ -221,13 +233,17 @@ const PlanningClasses = ({
                             handleClassesChange(classIndex, 'name', event.target.value);
                             setClassName(event.target.value);
                           }}
-                          className="w-100 m-b-20 col-12 form-group"
-                        >
-                          <option value="">Choose a class</option>
-                          {newClasses && newClasses.map((e) => (
-                            <option key={`${e}_1`} value={e}>{e}</option>
-                          ))}
-                        </select>
+                        />
+                        {/* <SelectInput
+                          options={newClasses}
+                          valueIndex="value"
+                          optionIndex="desc"
+                          titleIndex="type"
+                          value={filteraction}
+                          onChange={onChange}
+                          name="filteraction"
+                          className="theme-font font-black font-14 mr-4"
+                        /> */}
                       </div>
 
                       {className.trim().length < 1 ? null : (

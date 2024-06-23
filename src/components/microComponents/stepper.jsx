@@ -5,10 +5,40 @@ import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
+import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@mui/material/Typography';
 import { useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { animatedCheck } from '../temps/projectTemps/miscTemps';
+
+const centeredProperty = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  height: '38px'
+};
+
+const useStyles = makeStyles((theme) => ({
+  customButton: {
+    backgroundColor: '#FFA500',
+    color: '#202020',
+    '&:hover': {
+      backgroundColor: '#f4f4f4',
+      border: '1px solid #FFA500'
+    },
+    ...centeredProperty
+  },
+  outlineButton: {
+    backgroundColor: 'white',
+    border: '1px solid #FFA500',
+    color: '#202020',
+    '&:hover': {
+      backgroundColor: '#FFA500',
+      color: '#202020'
+    },
+    ...centeredProperty
+  }
+}));
 
 export default function HorizontalLinearStepper({ steps, active, link }) {
   const { goBack } = useHistory();
@@ -16,6 +46,7 @@ export default function HorizontalLinearStepper({ steps, active, link }) {
   const [activeStep, setActiveStep] = React.useState(active || 0);
   const [skipped, setSkipped] = React.useState(new Set());
   const currentItem = steps[activeStep];
+  const classes = useStyles();
 
   useEffect(() => {
     if (currentItem?.status === 'success') {
@@ -98,9 +129,9 @@ export default function HorizontalLinearStepper({ steps, active, link }) {
             display: 'flex', justifyContent: 'space-between', flexDirection: 'row', pt: 2
           }}
           >
-            <Button onClick={goBack}>Exit</Button>
+            <Button onClick={goBack} className={classes.outlineButton}>Exit</Button>
             <Link to={link}>Continue</Link>
-            <Button onClick={handleReset}>Reset</Button>
+            <Button onClick={handleReset} className={classes.customButton}>Reset</Button>
           </Box>
         </>
       ) : (
@@ -111,20 +142,20 @@ export default function HorizontalLinearStepper({ steps, active, link }) {
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
             <Button
               color="inherit"
-              className={activeStep === 0 ? 'd-none' : ''}
+              className={`${activeStep === 0 ? 'd-none' : ''} ${classes.outlineButton}`}
               disabled={activeStep === 0}
               onClick={handleBack}
               sx={{ mr: 1 }}
             >
               Back
             </Button>
-            <Button onClick={goBack}>Exit</Button>
+            <Button onClick={goBack} className={classes.outlineButton}>Exit</Button>
             <Box sx={{ flex: '1 1 auto' }} />
-            <Button className={isStepOptional(activeStep) ? '' : 'd-none'} color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
+            <Button className={`${isStepOptional(activeStep) ? '' : 'd-none'} ${classes.outlineButton}`} color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
               Skip
             </Button>
 
-            <Button onClick={handleNext}>
+            <Button onClick={handleNext} className={classes.customButton}>
               {steps[activeStep].btn}
             </Button>
           </Box>

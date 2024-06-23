@@ -1,30 +1,30 @@
 /* eslint-disable max-len */
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { last } from 'lodash';
-import Box from '@material-ui/core/Box';
+// import Box from '@material-ui/core/Box';
 import FormBuilder from '../../../../components/form/builders/form';
 import DragNDropTemp from '../newEngagement/DragNDropInputTemp';
-import PlanningClasses from './PlanningClasses';
-import userProps from '../../constants/usersProps';
-import NewEngagementTemp from '../newEngagement/NewEngagementTemp';
-import SliderSizes from '../../../../components/microComponents/slider';
+// import PlanningClasses from './PlanningClasses';
+// import userProps from '../../constants/usersProps';
+// import NewEngagementTemp from '../newEngagement/NewEngagementTemp';
+// import SliderSizes from '../../../../components/microComponents/slider';
 import CustomAccordion from '../../../../components/ui/customAccordion';
-import Creatable from '../../../../components/form/inputs/Creatable';
+// import Creatable from '../../../../components/form/inputs/Creatable';
 import planningProps from '../../constants/planningProps';
-import { index } from '../../../../utilities/auth';
+// import { index } from '../../../../utilities/auth';
 import { toastNotifier, slugToString, stringDoesNotExist } from '../../../../utilities/stringOperations';
-import { CheckboxField } from '../../../../components/form/inputs/Checkbox';
+import { RadioButtonField } from '../../../../components/form/inputs/Checkbox';
 import { assertions, miscTests } from '../../../../utilities/dummyData';
-import { QuillEditor } from '../../../../components/ui/richText';
+// import { QuillEditor } from '../../../../components/ui/richText';
 
 const MiscTemp = ({
   formData, setFormData, handleChange, errors, handleBlur, setErrors, blurHandler
 }) => {
   const [currentPanel, setCurrentPanel] = useState(0);
-  const [currentPanel1, setCurrentPanel1] = useState(50);
+  // const [currentPanel1, setCurrentPanel1] = useState(50);
   const [procedures, setProcedures] = useState([1]);
-  const [itentity, setItEntity] = useState('');
-  const name = (item) => `Assessment ${item}`;
+  const [itEntity, setItEntity] = useState('');
+  // const name = (item) => `Assessment ${item}`;
   // console.log(formData);
   const addProcess = () => {
     const fun = () => setProcedures([...procedures, (last(procedures) + 1)]);
@@ -43,12 +43,10 @@ const MiscTemp = ({
   };
 
   const OnChange = (e) => {
-    e.preventDefault();
     setItEntity(e.target.value);
-    // console.log(e.target.value);
     setFormData({ ...formData, risk_assessment_status: e.target.value });
   };
-  // console.log(itentity);
+  // console.log(itEntity);
   return (
     <div className="w-750 ">
 
@@ -93,15 +91,24 @@ const MiscTemp = ({
                       <div>
                         <div>
                           <p>Does the entity have any IT system</p>
-                          <label>
-                            <input type="radio" name="it_risk" onClick={OnChange} checked={itentity === 'yes'} value="yes" id="" />
-                            {' '}
-                            Yes
-                            {' '}
-                            <input type="radio" name="it_risk" id="" onClick={OnChange} checked={itentity === 'no'} value="no" />
-                            {' '}
-                            No
-                          </label>
+                          <div className="d-flex">
+                            <RadioButtonField
+                              label="Yes"
+                              checked={itEntity === 'yes'}
+                              handleChecked={OnChange}
+                              name="it_risk"
+                              className="pr-1"
+                              value="yes"
+                            />
+                            <RadioButtonField
+                              label="No"
+                              checked={itEntity === 'no'}
+                              handleChecked={OnChange}
+                              name="it_risk"
+                              className="pl-1"
+                              value="no"
+                            />
+                          </div>
 
                         </div>
                         {/* {formData?.risk_assessments?.map((item, key) => (
@@ -136,7 +143,7 @@ const MiscTemp = ({
                             />
                           </div>
                         ))} */}
-                        {itentity && itentity === 'yes'
+                        {itEntity && itEntity === 'yes'
                           ? (
                             <div>
                               {/* <CustomAccordion

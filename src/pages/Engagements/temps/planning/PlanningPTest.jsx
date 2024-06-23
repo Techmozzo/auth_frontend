@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 import React from 'react';
+import uuid from 'react-uuid';
 import CustomCheckbox from '../../../../components/form/inputs/CustomCheckbox';
 import { slugToString } from '../../../../utilities/stringOperations';
 // import { assertions } from '../../../../utilities/dummyData';
@@ -105,16 +106,14 @@ const PlanningPTest = ({
             <div className="d-flex wrap justify-content-between">
               {
                 assertions && assertions?.map((itemm) => (
-                  <div className="col-md-6" key={itemm.name}>
+                  <div className="col-md-6" key={uuid()}>
                     <div className="d-flex">
                       <CustomCheckbox
-                        key={itemm.name}
-                        label={slugToString(itemm.name)}
                         name={itemm.id}
                         // handleChecked={handleChecked}
                         className="w-100 neg-m-l-20 mt-4"
                         handleChecked={(event) => handleAssertionChange(event, itemm.id)}
-                        // checked={procedure.assertions.includes(itemm.id)}
+                        checked={procedure.assertions.includes(itemm.id)}
                       />
                       <div className="neg-m-t-10">{slugToString(itemm.name)}</div>
                     </div>
