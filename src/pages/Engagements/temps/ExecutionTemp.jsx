@@ -2,11 +2,13 @@
 /* eslint-disable max-len */
 /* eslint-disable camelcase */
 import React, { useEffect, useState } from 'react';
-import { last } from 'lodash';
+// import { last } from 'lodash';
 import { BsArrowsCollapse } from 'react-icons/bs';
 import { GiExpand } from 'react-icons/gi';
 import { MdDone } from 'react-icons/md';
 import { useSelector } from 'react-redux';
+import Button from '@mui/material/Button';
+import { makeStyles } from '@material-ui/core/styles';
 import { toastNotifier, slugToString, stringDoesNotExist } from '../../../utilities/stringOperations';
 import CustomAccordion from '../../../components/ui/customAccordion';
 import DragNDropTemp from './newEngagement/DragNDropInputTemp';
@@ -15,30 +17,54 @@ import useViewBoilerPlate from '../../../components/hooks/useViewBoilerPlate';
 import { apiOptions, get, post } from '../../../services/fetch';
 import CustomCheckbox from '../../../components/form/inputs/CustomCheckbox';
 
+const centeredProperty = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  height: '38px'
+};
+
+const useStyles = makeStyles((theme) => ({
+  customButton: {
+    backgroundColor: '#FFA500',
+    color: '#202020',
+    padding: '0px 20px',
+    borderRadius: '2px',
+    fontSize: '14px',
+    fontWeight: 600,
+    '&:hover': {
+      border: '1px solid #FFA500',
+      backgroundColor: '#f4f4f4',
+      borderRadius: '2px'
+    },
+    ...centeredProperty
+  }
+}));
+
 const ExecutionTemp = ({
   formData, setFormData, handleChange, errors, handleBlur, setErrors, blurHandler
 }) => {
   const [currentPanel, setCurrentPanel] = useState(0);
-  const [currentPanel1, setCurrentPanel1] = useState(50);
+  // const [currentPanel1, setCurrentPanel1] = useState(50);
   const [procedures, setProcedures] = useState([1]);
   const [isSuccess, setisSuccess] = useState(false);
-  const name = (item) => `Assessment ${item}`;
+  // const name = (item) => `Assessment ${item}`;
 
-  const addProcess = () => {
-    const fun = () => setProcedures([...procedures, (last(procedures) + 1)]);
-    blurHandler();
-    if (
-      stringDoesNotExist(formData.name)
-      || stringDoesNotExist(formData.function) || stringDoesNotExist(formData.review_performed)
-    ) {
-      return toastNotifier({
-        text: 'You have to fill every field in this form before adding a new entry',
-        title: 'Unfilled/Incomplete Form',
-        type: 'info'
-      });
-    }
-    return setTimeout(fun(), 500);
-  };
+  // const addProcess = () => {
+  //   const fun = () => setProcedures([...procedures, (last(procedures) + 1)]);
+  //   blurHandler();
+  //   if (
+  //     stringDoesNotExist(formData.name)
+  //     || stringDoesNotExist(formData.function) || stringDoesNotExist(formData.review_performed)
+  //   ) {
+  //     return toastNotifier({
+  //       text: 'You have to fill every field in this form before adding a new entry',
+  //       title: 'Unfilled/Incomplete Form',
+  //       type: 'info'
+  //     });
+  //   }
+  //   return setTimeout(fun(), 500);
+  // };
 
   return (
     <div className="w-750 ">
@@ -115,9 +141,10 @@ const ExecutionTemp = ({
 
 const Prod = ({ setisSuccess }) => {
   const store = useSelector((state) => state.engagement?.engagement);
-  const [classes, setClasses] = useState([
-  ]);
+  // const [classes, setClasses] = useState([]);
   const [statust, setStatus] = useState(false);
+
+  const btnClasses = useStyles();
 
   const [formData, setFormData] = React.useState({});
   const options = {
@@ -217,7 +244,7 @@ const Prod = ({ setisSuccess }) => {
 
           </div>
         ))}
-        <button type="button" disabled={statust} onClick={handleFormSubmit}>{statust ? 'Submitting' : 'Add Procedure'}</button>
+        <Button disabled={statust} onClick={handleFormSubmit} className={btnClasses.customButton}>{statust ? 'Submitting' : 'Add Procedure'}</Button>
       </>
     );
   }
@@ -277,7 +304,7 @@ const ProcedureForm = ({
       <div className="d-flex wrap justify-content-between">
 
         {formState.assertions.map((assertion) => (
-          <div className="col-md-6" key={assertion.id}>
+          <div key={assertion.id}>
             <div className="d-flex">
               <CustomCheckbox
                 key={assertion.id}
@@ -288,7 +315,7 @@ const ProcedureForm = ({
                 handleChecked={(event) => handleAssertionChange(assertion.procedure_assertion_id)}
                 checked={selectedAssertions.includes(assertion.procedure_assertion_id)}
               />
-              <div className="neg-m-t-10">{slugToString(assertion.name)}</div>
+              <div className="neg-m-t-10 ml-2">{slugToString(assertion.name)}</div>
             </div>
           </div>
           // <label key={assertion.id}>

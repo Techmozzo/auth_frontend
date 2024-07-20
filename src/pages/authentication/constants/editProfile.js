@@ -13,7 +13,7 @@ const editProfileProps = (
   {
     kind: 'input',
     props: {
-      className: 'w-100 m-b-20 col-12',
+      className: 'w-100 m-b-20',
       name: 'name',
       type: 'text',
       label: 'Name of Audit Firm',
@@ -30,7 +30,7 @@ const editProfileProps = (
   {
     kind: 'input',
     props: {
-      className: 'w-100 m-b-20 col-12',
+      className: 'w-100 m-b-20',
       name: 'phone',
       type: 'tel',
       label: 'Company Phone',
@@ -42,7 +42,7 @@ const editProfileProps = (
   {
     kind: 'input',
     props: {
-      className: 'w-100 m-b-20 col-12',
+      className: 'w-100 m-b-20',
       name: 'email',
       type: 'email',
       label: 'Company Email Address',
@@ -60,7 +60,7 @@ const editProfileProps = (
   {
     kind: 'input',
     props: {
-      className: 'w-100 m-b-20 col-12',
+      className: 'w-100 m-b-20',
       name: 'city',
       type: 'text',
       label: 'Company  City',
@@ -78,7 +78,7 @@ const editProfileProps = (
   {
     kind: 'input',
     props: {
-      className: 'w-100 m-b-20 col-12',
+      className: 'w-100 m-b-20',
       name: 'state',
       type: 'text',
       label: 'Company  State',
@@ -96,7 +96,7 @@ const editProfileProps = (
   {
     kind: 'input',
     props: {
-      className: 'w-100 m-b-20 col-12',
+      className: 'w-100 m-b-20',
       name: 'address',
       type: 'text',
       label: 'Company  Address',
@@ -114,7 +114,7 @@ const editProfileProps = (
   {
     kind: 'input',
     props: {
-      className: 'w-100 m-b-20 col-12',
+      className: 'w-100 m-b-20',
       name: 'zip',
       type: 'text',
       label: 'Zip',

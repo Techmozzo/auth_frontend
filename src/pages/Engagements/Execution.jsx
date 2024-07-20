@@ -1,14 +1,55 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useHistory, useParams } from 'react-router-dom';
+import Button from '@mui/material/Button';
+import { makeStyles } from '@material-ui/core/styles';
 import useCreateBoilerPlate from '../../components/hooks/useCreateBoilerPlate';
 import { apiOptions } from '../../services/fetch';
-import { sentenceCaps, slugify, stringDoesNotExist } from '../../utilities/stringOperations';
+import { sentenceCaps, slugify } from '../../utilities/stringOperations';
 import Loader from '../../components/microComponents/loader';
 import ExecutionTemp from './temps/ExecutionTemp';
 import Notes from './Notes';
 import { headerTemp1 } from '../../components/temps/projectTemps/miscTemps';
 import useViewBoilerPlate from '../../components/hooks/useViewBoilerPlate';
+
+const centeredProperty = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  height: '38px'
+};
+
+const useStyles = makeStyles((theme) => ({
+  customButton: {
+    backgroundColor: '#FFA500',
+    color: '#202020',
+    padding: '0px 20px',
+    borderRadius: '2px',
+    fontSize: '14px',
+    fontWeight: 600,
+    '&:hover': {
+      border: '1px solid #FFA500',
+      backgroundColor: '#f4f4f4',
+      borderRadius: '2px'
+    },
+    ...centeredProperty
+  },
+  outlineButton: {
+    backgroundColor: '#ffffff',
+    border: '1px solid #FFA500',
+    color: '#202020',
+    padding: '0px 20px',
+    borderRadius: '2px',
+    fontSize: '14px',
+    fontWeight: 600,
+    '&:hover': {
+      color: '#202020 !important',
+      backgroundColor: '#FFA500',
+      borderRadius: '2px'
+    },
+    ...centeredProperty
+  }
+}));
 
 const Execution = () => {
   /* router hooks */
@@ -69,7 +110,9 @@ const Execution = () => {
     if (status === 'success') {
       push(`/app/engagement/conclusion/${slugify(engagementName, '-')}/${engagementId}`);
     }
-  });
+  }, [status]);
+
+  const classes = useStyles();
 
   // console.log('Wicked ', formDataa);
   return (
@@ -107,9 +150,14 @@ const Execution = () => {
                         // text={text}
                         link={`/app/engagement/engagement/${engagementId}`}
                       />
-                      <div className="d-flex justify-content-between wrap">
-                        <Link to={`/app/engagement/engagement/${engagementId}`} className="btn-delete">Back</Link>
-                        <button type="button" className="btn" onClick={create}>Continue</button>
+                      <div className="d-flex justify-content-between wrap mt-3">
+                        <Link
+                          to={`/app/engagement/engagement/${engagementId}`}
+                          className={classes.outlineButton}
+                        >
+                          Back
+                        </Link>
+                        <Button onClick={create} className={classes.customButton}>Continue</Button>
                       </div>
                     </div>
                   )

@@ -24,19 +24,29 @@ const useStyles = makeStyles((theme) => ({
   customButton: {
     backgroundColor: '#FFA500',
     color: '#202020',
+    padding: '0px 20px',
+    borderRadius: '2px',
+    fontSize: '14px',
+    fontWeight: 600,
     '&:hover': {
+      border: '1px solid #FFA500',
       backgroundColor: '#f4f4f4',
-      border: '1px solid #FFA500'
+      borderRadius: '2px'
     },
     ...centeredProperty
   },
   outlineButton: {
-    backgroundColor: 'white',
+    backgroundColor: '#ffffff',
     border: '1px solid #FFA500',
     color: '#202020',
+    padding: '0px 20px',
+    borderRadius: '2px',
+    fontSize: '14px',
+    fontWeight: 600,
     '&:hover': {
+      color: '#202020 !important',
       backgroundColor: '#FFA500',
-      color: '#202020'
+      borderRadius: '2px'
     },
     ...centeredProperty
   }
@@ -214,7 +224,7 @@ export default function HorizontalLinearStepper({ steps, active, link }) {
           }}
           >
             <Button onClick={goBack} className={classes.outlineButton}>Exit</Button>
-            <Link to={link}>Continue</Link>
+            <Link to={link} className={classes.outlineButton}>Continue</Link>
             <Button onClick={handleReset} className={classes.customButton}>Reset</Button>
           </Box>
         </>

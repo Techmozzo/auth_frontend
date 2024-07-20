@@ -1,10 +1,36 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable max-len */
 import React, { useEffect, useState } from 'react';
+import Button from '@mui/material/Button';
+import { makeStyles } from '@material-ui/core/styles';
 import { get, post } from '../../services/fetch';
 import { toastNotifier } from '../../utilities/stringOperations';
 import Loader from '../../components/microComponents/loader';
 import SelectInput from '../../components/form/inputs/SelectInput';
+
+const centeredProperty = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  height: '38px'
+};
+
+const useStyles = makeStyles((theme) => ({
+  customButton: {
+    backgroundColor: '#FFA500',
+    color: '#202020',
+    padding: '0px 40px',
+    borderRadius: '2px',
+    fontSize: '13px',
+    fontWeight: 600,
+    '&:hover': {
+      border: '1px solid #FFA500',
+      backgroundColor: '#f4f4f4',
+      borderRadius: '2px'
+    },
+    ...centeredProperty
+  }
+}));
 
 const RolesPremission = ({ setCurrent }) => {
   const [roles, setRoles] = useState([]);
@@ -15,8 +41,11 @@ const RolesPremission = ({ setCurrent }) => {
   const [permissionId, setPermissionsId] = useState([]);
   const [checkedState, setCheckedState] = useState({});
   const [isLoading, setLoading] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+  // const [submitted, setSubmitted] = useState(false);
   const [sreq, setRequest] = useState(false);
+
+  const btnClasses = useStyles();
+
   useEffect(() => {
     setCurrent('Roles And Permission');
   }, []);
@@ -214,7 +243,13 @@ const RolesPremission = ({ setCurrent }) => {
                     ))}
                   </div>
 
-                  {singleroleid === '' ? null : <button className="mt-4 btn btn-small" type="button" onClick={UpdatePermission}>Update Permissions</button> }
+                  <div className="mt-3">
+                    <div className="d-flex justify-content-end">
+                      {singleroleid === ''
+                        ? null
+                        : <Button className={btnClasses.customButton} onClick={UpdatePermission}>Update Permissions</Button> }
+                    </div>
+                  </div>
                 </div>
 
                 {/*

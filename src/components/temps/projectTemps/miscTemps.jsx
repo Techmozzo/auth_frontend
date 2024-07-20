@@ -91,7 +91,7 @@ export const headerTemp1 = ({
       <span
         className="theme-font-bold font-title-small text-theme-black mr-1"
       >
-        {sentenceCaps(name)}
+        {sentenceCaps(name) ?? ''}
       </span>
       <span className={stringDoesNotExist(year) ? 'd-none' : 'mr-1'}>{year}</span>
     </div>

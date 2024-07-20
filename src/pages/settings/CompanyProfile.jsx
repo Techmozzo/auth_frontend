@@ -1,24 +1,55 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router';
-import localforage from 'localforage';
-import uuid from 'react-uuid';
+// import localforage from 'localforage';
+// import uuid from 'react-uuid';
+import Button from '@mui/material/Button';
+import { makeStyles } from '@material-ui/core/styles';
 import { mapBackendErrors, validateField } from '../../utilities/validation';
 import PageTemp from '../../components/temps/PageTemp';
 import { projectAction, resetAction } from '../../redux/actions/projectActions';
 import { toastNotifier, slugToString } from '../../utilities/stringOperations';
-
 import FormBuilder from '../../components/form/builders/form';
-import CheckboxComp from '../../components/ui/CheckboxComp';
+// import CheckboxComp from '../../components/ui/CheckboxComp';
 import { apiOptions, post } from '../../services/fetch';
-import { user } from '../../utilities/auth';
-import completeProfile1Props from '../authentication/constants/completeProfile1';
+// import { user } from '../../utilities/auth';
+// import completeProfile1Props from '../authentication/constants/completeProfile1';
 import editProfileProps from '../authentication/constants/editProfile';
 
+const centeredProperty = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  height: '38px'
+};
+
+const useStyles = makeStyles((theme) => ({
+  customButton: {
+    backgroundColor: '#FFA500',
+    color: '#202020',
+    padding: '0px 40px',
+    borderRadius: '2px',
+    fontSize: '13px',
+    fontWeight: 600,
+    '&:hover': {
+      border: '1px solid #FFA500',
+      backgroundColor: '#f4f4f4',
+      borderRadius: '2px'
+    },
+    ...centeredProperty
+  },
+  containerWrapper: {
+    padding: '0 60px',
+    [theme.breakpoints.down('sm')]: {
+      padding: '0 8px'
+    }
+  }
+}));
+
 const CompanyProfile = ({ setCurrent }) => {
-  const [terms, setTerms] = useState(false);
-  const [show, setShow] = useState(false);
+  // const [terms, setTerms] = useState(false);
+  // const [show, setShow] = useState(false);
   const [load, setLoading] = useState(false);
   const [formload, setFormLoading] = useState('initial');
   const [errors, setErrors] = useState({});
@@ -32,7 +63,8 @@ const CompanyProfile = ({ setCurrent }) => {
   const [formData, setFormData] = useState({
     ...indexstore?.data?.data?.company
   });
-  // console.log(store);
+
+  const btnClasses = useStyles();
 
   useEffect(() => {
     dispatch(projectAction({
@@ -148,52 +180,45 @@ const CompanyProfile = ({ setCurrent }) => {
 
   /* on visiting */
   const initialTemp = ({ ...props }) => (
-    <div className="">
-      <div className="box-shadow row ">
-
-        <div className="col-md-12 pt-5">
-          <div className="offset-1">
-            <div className="row">
-              <div className="pl-3">
-                <div className="font-regular text-theme-grey">
-                  Fill the application form below to register
-                </div>
-              </div>
-              <div className="col-md-10 mt-2">
-                <div className="d-flex justify-content-between wrap">
-                  <FormBuilder
-                    formItems={
-                      editProfileProps(
-                        {
-                          formData,
-                          handleBlur,
-                          handleChange,
-                          errors
-                        }
-                      )
+    <div className="box-shadow row">
+      <div className="container col-12 mt-3">
+        <div className={btnClasses.containerWrapper}>
+          <div className="font-regular text-theme-grey">
+            Fill the application form below to register
+          </div>
+          <div className="mt-2">
+            <div className="d-flex justify-content-between wrap">
+              <FormBuilder
+                formItems={
+                  editProfileProps(
+                    {
+                      formData,
+                      handleBlur,
+                      handleChange,
+                      errors
                     }
-                  />
-                  <div className="m-3">
-                    {load
-                      ? (
-                        <>
-                          Uploading image
-                        </>
-                      ) : (
-                        <>
-                          <img src={formData.dp} alt={formData.name} style={{ width: '150px', height: '150px' }} />
-                          <input type="file" accept="image/*" name="dp" id="dp" onChange={uploadImage} />
+                  )
+                }
+              />
+              <div className="m-3">
+                {load
+                  ? (
+                    <>
+                      Uploading image
+                    </>
+                  ) : (
+                    <>
+                      <img src={formData.dp} alt={formData.name} style={{ width: '150px', height: '150px' }} className="mr-2" />
+                      <input type="file" accept="image/*" name="dp" id="dp" onChange={uploadImage} />
 
-                        </>
-                      )}
-                  </div>
+                    </>
+                  )}
+              </div>
 
-                </div>
-                <div className="row justify-content-between mb-2">
-                  <div>
-                    <button className="w-100 btn btn-small" type="button" onClick={handleLogin}>Update</button>
-                  </div>
-                </div>
+            </div>
+            <div className="mt-3 mb-5">
+              <div className="d-flex justify-content-end">
+                <Button className={btnClasses.customButton} onClick={handleLogin}>Update</Button>
               </div>
             </div>
           </div>
