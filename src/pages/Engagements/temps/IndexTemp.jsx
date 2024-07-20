@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
-import FancySearch from '../../../components/form/fancySearch';
+import SearchInputTwo from '../../../components/form/inputs/SearchTwo';
 import EngagementTable from '../../../components/tables/engagementTable';
 
 const IndexTemp = ({ formData }) => (
@@ -11,7 +11,7 @@ const IndexTemp = ({ formData }) => (
           Dashboard
         </div>
         <div className="mr-3">
-          <FancySearch />
+          <SearchInputTwo placeholder="Search" className="" />
         </div>
       </div>
       <div className="row">

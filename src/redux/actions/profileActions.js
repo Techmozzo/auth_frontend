@@ -2,6 +2,8 @@
 import { get, patch, post } from '../../services/fetch';
 import constants from '../constants';
 
+const errorMessage = 'we could not connect to the server at this time, please try again later.!';
+
 const dispatchConnection = (connection, pending, action) => async (dispatch) => {
   dispatch(pending(connection));
   return connection.then((response) => action({ response, dispatch }));
@@ -22,7 +24,7 @@ export const myProfile = () => {
         dispatch(success(response?.data));
       } else if (response) {
         dispatch(failure(response?.errors || response));
-      } else dispatch(failure('we could not connect to the server at this time, please try again later.!'));
+      } else dispatch(failure(errorMessage));
     });
   };
 };
@@ -41,7 +43,7 @@ export const personalAccounts = () => {
         dispatch(success(response?.data));
       } else if (response) {
         dispatch(failure(response?.errors || response));
-      } else dispatch(failure('we could not connect to the server at this time, please try again later.!'));
+      } else dispatch(failure(errorMessage));
     });
   };
 };
@@ -61,7 +63,7 @@ export const corporateManagers = () => {
         dispatch(success(response?.data));
       } else if (response) {
         dispatch(failure(response?.errors || response));
-      } else dispatch(failure('we could not connect to the server at this time, please try again later.!'));
+      } else dispatch(failure(errorMessage));
     });
   };
 };
@@ -78,7 +80,7 @@ export const editPersonalAccount = (payload) => {
       dispatch(success(response?.data));
     } else if (response) {
       dispatch(failure(response?.errors || response));
-    } else dispatch(failure('we could not connect to the server at this time, please try again later.!'));
+    } else dispatch(failure(errorMessage));
   };
   return dispatchConnection(connection, request, dispatchActions);
 };
@@ -94,7 +96,7 @@ export const changeManager = (payload) => {
       dispatch(success(response?.data));
     } else if (response) {
       dispatch(failure(response?.errors || response));
-    } else dispatch(failure('we could not connect to the server at this time, please try again later.!'));
+    } else dispatch(failure(errorMessage));
   };
   return dispatchConnection(connection, request, dispatchActions);
 };
@@ -110,7 +112,7 @@ export const myProjects = () => {
       dispatch(success(response?.data));
     } else if (response) {
       dispatch(failure(response?.errors || response));
-    } else dispatch(failure('we could not connect to the server at this time, please try again later.!'));
+    } else dispatch(failure(errorMessage));
   };
   return dispatchConnection(connection, request, dispatchActions);
 };
@@ -130,7 +132,7 @@ export const profiles = () => {
         dispatch(success(response?.data));
       } else if (response) {
         dispatch(failure(response?.errors || response));
-      } else dispatch(failure('we could not connect to the server at this time, please try again later.!'));
+      } else dispatch(failure(errorMessage));
     });
   };
 };
@@ -161,7 +163,7 @@ export const notifications = ({
       } else if (response) {
         // console.log(response?.errors);
         dispatch(failure(response?.errors || response));
-      } else dispatch(failure('we could not connect to the server at this time, please try again later.!'));
+      } else dispatch(failure(errorMessage));
     });
   };
 };
@@ -189,7 +191,27 @@ export const activitylog = ({
       } else if (response) {
         // console.log(response?.errors);
         dispatch(failure(response?.errors || response));
-      } else dispatch(failure('we could not connect to the server at this time, please try again later.!'));
+      } else dispatch(failure(errorMessage));
+    });
+  };
+};
+
+export const permissions = () => {
+  const request = (req) => ({ type: constants.MY_PERMISSION_PENDING, request: req });
+  const success = (response) => ({ type: constants.MY_PERMISSION_SUCCESS, response });
+  const failure = (error) => ({ type: constants.MY_PERMISSION_FAILURE, error });
+
+  return async (dispatch) => {
+    const res = get({ endpoint: 'USER_ROLES', auth: true });
+
+    dispatch(request(res));
+
+    return res.then((response) => {
+      if (response?.status === 200 || response?.status === 201) {
+        dispatch(success(response?.data?.data));
+      } else if (response) {
+        dispatch(failure(response?.errors || response));
+      } else dispatch(failure(errorMessage));
     });
   };
 };

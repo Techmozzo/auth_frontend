@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
 import React from 'react';
-import FancySearch from '../../../components/form/fancySearch';
 import { InfoBarTemp } from '../../../components/temps/projectTemps/miscTemps';
 import { sentenceCaps } from '../../../utilities/stringOperations';
+import SearchInputTwo from '../../../components/form/inputs/SearchTwo';
 
 const IndexTemp = ({
   infoBarData, parent, header, link, table
@@ -15,7 +15,7 @@ const IndexTemp = ({
           {parent?.toUpperCase()}
         </div>
         <div className="mr-3">
-          <FancySearch />
+          <SearchInputTwo placeholder="Search" className="" />
         </div>
       </div>
       <InfoBarTemp data={infoBarData} />

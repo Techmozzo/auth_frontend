@@ -14,8 +14,10 @@ import { Button } from 'primereact/button';
 import { Menu } from 'primereact/menu';
 import { ConfirmPopup, confirmPopup } from 'primereact/confirmpopup';
 import { Toast } from 'primereact/toast';
+import uuid from 'react-uuid';
 import usePermission from '../hooks/usePermission';
 import { sentenceCaps } from '../../utilities/stringOperations';
+import { deepEqual } from '../../utilities/arrayOperations';
 import { del } from '../../services/fetch';
 
 const useStyles = makeStyles((theme) => ({
@@ -54,15 +56,17 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const LargeSpinner = styled('i')({
-  fontSize: '2rem'
+  fontSize: '1rem'
 });
 
-export default function DashboardTable({ data, isLoadingTableData }) {
+export default function DashboardTable({ data }) {
   const editEnganagment = usePermission('edit-engagement');
   const menuLeft = React.useRef(null);
   const { push } = useHistory();
   const toast = React.useRef(null);
+  const [rows, setRows] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
+
   function createData(name, date, client, members, status, id) {
     return {
       name,
@@ -71,6 +75,7 @@ export default function DashboardTable({ data, isLoadingTableData }) {
       members,
       status,
       id,
+      uuid: uuid(),
       action: [
         {
           label: 'Options',
@@ -113,9 +118,26 @@ export default function DashboardTable({ data, isLoadingTableData }) {
 
     };
   }
-  const rows = data?.map((item) => createData(
-    item?.name, item?.year, item?.client?.name, item?.team_members_count, item?.status?.name, item?.id
-  ));
+
+  const tableRows = React.useMemo(() => {
+    if (!!data && data.length) {
+      return data.map((item) => createData(
+        item?.name,
+        item?.year,
+        item?.client?.name,
+        item?.team_members_count,
+        item?.status?.name,
+        item?.id
+      ));
+    }
+    return [];
+  }, [data]);
+
+  React.useEffect(() => {
+    if (!deepEqual(rows, tableRows)) {
+      setRows(tableRows);
+    }
+  }, [rows, tableRows]);
 
   const handleRow = (row) => {
     // const theData = data.filter((item) => item.name === row.name);
@@ -127,15 +149,15 @@ export default function DashboardTable({ data, isLoadingTableData }) {
     // console.log('cliers', row);
   };
   // console.log('Den ', data);
-  const ITEM_HEIGHT = 48;
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  // const ITEM_HEIGHT = 48;
+  // const [anchorEl, setAnchorEl] = React.useState(null);
+  // const open = Boolean(anchorEl);
+  // const handleClick = (event) => {
+  //   setAnchorEl(event.currentTarget);
+  // };
+  // const handleClose = () => {
+  //   setAnchorEl(null);
+  // };
   const acceptDelete = async (id) => {
     setLoading(true);
     try {
@@ -175,7 +197,7 @@ export default function DashboardTable({ data, isLoadingTableData }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {isLoadingTableData
+          {!!rows && !rows.length
             ? (
               <TableRow>
                 <TableCell colSpan={6}>
@@ -186,7 +208,7 @@ export default function DashboardTable({ data, isLoadingTableData }) {
               </TableRow>
             )
             : rows?.map((row) => (
-              <StyledTableRow key={sentenceCaps(row.name)}>
+              <StyledTableRow key={sentenceCaps(row.uuid)}>
                 <StyledTableCell component="th" scope="row">
                   <div className="bold theme-font font-small">{sentenceCaps(row.name)}</div>
                 </StyledTableCell>

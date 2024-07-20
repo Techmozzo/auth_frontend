@@ -6,7 +6,8 @@ import useViewBoilerPlate from '../../components/hooks/useViewBoilerPlate';
 import IndexTemp from '../Dashboard/temp/IndexTemp';
 import DashboardTable from '../../components/tables/dashboardTable';
 import { projectAction } from '../../redux/actions/projectActions';
-import { user, role } from '../../utilities/auth';
+// import { user, role } from '../../utilities/auth';
+import { role } from '../../utilities/auth';
 import usePermission from '../../components/hooks/usePermission';
 
 const EngagementIndex = () => {
@@ -16,7 +17,7 @@ const EngagementIndex = () => {
   const indexstore = useSelector((state) => state.engagement);
   const viewEngangment = usePermission('view-engagement');
   const addEnganagment = usePermission('add-engagement');
-  // console.log(viewEngangment);
+
   const options = {
     action: 'ENGAGEMENTS',
     apiOpts: apiOptions({
@@ -34,24 +35,24 @@ const EngagementIndex = () => {
     options
   });
 
-  const infoBarData = [
-    {
-      title: 'Total Engagement',
-      val: indexstore?.dashboard?.data?.data?.engagement_count || '0'
-    },
-    {
-      title: 'Pending Conclusion',
-      val: indexstore?.dashboard?.data?.data?.pending_engagement || '0'
-    },
-    {
-      title: 'Concluded And Closed',
-      val: indexstore?.dashboard?.data?.data?.concluded_engagement || '0'
-    },
-    {
-      title: 'Total Client',
-      val: indexstore?.dashboard?.data?.data?.clients_count || '0'
-    }
-  ];
+  // const infoBarData = [
+  //   {
+  //     title: 'Total Engagement',
+  //     val: indexstore?.dashboard?.data?.data?.engagement_count || '0'
+  //   },
+  //   {
+  //     title: 'Pending Conclusion',
+  //     val: indexstore?.dashboard?.data?.data?.pending_engagement || '0'
+  //   },
+  //   {
+  //     title: 'Concluded And Closed',
+  //     val: indexstore?.dashboard?.data?.data?.concluded_engagement || '0'
+  //   },
+  //   {
+  //     title: 'Total Client',
+  //     val: indexstore?.dashboard?.data?.data?.clients_count || '0'
+  //   }
+  // ];
   // console.log('Data', formData);
   useEffect(() => {
     dispatch(projectAction({

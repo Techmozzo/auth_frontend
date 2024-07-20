@@ -1,9 +1,9 @@
 import React from 'react';
-import { Link, useHistory, useLocation } from 'react-router-dom';
-import { ImSad } from 'react-icons/fa';
-import pageNotFound from '../../assets/images/pageNotFound.jpeg';
-import noData1 from '../../assets/images/nodata.png';
-import FancySearch from '../../components/form/fancySearch';
+import { useHistory } from 'react-router-dom';
+// import { Link, useHistory, useLocation } from 'react-router-dom';
+// import { ImSad } from 'react-icons/fa';
+// import pageNotFound from '../../assets/images/pageNotFound.jpeg';
+// import noData1 from '../../assets/images/nodata.png';
 
 const CompleteProfile = ({ tryAgain, home }) => {
   const history = useHistory();

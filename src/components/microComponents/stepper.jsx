@@ -4,11 +4,13 @@ import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
+import Check from '@mui/icons-material/Check';
 import Button from '@mui/material/Button';
-import { makeStyles } from '@material-ui/core/styles';
+import { styled, makeStyles } from '@material-ui/core/styles';
 import Typography from '@mui/material/Typography';
 import { useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
 import { animatedCheck } from '../temps/projectTemps/miscTemps';
 
 const centeredProperty = {
@@ -39,6 +41,79 @@ const useStyles = makeStyles((theme) => ({
     ...centeredProperty
   }
 }));
+
+const QontoConnector = styled(StepConnector)(({ theme }) => ({
+  [`&.${stepConnectorClasses.alternativeLabel}`]: {
+    top: 10,
+    left: 'calc(-50% + 12px)',
+    right: 'calc(50% + 12px)'
+  },
+  [`&.${stepConnectorClasses.active}`]: {
+    [`& .${stepConnectorClasses.line}`]: {
+      borderColor: '#ffa500'
+    }
+  },
+  [`&.${stepConnectorClasses.completed}`]: {
+    [`& .${stepConnectorClasses.line}`]: {
+      borderColor: '#ffa500'
+    }
+  },
+  [`& .${stepConnectorClasses.line}`]: {
+    borderColor: theme.palette.mode === 'dark' ? theme.palette.grey[800] : '#cccccc',
+    borderTopWidth: 3,
+    borderRadius: 1
+  }
+}));
+
+const QontoStepIconRoot = styled('div')(({ theme, ownerstate }) => ({
+  color: theme.palette.mode === 'dark' ? theme.palette.grey[700] : '#ffa500',
+  display: 'flex',
+  height: 22,
+  width: 22,
+  alignItems: 'center',
+  ...(ownerstate.active && {
+    borderRadius: '100%'
+  }),
+  '& .QontoStepIcon-completedIcon': {
+    color: '#ffffff',
+    zIndex: 1,
+    fontSize: 23,
+    padding: 4,
+    boxShadow: '0px 3px 6px 0px rgba(255, 165, 0, 0.2)',
+    borderRadius: '100%',
+    backgroundColor: '#ffa500'
+  },
+  '& .QontoStepIcon-circle': {
+    width: 16,
+    height: 16,
+    borderRadius: '100%',
+    color: '#f2f2f2',
+    border: '2px solid #cccccc',
+    padding: 10.2,
+    backgroundColor: 'currentColor',
+    ...(ownerstate.active && {
+      color: '#ffa500',
+      padding: 4,
+      border: '7.5px solid #ffffff',
+      backgroundColor: '#ffa500',
+      boxShadow: '0px 3px 6px 0px rgba(198, 198, 198, 0.5)'
+    })
+  }
+}));
+
+function QontoStepIcon(props) {
+  const { active, completed, className } = props;
+
+  return (
+    <QontoStepIconRoot ownerstate={{ active }} className={className}>
+      {completed ? (
+        <Check className="QontoStepIcon-completedIcon" />
+      ) : (
+        <div className="QontoStepIcon-circle" />
+      )}
+    </QontoStepIconRoot>
+  );
+}
 
 export default function HorizontalLinearStepper({ steps, active, link }) {
   const { goBack } = useHistory();
@@ -95,7 +170,16 @@ export default function HorizontalLinearStepper({ steps, active, link }) {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Stepper activeStep={activeStep}>
+      <Stepper
+        activeStep={activeStep}
+        alternativeLabel
+        connector={<QontoConnector />}
+        sx={{
+          '& .MuiStepLabel-label.Mui-active': {
+            fontWeight: 600
+          }
+        }}
+      >
         {steps.map(({ label, optional }, index) => {
           const stepProps = {};
           const labelProps = {};
@@ -109,7 +193,7 @@ export default function HorizontalLinearStepper({ steps, active, link }) {
           }
           return (
             <Step key={label} {...stepProps}>
-              <StepLabel {...labelProps}>{label}</StepLabel>
+              <StepLabel {...labelProps} StepIconComponent={QontoStepIcon}>{label}</StepLabel>
             </Step>
           );
         })}

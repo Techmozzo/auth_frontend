@@ -32,6 +32,10 @@ const initialState = {
   dp: {
     data: {},
     status: 'initial'
+  },
+  permissions: {
+    data: {},
+    status: 'initial'
   }
 };
 
@@ -292,6 +296,32 @@ const profileReducer = (state = initialState, { type, response, error }) => {
     return {
       ...state,
       dp: {
+        data: error || {},
+        status: 'failed'
+      }
+    };
+
+  case constants.MY_PERMISSION_PENDING:
+    return {
+      ...state,
+      permissions: {
+        data: {},
+        status: 'pending'
+      }
+    };
+  case constants.MY_PERMISSION_SUCCESS:
+    return {
+      ...state,
+      permissions: {
+        ...state.permissions,
+        data: response,
+        status: 'success'
+      }
+    };
+  case constants.MY_PERMISSION_FAILURE:
+    return {
+      ...state,
+      permissions: {
         data: error || {},
         status: 'failed'
       }

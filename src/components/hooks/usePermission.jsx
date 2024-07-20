@@ -1,35 +1,35 @@
 /* eslint-disable max-len */
-import { useState, useEffect } from 'react';
-import { role } from '../../utilities/auth';
-
-import { get } from '../../services/fetch';
+import {
+  useState, useEffect, useRef
+} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { permissions } from '../../redux/actions/profileActions';
+// import { role } from '../../utilities/auth';
+// import { get } from '../../services/fetch';
 
 export default function usePermission(permissionName) {
-//   const history = useHistory();
-  const [loading, setLoading] = useState(false);
-  const [permissions, setPermissions] = useState([]);
+  const dispatch = useDispatch();
+  const store = useSelector((state) => state.profile.permissions);
+
+  const [userPermissions, setUserPermissions] = useState([]);
+
+  const hasDispatchedPermissions = useRef(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
+    if (store?.status === 'initial' && !hasDispatchedPermissions.current) {
+      hasDispatchedPermissions.current = true;
+      dispatch(permissions());
+    }
+  }, [dispatch, store?.status]);
 
-      const data = await get({ endpoint: 'USER_ROLES', auth: true });
+  useEffect(() => {
+    if (store?.status === 'success') {
+      const permissionsData = store?.data;
+      setUserPermissions(permissionsData?.permissions || []);
+    }
+  }, [store]);
 
-      if (data?.data?.data?.roles) {
-        // const permissionsData = data?.data?.data?.roles.filter((id) => String(id.name) === String(role && role[0]));
-        const permissionsData = data?.data?.data;
-        // console.log('Inside ', data.data.data.roles);
-        // // eslint-disable-next-line max-len
-        setPermissions(permissionsData?.permissions || []);
-      }
-
-      setLoading(false);
-    };
-
-    fetchData().catch(console.error);
-  }, []);
-
-  const permissionGranted = permissions.some((name) => name.name === permissionName);
+  const permissionGranted = userPermissions.some((name) => name.name === permissionName);
   // console.log('Timers ', permissions);
   //   if (!permissionGranted && !loading) {
   //     history.push('/no-access');
