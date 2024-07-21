@@ -79,7 +79,7 @@ const TextareaInput = (
               id={name}
               value={value}
               placeholder={placeholder}
-              rows={rows || 3}
+              minRows={rows || 3}
               variant="filled"
               onChange={onChange}
               onBlur={((e) => typeof onBlur === 'function'

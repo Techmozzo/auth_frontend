@@ -115,7 +115,7 @@ const PlanningPTest = ({
                         handleChecked={(event) => handleAssertionChange(event, itemm.id)}
                         checked={procedure.assertions.includes(itemm.id)}
                       />
-                      <div className="neg-m-t-10">{slugToString(itemm.name)}</div>
+                      <div className="neg-m-t-10 ml-2">{slugToString(itemm.name)}</div>
                     </div>
                   </div>
                 ))
