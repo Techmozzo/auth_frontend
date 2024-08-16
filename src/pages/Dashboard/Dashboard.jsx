@@ -4,6 +4,8 @@ import { isNull } from 'lodash';
 import { useHistory } from 'react-router';
 import { user, role } from '../../utilities/auth';
 // import usePermission from '../../components/hooks/usePermission';
+const DashIndex = React.lazy(() => import('./AdminDash'));
+const DashClientIndex = React.lazy(() => import('./ClientDash'));
 
 const Dashboard = () => {
   // const { pathname } = useLocation();
@@ -18,8 +20,6 @@ const Dashboard = () => {
     }
   }, []);
 
-  const DashIndex = React.lazy(() => import('./AdminDash'));
-  const DashClientIndex = React.lazy(() => import('./ClientDash'));
   // console.log(canAddUser);
   return (
     <>

@@ -2,10 +2,52 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import ReactPaginate from 'react-paginate';
+import { styled } from '@mui/material/styles';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import { makeStyles } from '@material-ui/core/styles';
+import TableRow from '@mui/material/TableRow';
+import { Box } from '@mui/material';
 import { activitylog } from '../../redux/actions/profileActions';
-import Loader from '../../components/microComponents/loader';
+import { sentenceCaps } from '../../utilities/stringOperations';
+import { getCurrentDateTime } from '../../utilities/dateOperations';
 
 const itemsPerPage = 20;
+
+const useStyles = makeStyles((theme) => ({
+  table: {
+    overflowY: 'auto',
+    borderCollapse: 'separate',
+    borderSpacing: '0 1em'
+  },
+  tableRow: {
+    borderBottom: '1px solid rgb(151, 151, 151, 0.4)'
+  }
+}));
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    color: '#393939',
+    fontSize: '13px',
+    fontWeight: 500,
+    padding: '8px 16px'
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: '14px',
+    padding: '8px 16px'
+  }
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  backgroundColor: '#ffffff'
+}));
+
+const LargeSpinner = styled('i')({
+  fontSize: '1rem'
+});
 
 const ActivityLog = () => {
   const dispatch = useDispatch();
@@ -34,72 +76,82 @@ const ActivityLog = () => {
   };
 
   // console.log('Offset ', itemOffset);
+  const classes = useStyles();
   return (
     <div className="container">
-      <h2>Activity Log </h2>
-      {store && store.status === 'pending'
-        ? <Loader />
-        : (
-          <>
-            <table className="table">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th>Name</th>
-                  <th scope="col">Causer</th>
-                  <th scope="col">IP</th>
-                  <th scope="col">Description</th>
-                  <th scope="col">Created At</th>
-                  <th scope="col">Handle</th>
-                </tr>
-              </thead>
-              <tbody>
-                {store && store?.data?.data?.logs?.data.map((log, i) => (
-                  <tr key={log.id}>
-                    <td>{i + 1}</td>
-                    <td>{log.name}</td>
-                    <td>
-                      {log.causer.first_name}
-                      {' '}
-                      {log.causer.last_name}
-                      <br />
-                      {log.causer.email}
-                      <br />
-                      {log.causer_role}
-                    </td>
-                    <td>{log.ip}</td>
-                    <td>{log.description}</td>
-                    <td>{log.created_at}</td>
-                    <td>@mdo</td>
-                  </tr>
+      <>
+        <h2>Activity Log </h2>
+        <TableContainer component={Box}>
+          <Table sx={{ minWidth: 700 }} aria-label="customized table" className={classes.table}>
+            <TableHead sx={{ borderBottom: '3px solid #e0e0e0' }}>
+              <TableRow className={classes.tableRow}>
+                <StyledTableCell>#</StyledTableCell>
+                <StyledTableCell align="left">Name</StyledTableCell>
+                <StyledTableCell align="left">Causer</StyledTableCell>
+                <StyledTableCell align="left">IP</StyledTableCell>
+                <StyledTableCell align="left">Description</StyledTableCell>
+                <StyledTableCell align="left">Created At</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {!!store && store.status === 'pending'
+                ? (
+                  <TableRow>
+                    <TableCell colSpan={6}>
+                      <Box display="flex" justifyContent="center" alignItems="center" height="100px">
+                        <LargeSpinner className="pi pi-spin pi-spinner" />
+                      </Box>
+                    </TableCell>
+                  </TableRow>
+                )
+                : store && store?.data?.data?.logs?.data?.map((row, i) => (
+                  <StyledTableRow key={row.id}>
+                    <StyledTableCell component="th" scope="row">
+                      <div className="bold theme-font font-small">{i + 1}</div>
+                    </StyledTableCell>
+                    <StyledTableCell align="left"><div className="theme-font-2">{row.name}</div></StyledTableCell>
+                    <StyledTableCell align="left">
+                      <div className="theme-font-2">
+                        {sentenceCaps(row.causer.first_name)}
+                        {' '}
+                        {sentenceCaps(row.causer.last_name)}
+                        <br />
+                        {sentenceCaps(row.causer.email)}
+                        <br />
+                        {sentenceCaps(row.causer_role)}
+                      </div>
+                    </StyledTableCell>
+                    <StyledTableCell align="left"><div className="theme-font-2">{sentenceCaps(row.ip)}</div></StyledTableCell>
+                    <StyledTableCell align="left"><div className="theme-font-2">{sentenceCaps(row.description)}</div></StyledTableCell>
+                    <StyledTableCell align="left">
+                      <div className="theme-font-2">{getCurrentDateTime(row.created_at)}</div>
+                    </StyledTableCell>
+                  </StyledTableRow>
                 ))}
-
-              </tbody>
-            </table>
-
-            <ReactPaginate
-              breakLabel="..."
-              nextLabel="next >"
-              previousLabel="< previous"
-              onPageChange={handlePageClick}
-              pageRangeDisplayed={5}
-              pageCount={pageCount}
-              renderOnZeroPageCount={null}
-              marginPagesDisplayed={2}
-              pageClassName="page-item"
-              pageLinkClassName="page-link"
-              previousClassName="page-item"
-              previousLinkClassName="page-link"
-              nextClassName="page-item"
-              nextLinkClassName="page-link"
-              breakClassName="page-item"
-              breakLinkClassName="page-link"
-              containerClassName="pagination"
-              activeClassName="active"
-            />
-          </>
-
-        )}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </>
+      <ReactPaginate
+        breakLabel="..."
+        nextLabel="next >"
+        previousLabel="< previous"
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={5}
+        pageCount={pageCount}
+        renderOnZeroPageCount={null}
+        marginPagesDisplayed={2}
+        pageClassName="page-item"
+        pageLinkClassName="page-link"
+        previousClassName="page-item"
+        previousLinkClassName="page-link"
+        nextClassName="page-item"
+        nextLinkClassName="page-link"
+        breakClassName="page-item"
+        breakLinkClassName="page-link"
+        containerClassName="pagination"
+        activeClassName="active"
+      />
     </div>
   );
 };

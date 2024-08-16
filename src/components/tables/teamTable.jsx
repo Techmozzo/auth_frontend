@@ -33,6 +33,11 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0
   }
 }));
+
+const LargeSpinner = styled('i')({
+  fontSize: '1rem'
+});
+
 export default function TeamTable({ data }) {
   // console.log('Team ', data);
   const { push } = useHistory();
@@ -60,23 +65,33 @@ export default function TeamTable({ data }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows?.map((row) => (
-            <StyledTableRow key={uuid()}>
-              <StyledTableCell component="th" scope="row">
-                <div className="bold theme-font font-small">{sentenceCaps(row.name)}</div>
-              </StyledTableCell>
-              <StyledTableCell align="right"><div className="theme-font-2">{row.phone}</div></StyledTableCell>
-              <StyledTableCell align="right"><div className="theme-font-2">{row.designation}</div></StyledTableCell>
-              <StyledTableCell align="right"><div className="theme-font-2">{row.email}</div></StyledTableCell>
-              <StyledTableCell align="right">
-                <div className="theme-font-2">
-                  <Button type="button" className="btn-small btn text-white" onClick={() => handleRow(row)}>
-                    <CgArrowsExpandUpRight />
-                  </Button>
-                </div>
-              </StyledTableCell>
-            </StyledTableRow>
-          ))}
+          {!!rows && !rows.length
+            ? (
+              <TableRow>
+                <TableCell colSpan={6}>
+                  <Box display="flex" justifyContent="center" alignItems="center" height="100px">
+                    <LargeSpinner className="pi pi-spin pi-spinner" />
+                  </Box>
+                </TableCell>
+              </TableRow>
+            )
+            : rows?.map((row) => (
+              <StyledTableRow key={uuid()}>
+                <StyledTableCell component="th" scope="row">
+                  <div className="bold theme-font font-small">{sentenceCaps(row.name)}</div>
+                </StyledTableCell>
+                <StyledTableCell align="right"><div className="theme-font-2">{row.phone}</div></StyledTableCell>
+                <StyledTableCell align="right"><div className="theme-font-2">{row.designation}</div></StyledTableCell>
+                <StyledTableCell align="right"><div className="theme-font-2">{row.email}</div></StyledTableCell>
+                <StyledTableCell align="right">
+                  <div className="theme-font-2">
+                    <Button type="button" className="btn-small btn text-white" onClick={() => handleRow(row)}>
+                      <CgArrowsExpandUpRight />
+                    </Button>
+                  </div>
+                </StyledTableCell>
+              </StyledTableRow>
+            ))}
         </TableBody>
       </Table>
     </TableContainer>

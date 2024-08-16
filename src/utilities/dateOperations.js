@@ -43,3 +43,8 @@ export const greeter = (date) => {
     return greet;
   }
 };
+
+export const getCurrentDateTime = (date) => {
+  const dateObject = new Date(date);
+  return format(dateObject, 'dd-MM-yyyy HH:mm:ss');
+};
