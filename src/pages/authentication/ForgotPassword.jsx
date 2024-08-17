@@ -40,16 +40,16 @@ const useStyles = makeStyles((theme) => ({
     ...centeredProperty
   },
   outlineButton: {
-    backgroundColor: '#ffffff',
-    border: '1px solid #FFA500',
-    color: '#202020',
-    padding: '0px 20px',
-    borderRadius: '2px',
-    fontSize: '14px',
-    fontWeight: 600,
+    backgroundColor: '#ffffff !important',
+    border: '1px solid #FFA500 !important',
+    color: '#202020 !important',
+    padding: '0px 20px !important',
+    borderRadius: '2px !important',
+    fontSize: '14px !important',
+    fontWeight: '600 !important',
     '&:hover': {
       color: '#202020 !important',
-      backgroundColor: '#FFA500',
+      backgroundColor: '#FFA500 !important',
       borderRadius: '2px'
     },
     ...centeredProperty
@@ -157,10 +157,10 @@ const ForgotPassword = () => {
                     <Button
                       onClick={handleResetPassword}
                       className={classes.customButton}
+                      disabled={
+                        !(!stringDoesNotExist(formData.email) && errors.email?.length === 0) || store.status === 'pending'
+                      }
                     >
-                      {/* disabled={
-                        !(!stringDoesNotExist(formData.email) && errors.email?.length === 0)
-                      } */}
                       Reset Password
                     </Button>
                   </div>
@@ -188,13 +188,13 @@ const ForgotPassword = () => {
             )
           }
           {
-            show && store.status === 'failed' && (
+            !show && store.status === 'failed' && !showForm && (
               <>
                 <div className="">
                   We encountered an issue while processing your password reset request.
                   {' '}
                   To reset your password, please start the process again.
-                  <div className="d-flex justify-content-center">
+                  <div className="d-flex justify-content-center m-t-40">
                     <Button
                       onClick={handleTryAgain}
                       className={classes.outlineButton}

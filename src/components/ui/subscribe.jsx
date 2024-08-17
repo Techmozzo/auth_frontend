@@ -32,7 +32,7 @@ const SubscribeBtn = () => {
 
   const handleClose = () => {
     setShow(false);
-    window.location.replace(`/reset-password?${store.data.data.token}`);
+    window.location.replace(`/reset-password?${store?.data?.data?.token}`);
   };
 
   const handleChange = (e) => {
