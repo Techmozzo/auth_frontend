@@ -60,25 +60,19 @@ const PlanningMateriality = ({ setTempParams, planningid }) => {
 
   return (
     <div className="mt-4">
-      {
-        status === 'pending'
-          ? <Loader />
-          : (
-            <MaterialityTemp
-              formData={formData}
-              setFormData={setFormData}
-              errors={errors}
-              setErrors={setErrors}
-              handleBlur={handleBlur}
-              handleChange={handleChange}
-              handleChecked={handleChecked}
-              create={create}
-              status={status}
-              message={message}
-              link={`/app/engagement/engagement/${engagementId}`}
-            />
-          )
-      }
+      <MaterialityTemp
+        formData={formData}
+        setFormData={setFormData}
+        errors={errors}
+        setErrors={setErrors}
+        handleBlur={handleBlur}
+        handleChange={handleChange}
+        handleChecked={handleChecked}
+        create={create}
+        status={status}
+        message={message}
+        link={`/app/engagement/engagement/${engagementId}`}
+      />
     </div>
   );
 };

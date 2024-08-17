@@ -236,6 +236,7 @@ const Prod = ({ setisSuccess }) => {
             <p className="font-title-small text-theme">{tc.name}</p>
             {tc && tc?.procedures.map((tp, procedureIndex) => (
               <ProcedureForm
+                key={tp?.id}
                 procedure={tp}
                 assertionss={tp.assertions}
                 onProcedureChange={(updatedFormData) => handleProcedureChange(procedureIndex, updatedFormData)}
@@ -255,7 +256,11 @@ const Prod = ({ setisSuccess }) => {
 const ProcedureForm = ({
   procedure, onProcedureChange
 }) => {
-  const [formState, setFormState] = useState({ assertions: procedure?.assertions, other_info: procedure?.other_info, id: procedure?.id });
+  const [formState, setFormState] = useState({
+    assertions: procedure?.assertions,
+    other_info: procedure?.other_info ?? '',
+    id: procedure?.id
+  });
   const [selectedAssertions, setSelectedAssertions] = useState(
     procedure?.assertions
       .filter((assertion) => Number(assertion.value) === 1)

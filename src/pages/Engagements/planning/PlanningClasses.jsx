@@ -1,19 +1,19 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { isFunction } from 'lodash';
+// import { isFunction } from 'lodash';
 import { Link, useHistory, useParams } from 'react-router-dom';
-import Loader from '../../../components/microComponents/loader';
+// import Loader from '../../../components/microComponents/loader';
 import useCreateBoilerPlate from '../../../components/hooks/useCreateBoilerPlate';
-import { toastNotifier, sentenceCaps } from '../../../utilities/stringOperations';
-import useUpdateStore from '../../../components/hooks/useUpdateStore';
+// import { toastNotifier, sentenceCaps } from '../../../utilities/stringOperations';
+// import useUpdateStore from '../../../components/hooks/useUpdateStore';
 // import useStoreParams from '../../../components/hooks/useStoreParams';
 import { apiOptions } from '../../../services/fetch';
 import PlanningTemp from '../temps/planning/PlanningTemp';
-import Notes from '../Notes';
-import NewEngagementTemp from '../temps/newEngagement/NewEngagementTemp';
-import HorizontalLinearStepper from '../../../components/microComponents/stepper';
-import useViewBoilerPlate from '../../../components/hooks/useViewBoilerPlate';
-import { projectAction } from '../../../redux/actions/projectActions';
+// import Notes from '../Notes';
+// import NewEngagementTemp from '../temps/newEngagement/NewEngagementTemp';
+// import HorizontalLinearStepper from '../../../components/microComponents/stepper';
+// import useViewBoilerPlate from '../../../components/hooks/useViewBoilerPlate';
+// import { projectAction } from '../../../redux/actions/projectActions';
 
 const PlanningClasses = ({ setTempParams, classes }) => {
   const { engagementId } = useParams();
@@ -61,25 +61,19 @@ const PlanningClasses = ({ setTempParams, classes }) => {
 
   return (
     <div className="mt-4">
-      {
-        status === 'pending'
-          ? <Loader />
-          : (
-            <PlanningTemp
-              formData={formData}
-              setFormData={setFormData}
-              errors={errors}
-              setErrors={setErrors}
-              handleBlur={handleBlur}
-              handleChange={handleChange}
-              handleChecked={handleChecked}
-              create={create}
-              status={status}
-              message={message}
-              link={`/app/engagement/engagement/${engagementId}`}
-            />
-          )
-      }
+      <PlanningTemp
+        formData={formData}
+        setFormData={setFormData}
+        errors={errors}
+        setErrors={setErrors}
+        handleBlur={handleBlur}
+        handleChange={handleChange}
+        handleChecked={handleChecked}
+        create={create}
+        status={status}
+        message={message}
+        link={`/app/engagement/engagement/${engagementId}`}
+      />
     </div>
   );
 };

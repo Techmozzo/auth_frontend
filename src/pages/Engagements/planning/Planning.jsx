@@ -8,9 +8,9 @@ import PlanningClasses from './PlanningClasses';
 import PlanningMateriality from './PlanningMateriality';
 import { apiOptions } from '../../../services/fetch';
 import useViewBoilerPlate from '../../../components/hooks/useViewBoilerPlate';
-import Loader from '../../../components/microComponents/loader';
+// import Loader from '../../../components/microComponents/loader';
 import PageTemp from '../../../components/temps/PageTemp';
-import PlanningTests from './PlanningTests';
+// import PlanningTests from './PlanningTests';
 import PlanningMisc from './PlanningMisc';
 import { headerTemp1 } from '../../../components/temps/projectTemps/miscTemps';
 import useClasses from '../../../components/hooks/useClasses';
@@ -64,7 +64,7 @@ const Planning = () => {
                 })
               }
               <div className="content w-800">
-                <div className="">
+                <div className="w-75">
                   <div className="mb-4 font-title-small mb-4">
                     <HorizontalLinearStepper
                       steps={[

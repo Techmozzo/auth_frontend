@@ -95,28 +95,22 @@ const PlanningMisc = ({ setTempParams, planningid }) => {
 
   return (
     <div className="mt-4">
-      {
-        status === 'pending'
-          ? <Loader />
-          : (
-            <MiscTemp
-              formData={formData}
-              setFormData={setFormData}
-              errors={errors}
-              setErrors={setErrors}
-              handleBlur={handleBlur}
-              handleChange={handleChange}
-              handleChecked={handleChecked}
-              blurHandler={blurHandler}
-              status={status}
-              message={message}
-              // setCurIndex={setCurIndex}
-              // setText={setText}
-              // text={text}
-              link={`/app/engagement/engagement/${engagementId}`}
-            />
-          )
-      }
+      <MiscTemp
+        formData={formData}
+        setFormData={setFormData}
+        errors={errors}
+        setErrors={setErrors}
+        handleBlur={handleBlur}
+        handleChange={handleChange}
+        handleChecked={handleChecked}
+        blurHandler={blurHandler}
+        status={status}
+        message={message}
+        // setCurIndex={setCurIndex}
+        // setText={setText}
+        // text={text}
+        link={`/app/engagement/engagement/${engagementId}`}
+      />
     </div>
   );
 };
