@@ -1,15 +1,60 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Modal from '../../components/microComponents/modal';
-import TextInput from '../../components/form/inputs/TextInput';
+// import Modal from '../../components/microComponents/modal';
+// import TextInput from '../../components/form/inputs/TextInput';
+import Button from '@mui/material/Button';
+import { makeStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 import { forgotPassword } from '../../redux/actions/authenticationActions';
-import Loader from '../../components/microComponents/loader';
+// import Loader from '../../components/microComponents/loader';
 import FormBuilder from '../../components/form/builders/form';
 import {
-  slugToString, stringDoesNotExist
+  slugToString,
+  stringDoesNotExist,
+  toastNotifier
 } from '../../utilities/stringOperations';
 import { validateField } from '../../utilities/validation';
 import forgotPasswordProps from './constants/forgotPassword';
+
+const centeredProperty = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  height: '38px'
+};
+
+const useStyles = makeStyles((theme) => ({
+  customButton: {
+    backgroundColor: '#FFA500 !important',
+    color: '#202020 !important',
+    padding: '0px 20px !important',
+    borderRadius: '2px !important',
+    fontSize: '14px !important',
+    fontWeight: '600 !important',
+    '&:hover': {
+      border: '1px solid #FFA500 !important',
+      backgroundColor: '#f4f4f4 !important',
+      borderRadius: '2px',
+      color: '#202020'
+    },
+    ...centeredProperty
+  },
+  outlineButton: {
+    backgroundColor: '#ffffff',
+    border: '1px solid #FFA500',
+    color: '#202020',
+    padding: '0px 20px',
+    borderRadius: '2px',
+    fontSize: '14px',
+    fontWeight: 600,
+    '&:hover': {
+      color: '#202020 !important',
+      backgroundColor: '#FFA500',
+      borderRadius: '2px'
+    },
+    ...centeredProperty
+  }
+}));
 
 const ForgotPassword = () => {
   /* redux */
@@ -18,21 +63,42 @@ const ForgotPassword = () => {
   /* state */
   const [formData, setFormData] = useState({});
   const [show, setShow] = useState(false);
+  const [showForm, setShowForm] = useState(false);
   const [errors, setErrors] = useState({});
+  const classes = useStyles();
 
   useEffect(() => {
+    if (store.status === 'initial' || store.status === 'pending') {
+      setShow(false);
+      setShowForm(true);
+    }
     if (store.status === 'success') {
       setShow(true);
+      setShowForm(false);
+      toastNotifier({
+        title: 'Please check your email',
+        text: 'We have sent the next steps to your email.',
+        type: 'success'
+      });
     }
-  }, [store]);
+    if (store.status === 'failed') {
+      setShow(false);
+      setShowForm(false);
+      toastNotifier({
+        title: 'Something went wrong',
+        text: 'We cannot verify this email, Please try again!',
+        type: 'danger'
+      });
+    }
+  }, [store.status]);
 
   const handleResetPassword = () => {
     dispatch(forgotPassword(formData));
   };
 
-  const handleClose = () => {
+  const handleTryAgain = () => {
     setShow(false);
-    window.location.replace(`/reset-password?${store.data.data.token}`);
+    setShowForm(true);
   };
 
   const handleChange = (e) => {
@@ -46,7 +112,6 @@ const ForgotPassword = () => {
   const handleBlur = (e, validations) => {
     const { name, value } = e.target;
     const field = slugToString(name);
-    // console.log(typeof field !== 'undefined');Q3';'
     typeof field !== 'undefined'
     && setErrors(
       {
@@ -56,68 +121,23 @@ const ForgotPassword = () => {
         )
       }
     );
-    // setIsError(errorsChecker(errors));
-    // canContinue();
   };
-
-  const modalTemplate = (
-    <div className={
-      // eslint-disable-next-line no-nested-ternary
-      (store?.status === 'failed')
-        ? 'mt-5 p-5'
-        : (
-          store?.status === 'initial' || store?.status === 'pending'
-            ? 'mt-5 p-5 '
-            : 'mt-5 p-5 bg-white'
-        )
-    }
-    >
-      <div className="text-white">
-
-        <div className="">
-          <h5 className="center-text text-muted">{store?.status}</h5>
-          <div className="text-warning">
-            {
-              store?.status === 'failed'
-              && (
-                <div>
-                  We cannot verify this email, try again!
-                  <button onClick={() => setShow(false)} type="button" className="btn w-25 center btn-small float-right">
-                    Ok
-                  </button>
-                </div>
-              )
-
-            }
-            {
-              store.status === 'success'
-              && (
-                <p className="text-white">
-                  we have sent the next steps to your email.
-                  {
-                    setTimeout(handleClose, 3000)
-                  }
-                </p>
-              )
-            }
-          </div>
-        </div>
-
-      </div>
-    </div>
-  );
 
   return (
     <div className="content">
-      <p>
-        Forgot Password
-      </p>
+
       <div className="max-w-600 w-600 margin-center m-t-40 ">
-        {
-          store.status === 'pending'
-            ? <Loader />
-            : (
-              <div className="login-form-container p-20">
+        <div className="d-flex justify-content-center mb-3">
+          <h6 className="text-center">
+            {
+              store.status === 'initial' || store.status === 'failed' ? 'Reset your Password' : 'Please check your email'
+            }
+          </h6>
+        </div>
+        <div className="login-form-container p-20">
+          {
+            !show && showForm && (
+              <>
                 <p className="">Provide your registered email address to reset your password</p>
                 <hr />
                 <div className=" mb-3">
@@ -133,21 +153,68 @@ const ForgotPassword = () => {
                       )
                     }
                   />
-                  <div className="clearfix">
-                    <button disabled={!(!stringDoesNotExist(formData.email) && errors.email?.length === 0)} className="w-50 btn btn-sm float-right" type="button" onClick={handleResetPassword}>
+                  <div className="d-flex justify-content-center">
+                    <Button
+                      onClick={handleResetPassword}
+                      className={classes.customButton}
+                    >
+                      {/* disabled={
+                        !(!stringDoesNotExist(formData.email) && errors.email?.length === 0)
+                      } */}
                       Reset Password
-                    </button>
+                    </Button>
                   </div>
 
                 </div>
-              </div>
+              </>
             )
+          }
+          {
+            show && store.status === 'success' && (
+              <>
+                <p className="">
+                  If this email
+                  {' '}
+                  {formData?.email}
+                  {' '}
+                  exist in our record,
+                  We will send you an email
+                  with steps for resetting your password
+                </p>
+                <div className="w-50 m-t-40">
+                  <Link to="/login" className={classes.outlineButton}>Continue to login</Link>
+                </div>
+              </>
+            )
+          }
+          {
+            show && store.status === 'failed' && (
+              <>
+                <div className="">
+                  We encountered an issue while processing your password reset request.
+                  {' '}
+                  To reset your password, please start the process again.
+                  <div className="d-flex justify-content-center">
+                    <Button
+                      onClick={handleTryAgain}
+                      className={classes.outlineButton}
+                    >
+                      Try again
+                    </Button>
+                  </div>
+                </div>
+              </>
+            )
+          }
+        </div>
+        {
+          !show && store.status !== 'success' && (
+            <div className="d-flex justify-content-center m-t-40">
+              <Link to="/login" className={classes.outlineButton}>Back to login</Link>
+            </div>
+          )
         }
       </div>
-      <Modal
-        className={show ? 'max-w-400 right top' : 'max-w-400 right top off'}
-        content={modalTemplate}
-      />
     </div>
   );
 };

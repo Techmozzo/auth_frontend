@@ -18,6 +18,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import { HiChevronLeft, HiChevronRight } from 'react-icons/hi';
 import { AiOutlineLogout } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
+import localforage from 'localforage';
 import {
   doLogin, logout, user, role
 } from '../../utilities/auth';
@@ -144,11 +145,8 @@ const MiniDrawer = ({
     typeof item.action === 'function' && item.action();
     setActive(item);
   };
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
 
-  const handleDrawerClose = () => {
+  const handleDrawerOpen = () => {
     setOpen(!open);
   };
   const logoutNow = useCallback((slug) => {
@@ -188,6 +186,20 @@ const MiniDrawer = ({
         }), 500);
     }
   }, [store?.auth?.logout?.status]);
+
+  useEffect(() => {
+    localforage.getItem('drawerState').then((value) => {
+      if (value !== null) {
+        setOpen(value);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    // Save the state to localforage whenever it changes
+    localforage.setItem('drawerState', open);
+  }, [open]);
+
   return (
     <Box sx={{ display: 'flex' }}>
       {
@@ -197,7 +209,7 @@ const MiniDrawer = ({
       <Box position="fixed" open={open} className="white-header text-theme-faint">
         <Toolbar className="position-relative">
           <DrawerHeader className="">
-            <IconButton onClick={handleDrawerClose} className="text-theme">
+            <IconButton onClick={handleDrawerOpen} className="text-theme">
               {open ? <HiChevronLeft style={{ position: 'absolute', left: '200px' }} /> : <HiChevronRight style={{ position: 'absolute', left: '36px' }} />}
             </IconButton>
           </DrawerHeader>
